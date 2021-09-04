@@ -79,7 +79,8 @@ struct ContentView: View {
                         Button(action: {
                             self.selectedFormatStyle = formatStyle
                         }) {
-                            Image(systemName: formatStyle.icon)
+                            Label(formatStyle.name, systemImage: formatStyle.icon)
+                                .labelStyle(IconOnlyLabelStyle())
                                 .foregroundColor(.white)
                                 .font(.title)
                                 .frame(width: 50, height: 50)
