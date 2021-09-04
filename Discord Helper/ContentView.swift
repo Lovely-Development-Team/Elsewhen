@@ -58,7 +58,8 @@ struct ContentView: View {
             dateFormatter.dateStyle = .none
             dateFormatter.timeStyle = .medium
         case .R:
-            dateFormatter.dateStyle = .long
+            let relativeFormatter = RelativeDateTimeFormatter()
+            return relativeFormatter.localizedString(for: selectedDate, relativeTo: Date())
         }
         return dateFormatter.string(from: selectedDate)
     }
