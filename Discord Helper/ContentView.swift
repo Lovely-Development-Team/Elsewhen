@@ -71,9 +71,9 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             VStack {
-                Spacer()
                 DatePicker("Date", selection: $selectedDate)
                     .datePickerStyle(.graphical)
+                    .padding(.horizontal, 30)
                 HStack(spacing: 0) {
                     Spacer()
                     ForEach(Self.dateFormats, id: \.self) { formatStyle in
@@ -114,6 +114,7 @@ struct ContentView: View {
                     }
                 }) {
                     Text("Copy Discord Code!")
+                        .font(.headline)
                         .foregroundColor(.white)
                 }
                 .padding(.horizontal)
@@ -123,7 +124,7 @@ struct ContentView: View {
                         .fill(Color.accentColor)
                 )
                 Spacer()
-                Text("*Representative of date/time components only, may not match exact Discord formatting.")
+                Text("*Representative of date and time components only; may not match exact Discord formatting.")
                     .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                     .font(.caption)
                     .foregroundColor(.secondary)
