@@ -141,6 +141,15 @@ struct ContentView: View {
                     
                     Text("\(formattedDate)*")
                         .font(.headline)
+                        .contextMenu {
+                            ForEach(Self.dateFormats, id: \.self) { formatStyle in
+                                Button(action: {
+                                    self.selectedFormatStyle = formatStyle
+                                }) {
+                                    Label(formatStyle.name, systemImage: formatStyle.icon)
+                                }
+                            }
+                        }
                     DiscordFormattedDate(text: discordFormat)
                     
                     Button(action: {
