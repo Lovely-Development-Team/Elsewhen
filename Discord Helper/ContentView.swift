@@ -7,6 +7,7 @@
 
 import SwiftUI
 import MobileCoreServices
+import UniformTypeIdentifiers
 
 enum FormatCode: String {
     case f
@@ -116,9 +117,7 @@ struct ContentView: View {
                 Spacer()
                 Text("\(formattedDate)*")
                     .font(.headline)
-                Text(discordFormat)
-                    .font(.system(.body, design: .monospaced))
-                    .foregroundColor(.secondary)
+                DiscordFormattedDate(text: discordFormat)
                 Spacer()
                 Button(action: {
                     UIPasteboard.general.setValue(self.discordFormat,
