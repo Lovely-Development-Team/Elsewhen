@@ -81,9 +81,33 @@ struct ContentView: View {
     
     var body: some View {
         NavigationView {
-            VStack {
-                HStack(alignment: .top) {
-                    VStack(spacing: 5) {
+            VStack(spacing: 0) {
+                
+                ScrollView {
+                    
+                    DatePicker("Date", selection: $selectedDate)
+                        .datePickerStyle(.graphical)
+                        .padding(.top)
+                    
+                    HStack {
+                        Text("Time zone")
+                            .fontWeight(.bold)
+                        Spacer()
+                        NavigationLink(destination: TimezoneChoiceView(selectedTimeZone: $selectedTimeZone)) {
+                            Text(selectedTimeZone)
+                                .foregroundColor(.primary)
+                                .padding(.vertical, 8)
+                                .padding(.horizontal, 10)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                        .fill(Color(UIColor.secondarySystemBackground))
+                                )
+                        }
+                    }
+                    .padding(.horizontal, 8)
+                    .padding(.bottom, 10)
+                    
+                    HStack(spacing: 5) {
                         ForEach(Self.dateFormats, id: \.self) { formatStyle in
                             Button(action: {
                                 self.selectedFormatStyle = formatStyle
@@ -100,57 +124,67 @@ struct ContentView: View {
                             }.buttonStyle(PlainButtonStyle())
                         }
                     }
-                    VStack {
-                        DatePicker("Date", selection: $selectedDate)
-                            .datePickerStyle(.graphical)
+                    .padding(.bottom, 10)
+                    
+                    Button(action: {
+                        self.selectedDate = Date()
+                        self.selectedTimeZone = TimeZone.current.identifier
+                    }) {
+                        Text("Reset")
                     }
-                }
-                NavigationLink(destination: TimezoneChoiceView(selectedTimeZone: $selectedTimeZone)) {
-                    HStack {
-                        Text("Time Zone")
-                        Spacer()
-                        Text(selectedTimeZone)
-                        Image(systemName: "chevron.right")
-                    }
-                    .foregroundColor(.primary)
-                }
-                Spacer()
-                Text("\(formattedDate)*")
-                    .font(.headline)
-                DiscordFormattedDate(text: discordFormat)
-                Spacer()
-                Button(action: {
-                    UIPasteboard.general.setValue(self.discordFormat,
-                                                  forPasteboardType: kUTTypePlainText as String)
-                    withAnimation {
-                        showCopied = true
-                    }
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                        withAnimation {
-                            showCopied = false
-                        }
-                    }
-                }) {
-                    Text(showCopied ? "Copied ✓" : "Copy Discord Code")
-                        .font(.headline)
-                        .foregroundColor(.white)
+                    .padding(.bottom, 20)
+                    
                 }
                 .padding(.horizontal)
-                .padding(.vertical, 5)
+                
+                VStack {
+                    
+                    Text("\(formattedDate)*")
+                        .font(.headline)
+                    DiscordFormattedDate(text: discordFormat)
+                    
+                    Button(action: {
+                        UIPasteboard.general.setValue(self.discordFormat,
+                                                      forPasteboardType: kUTTypePlainText as String)
+                        withAnimation {
+                            showCopied = true
+                        }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                            withAnimation {
+                                showCopied = false
+                            }
+                        }
+                    }) {
+                        Text(showCopied ? "Copied ✓" : "Copy Discord Code")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                    }
+                    .padding(.horizontal)
+                    .padding(.vertical, 5)
+                    .background(
+                        RoundedRectangle(cornerRadius: 15, style: .continuous)
+                            .fill(Color.accentColor)
+                    )
+                    .padding(.bottom, 8)
+                    
+                    Text("*Representative of date and time components only; may not match exact Discord formatting.")
+                        .multilineTextAlignment(.center)
+                        .font(.caption2)
+                        .foregroundColor(.secondary)
+                    
+                }
+                .padding()
                 .background(
-                    RoundedRectangle(cornerRadius: 15, style: .continuous)
-                        .fill(Color.accentColor)
+                    Color(UIColor.secondarySystemBackground)
+                        .shadow(radius: 10)
                 )
-                Spacer()
-                Text("*Representative of date and time components only; may not match exact Discord formatting.")
-                    .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                    .font(.caption)
-                    .foregroundColor(.secondary)
+                
             }
-            .padding()
+            .edgesIgnoringSafeArea(.bottom)
             .navigationTitle("Discord Time Code Generator")
             .navigationBarTitleDisplayMode(.inline)
         }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 
