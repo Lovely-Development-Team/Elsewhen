@@ -29,6 +29,7 @@ struct ContentView: View {
     
     @State private var selectedDate = Date()
     @State private var selectedFormatStyle: DateFormat = Self.dateFormats[0]
+    @State private var selectedTimeZone: String = TimeZone.current.identifier
     @State private var showCopied: Bool = false
     
     static private let dateFormats: [DateFormat] = [
@@ -42,6 +43,7 @@ struct ContentView: View {
     
     private var formattedDate: String {
         let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone(identifier: selectedTimeZone)
         switch selectedFormatStyle.code {
         case .f:
             dateFormatter.dateStyle = .long
@@ -65,33 +67,51 @@ struct ContentView: View {
     }
     
     private var discordFormat: String {
-        "<t:\(Int(selectedDate.timeIntervalSince1970)):\(selectedFormatStyle.code.rawValue)>"
+        
+        var timeIntervalSince1970 = Int(selectedDate.timeIntervalSince1970)
+        
+        if let tz = TimeZone(identifier: selectedTimeZone) {
+            timeIntervalSince1970 += tz.secondsFromGMT(for: selectedDate)
+            timeIntervalSince1970 -= TimeZone.current.secondsFromGMT(for: selectedDate)
+        }
+        
+        return "<t:\(timeIntervalSince1970):\(selectedFormatStyle.code.rawValue)>"
     }
     
     var body: some View {
-        ZStack {
+        NavigationView {
             VStack {
-                DatePicker("Date", selection: $selectedDate)
-                    .datePickerStyle(.graphical)
-                    .padding(.horizontal, 30)
-                HStack(spacing: 0) {
-                    Spacer()
-                    ForEach(Self.dateFormats, id: \.self) { formatStyle in
-                        Button(action: {
-                            self.selectedFormatStyle = formatStyle
-                        }) {
-                            Label(formatStyle.name, systemImage: formatStyle.icon)
-                                .labelStyle(IconOnlyLabelStyle())
-                                .foregroundColor(.white)
-                                .font(.title)
-                                .frame(width: 50, height: 50)
-                                .background(
-                                    RoundedRectangle(cornerRadius: 10, style: .continuous)
-                                        .fill(formatStyle == selectedFormatStyle ? Color.accentColor : .secondary)
-                                )
-                        }.buttonStyle(PlainButtonStyle())
-                        Spacer()
+                HStack(alignment: .top) {
+                    VStack(spacing: 5) {
+                        ForEach(Self.dateFormats, id: \.self) { formatStyle in
+                            Button(action: {
+                                self.selectedFormatStyle = formatStyle
+                            }) {
+                                Label(formatStyle.name, systemImage: formatStyle.icon)
+                                    .labelStyle(IconOnlyLabelStyle())
+                                    .foregroundColor(.white)
+                                    .font(.title)
+                                    .frame(width: 50, height: 50)
+                                    .background(
+                                        RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                            .fill(formatStyle == selectedFormatStyle ? Color.accentColor : .secondary)
+                                    )
+                            }.buttonStyle(PlainButtonStyle())
+                        }
                     }
+                    VStack {
+                        DatePicker("Date", selection: $selectedDate)
+                            .datePickerStyle(.graphical)
+                    }
+                }
+                NavigationLink(destination: TimezoneChoiceView(selectedTimeZone: $selectedTimeZone)) {
+                    HStack {
+                        Text("Time Zone")
+                        Spacer()
+                        Text(selectedTimeZone)
+                        Image(systemName: "chevron.right")
+                    }
+                    .foregroundColor(.primary)
                 }
                 Spacer()
                 Text("\(formattedDate)*")
@@ -99,11 +119,10 @@ struct ContentView: View {
                 Text(discordFormat)
                     .font(.system(.body, design: .monospaced))
                     .foregroundColor(.secondary)
-                    .padding(.top, 2)
                 Spacer()
                 Button(action: {
                     UIPasteboard.general.setValue(self.discordFormat,
-                                forPasteboardType: kUTTypePlainText as String)
+                                                  forPasteboardType: kUTTypePlainText as String)
                     withAnimation {
                         showCopied = true
                     }
@@ -113,7 +132,7 @@ struct ContentView: View {
                         }
                     }
                 }) {
-                    Text("Copy Discord Code!")
+                    Text(showCopied ? "Copied ✓" : "Copy Discord Code")
                         .font(.headline)
                         .foregroundColor(.white)
                 }
@@ -130,21 +149,8 @@ struct ContentView: View {
                     .foregroundColor(.secondary)
             }
             .padding()
-        
-            if showCopied {
-                Text("Copied!")
-                    .font(.title)
-                    .fontWeight(.light)
-                    .foregroundColor(.secondary)
-                    .frame(width: 200, height: 200, alignment: .center)
-                    .background(
-                        RoundedRectangle(cornerRadius: 15, style: .continuous)
-                            .fill(Color(UIColor.secondarySystemBackground))
-                    )
-                    .opacity(0.95)
-                    .transition(.opacity)
-            }
-            
+            .navigationTitle("Discord Time Code Generator")
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
 }
