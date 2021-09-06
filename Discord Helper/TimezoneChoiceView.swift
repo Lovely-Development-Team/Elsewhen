@@ -24,6 +24,8 @@ struct TimezoneChoiceView: View {
                 return true
             }
             return false
+        }.map { tz in
+            tz.replacingOccurrences(of: "_", with: " ")
         }
     }
     
