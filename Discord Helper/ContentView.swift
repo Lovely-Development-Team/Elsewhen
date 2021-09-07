@@ -45,9 +45,8 @@ struct ContentView: View {
         DateFormat(icon: "clock.arrow.2.circlepath", name: "Relative", code: .R),
     ]
     
-    private var formattedDate: String {
+    private func format(date: Date) -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.timeZone = TimeZone(identifier: selectedTimeZone)
         switch selectedFormatStyle.code {
         case .f:
             dateFormatter.dateStyle = .long
@@ -65,18 +64,18 @@ struct ContentView: View {
             dateFormatter.timeStyle = .medium
         case .R:
             let relativeFormatter = RelativeDateTimeFormatter()
-            return relativeFormatter.localizedString(for: selectedDate, relativeTo: Date())
+            return relativeFormatter.localizedString(for: date, relativeTo: Date())
         }
-        return dateFormatter.string(from: selectedDate)
+        return dateFormatter.string(from: date)
     }
     
     private var discordFormat: String {
         
+        
         var timeIntervalSince1970 = Int(selectedDate.timeIntervalSince1970)
         
         if let tz = TimeZone(identifier: selectedTimeZone) {
-            timeIntervalSince1970 += tz.secondsFromGMT(for: selectedDate)
-            timeIntervalSince1970 -= TimeZone.current.secondsFromGMT(for: selectedDate)
+            timeIntervalSince1970 = Int(convert(date: selectedDate, from: tz, to: TimeZone.current).timeIntervalSince1970)
         } else {
             logger.warning("\(selectedTimeZone, privacy: .public) is not a valid timezone identifier!")
         }
@@ -143,9 +142,18 @@ struct ContentView: View {
                 .padding(.horizontal)
                 
                 VStack {
-                    
-                    Text(formattedDate)
-                        .multilineTextAlignment(.center)
+                    Text("Selected timezone: \(format(date: convert(date: selectedDate, from: TimeZone(identifier: selectedTimeZone)!, to: TimeZone(identifier: selectedTimeZone)!)))")
+                        .font(.headline)
+                        .contextMenu {
+                            ForEach(Self.dateFormats, id: \.self) { formatStyle in
+                                Button(action: {
+                                    self.selectedFormatStyle = formatStyle
+                                }) {
+                                    Label(formatStyle.name, systemImage: formatStyle.icon)
+                                }
+                            }
+                        }
+                    Text("Your timezone: \(format(date: convert(date: selectedDate, from: TimeZone(identifier: selectedTimeZone)!, to: TimeZone.current)))")
                         .font(.headline)
                         .contextMenu {
                             ForEach(Self.dateFormats, id: \.self) { formatStyle in
@@ -208,4 +216,9 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
     }
+}
+
+func convert(date: Date, from initialTimezone: TimeZone, to targetTimezone: TimeZone) -> Date {
+    let offset = TimeInterval(targetTimezone.secondsFromGMT(for: date) - initialTimezone.secondsFromGMT(for: date))
+    return date.addingTimeInterval(offset)
 }
