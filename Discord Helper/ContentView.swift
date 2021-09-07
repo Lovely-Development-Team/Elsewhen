@@ -35,6 +35,7 @@ struct ContentView: View {
     @State private var selectedFormatStyle: DateFormat = Self.dateFormats[0]
     @State private var selectedTimeZone: String = TimeZone.current.identifier
     @State private var showCopied: Bool = false
+    @State private var showLocalTimeInstead: Bool = false
     
     static private let dateFormats: [DateFormat] = [
         DateFormat(icon: "calendar.badge.clock", name: "Full", code: .f),
@@ -84,88 +85,123 @@ struct ContentView: View {
         return "<t:\(timeIntervalSince1970):\(selectedFormatStyle.code.rawValue)>"
     }
     
+    private func formatTimeZoneName(_ zone: String) -> String {
+        zone.replacingOccurrences(of: "_", with: " ")
+    }
+    
     var body: some View {
         NavigationView {
             VStack(spacing: 0) {
                 
-                ScrollView {
+                ScrollView(showsIndicators: true) {
                     
-                    DatePicker("Date", selection: $selectedDate)
-                        .datePickerStyle(.graphical)
-                        .padding(.top)
-                    
-                    HStack {
-                        Text("Time zone")
-                            .fontWeight(.bold)
-                        Spacer()
-                        NavigationLink(destination: TimezoneChoiceView(selectedTimeZone: $selectedTimeZone)) {
-                            Text(selectedTimeZone.replacingOccurrences(of: "_", with: " "))
-                                .foregroundColor(.primary)
-                                .padding(.vertical, 8)
-                                .padding(.horizontal, 10)
-                                .background(
-                                    RoundedRectangle(cornerRadius: 10, style: .continuous)
-                                        .fill(Color(UIColor.secondarySystemBackground))
-                                )
+                    Group {
+                        
+                        DatePicker("Date", selection: $selectedDate)
+                            .datePickerStyle(.graphical)
+                            .padding(.top)
+                        
+                        HStack {
+                            Text("Time zone")
+                                .fontWeight(.bold)
+                            Spacer()
+                            NavigationLink(destination: TimezoneChoiceView(selectedTimeZone: $selectedTimeZone)) {
+                                Text(selectedTimeZone.replacingOccurrences(of: "_", with: " "))
+                                    .foregroundColor(.primary)
+                                    .padding(.vertical, 8)
+                                    .padding(.horizontal, 10)
+                                    .background(
+                                        RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                            .fill(Color(UIColor.secondarySystemBackground))
+                                    )
+                            }
                         }
+                        .padding(.horizontal, 8)
+                        .padding(.bottom, 10)
+                        
+                        HStack(spacing: 5) {
+                            ForEach(Self.dateFormats, id: \.self) { formatStyle in
+                                Button(action: {
+                                    self.selectedFormatStyle = formatStyle
+                                }) {
+                                    Label(formatStyle.name, systemImage: formatStyle.icon)
+                                        .labelStyle(IconOnlyLabelStyle())
+                                        .foregroundColor(.white)
+                                        .font(.title)
+                                        .frame(width: 50, height: 50)
+                                        .background(
+                                            RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                                .fill(formatStyle == selectedFormatStyle ? Color.accentColor : .secondary)
+                                        )
+                                }.buttonStyle(PlainButtonStyle())
+                            }
+                        }
+                        .padding(.bottom, 10)
+                        
+                        Button(action: {
+                            self.selectedDate = Date()
+                            self.selectedTimeZone = TimeZone.current.identifier
+                        }) {
+                            Text("Reset")
+                        }
+                        .padding(.bottom, 20)
+                        
                     }
-                    .padding(.horizontal, 8)
-                    .padding(.bottom, 10)
+                    .padding(.horizontal)
                     
-                    HStack(spacing: 5) {
+                }
+                
+                VStack {
+                    VStack {
+                        
+                        let selectedTimezoneIdentifier = TimeZone(identifier: selectedTimeZone)!
+                        
+                        if !showLocalTimeInstead {
+                            
+                            Text(format(date: convertSelectedDate(from: selectedTimezoneIdentifier, to: selectedTimezoneIdentifier), in: selectedTimezoneIdentifier))
+                                .multilineTextAlignment(.center)
+                                .font(.headline)
+                                .foregroundColor(.primary)
+                            
+                        } else {
+                            
+                            Text(format(date: convertSelectedDate(from: selectedTimezoneIdentifier, to: TimeZone.current), in: TimeZone.current))
+                                .multilineTextAlignment(.center)
+                                .font(.headline)
+                                .foregroundColor(.primary)
+                            
+                        }
+                        
+                        if selectedTimezoneIdentifier != TimeZone.current {
+                            
+                            Text(showLocalTimeInstead ? "for you (\(formatTimeZoneName(TimeZone.current.identifier)))" : "in \(formatTimeZoneName(selectedTimeZone))")
+                                .foregroundColor(.secondary)
+                            
+                        }
+                        
+                    }
+                    .padding(.vertical, 5)
+                    .padding(.horizontal)
+                    .contextMenu {
                         ForEach(Self.dateFormats, id: \.self) { formatStyle in
                             Button(action: {
                                 self.selectedFormatStyle = formatStyle
                             }) {
                                 Label(formatStyle.name, systemImage: formatStyle.icon)
-                                    .labelStyle(IconOnlyLabelStyle())
-                                    .foregroundColor(.white)
-                                    .font(.title)
-                                    .frame(width: 50, height: 50)
-                                    .background(
-                                        RoundedRectangle(cornerRadius: 10, style: .continuous)
-                                            .fill(formatStyle == selectedFormatStyle ? Color.accentColor : .secondary)
-                                    )
-                            }.buttonStyle(PlainButtonStyle())
-                        }
-                    }
-                    .padding(.bottom, 10)
-                    
-                    Button(action: {
-                        self.selectedDate = Date()
-                        self.selectedTimeZone = TimeZone.current.identifier
-                    }) {
-                        Text("Reset")
-                    }
-                    .padding(.bottom, 20)
-                    
-                }
-                .padding(.horizontal)
-                
-                VStack {
-                    let selectedTimezoneIdentifier = TimeZone(identifier: selectedTimeZone)!
-                    Text("Selected timezone: \(format(date: convertSelectedDate(from: selectedTimezoneIdentifier, to: selectedTimezoneIdentifier), in: selectedTimezoneIdentifier))")
-                        .font(.headline)
-                        .contextMenu {
-                            ForEach(Self.dateFormats, id: \.self) { formatStyle in
-                                Button(action: {
-                                    self.selectedFormatStyle = formatStyle
-                                }) {
-                                    Label(formatStyle.name, systemImage: formatStyle.icon)
-                                }
                             }
                         }
-                    Text("Your timezone: \(format(date: convertSelectedDate(from: selectedTimezoneIdentifier, to: TimeZone.current), in: TimeZone.current))")
-                        .font(.headline)
-                        .contextMenu {
-                            ForEach(Self.dateFormats, id: \.self) { formatStyle in
-                                Button(action: {
-                                    self.selectedFormatStyle = formatStyle
-                                }) {
-                                    Label(formatStyle.name, systemImage: formatStyle.icon)
-                                }
+                    }
+                    .onTapGesture {
+                        withAnimation {
+                            showLocalTimeInstead = true
+                        }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                            withAnimation {
+                                showLocalTimeInstead = false
                             }
                         }
+                    }
+                    
                     DiscordFormattedDate(text: discordFormat)
                     
                     Button(action: {
