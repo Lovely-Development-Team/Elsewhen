@@ -139,7 +139,7 @@ struct ContentView: View {
                 
                 VStack {
                     
-                    Text("\(formattedDate)*")
+                    Text(formattedDate)
                         .font(.headline)
                         .contextMenu {
                             ForEach(Self.dateFormats, id: \.self) { formatStyle in
@@ -176,13 +176,14 @@ struct ContentView: View {
                     )
                     .padding(.bottom, 8)
                     
-                    Text("*Representative of date and time components only; may not match exact Discord formatting.")
+                    Text("Date and time representative of components only; may not match exact Discord formatting.")
                         .multilineTextAlignment(.center)
                         .font(.caption2)
                         .foregroundColor(.secondary)
                     
                 }
                 .padding()
+                .frame(minWidth: 0, maxWidth: .infinity)
                 .background(
                     Color(UIColor.secondarySystemBackground)
                         .shadow(radius: 10)
