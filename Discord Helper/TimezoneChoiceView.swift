@@ -16,8 +16,8 @@ struct TimezoneChoiceView: View {
     
     private var filteredTimeZones: [TimeZone] {
         let st = searchTerm.trimmingCharacters(in: .whitespaces).lowercased().replacingOccurrences(of: " ", with: "_")
-        return TimeZone.knownTimeZoneIdentifiers.map { tz in
-            TimeZone(identifier: tz)!
+        return TimeZone.knownTimeZoneIdentifiers.compactMap { tz in
+            TimeZone(identifier: tz)
         }.filter { tz in
             if st == "" {
                 return true
