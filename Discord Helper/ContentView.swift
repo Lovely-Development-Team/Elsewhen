@@ -8,6 +8,7 @@
 import SwiftUI
 import MobileCoreServices
 import UniformTypeIdentifiers
+import os.log
 
 enum FormatCode: String {
     case f
@@ -25,6 +26,8 @@ struct DateFormat: Identifiable, Hashable {
     
     var id: String { code.rawValue }
 }
+
+let logger = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "times")
 
 struct ContentView: View {
     
@@ -74,6 +77,8 @@ struct ContentView: View {
         if let tz = TimeZone(identifier: selectedTimeZone) {
             timeIntervalSince1970 += tz.secondsFromGMT(for: selectedDate)
             timeIntervalSince1970 -= TimeZone.current.secondsFromGMT(for: selectedDate)
+        } else {
+            logger.warning("\(selectedTimeZone, privacy: .public) is not a valid timezone identifier!")
         }
         
         return "<t:\(timeIntervalSince1970):\(selectedFormatStyle.code.rawValue)>"
