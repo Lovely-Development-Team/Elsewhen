@@ -26,4 +26,6 @@ if test -f "$FILE" -a "$FILE_HASH" != "$LAST_BUILD_HASH"; then
 	gh pr create --title "Release $NEW_BUILD" --body "$(cat $FILE)" -B main
 	# Return to the main branch
 	git checkout main
+	# Remove app.xcarchive
+	rm -rf app.xcarchive
 fi
