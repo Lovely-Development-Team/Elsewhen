@@ -45,7 +45,7 @@ struct ContentView: View {
         DateFormat(icon: "clock.arrow.2.circlepath", name: "Relative", code: .R),
     ]
     
-    private func format(date: Date) -> String {
+    private func format(date: Date, in timezone: TimeZone) -> String {
         let dateFormatter = DateFormatter()
         switch selectedFormatStyle.code {
         case .f:
@@ -64,7 +64,8 @@ struct ContentView: View {
             dateFormatter.timeStyle = .medium
         case .R:
             let relativeFormatter = RelativeDateTimeFormatter()
-            return relativeFormatter.localizedString(for: date, relativeTo: Date())
+            let convertedNow = convert(date: Date(), from: TimeZone.current, to: timezone)
+            return relativeFormatter.localizedString(for: date, relativeTo: convertedNow)
         }
         return dateFormatter.string(from: date)
     }
@@ -142,7 +143,7 @@ struct ContentView: View {
                 .padding(.horizontal)
                 
                 VStack {
-                    Text("Selected timezone: \(format(date: convert(date: selectedDate, from: TimeZone(identifier: selectedTimeZone)!, to: TimeZone(identifier: selectedTimeZone)!)))")
+                    Text("Selected timezone: \(format(date: convert(date: selectedDate, from: TimeZone(identifier: selectedTimeZone)!, to: TimeZone(identifier: selectedTimeZone)!), in: TimeZone(identifier: selectedTimeZone)!))")
                         .font(.headline)
                         .contextMenu {
                             ForEach(Self.dateFormats, id: \.self) { formatStyle in
@@ -153,7 +154,7 @@ struct ContentView: View {
                                 }
                             }
                         }
-                    Text("Your timezone: \(format(date: convert(date: selectedDate, from: TimeZone(identifier: selectedTimeZone)!, to: TimeZone.current)))")
+                    Text("Your timezone: \(format(date: convert(date: selectedDate, from: TimeZone(identifier: selectedTimeZone)!, to: TimeZone.current), in: TimeZone.current))")
                         .font(.headline)
                         .contextMenu {
                             ForEach(Self.dateFormats, id: \.self) { formatStyle in
