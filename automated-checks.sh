@@ -15,12 +15,13 @@ if test -f "$FILE" -a "$FILE_HASH" != "$LAST_BUILD_HASH"; then
 	xcodebuild -exportArchive -archivePath ./app.xcarchive -exportOptionsPlist exportOptions.plist
 	# PR with new version number
 	git checkout -B "release/$NEW_BUILD"
+	# Store hash of this build file
+	sha3sum $FILE > $LAST_BUILD_FILE
+	# Remove file & continue PR
 	rm $FILE
 	git add "$PROJECT_FILE/project.pbxproj"
 	git commit -m "Bump build ($NEW_BUILD)"
 	gh pr create --title "Release $NEW_BUILD" --body "$(cat $FILE)" -B main
-	# Store hash of this build file
-	sha3sum $FILE > $LAST_BUILD_FILE
 	# Return to the main branch
 	git checkout main
 fi
