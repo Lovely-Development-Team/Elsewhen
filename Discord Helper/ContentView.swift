@@ -94,7 +94,7 @@ struct ContentView: View {
                             .fontWeight(.bold)
                         Spacer()
                         NavigationLink(destination: TimezoneChoiceView(selectedTimeZone: $selectedTimeZone)) {
-                            Text(selectedTimeZone)
+                            Text(selectedTimeZone.replacingOccurrences(of: "_", with: " "))
                                 .foregroundColor(.primary)
                                 .padding(.vertical, 8)
                                 .padding(.horizontal, 10)
