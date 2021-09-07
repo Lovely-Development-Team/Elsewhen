@@ -24,8 +24,6 @@ struct TimezoneChoiceView: View {
                 return true
             }
             return false
-        }.map { tz in
-            tz.replacingOccurrences(of: "_", with: " ")
         }
     }
     
@@ -39,7 +37,7 @@ struct TimezoneChoiceView: View {
                     presentationMode.wrappedValue.dismiss()
                 }) {
                     HStack {
-                        Text(tz)
+                        Text(tz.replacingOccurrences(of: "_", with: " "))
                         if selectedTimeZone == tz {
                             Spacer()
                             Image(systemName: "checkmark")
