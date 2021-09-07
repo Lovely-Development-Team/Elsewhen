@@ -21,6 +21,7 @@ if test -f "$FILE" -a "$FILE_HASH" != "$LAST_BUILD_HASH"; then
 	rm $FILE
 	git add "$PROJECT_FILE/project.pbxproj"
 	git commit -m "Bump build ($NEW_BUILD)"
+	git push -u "release/$NEW_BUILD"
 	gh pr create --title "Release $NEW_BUILD" --body "$(cat $FILE)" -B main
 	# Return to the main branch
 	git checkout main
