@@ -76,7 +76,7 @@ struct ContentView: View {
         var timeIntervalSince1970 = Int(selectedDate.timeIntervalSince1970)
         
         if let tz = TimeZone(identifier: selectedTimeZone) {
-            timeIntervalSince1970 = Int(convert(date: selectedDate, from: tz, to: TimeZone.current).timeIntervalSince1970)
+            timeIntervalSince1970 = Int(convertSelectedDate(from: tz, to: TimeZone.current).timeIntervalSince1970)
         } else {
             logger.warning("\(selectedTimeZone, privacy: .public) is not a valid timezone identifier!")
         }
@@ -143,7 +143,8 @@ struct ContentView: View {
                 .padding(.horizontal)
                 
                 VStack {
-                    Text("Selected timezone: \(format(date: convert(date: selectedDate, from: TimeZone(identifier: selectedTimeZone)!, to: TimeZone(identifier: selectedTimeZone)!), in: TimeZone(identifier: selectedTimeZone)!))")
+                    let selectedTimezoneIdentifier = TimeZone(identifier: selectedTimeZone)!
+                    Text("Selected timezone: \(format(date: convertSelectedDate(from: selectedTimezoneIdentifier, to: selectedTimezoneIdentifier), in: selectedTimezoneIdentifier))")
                         .font(.headline)
                         .contextMenu {
                             ForEach(Self.dateFormats, id: \.self) { formatStyle in
@@ -154,7 +155,7 @@ struct ContentView: View {
                                 }
                             }
                         }
-                    Text("Your timezone: \(format(date: convert(date: selectedDate, from: TimeZone(identifier: selectedTimeZone)!, to: TimeZone.current), in: TimeZone.current))")
+                    Text("Your timezone: \(format(date: convertSelectedDate(from: selectedTimezoneIdentifier, to: TimeZone.current), in: TimeZone.current))")
                         .font(.headline)
                         .contextMenu {
                             ForEach(Self.dateFormats, id: \.self) { formatStyle in
@@ -210,6 +211,10 @@ struct ContentView: View {
             .navigationBarTitleDisplayMode(.inline)
         }
         .navigationViewStyle(StackNavigationViewStyle())
+    }
+    
+    func convertSelectedDate(from initialTimezone: TimeZone, to targetTimezone: TimeZone) -> Date {
+        return convert(date: selectedDate, from: initialTimezone, to: targetTimezone)
     }
 }
 
