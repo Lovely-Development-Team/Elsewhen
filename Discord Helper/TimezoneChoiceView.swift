@@ -14,13 +14,18 @@ struct TimezoneChoiceView: View {
     @Binding var selectedTimeZone: String
     @State private var searchTerm: String = ""
     
-    private var filteredTimeZones: [String] {
+    private var filteredTimeZones: [TimeZone] {
         let st = searchTerm.trimmingCharacters(in: .whitespaces).lowercased().replacingOccurrences(of: " ", with: "_")
-        return TimeZone.knownTimeZoneIdentifiers.filter { tz in
+        return TimeZone.knownTimeZoneIdentifiers.map { tz in
+            TimeZone(identifier: tz)!
+        }.filter { tz in
             if st == "" {
                 return true
             }
-            if tz.lowercased().contains(st) {
+            if tz.identifier.lowercased().contains(st) {
+                return true
+            }
+            if let abbreviation = tz.abbreviation(), abbreviation.lowercased().contains(st) {
                 return true
             }
             return false
@@ -33,17 +38,18 @@ struct TimezoneChoiceView: View {
                 .padding(.horizontal, -10)
             ForEach(filteredTimeZones, id: \.self) { tz in
                 Button(action: {
-                    self.selectedTimeZone = tz
+                    self.selectedTimeZone = tz.identifier
                     presentationMode.wrappedValue.dismiss()
                 }) {
                     HStack {
-                        Text(tz.replacingOccurrences(of: "_", with: " "))
-                        if selectedTimeZone == tz {
-                            Spacer()
-                            Image(systemName: "checkmark")
+                        Text(tz.identifier.replacingOccurrences(of: "_", with: " "))
+                        Spacer()
+                        if let abbreviation = tz.abbreviation() {
+                            Text(abbreviation)
+                                .foregroundColor(selectedTimeZone == tz.identifier ? .accentColor : .secondary)
                         }
                     }
-                    .foregroundColor(selectedTimeZone == tz ? .accentColor : .primary)
+                    .foregroundColor(selectedTimeZone == tz.identifier ? .accentColor : .primary)
                 }
             }
         }
@@ -54,6 +60,6 @@ struct TimezoneChoiceView: View {
 
 struct TimezoneChoiceView_Previews: PreviewProvider {
     static var previews: some View {
-        TimezoneChoiceView(selectedTimeZone: .constant("Africa/Accra"))
+        TimezoneChoiceView(selectedTimeZone: .constant("Europe/London"))
     }
 }
