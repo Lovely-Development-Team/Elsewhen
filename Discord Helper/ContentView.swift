@@ -145,6 +145,7 @@ struct ContentView: View {
                 VStack {
                     
                     Text(formattedDate)
+                        .multilineTextAlignment(.center)
                         .font(.headline)
                         .contextMenu {
                             ForEach(Self.dateFormats, id: \.self) { formatStyle in
