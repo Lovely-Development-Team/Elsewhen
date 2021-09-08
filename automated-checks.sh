@@ -11,8 +11,8 @@ if test -f "$FILE" -a "$FILE_HASH" != "$LAST_BUILD_HASH"; then
 	NEW_BUILD=$(agvtool what-version -terse)
 	PROJECT_FILE=$(find . -maxdepth 1 -name '*.xcodeproj')
 	# Build the app and upload
-	xcodebuild -project "$PROJECT_FILE" -scheme "Discord Helper" -configuration Release -archivePath ./app.xcarchive  archive
-	xcodebuild -exportArchive -archivePath ./app.xcarchive -exportOptionsPlist exportOptions.plist
+	/usr/bin/xcodebuild -project "$PROJECT_FILE" -scheme "Discord Helper" -configuration Release -archivePath ./app.xcarchive  archive
+	/usr/bin/xcodebuild -exportArchive -archivePath ./app.xcarchive -exportOptionsPlist exportOptions.plist
 	# PR with new version number
 	git checkout -B "release/$NEW_BUILD"
 	# Store hash of this build file
@@ -23,7 +23,7 @@ if test -f "$FILE" -a "$FILE_HASH" != "$LAST_BUILD_HASH"; then
 	git add "$FILE"
 	git commit -m "Bump build ($NEW_BUILD)"
 	git push -u orign "release/$NEW_BUILD"
-	/usr/local/bin/gh pr create --title "Release $NEW_BUILD" --body "$(cat $FILE)" -B main
+	gh pr create --title "Release $NEW_BUILD" --body "$(cat $FILE)" -B main
 	# Return to the main branch
 	git checkout main
 	# Remove app.xcarchive
