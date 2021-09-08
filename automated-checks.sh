@@ -13,6 +13,11 @@ LAST_ICON_HASH=$(cat $LAST_ICON_FILE 2>/dev/null)
 
 CHANGE_ICON=false
 
+# PR body
+BODY=$(cat $FILE)
+
+PROJECT_FILE=$(find . -maxdepth 1 -name '*.xcodeproj')
+
 # Build file must exist and be different from the last we processed
 if test -f "$FILE" -a "$FILE_HASH" != "$LAST_BUILD_HASH"; then
 	if test -f "$ICON_FILE" -a "$ICON_HASH" != "$LAST_ICON_HASH"; then
@@ -24,8 +29,7 @@ if test -f "$FILE" -a "$FILE_HASH" != "$LAST_BUILD_HASH"; then
 	# Bump the build version
 	agvtool bump
 	# Store the new build number for use in commit
-	NEW_BUILD=$(agvtool what-version -terse)
-	PROJECT_FILE=$(find . -maxdepth 1 -name '*.xcodeproj')
+	NEW_BUILD=$(agvtool what-version -terse)=
 	# Build the app and upload
 	/Applications/Xcode-beta.app/Contents/Developer/usr/bin/xcodebuild -project "$PROJECT_FILE" -scheme "Elsewhen" -configuration Release -destination 'platform=iOS Simulator,name=iPhone 12' -archivePath ./app.xcarchive  archive
 	/Applications/Xcode-beta.app/Contents/Developer/usr/bin/xcodebuild -exportArchive -archivePath ./app.xcarchive -exportOptionsPlist exportOptions.plist
@@ -34,7 +38,6 @@ if test -f "$FILE" -a "$FILE_HASH" != "$LAST_BUILD_HASH"; then
 	# Store hash of this build file
 	/usr/local/bin/sha3sum $FILE > $LAST_BUILD_FILE
 	# Remove file & continue PR
-	BODY=$(cat $FILE)
 	rm $FILE
 	git add "$PROJECT_FILE/project.pbxproj"
 	git add "$FILE"
