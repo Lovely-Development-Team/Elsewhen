@@ -36,6 +36,10 @@ struct ContentView: View {
     @State private var selectedTimeZone: String = TimeZone.current.identifier
     @State private var showCopied: Bool = false
     @State private var showLocalTimeInstead: Bool = false
+    #if os(iOS)
+    @State private var selectionFeedbackGenerator: UISelectionFeedbackGenerator? = nil
+    @State private var notificationFeedbackGenerator: UINotificationFeedbackGenerator? = nil
+    #endif
     
     static private let dateFormats: [DateFormat] = [
         DateFormat(icon: "calendar.badge.clock", name: "Full", code: .f),
@@ -192,13 +196,22 @@ struct ContentView: View {
                         }
                     }
                     .onTapGesture {
+                        #if os(iOS)
+                        selectionFeedbackGenerator = UISelectionFeedbackGenerator()
+                        #endif
                         withAnimation {
                             showLocalTimeInstead = true
+                            #if os(iOS)
+                            selectionFeedbackGenerator?.selectionChanged()
+                            #endif
                         }
                         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                             withAnimation {
                                 showLocalTimeInstead = false
                             }
+                            #if os(iOS)
+                            selectionFeedbackGenerator = nil
+                            #endif
                         }
                     }
                     
@@ -207,15 +220,25 @@ struct ContentView: View {
                         DiscordFormattedDate(text: discordFormat)
                         
                         Button(action: {
+                            #if os(iOS)
+                            notificationFeedbackGenerator = UINotificationFeedbackGenerator()
+                            notificationFeedbackGenerator?.prepare()
+                            #endif
                             UIPasteboard.general.setValue(self.discordFormat,
                                                           forPasteboardType: kUTTypePlainText as String)
                             withAnimation {
                                 showCopied = true
+                                #if os(iOS)
+                                notificationFeedbackGenerator?.notificationOccurred(.success)
+                                #endif
                             }
                             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                                 withAnimation {
                                     showCopied = false
                                 }
+                                #if os(iOS)
+                                notificationFeedbackGenerator = nil
+                                #endif
                             }
                         }) {
                             Text(showCopied ? "Copied ✓" : "Copy Discord Code")
