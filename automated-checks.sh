@@ -1,6 +1,6 @@
 FILE=build_app
 LAST_BUILD_FILE=last_build
-FILE_HASH=$(sha3sum $FILE)
+FILE_HASH=$(/usr/local/bin/sha3sum $FILE)
 LAST_BUILD_HASH=$(cat $LAST_BUILD_FILE 2>/dev/null)
 # Build file must exist and be different from the last we processed
 if test -f "$FILE" -a "$FILE_HASH" != "$LAST_BUILD_HASH"; then
@@ -16,7 +16,7 @@ if test -f "$FILE" -a "$FILE_HASH" != "$LAST_BUILD_HASH"; then
 	# PR with new version number
 	git checkout -B "release/$NEW_BUILD"
 	# Store hash of this build file
-	sha3sum $FILE > $LAST_BUILD_FILE
+	/usr/local/bin/sha3sum $FILE > $LAST_BUILD_FILE
 	# Remove file & continue PR
 	rm $FILE
 	git add "$PROJECT_FILE/project.pbxproj"
