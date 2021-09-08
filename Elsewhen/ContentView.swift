@@ -103,7 +103,7 @@ struct ContentView: View {
                         
                         HStack {
                             Text("Time zone")
-                                .fontWeight(.bold)
+                                .fontWeight(.semibold)
                             Spacer()
                             NavigationLink(destination: TimezoneChoiceView(selectedTimeZone: $selectedTimeZone)) {
                                 Text(selectedTimeZone.replacingOccurrences(of: "_", with: " "))
@@ -118,6 +118,7 @@ struct ContentView: View {
                         }
                         .padding(.horizontal, 8)
                         .padding(.bottom, 10)
+                        .frame(minWidth: 0, maxWidth: 390)
                         
                         HStack(spacing: 5) {
                             ForEach(Self.dateFormats, id: \.self) { formatStyle in
