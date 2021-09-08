@@ -31,7 +31,7 @@ if test -f "$FILE" -a "$FILE_HASH" != "$LAST_BUILD_HASH"; then
 	# Store the new build number for use in commit
 	NEW_BUILD=$(agvtool what-version -terse)
 	# Build the app and upload
-	/Applications/Xcode-beta.app/Contents/Developer/usr/bin/xcodebuild -project "$PROJECT_FILE" -scheme "Elsewhen" -configuration Release -destination 'platform=iOS Simulator,name=iPhone 12' -archivePath ./app.xcarchive  archive
+	/Applications/Xcode-beta.app/Contents/Developer/usr/bin/xcodebuild -project "$PROJECT_FILE" -scheme "Elsewhen" -configuration Release -destination 'platform=iOS Simulator,name=iPhone 12' -archivePath ./app.xcarchive -allowProvisioningUpdates archive
 	/Applications/Xcode-beta.app/Contents/Developer/usr/bin/xcodebuild -exportArchive -archivePath ./app.xcarchive -exportOptionsPlist exportOptions.plist
 	# PR with new version number
 	git checkout -B "release/$NEW_BUILD"
