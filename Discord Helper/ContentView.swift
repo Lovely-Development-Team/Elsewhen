@@ -180,8 +180,7 @@ struct ContentView: View {
                         }
                         
                     }
-                    .padding(.vertical, 5)
-                    .padding(.horizontal)
+                    .padding(5)
                     .contextMenu {
                         ForEach(Self.dateFormats, id: \.self) { formatStyle in
                             Button(action: {
@@ -202,39 +201,44 @@ struct ContentView: View {
                         }
                     }
                     
-                    DiscordFormattedDate(text: discordFormat)
-                    
-                    Button(action: {
-                        UIPasteboard.general.setValue(self.discordFormat,
-                                                      forPasteboardType: kUTTypePlainText as String)
-                        withAnimation {
-                            showCopied = true
-                        }
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    Group {
+                        
+                        DiscordFormattedDate(text: discordFormat)
+                        
+                        Button(action: {
+                            UIPasteboard.general.setValue(self.discordFormat,
+                                                          forPasteboardType: kUTTypePlainText as String)
                             withAnimation {
-                                showCopied = false
+                                showCopied = true
                             }
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                withAnimation {
+                                    showCopied = false
+                                }
+                            }
+                        }) {
+                            Text(showCopied ? "Copied ✓" : "Copy Discord Code")
+                                .font(.headline)
+                                .foregroundColor(.white)
                         }
-                    }) {
-                        Text(showCopied ? "Copied ✓" : "Copy Discord Code")
-                            .font(.headline)
-                            .foregroundColor(.white)
+                        .padding(.horizontal)
+                        .padding(.vertical, 5)
+                        .background(
+                            RoundedRectangle(cornerRadius: 15, style: .continuous)
+                                .fill(Color.accentColor)
+                        )
+                        .padding(.bottom, 8)
+                        
+                        Text("Date and time representative of components only; may not match exact Discord formatting.")
+                            .multilineTextAlignment(.center)
+                            .font(.caption2)
+                            .foregroundColor(.secondary)
+                        
                     }
                     .padding(.horizontal)
-                    .padding(.vertical, 5)
-                    .background(
-                        RoundedRectangle(cornerRadius: 15, style: .continuous)
-                            .fill(Color.accentColor)
-                    )
-                    .padding(.bottom, 8)
-                    
-                    Text("Date and time representative of components only; may not match exact Discord formatting.")
-                        .multilineTextAlignment(.center)
-                        .font(.caption2)
-                        .foregroundColor(.secondary)
                     
                 }
-                .padding()
+                .padding(.vertical)
                 .frame(minWidth: 0, maxWidth: .infinity)
                 .background(
                     Color(UIColor.secondarySystemBackground)
