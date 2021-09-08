@@ -1,6 +1,6 @@
 //
 //  ContentView.swift
-//  Discord Helper
+//  Elsewhen
 //
 //  Created by Ben Cardy on 04/09/2021.
 //
