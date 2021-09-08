@@ -1,6 +1,6 @@
 //
-//  Discord_HelperApp.swift
-//  Discord Helper
+//  ElsewhenApp.swift
+//  Elsewhen
 //
 //  Created by Ben Cardy on 04/09/2021.
 //
@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct Discord_HelperApp: App {
+struct ElsewhenApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()

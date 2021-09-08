@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5EAB48DD26E624CD00B04A60 /* TimezoneChoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAB48DC26E624CD00B04A60 /* TimezoneChoiceView.swift */; };
-		5EB23B9D26E406B600203153 /* Discord_HelperApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB23B9C26E406B600203153 /* Discord_HelperApp.swift */; };
+		5EB23B9D26E406B600203153 /* ElsewhenApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB23B9C26E406B600203153 /* ElsewhenApp.swift */; };
 		5EB23B9F26E406B600203153 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB23B9E26E406B600203153 /* ContentView.swift */; };
 		5EB23BA126E406B900203153 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5EB23BA026E406B900203153 /* Assets.xcassets */; };
 		5EB23BA426E406B900203153 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5EB23BA326E406B900203153 /* Preview Assets.xcassets */; };
@@ -18,8 +18,8 @@
 
 /* Begin PBXFileReference section */
 		5EAB48DC26E624CD00B04A60 /* TimezoneChoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimezoneChoiceView.swift; sourceTree = "<group>"; };
-		5EB23B9926E406B600203153 /* Discord Helper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Discord Helper.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		5EB23B9C26E406B600203153 /* Discord_HelperApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Discord_HelperApp.swift; sourceTree = "<group>"; };
+		5EB23B9926E406B600203153 /* Elsewhen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Elsewhen.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5EB23B9C26E406B600203153 /* ElsewhenApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElsewhenApp.swift; sourceTree = "<group>"; };
 		5EB23B9E26E406B600203153 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		5EB23BA026E406B900203153 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5EB23BA326E406B900203153 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -41,7 +41,7 @@
 		5EB23B9026E406B600203153 = {
 			isa = PBXGroup;
 			children = (
-				5EB23B9B26E406B600203153 /* Discord Helper */,
+				5EB23B9B26E406B600203153 /* Elsewhen */,
 				5EB23B9A26E406B600203153 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -49,15 +49,15 @@
 		5EB23B9A26E406B600203153 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5EB23B9926E406B600203153 /* Discord Helper.app */,
+				5EB23B9926E406B600203153 /* Elsewhen.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		5EB23B9B26E406B600203153 /* Discord Helper */ = {
+		5EB23B9B26E406B600203153 /* Elsewhen */ = {
 			isa = PBXGroup;
 			children = (
-				5EB23B9C26E406B600203153 /* Discord_HelperApp.swift */,
+				5EB23B9C26E406B600203153 /* ElsewhenApp.swift */,
 				5EB23B9E26E406B600203153 /* ContentView.swift */,
 				635C8FA626E66E8300361B08 /* DiscordFormattedDate.swift */,
 				5EAB48DC26E624CD00B04A60 /* TimezoneChoiceView.swift */,
@@ -65,7 +65,7 @@
 				5EB23BA026E406B900203153 /* Assets.xcassets */,
 				5EB23BA226E406B900203153 /* Preview Content */,
 			);
-			path = "Discord Helper";
+			path = Elsewhen;
 			sourceTree = "<group>";
 		};
 		5EB23BA226E406B900203153 /* Preview Content */ = {
@@ -79,9 +79,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		5EB23B9826E406B600203153 /* Discord Helper */ = {
+		5EB23B9826E406B600203153 /* Elsewhen */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5EB23BA726E406B900203153 /* Build configuration list for PBXNativeTarget "Discord Helper" */;
+			buildConfigurationList = 5EB23BA726E406B900203153 /* Build configuration list for PBXNativeTarget "Elsewhen" */;
 			buildPhases = (
 				5EB23B9526E406B600203153 /* Sources */,
 				5EB23B9626E406B600203153 /* Frameworks */,
@@ -91,9 +91,9 @@
 			);
 			dependencies = (
 			);
-			name = "Discord Helper";
+			name = Elsewhen;
 			productName = "Discord Helper";
-			productReference = 5EB23B9926E406B600203153 /* Discord Helper.app */;
+			productReference = 5EB23B9926E406B600203153 /* Elsewhen.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -111,7 +111,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 5EB23B9426E406B600203153 /* Build configuration list for PBXProject "Discord Helper" */;
+			buildConfigurationList = 5EB23B9426E406B600203153 /* Build configuration list for PBXProject "Elsewhen" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -124,7 +124,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				5EB23B9826E406B600203153 /* Discord Helper */,
+				5EB23B9826E406B600203153 /* Elsewhen */,
 			);
 		};
 /* End PBXProject section */
@@ -150,7 +150,7 @@
 				5EB31FB726E6390D00826907 /* SearchBar.swift in Sources */,
 				5EAB48DD26E624CD00B04A60 /* TimezoneChoiceView.swift in Sources */,
 				635C8FA726E66E8300361B08 /* DiscordFormattedDate.swift in Sources */,
-				5EB23B9D26E406B600203153 /* Discord_HelperApp.swift in Sources */,
+				5EB23B9D26E406B600203153 /* ElsewhenApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,7 +296,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.rosmearyorchard.Discord-Helper";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Elsewhen;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -326,7 +326,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.rosmearyorchard.Discord-Helper";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Elsewhen;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -336,7 +336,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		5EB23B9426E406B600203153 /* Build configuration list for PBXProject "Discord Helper" */ = {
+		5EB23B9426E406B600203153 /* Build configuration list for PBXProject "Elsewhen" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5EB23BA526E406B900203153 /* Debug */,
@@ -345,7 +345,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5EB23BA726E406B900203153 /* Build configuration list for PBXNativeTarget "Discord Helper" */ = {
+		5EB23BA726E406B900203153 /* Build configuration list for PBXNativeTarget "Elsewhen" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5EB23BA826E406B900203153 /* Debug */,

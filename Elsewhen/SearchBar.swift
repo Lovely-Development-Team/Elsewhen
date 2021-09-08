@@ -1,6 +1,6 @@
 //
 //  SearchBar.swift
-//  Medication Tracker
+//  Elsewhen
 //
 //  Created by Ben Cardy on 26/05/2021.
 //
