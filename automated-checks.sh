@@ -27,7 +27,7 @@ if test -f "$FILE" -a "$FILE_HASH" != "$LAST_BUILD_HASH"; then
 	fi 
 	rm $LAST_BUILD_FILE
 	# Bump the build version
-	agvtool bump
+	/Applications/Xcode-beta.app/Contents/Developer/usr/bin/agvtool bump
 	# Store the new build number for use in commit
 	NEW_BUILD=$(agvtool what-version -terse)=
 	# Build the app and upload
