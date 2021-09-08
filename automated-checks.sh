@@ -12,8 +12,8 @@ if test -f "$FILE" -a "$FILE_HASH" != "$LAST_BUILD_HASH"; then
 	NEW_BUILD=$(agvtool what-version -terse)
 	PROJECT_FILE=$(find . -maxdepth 1 -name '*.xcodeproj')
 	# Build the app and upload
-	/usr/bin/xcodebuild -project "$PROJECT_FILE" -scheme "Elsewhen" -configuration Release -destination 'platform=iOS,name=Any iOS Device' -archivePath ./app.xcarchive  archive
-	/usr/bin/xcodebuild -exportArchive -archivePath ./app.xcarchive -exportOptionsPlist exportOptions.plist
+	/Applications/Xcode-beta.app/Contents/Developer/usr/bin/xcodebuild -project "$PROJECT_FILE" -scheme "Elsewhen" -configuration Release -destination 'platform=iOS,name=Any iOS Device' -archivePath ./app.xcarchive  archive
+	/Applications/Xcode-beta.app/Contents/Developer/usr/bin/xcodebuild -exportArchive -archivePath ./app.xcarchive -exportOptionsPlist exportOptions.plist
 	# PR with new version number
 	git checkout -B "release/$NEW_BUILD"
 	# Store hash of this build file
