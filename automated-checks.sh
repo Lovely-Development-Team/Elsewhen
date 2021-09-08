@@ -1,10 +1,25 @@
 set -x
 FILE=build_app
-LAST_BUILD_FILE=last_build
 FILE_HASH=$(/usr/local/bin/sha3sum $FILE)
+
+LAST_BUILD_FILE=last_build
 LAST_BUILD_HASH=$(cat $LAST_BUILD_FILE 2>/dev/null)
+
+ICON_FILE=icon.png
+ICON_HASH=$(/usr/local/bin/sha3sum $ICON_FILE)
+
+LAST_ICON_FILE=icon_hash
+LAST_ICON_HASH=$(cat $LAST_ICON_FILE 2>/dev/null)
+
+CHANGE_ICON=false
+
 # Build file must exist and be different from the last we processed
 if test -f "$FILE" -a "$FILE_HASH" != "$LAST_BUILD_HASH"; then
+	if test -f "$ICON_FILE" -a "$ICON_HASH" != "$LAST_ICON_HASH"; then
+		CHANGE_ICON=true
+		npx app-icon generate
+		/usr/local/bin/sha3sum $ICON_FILE > $LAST_ICON_HASH
+	fi 
 	rm $LAST_BUILD_FILE
 	# Bump the build version
 	agvtool bump
@@ -23,6 +38,9 @@ if test -f "$FILE" -a "$FILE_HASH" != "$LAST_BUILD_HASH"; then
 	rm $FILE
 	git add "$PROJECT_FILE/project.pbxproj"
 	git add "$FILE"
+	if "$CHANGE_ICON" == "true"; then
+		git add Assets.xcassets/AppIcon.appiconset/*
+	fi
 	git commit -m "Bump build ($NEW_BUILD)"
 	git push -u origin "release/$NEW_BUILD"
 	/usr/local/bin/gh pr create --title "Release $NEW_BUILD" --body "$BODY" -B main
