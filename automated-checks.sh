@@ -19,12 +19,13 @@ if test -f "$FILE" -a "$FILE_HASH" != "$LAST_BUILD_HASH"; then
 	# Store hash of this build file
 	/usr/local/bin/sha3sum $FILE > $LAST_BUILD_FILE
 	# Remove file & continue PR
+	BODY=$(cat $FILE)
 	rm $FILE
 	git add "$PROJECT_FILE/project.pbxproj"
 	git add "$FILE"
 	git commit -m "Bump build ($NEW_BUILD)"
 	git push -u origin "release/$NEW_BUILD"
-	/usr/local/bin/gh pr create --title "Release $NEW_BUILD" --body "$(cat $FILE)" -B main
+	/usr/local/bin/gh pr create --title "Release $NEW_BUILD" --body "$BODY" -B main
 	# Return to the main branch
 	git checkout main
 	# Remove app.xcarchive
