@@ -1,4 +1,4 @@
-set -x
+set -ex
 FILE=build_app
 FILE_HASH=$(/usr/local/bin/sha3sum $FILE)
 
