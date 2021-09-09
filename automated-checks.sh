@@ -9,7 +9,7 @@ ICON_FILE=icon.png
 ICON_HASH=$(/usr/local/bin/sha3sum $ICON_FILE)
 
 LAST_ICON_FILE=icon_hash
-LAST_ICON_HASH=$(cat $LAST_ICON_FILE 2>/dev/null)
+LAST_ICON_HASH=$(cat $LAST_ICON_FILE 2>/dev/null || :)
 
 CHANGE_ICON=false
 
