@@ -18,19 +18,30 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Elsewhen" translatesAutoresizingMaskIntoConstraints="NO" id="yI3-Ud-Kj3">
-                                <rect key="frame" x="107" y="348" width="200" height="200"/>
+                                <rect key="frame" x="157" y="398" width="100" height="100"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="200" id="rRK-hq-Ra1"/>
-                                    <constraint firstAttribute="height" constant="200" id="zDN-Ea-Qj1"/>
+                                    <constraint firstAttribute="width" secondItem="yI3-Ud-Kj3" secondAttribute="height" multiplier="1:1" id="kJ4-74-H8F"/>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="100" id="rRK-hq-Ra1"/>
                                 </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Elsewhen" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oiK-rs-6zC">
+                                <rect key="frame" x="60" y="518" width="294" height="43"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="36"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Bcu-3y-fUS"/>
                         <color key="backgroundColor" name="AccentColor"/>
                         <constraints>
+                            <constraint firstItem="Bcu-3y-fUS" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="yI3-Ud-Kj3" secondAttribute="trailing" constant="60" id="13C-XX-aOz"/>
                             <constraint firstItem="yI3-Ud-Kj3" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="El4-vk-gtd"/>
+                            <constraint firstItem="oiK-rs-6zC" firstAttribute="leading" secondItem="Bcu-3y-fUS" secondAttribute="leading" constant="60" id="FBK-A6-jQn"/>
+                            <constraint firstItem="Bcu-3y-fUS" firstAttribute="trailing" secondItem="oiK-rs-6zC" secondAttribute="trailing" constant="60" id="YrN-be-QYZ"/>
                             <constraint firstItem="yI3-Ud-Kj3" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="bNC-Ci-i2L"/>
+                            <constraint firstItem="yI3-Ud-Kj3" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Bcu-3y-fUS" secondAttribute="leading" constant="60" id="nXL-iS-sf7"/>
+                            <constraint firstItem="oiK-rs-6zC" firstAttribute="top" secondItem="yI3-Ud-Kj3" secondAttribute="bottom" constant="20" id="yBx-nQ-8v3"/>
                         </constraints>
                     </view>
                 </viewController>
