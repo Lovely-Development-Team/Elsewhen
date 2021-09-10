@@ -24,31 +24,6 @@ struct ResultSheet: View {
     @State private var notificationFeedbackGenerator: UINotificationFeedbackGenerator? = nil
     #endif
     
-    private func format(date: Date, in timezone: TimeZone) -> String {
-        let dateFormatter = DateFormatter()
-        switch selectedFormatStyle.code {
-        case .f:
-            dateFormatter.dateStyle = .long
-            dateFormatter.timeStyle = .short
-        case .F:
-            dateFormatter.dateStyle = .full
-            dateFormatter.timeStyle = .short
-        case .D:
-            dateFormatter.dateStyle = .long
-        case .t:
-            dateFormatter.dateStyle = .none
-            dateFormatter.timeStyle = .short
-        case .T:
-            dateFormatter.dateStyle = .none
-            dateFormatter.timeStyle = .medium
-        case .R:
-            let relativeFormatter = RelativeDateTimeFormatter()
-            let convertedNow = convert(date: Date(), from: TimeZone.current, to: timezone)
-            return relativeFormatter.localizedString(for: date, relativeTo: convertedNow)
-        }
-        return dateFormatter.string(from: date)
-    }
-    
     var body: some View {
         VStack {
             VStack {
@@ -56,14 +31,14 @@ struct ResultSheet: View {
                 
                 if !showLocalTimeInstead {
                     
-                    Text(format(date: convertSelectedDate(from: selectedTimezoneIdentifier, to: selectedTimezoneIdentifier), in: selectedTimezoneIdentifier))
+                    Text(format(date: convertSelectedDate(from: selectedTimezoneIdentifier, to: selectedTimezoneIdentifier), in: selectedTimezoneIdentifier, with: selectedFormatStyle))
                         .multilineTextAlignment(.center)
                         .font(.headline)
                         .foregroundColor(.primary)
                     
                 } else {
                     
-                    Text(format(date: convertSelectedDate(from: selectedTimezoneIdentifier, to: TimeZone.current), in: TimeZone.current))
+                    Text(format(date: convertSelectedDate(from: selectedTimezoneIdentifier, to: TimeZone.current), in: TimeZone.current, with: selectedFormatStyle))
                         .multilineTextAlignment(.center)
                         .font(.headline)
                         .foregroundColor(.primary)
