@@ -270,11 +270,14 @@ struct ContentView: View {
                 )
                 
             }
-            .edgesIgnoringSafeArea(.bottom)
+            .edgesIgnoringSafeArea([.bottom, .horizontal])
             .navigationTitle("Discord Time Code Generator")
             .navigationBarTitleDisplayMode(.inline)
         }
         .navigationViewStyle(StackNavigationViewStyle())
+        .onChange(of: selectedTimeZone) { _ in
+            showLocalTimeInstead = false
+        }
     }
     
     func convertSelectedDate(from initialTimezone: TimeZone, to targetTimezone: TimeZone) -> Date {
