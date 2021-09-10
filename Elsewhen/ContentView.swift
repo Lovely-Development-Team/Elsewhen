@@ -10,23 +10,6 @@ import MobileCoreServices
 import UniformTypeIdentifiers
 import os.log
 
-enum FormatCode: String {
-    case f
-    case F
-    case D
-    case t
-    case T
-    case R
-}
-
-struct DateFormat: Identifiable, Hashable {
-    let icon: String
-    let name: String
-    let code: FormatCode
-    
-    var id: String { code.rawValue }
-}
-
 let logger = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "times")
 
 struct ContentView: View {

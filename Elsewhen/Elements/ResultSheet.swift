@@ -31,14 +31,14 @@ struct ResultSheet: View {
                 
                 if !showLocalTimeInstead {
                     
-                    Text(format(date: convertSelectedDate(from: selectedTimezoneIdentifier, to: selectedTimezoneIdentifier), in: selectedTimezoneIdentifier, with: selectedFormatStyle))
+                    Text(format(date: convertSelectedDate(from: selectedTimezoneIdentifier, to: selectedTimezoneIdentifier), in: selectedTimezoneIdentifier, with: selectedFormatStyle.code))
                         .multilineTextAlignment(.center)
                         .font(.headline)
                         .foregroundColor(.primary)
                     
                 } else {
                     
-                    Text(format(date: convertSelectedDate(from: selectedTimezoneIdentifier, to: TimeZone.current), in: TimeZone.current, with: selectedFormatStyle))
+                    Text(format(date: convertSelectedDate(from: selectedTimezoneIdentifier, to: TimeZone.current), in: TimeZone.current, with: selectedFormatStyle.code))
                         .multilineTextAlignment(.center)
                         .font(.headline)
                         .foregroundColor(.primary)
