@@ -7,6 +7,23 @@
 
 import Foundation
 
+enum FormatCode: String {
+    case f
+    case F
+    case D
+    case t
+    case T
+    case R
+}
+
+struct DateFormat: Identifiable, Hashable {
+    let icon: String
+    let name: String
+    let code: FormatCode
+    
+    var id: String { code.rawValue }
+}
+
 let dateFormats: [DateFormat] = [
     DateFormat(icon: "calendar.badge.clock", name: "Full", code: .f),
     DateFormat(icon: "calendar.badge.plus", name: "Full with Day", code: .F),
@@ -25,9 +42,9 @@ func formatTimeZoneName(_ zone: String) -> String {
     zone.replacingOccurrences(of: "_", with: " ")
 }
 
-func format(date: Date, in timezone: TimeZone, with formatStyle: DateFormat) -> String {
+func format(date: Date, in timezone: TimeZone, with formatCode: FormatCode) -> String {
     let dateFormatter = DateFormatter()
-    switch formatStyle.code {
+    switch formatCode {
     case .f:
         dateFormatter.dateStyle = .long
         dateFormatter.timeStyle = .short

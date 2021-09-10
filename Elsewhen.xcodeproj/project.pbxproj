@@ -19,7 +19,50 @@
 		6378398326EB80C30055A10D /* ResultSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6378398226EB80C30055A10D /* ResultSheet.swift */; };
 		6378398526EB80F50055A10D /* DateHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6378398426EB80F50055A10D /* DateHelpers.swift */; };
 		6378398726EBA7C60055A10D /* DateTimeSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6378398626EBA7C60055A10D /* DateTimeSelection.swift */; };
+		6378398F26EBF4750055A10D /* Intents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6378398E26EBF4750055A10D /* Intents.framework */; };
+		6378399226EBF4750055A10D /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6378399126EBF4750055A10D /* IntentHandler.swift */; };
+		6378399A26EBF4750055A10D /* IntentsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6378399926EBF4750055A10D /* IntentsUI.framework */; };
+		6378399D26EBF4750055A10D /* IntentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6378399C26EBF4750055A10D /* IntentViewController.swift */; };
+		637839A026EBF4750055A10D /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6378399E26EBF4750055A10D /* MainInterface.storyboard */; };
+		637839A426EBF4750055A10D /* Discord Helper IntentsUI.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6378399826EBF4750055A10D /* Discord Helper IntentsUI.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		637839A726EBF4760055A10D /* Discord Helper Intents.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6378398C26EBF4750055A10D /* Discord Helper Intents.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		637839B026EBF4910055A10D /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 637839AF26EBF4910055A10D /* Intents.intentdefinition */; };
+		637839B226EBF5FD0055A10D /* ConvertTimeIntentHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637839B126EBF5FD0055A10D /* ConvertTimeIntentHandling.swift */; };
+		637839B526EBF8130055A10D /* FormatCodeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637839B426EBF8130055A10D /* FormatCodeExtension.swift */; };
+		637839B626EBF9690055A10D /* DateHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6378398426EB80F50055A10D /* DateHelpers.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		637839A226EBF4750055A10D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5EB23B9126E406B600203153 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6378399726EBF4750055A10D;
+			remoteInfo = "Discord Helper IntentsUI";
+		};
+		637839A526EBF4760055A10D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5EB23B9126E406B600203153 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6378398B26EBF4750055A10D;
+			remoteInfo = "Discord Helper Intents";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		637839A826EBF4760055A10D /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				637839A426EBF4750055A10D /* Discord Helper IntentsUI.appex in Embed App Extensions */,
+				637839A726EBF4760055A10D /* Discord Helper Intents.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		5EAB48DC26E624CD00B04A60 /* TimezoneChoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimezoneChoiceView.swift; sourceTree = "<group>"; };
@@ -35,6 +78,18 @@
 		6378398226EB80C30055A10D /* ResultSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultSheet.swift; sourceTree = "<group>"; };
 		6378398426EB80F50055A10D /* DateHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHelpers.swift; sourceTree = "<group>"; };
 		6378398626EBA7C60055A10D /* DateTimeSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTimeSelection.swift; sourceTree = "<group>"; };
+		6378398C26EBF4750055A10D /* Discord Helper Intents.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Discord Helper Intents.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6378398E26EBF4750055A10D /* Intents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Intents.framework; path = System/Library/Frameworks/Intents.framework; sourceTree = SDKROOT; };
+		6378399126EBF4750055A10D /* IntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentHandler.swift; sourceTree = "<group>"; };
+		6378399326EBF4750055A10D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6378399826EBF4750055A10D /* Discord Helper IntentsUI.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Discord Helper IntentsUI.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6378399926EBF4750055A10D /* IntentsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IntentsUI.framework; path = System/Library/Frameworks/IntentsUI.framework; sourceTree = SDKROOT; };
+		6378399C26EBF4750055A10D /* IntentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentViewController.swift; sourceTree = "<group>"; };
+		6378399F26EBF4750055A10D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		637839A126EBF4750055A10D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		637839AF26EBF4910055A10D /* Intents.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = Intents.intentdefinition; sourceTree = "<group>"; };
+		637839B126EBF5FD0055A10D /* ConvertTimeIntentHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertTimeIntentHandling.swift; sourceTree = "<group>"; };
+		637839B426EBF8130055A10D /* FormatCodeExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatCodeExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +100,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6378398926EBF4750055A10D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6378398F26EBF4750055A10D /* Intents.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6378399526EBF4750055A10D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6378399A26EBF4750055A10D /* IntentsUI.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -52,6 +123,9 @@
 			isa = PBXGroup;
 			children = (
 				5EB23B9B26E406B600203153 /* Elsewhen */,
+				6378399026EBF4750055A10D /* Discord Helper Intents */,
+				6378399B26EBF4750055A10D /* Discord Helper IntentsUI */,
+				6378398D26EBF4750055A10D /* Frameworks */,
 				5EB23B9A26E406B600203153 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -60,6 +134,8 @@
 			isa = PBXGroup;
 			children = (
 				5EB23B9926E406B600203153 /* Elsewhen.app */,
+				6378398C26EBF4750055A10D /* Discord Helper Intents.appex */,
+				6378399826EBF4750055A10D /* Discord Helper IntentsUI.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -107,6 +183,45 @@
 			path = Elements;
 			sourceTree = "<group>";
 		};
+		6378398D26EBF4750055A10D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6378398E26EBF4750055A10D /* Intents.framework */,
+				6378399926EBF4750055A10D /* IntentsUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6378399026EBF4750055A10D /* Discord Helper Intents */ = {
+			isa = PBXGroup;
+			children = (
+				637839B326EBF7F90055A10D /* Extensions */,
+				6378399126EBF4750055A10D /* IntentHandler.swift */,
+				637839B126EBF5FD0055A10D /* ConvertTimeIntentHandling.swift */,
+				637839AF26EBF4910055A10D /* Intents.intentdefinition */,
+				6378399326EBF4750055A10D /* Info.plist */,
+			);
+			path = "Discord Helper Intents";
+			sourceTree = "<group>";
+		};
+		6378399B26EBF4750055A10D /* Discord Helper IntentsUI */ = {
+			isa = PBXGroup;
+			children = (
+				6378399C26EBF4750055A10D /* IntentViewController.swift */,
+				6378399E26EBF4750055A10D /* MainInterface.storyboard */,
+				637839A126EBF4750055A10D /* Info.plist */,
+			);
+			path = "Discord Helper IntentsUI";
+			sourceTree = "<group>";
+		};
+		637839B326EBF7F90055A10D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				637839B426EBF8130055A10D /* FormatCodeExtension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -117,15 +232,52 @@
 				5EB23B9526E406B600203153 /* Sources */,
 				5EB23B9626E406B600203153 /* Frameworks */,
 				5EB23B9726E406B600203153 /* Resources */,
+				637839A826EBF4760055A10D /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				637839A326EBF4750055A10D /* PBXTargetDependency */,
+				637839A626EBF4760055A10D /* PBXTargetDependency */,
 			);
 			name = Elsewhen;
 			productName = "Discord Helper";
 			productReference = 5EB23B9926E406B600203153 /* Elsewhen.app */;
 			productType = "com.apple.product-type.application";
+		};
+		6378398B26EBF4750055A10D /* Discord Helper Intents */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 637839AE26EBF4760055A10D /* Build configuration list for PBXNativeTarget "Discord Helper Intents" */;
+			buildPhases = (
+				6378398826EBF4750055A10D /* Sources */,
+				6378398926EBF4750055A10D /* Frameworks */,
+				6378398A26EBF4750055A10D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Discord Helper Intents";
+			productName = "Discord Helper Intents";
+			productReference = 6378398C26EBF4750055A10D /* Discord Helper Intents.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		6378399726EBF4750055A10D /* Discord Helper IntentsUI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 637839AD26EBF4760055A10D /* Build configuration list for PBXNativeTarget "Discord Helper IntentsUI" */;
+			buildPhases = (
+				6378399426EBF4750055A10D /* Sources */,
+				6378399526EBF4750055A10D /* Frameworks */,
+				6378399626EBF4750055A10D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Discord Helper IntentsUI";
+			productName = "Discord Helper IntentsUI";
+			productReference = 6378399826EBF4750055A10D /* Discord Helper IntentsUI.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -138,6 +290,12 @@
 				LastUpgradeCheck = 1300;
 				TargetAttributes = {
 					5EB23B9826E406B600203153 = {
+						CreatedOnToolsVersion = 13.0;
+					};
+					6378398B26EBF4750055A10D = {
+						CreatedOnToolsVersion = 13.0;
+					};
+					6378399726EBF4750055A10D = {
 						CreatedOnToolsVersion = 13.0;
 					};
 				};
@@ -156,6 +314,8 @@
 			projectRoot = "";
 			targets = (
 				5EB23B9826E406B600203153 /* Elsewhen */,
+				6378398B26EBF4750055A10D /* Discord Helper Intents */,
+				6378399726EBF4750055A10D /* Discord Helper IntentsUI */,
 			);
 		};
 /* End PBXProject section */
@@ -168,6 +328,21 @@
 				6378398026EA61AB0055A10D /* Launch Screen.storyboard in Resources */,
 				5EB23BA426E406B900203153 /* Preview Assets.xcassets in Resources */,
 				5EB23BA126E406B900203153 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6378398A26EBF4750055A10D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6378399626EBF4750055A10D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				637839A026EBF4750055A10D /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -190,7 +365,51 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6378398826EBF4750055A10D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				637839B026EBF4910055A10D /* Intents.intentdefinition in Sources */,
+				6378399226EBF4750055A10D /* IntentHandler.swift in Sources */,
+				637839B526EBF8130055A10D /* FormatCodeExtension.swift in Sources */,
+				637839B626EBF9690055A10D /* DateHelpers.swift in Sources */,
+				637839B226EBF5FD0055A10D /* ConvertTimeIntentHandling.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6378399426EBF4750055A10D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6378399D26EBF4750055A10D /* IntentViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		637839A326EBF4750055A10D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6378399726EBF4750055A10D /* Discord Helper IntentsUI */;
+			targetProxy = 637839A226EBF4750055A10D /* PBXContainerItemProxy */;
+		};
+		637839A626EBF4760055A10D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6378398B26EBF4750055A10D /* Discord Helper Intents */;
+			targetProxy = 637839A526EBF4760055A10D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		6378399E26EBF4750055A10D /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6378399F26EBF4750055A10D /* Base */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		5EB23BA526E406B900203153 /* Debug */ = {
@@ -312,6 +531,7 @@
 		5EB23BA826E406B900203153 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -343,6 +563,7 @@
 		5EB23BA926E406B900203153 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -371,6 +592,110 @@
 			};
 			name = Release;
 		};
+		637839A926EBF4760055A10D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 10;
+				DEVELOPMENT_TEAM = QRVYSKD5TN;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Discord Helper Intents/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Elsewhen Intents";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.rosmearyorchard.Discord-Helper.Elsewhen-Intents";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		637839AA26EBF4760055A10D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 10;
+				DEVELOPMENT_TEAM = QRVYSKD5TN;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Discord Helper Intents/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Elsewhen Intents";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.rosmearyorchard.Discord-Helper.Elsewhen-Intents";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		637839AB26EBF4760055A10D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 10;
+				DEVELOPMENT_TEAM = QRVYSKD5TN;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Discord Helper IntentsUI/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Discord Helper IntentsUI";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.rosmearyorchard.Discord-Helper.Discord-Helper-IntentsUI";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		637839AC26EBF4760055A10D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 10;
+				DEVELOPMENT_TEAM = QRVYSKD5TN;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Discord Helper IntentsUI/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Discord Helper IntentsUI";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.rosmearyorchard.Discord-Helper.Discord-Helper-IntentsUI";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -388,6 +713,24 @@
 			buildConfigurations = (
 				5EB23BA826E406B900203153 /* Debug */,
 				5EB23BA926E406B900203153 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		637839AD26EBF4760055A10D /* Build configuration list for PBXNativeTarget "Discord Helper IntentsUI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				637839AB26EBF4760055A10D /* Debug */,
+				637839AC26EBF4760055A10D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		637839AE26EBF4760055A10D /* Build configuration list for PBXNativeTarget "Discord Helper Intents" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				637839A926EBF4760055A10D /* Debug */,
+				637839AA26EBF4760055A10D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
