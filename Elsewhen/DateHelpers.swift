@@ -24,3 +24,28 @@ func convert(date: Date, from initialTimezone: TimeZone, to targetTimezone: Time
 func formatTimeZoneName(_ zone: String) -> String {
     zone.replacingOccurrences(of: "_", with: " ")
 }
+
+func format(date: Date, in timezone: TimeZone, with formatStyle: DateFormat) -> String {
+    let dateFormatter = DateFormatter()
+    switch formatStyle.code {
+    case .f:
+        dateFormatter.dateStyle = .long
+        dateFormatter.timeStyle = .short
+    case .F:
+        dateFormatter.dateStyle = .full
+        dateFormatter.timeStyle = .short
+    case .D:
+        dateFormatter.dateStyle = .long
+    case .t:
+        dateFormatter.dateStyle = .none
+        dateFormatter.timeStyle = .short
+    case .T:
+        dateFormatter.dateStyle = .none
+        dateFormatter.timeStyle = .medium
+    case .R:
+        let relativeFormatter = RelativeDateTimeFormatter()
+        let convertedNow = convert(date: Date(), from: TimeZone.current, to: timezone)
+        return relativeFormatter.localizedString(for: date, relativeTo: convertedNow)
+    }
+    return dateFormatter.string(from: date)
+}
