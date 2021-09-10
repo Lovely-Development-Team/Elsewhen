@@ -25,11 +25,15 @@ if test -f "$FILE" -a "$FILE_HASH" != "$LAST_BUILD_HASH"; then
 		npx app-icon generate
 		sha3sum $ICON_FILE > $LAST_ICON_HASH
 	fi 
+	touch $LAST_BUILD_FILE
 	rm $LAST_BUILD_FILE
 	# Bump the build version
 	agvtool bump
 	# Store the new build number for use in commit
 	NEW_BUILD=$(agvtool what-version -terse)
+	# Clean up previous builds
+	rm -rf build
+	xcodebuild clean
 	# Build the app and upload
 	xcodebuild -project "$PROJECT_FILE" -scheme "Elsewhen" -configuration Release -destination 'platform=iOS Simulator,name=iPhone 12' -archivePath ./app.xcarchive -allowProvisioningUpdates archive
 	xcodebuild -exportArchive -archivePath ./app.xcarchive -exportOptionsPlist exportOptions.plist
