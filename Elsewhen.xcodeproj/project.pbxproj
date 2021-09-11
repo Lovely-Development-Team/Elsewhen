@@ -40,6 +40,7 @@
 		637839BF26ECB9770055A10D /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 637839AF26EBF4910055A10D /* Intents.intentdefinition */; };
 		637839C126ECBA5B0055A10D /* NSUserInfoKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637839C026ECBA5B0055A10D /* NSUserInfoKeys.swift */; };
 		637839C226ECBA680055A10D /* NSUserInfoKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637839C026ECBA5B0055A10D /* NSUserInfoKeys.swift */; };
+		637839CB26ED11360055A10D /* TimeZone+ItemProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637839CA26ED11360055A10D /* TimeZone+ItemProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,6 +109,7 @@
 		637839BB26ECB64E0055A10D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		637839BC26ECB8C10055A10D /* Loggers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loggers.swift; sourceTree = "<group>"; };
 		637839C026ECBA5B0055A10D /* NSUserInfoKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSUserInfoKeys.swift; sourceTree = "<group>"; };
+		637839CA26ED11360055A10D /* TimeZone+ItemProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeZone+ItemProvider.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -212,6 +214,7 @@
 			isa = PBXGroup;
 			children = (
 				6378397D26EA5FD60055A10D /* UIApplication+clearLaunchScreenCache.swift */,
+				637839CA26ED11360055A10D /* TimeZone+ItemProvider.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -408,6 +411,7 @@
 				637839BD26ECB8C20055A10D /* Loggers.swift in Sources */,
 				5EE70E2726ECCC0700F3F164 /* TimeCodeGeneratorView.swift in Sources */,
 				6378398726EBA7C60055A10D /* DateTimeSelection.swift in Sources */,
+				637839CB26ED11360055A10D /* TimeZone+ItemProvider.swift in Sources */,
 				6378398326EB80C30055A10D /* ResultSheet.swift in Sources */,
 				6378398526EB80F50055A10D /* DateHelpers.swift in Sources */,
 				635C8FA726E66E8300361B08 /* DiscordFormattedDate.swift in Sources */,
