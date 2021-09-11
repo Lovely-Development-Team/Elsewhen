@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UniformTypeIdentifiers
 
 struct MykeMode: View {
     
@@ -42,6 +43,9 @@ struct MykeMode: View {
                             Text(abbreviation)
                                 .foregroundColor(.secondary)
                         }
+                    }
+                    .onDrag {
+                        NSItemProvider(item: tz.identifier.data(using: .utf8)! as NSData, typeIdentifier: UTType.utf8PlainText.identifier)
                     }
                 }
                 .onMove(perform: move)
