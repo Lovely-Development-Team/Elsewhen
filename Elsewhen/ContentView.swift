@@ -12,47 +12,19 @@ import os.log
 
 struct ContentView: View {
     
-    @State private var selectedDate = Date()
-    @State private var selectedFormatStyle: DateFormat = dateFormats[0]
-    @State private var selectedTimeZone: String = TimeZone.current.identifier
-    @State private var showLocalTimeInstead: Bool = false
-    
-    private var discordFormat: String {
-        var timeIntervalSince1970 = Int(selectedDate.timeIntervalSince1970)
-        
-        if let tz = TimeZone(identifier: selectedTimeZone) {
-            timeIntervalSince1970 = Int(convertSelectedDate(from: tz, to: TimeZone.current).timeIntervalSince1970)
-        } else {
-            logger.warning("\(selectedTimeZone, privacy: .public) is not a valid timezone identifier!")
-        }
-        
-        return "<t:\(timeIntervalSince1970):\(selectedFormatStyle.code.rawValue)>"
-    }
+    @State private var selectedTab: Int = 1
     
     var body: some View {
-        NavigationView {
-            VStack(spacing: 0) {
-                
-                ScrollView(showsIndicators: true) {
-                    DateTimeSelection(selectedFormatStyle: $selectedFormatStyle, selectedDate: $selectedDate, selectedTimeZone: $selectedTimeZone)
-                }
-                
-                ResultSheet(selectedDate: selectedDate, selectedTimeZone: selectedTimeZone, discordFormat: discordFormat, showLocalTimeInstead: $showLocalTimeInstead, selectedFormatStyle: $selectedFormatStyle)
-                
-            }
-            .edgesIgnoringSafeArea([.bottom, .horizontal])
-            .navigationTitle("Discord Time Code Generator")
-            .navigationBarTitleDisplayMode(.inline)
-        }
-        .navigationViewStyle(StackNavigationViewStyle())
-        .onChange(of: selectedTimeZone) { _ in
-            showLocalTimeInstead = false
+        TabView(selection: $selectedTab) {
+            TimeCodeGeneratorView()
+                .tabItem { Label("Time Codes", systemImage: "clock") }
+                .tag(0)
+            MykeMode()
+                .tabItem { Label("Myke Mode", systemImage: "keyboard") }
+                .tag(1)
         }
     }
     
-    func convertSelectedDate(from initialTimezone: TimeZone, to targetTimezone: TimeZone) -> Date {
-        return convert(date: selectedDate, from: initialTimezone, to: targetTimezone)
-    }
 }
 
 struct ContentView_Previews: PreviewProvider {
