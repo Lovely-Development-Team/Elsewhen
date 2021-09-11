@@ -15,6 +15,10 @@ import IntentsUI
 // "Send a message using <myApp>"
 
 class IntentViewController: UIViewController, INUIHostedViewControlling {
+    @IBOutlet weak var topSpacer: NSLayoutConstraint!
+    @IBOutlet weak var humanFormatLabel: UILabel!
+    @IBOutlet weak var discordFormatSpacer: NSLayoutConstraint!
+    @IBOutlet weak var discordFormatLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +30,48 @@ class IntentViewController: UIViewController, INUIHostedViewControlling {
     // Prepare your view controller for the interaction to handle.
     func configureView(for parameters: Set<INParameter>, of interaction: INInteraction, interactiveBehavior: INUIInteractiveBehavior, context: INUIHostedViewContext, completion: @escaping (Bool, Set<INParameter>, CGSize) -> Void) {
         // Do configuration here, including preparing views and calculating a desired size for presentation.
-        completion(true, parameters, self.desiredSize)
+        let intent = interaction.intent
+        switch intent {
+        case is ConvertTimeIntent:
+            guard let intentResponse = interaction.intentResponse as? ConvertTimeIntentResponse else {
+                      completion(false, parameters, self.desiredSize)
+                      return
+                  }
+            guard intentResponse.code == .success else {
+                guard intentResponse.code == .noDate else {
+                    completion(false, parameters, self.desiredSize)
+                    return
+                }
+                humanFormatLabel.text = "No date provided"
+                discordFormatLabel.removeFromSuperview()
+                completion(false, parameters, discordFormatLabel.sizeThatFits(desiredSize))
+                return
+            }
+            guard let humanFormat = intentResponse.humanFormat,
+                  let discordFormat = intentResponse.discordFormat else {
+                      completion(false, parameters, self.desiredSize)
+                      return
+                  }
+            humanFormatLabel.text = humanFormat
+            discordFormatLabel.text = discordFormat
+            let humanFormatLabelSizeThatFits = humanFormatLabel.sizeThatFits(desiredSize)
+            let discordFormatLabelSizeThatFits = discordFormatLabel.sizeThatFits(desiredSize)
+            // Spacing from the top of the view
+            let topSpacerHeight = topSpacer.constant
+            // Spacing of the first ("human format") label
+            let humanFormatLabelHeight = humanFormatLabelSizeThatFits.height
+            // Space between the two labels
+            let spacerHeight = discordFormatSpacer.constant
+            // Spacing of the second ("discord format") label
+            let discordFormatLabelHeight = discordFormatLabelSizeThatFits.height
+            // At a bit of padding for some space at the bottom
+            let heightPadding = CGFloat(4)
+            let desiredHeight = topSpacerHeight + humanFormatLabelHeight + discordFormatLabelHeight + spacerHeight + heightPadding
+            let desiredWidth = humanFormatLabelSizeThatFits.width + discordFormatLabelSizeThatFits.width
+            completion(true, parameters, CGSize(width: desiredWidth, height: desiredHeight))
+        default:
+            completion(false, parameters, self.desiredSize)
+        }
     }
     
     var desiredSize: CGSize {

@@ -10,8 +10,6 @@ import MobileCoreServices
 import UniformTypeIdentifiers
 import os.log
 
-let logger = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "times")
-
 struct ContentView: View {
     
     @State private var selectedDate = Date()
