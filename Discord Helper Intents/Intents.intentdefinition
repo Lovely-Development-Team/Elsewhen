@@ -107,6 +107,8 @@
 			<string>information</string>
 			<key>INIntentConfigurable</key>
 			<true/>
+			<key>INIntentDescription</key>
+			<string>Generate a timecode for sharing a user-localized date and time in Discord.</string>
 			<key>INIntentDescriptionID</key>
 			<string>IWOGgh</string>
 			<key>INIntentIneligibleForSuggestions</key>

@@ -100,7 +100,6 @@
 		6378398C26EBF4750055A10D /* Discord Helper Intents.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Discord Helper Intents.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6378398E26EBF4750055A10D /* Intents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Intents.framework; path = System/Library/Frameworks/Intents.framework; sourceTree = SDKROOT; };
 		6378399126EBF4750055A10D /* IntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentHandler.swift; sourceTree = "<group>"; };
-		6378399326EBF4750055A10D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6378399826EBF4750055A10D /* Discord Helper IntentsUI.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Discord Helper IntentsUI.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6378399926EBF4750055A10D /* IntentsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IntentsUI.framework; path = System/Library/Frameworks/IntentsUI.framework; sourceTree = SDKROOT; };
 		6378399C26EBF4750055A10D /* IntentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentViewController.swift; sourceTree = "<group>"; };
@@ -115,6 +114,7 @@
 		637839BC26ECB8C10055A10D /* Loggers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loggers.swift; sourceTree = "<group>"; };
 		637839C026ECBA5B0055A10D /* NSUserInfoKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSUserInfoKeys.swift; sourceTree = "<group>"; };
 		637839CA26ED11360055A10D /* TimeZone+ItemProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeZone+ItemProvider.swift"; sourceTree = "<group>"; };
+		D5F5DE5E26ED1C9800851D98 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -249,7 +249,7 @@
 				6378399126EBF4750055A10D /* IntentHandler.swift */,
 				637839B126EBF5FD0055A10D /* ConvertTimeIntentHandling.swift */,
 				637839AF26EBF4910055A10D /* Intents.intentdefinition */,
-				6378399326EBF4750055A10D /* Info.plist */,
+				D5F5DE5F26ED1C9800851D98 /* Info.plist */,
 				637839C026ECBA5B0055A10D /* NSUserInfoKeys.swift */,
 			);
 			path = "Discord Helper Intents";
@@ -473,6 +473,14 @@
 				6378399F26EBF4750055A10D /* Base */,
 			);
 			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
+		D5F5DE5F26ED1C9800851D98 /* Info.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D5F5DE5E26ED1C9800851D98 /* Base */,
+			);
+			name = Info.plist;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
