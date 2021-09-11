@@ -111,14 +111,22 @@
 			<string>IWOGgh</string>
 			<key>INIntentIneligibleForSuggestions</key>
 			<true/>
+			<key>INIntentInput</key>
+			<string>date</string>
+			<key>INIntentKeyParameter</key>
+			<string>date</string>
 			<key>INIntentLastParameterTag</key>
-			<integer>4</integer>
+			<integer>6</integer>
 			<key>INIntentManagedParameterCombinations</key>
 			<dict>
-				<key>date,formatCode</key>
+				<key>date,formatCode,timezone</key>
 				<dict>
 					<key>INIntentParameterCombinationSupportsBackgroundExecution</key>
 					<true/>
+					<key>INIntentParameterCombinationTitle</key>
+					<string>Get Discord Code for  ${date}in ${timezone} formatted as ${formatCode}</string>
+					<key>INIntentParameterCombinationTitleID</key>
+					<string>5fnINq</string>
 					<key>INIntentParameterCombinationUpdatesLinked</key>
 					<true/>
 				</dict>
@@ -163,7 +171,7 @@
 							<key>INIntentParameterPromptDialogCustom</key>
 							<true/>
 							<key>INIntentParameterPromptDialogFormatString</key>
-							<string>What time dop you want to convert?</string>
+							<string>What time do you want to convert?</string>
 							<key>INIntentParameterPromptDialogFormatStringID</key>
 							<string>rWUDjF</string>
 							<key>INIntentParameterPromptDialogType</key>
@@ -237,6 +245,77 @@
 					<key>INIntentParameterType</key>
 					<string>Integer</string>
 				</dict>
+				<dict>
+					<key>INIntentParameterConfigurable</key>
+					<true/>
+					<key>INIntentParameterCustomDisambiguation</key>
+					<true/>
+					<key>INIntentParameterDisplayName</key>
+					<string>Timezone</string>
+					<key>INIntentParameterDisplayNameID</key>
+					<string>fosGKg</string>
+					<key>INIntentParameterDisplayPriority</key>
+					<integer>3</integer>
+					<key>INIntentParameterName</key>
+					<string>timezone</string>
+					<key>INIntentParameterObjectType</key>
+					<string>Timezone</string>
+					<key>INIntentParameterObjectTypeNamespace</key>
+					<string>ypDtPf</string>
+					<key>INIntentParameterPromptDialogs</key>
+					<array>
+						<dict>
+							<key>INIntentParameterPromptDialogCustom</key>
+							<true/>
+							<key>INIntentParameterPromptDialogFormatString</key>
+							<string>Select a timezone</string>
+							<key>INIntentParameterPromptDialogFormatStringID</key>
+							<string>PVSaCa</string>
+							<key>INIntentParameterPromptDialogType</key>
+							<string>Configuration</string>
+						</dict>
+						<dict>
+							<key>INIntentParameterPromptDialogCustom</key>
+							<true/>
+							<key>INIntentParameterPromptDialogFormatString</key>
+							<string>What ${timezone}would you like to use?</string>
+							<key>INIntentParameterPromptDialogFormatStringID</key>
+							<string>VHE3Lg</string>
+							<key>INIntentParameterPromptDialogType</key>
+							<string>Primary</string>
+						</dict>
+						<dict>
+							<key>INIntentParameterPromptDialogCustom</key>
+							<true/>
+							<key>INIntentParameterPromptDialogFormatString</key>
+							<string>There are ${count} options matching ‘${timezone}’.</string>
+							<key>INIntentParameterPromptDialogFormatStringID</key>
+							<string>oXtY0U</string>
+							<key>INIntentParameterPromptDialogType</key>
+							<string>DisambiguationIntroduction</string>
+						</dict>
+						<dict>
+							<key>INIntentParameterPromptDialogCustom</key>
+							<true/>
+							<key>INIntentParameterPromptDialogFormatString</key>
+							<string>Just to confirm, you wanted ‘${timezone}’?</string>
+							<key>INIntentParameterPromptDialogFormatStringID</key>
+							<string>I3o0El</string>
+							<key>INIntentParameterPromptDialogType</key>
+							<string>Confirmation</string>
+						</dict>
+					</array>
+					<key>INIntentParameterSupportsDynamicEnumeration</key>
+					<true/>
+					<key>INIntentParameterSupportsResolution</key>
+					<true/>
+					<key>INIntentParameterSupportsSearch</key>
+					<true/>
+					<key>INIntentParameterTag</key>
+					<integer>6</integer>
+					<key>INIntentParameterType</key>
+					<string>Object</string>
+				</dict>
 			</array>
 			<key>INIntentResponse</key>
 			<dict>
@@ -252,9 +331,13 @@
 						<key>INIntentResponseCodeName</key>
 						<string>failure</string>
 					</dict>
+					<dict>
+						<key>INIntentResponseCodeName</key>
+						<string>noDate</string>
+					</dict>
 				</array>
 				<key>INIntentResponseLastParameterTag</key>
-				<integer>1</integer>
+				<integer>2</integer>
 				<key>INIntentResponseOutput</key>
 				<string>discordFormat</string>
 				<key>INIntentResponseParameters</key>
@@ -273,10 +356,24 @@
 						<key>INIntentResponseParameterType</key>
 						<string>String</string>
 					</dict>
+					<dict>
+						<key>INIntentResponseParameterDisplayName</key>
+						<string>Human Format</string>
+						<key>INIntentResponseParameterDisplayNameID</key>
+						<string>fE5vqC</string>
+						<key>INIntentResponseParameterDisplayPriority</key>
+						<integer>2</integer>
+						<key>INIntentResponseParameterName</key>
+						<string>humanFormat</string>
+						<key>INIntentResponseParameterTag</key>
+						<integer>2</integer>
+						<key>INIntentResponseParameterType</key>
+						<string>String</string>
+					</dict>
 				</array>
 			</dict>
 			<key>INIntentTitle</key>
-			<string>Convert Time</string>
+			<string>Get Discord Code</string>
 			<key>INIntentTitleID</key>
 			<string>1wSgOR</string>
 			<key>INIntentType</key>
@@ -286,6 +383,86 @@
 		</dict>
 	</array>
 	<key>INTypes</key>
-	<array/>
+	<array>
+		<dict>
+			<key>INTypeClassName</key>
+			<string>INTimezone</string>
+			<key>INTypeDisplayName</key>
+			<string>Timezone</string>
+			<key>INTypeDisplayNameID</key>
+			<string>j3HWwr</string>
+			<key>INTypeLastPropertyTag</key>
+			<integer>100</integer>
+			<key>INTypeName</key>
+			<string>Timezone</string>
+			<key>INTypeProperties</key>
+			<array>
+				<dict>
+					<key>INTypePropertyDefault</key>
+					<true/>
+					<key>INTypePropertyDisplayPriority</key>
+					<integer>1</integer>
+					<key>INTypePropertyName</key>
+					<string>identifier</string>
+					<key>INTypePropertyTag</key>
+					<integer>1</integer>
+					<key>INTypePropertyType</key>
+					<string>String</string>
+				</dict>
+				<dict>
+					<key>INTypePropertyDefault</key>
+					<true/>
+					<key>INTypePropertyDisplayPriority</key>
+					<integer>2</integer>
+					<key>INTypePropertyName</key>
+					<string>displayString</string>
+					<key>INTypePropertyTag</key>
+					<integer>2</integer>
+					<key>INTypePropertyType</key>
+					<string>String</string>
+				</dict>
+				<dict>
+					<key>INTypePropertyDefault</key>
+					<true/>
+					<key>INTypePropertyDisplayPriority</key>
+					<integer>3</integer>
+					<key>INTypePropertyName</key>
+					<string>pronunciationHint</string>
+					<key>INTypePropertyTag</key>
+					<integer>3</integer>
+					<key>INTypePropertyType</key>
+					<string>String</string>
+				</dict>
+				<dict>
+					<key>INTypePropertyDefault</key>
+					<true/>
+					<key>INTypePropertyDisplayPriority</key>
+					<integer>4</integer>
+					<key>INTypePropertyName</key>
+					<string>alternativeSpeakableMatches</string>
+					<key>INTypePropertySupportsMultipleValues</key>
+					<true/>
+					<key>INTypePropertyTag</key>
+					<integer>4</integer>
+					<key>INTypePropertyType</key>
+					<string>SpeakableString</string>
+				</dict>
+				<dict>
+					<key>INTypePropertyDisplayName</key>
+					<string>Abbreviation</string>
+					<key>INTypePropertyDisplayNameID</key>
+					<string>nzDw0q</string>
+					<key>INTypePropertyDisplayPriority</key>
+					<integer>5</integer>
+					<key>INTypePropertyName</key>
+					<string>abbreviation</string>
+					<key>INTypePropertyTag</key>
+					<integer>100</integer>
+					<key>INTypePropertyType</key>
+					<string>String</string>
+				</dict>
+			</array>
+		</dict>
+	</array>
 </dict>
 </plist>
