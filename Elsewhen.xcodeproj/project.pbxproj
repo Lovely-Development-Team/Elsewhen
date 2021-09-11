@@ -166,6 +166,7 @@
 				5EE70E2526ECCBF400F3F164 /* Views */,
 				6378398126EB7F510055A10D /* Elements */,
 				6378397C26EA5FA50055A10D /* Extensions */,
+				5EE70E2826ED0EE700F3F164 /* Helpers */,
 				5EB23B9C26E406B600203153 /* ElsewhenApp.swift */,
 				5EB23B9E26E406B600203153 /* ContentView.swift */,
 				5EE70E2326ECBEED00F3F164 /* MykeMode.swift */,
@@ -192,8 +193,19 @@
 			isa = PBXGroup;
 			children = (
 				5EE70E2626ECCC0700F3F164 /* TimeCodeGeneratorView.swift */,
+				5EE70E2326ECBEED00F3F164 /* MykeMode.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		5EE70E2826ED0EE700F3F164 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				6378398426EB80F50055A10D /* DateHelpers.swift */,
+				5EB31FB626E6390D00826907 /* SearchBar.swift */,
+				5EE70E2126EC9AA500F3F164 /* TimeZoneFlags.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		6378397C26EA5FA50055A10D /* Extensions */ = {
