@@ -16,6 +16,7 @@
 		5EE70E2226EC9AA600F3F164 /* TimeZoneFlags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE70E2126EC9AA500F3F164 /* TimeZoneFlags.swift */; };
 		5EE70E2426ECBEED00F3F164 /* MykeMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE70E2326ECBEED00F3F164 /* MykeMode.swift */; };
 		5EE70E2726ECCC0700F3F164 /* TimeCodeGeneratorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE70E2626ECCC0700F3F164 /* TimeCodeGeneratorView.swift */; };
+		5EE70E2A26ED21AA00F3F164 /* DateTimeZonePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE70E2926ED21AA00F3F164 /* DateTimeZonePicker.swift */; };
 		635C8FA726E66E8300361B08 /* DiscordFormattedDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635C8FA626E66E8300361B08 /* DiscordFormattedDate.swift */; };
 		6378397E26EA5FD60055A10D /* UIApplication+clearLaunchScreenCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6378397D26EA5FD60055A10D /* UIApplication+clearLaunchScreenCache.swift */; };
 		6378398026EA61AB0055A10D /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6378397F26EA61AB0055A10D /* Launch Screen.storyboard */; };
@@ -86,6 +87,7 @@
 		5EE70E2126EC9AA500F3F164 /* TimeZoneFlags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeZoneFlags.swift; sourceTree = "<group>"; };
 		5EE70E2326ECBEED00F3F164 /* MykeMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MykeMode.swift; sourceTree = "<group>"; };
 		5EE70E2626ECCC0700F3F164 /* TimeCodeGeneratorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCodeGeneratorView.swift; sourceTree = "<group>"; };
+		5EE70E2926ED21AA00F3F164 /* DateTimeZonePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTimeZonePicker.swift; sourceTree = "<group>"; };
 		635C8FA626E66E8300361B08 /* DiscordFormattedDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscordFormattedDate.swift; sourceTree = "<group>"; };
 		6378397D26EA5FD60055A10D /* UIApplication+clearLaunchScreenCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+clearLaunchScreenCache.swift"; sourceTree = "<group>"; };
 		6378397F26EA61AB0055A10D /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
@@ -226,6 +228,7 @@
 				5EAB48DC26E624CD00B04A60 /* TimezoneChoiceView.swift */,
 				6378398226EB80C30055A10D /* ResultSheet.swift */,
 				6378398626EBA7C60055A10D /* DateTimeSelection.swift */,
+				5EE70E2926ED21AA00F3F164 /* DateTimeZonePicker.swift */,
 			);
 			path = Elements;
 			sourceTree = "<group>";
@@ -402,6 +405,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5EE70E2A26ED21AA00F3F164 /* DateTimeZonePicker.swift in Sources */,
 				5EE70E2226EC9AA600F3F164 /* TimeZoneFlags.swift in Sources */,
 				5EB23B9F26E406B600203153 /* ContentView.swift in Sources */,
 				5EE70E2426ECBEED00F3F164 /* MykeMode.swift in Sources */,

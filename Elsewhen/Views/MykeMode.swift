@@ -9,8 +9,14 @@ import SwiftUI
 
 struct MykeMode: View {
     
-    @State private var selectedDate: Date = Date(timeIntervalSince1970: TimeInterval(1639239835))
+//    @State private var selectedDate: Date = Date(timeIntervalSince1970: TimeInterval(1639239835))
 //    @State private var selectedDate: Date = Date(timeIntervalSince1970: TimeInterval(1631892600))
+    
+    @Binding var selectedDate: Date
+    @Binding var selectedTimeZone: String
+    
+    @State private var selectedFormatStyle: DateFormat = dateFormats[0]
+    
     @State private var selectedTimeZones: [TimeZone] = [
         TimeZone(identifier: "America/Los_Angeles")!,
         TimeZone(identifier: "America/New_York")!,
@@ -24,36 +30,48 @@ struct MykeMode: View {
         df.timeStyle = .short
         df.timeZone = zone
         df.locale = Locale(identifier: "en/us")
-        return df.string(from: selectedDate)
+        return df.string(from: convert(date: selectedDate, from: TimeZone(identifier: selectedTimeZone)!, to: TimeZone.current))
     }
     
     var body: some View {
         
-        VStack(alignment: .leading, spacing: 20) {
+        NavigationView {
             
-            Text("\(selectedDate)")
-            
-            List {
-                ForEach(selectedTimeZones, id: \.self) { tz in
-                    HStack {
-                        Text("\(flagForTimeZone(tz)) \(selectedTimeInZone(tz))")
-                        Spacer()
-                        if let abbreviation = fudgedAbbreviation(for: tz) {
-                            Text(abbreviation)
-                                .foregroundColor(.secondary)
+            ScrollView(showsIndicators: true) {
+                DateTimeZonePicker(selectedDate: $selectedDate, selectedTimeZone: $selectedTimeZone)
+                
+                Text("Time Zones:")
+                    .font(.headline)
+                    .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                
+                List {
+                    ForEach(selectedTimeZones, id: \.self) { tz in
+                        HStack {
+                            Text("\(flagForTimeZone(tz)) \(selectedTimeInZone(tz))")
+                            Spacer()
+                            if let abbreviation = fudgedAbbreviation(for: tz) {
+                                Text(abbreviation)
+                                    .foregroundColor(.secondary)
+                            }
+                        }
+                        .onDrag {
+                            let tzItemProvider = tz.itemProvider
+                            let itemProvider = NSItemProvider(object: tzItemProvider)
+                            itemProvider.suggestedName = tzItemProvider.resolvedName
+                            return itemProvider
                         }
                     }
-                    .onDrag {
-                        let tzItemProvider = tz.itemProvider
-                        let itemProvider = NSItemProvider(object: tzItemProvider)
-                        itemProvider.suggestedName = tzItemProvider.resolvedName
-                        return itemProvider
-                    }
+                    .onMove(perform: move)
                 }
-                .onMove(perform: move)
+                .listStyle(PlainListStyle())
+                .scaledToFill()
+                
             }
-            
+            .padding(.horizontal)
+            .navigationTitle("Myke Mode")
+            .navigationBarTitleDisplayMode(.inline)
         }
+        .navigationViewStyle(StackNavigationViewStyle())
         
     }
     
@@ -79,6 +97,6 @@ struct MykeMode: View {
 
 struct MykeMode_Previews: PreviewProvider {
     static var previews: some View {
-        MykeMode()
+        MykeMode(selectedDate: .constant(Date()), selectedTimeZone: .constant("America/Los_Angeles"))
     }
 }
