@@ -9,7 +9,8 @@ import SwiftUI
 
 struct MykeMode: View {
     
-    @State private var selectedDate: Date = Date(timeIntervalSince1970: TimeInterval(1631892600))
+    @State private var selectedDate: Date = Date(timeIntervalSince1970: TimeInterval(1639239835))
+//    @State private var selectedDate: Date = Date(timeIntervalSince1970: TimeInterval(1631892600))
     @State private var selectedTimeZones: [TimeZone] = [
         TimeZone(identifier: "America/Los_Angeles")!,
         TimeZone(identifier: "America/New_York")!,
@@ -37,7 +38,7 @@ struct MykeMode: View {
                     HStack {
                         Text("\(flagForTimeZone(tz)) \(selectedTimeInZone(tz))")
                         Spacer()
-                        if let abbreviation = tz.abbreviation() {
+                        if let abbreviation = fudgedAbbreviation(for: tz) {
                             Text(abbreviation)
                                 .foregroundColor(.secondary)
                         }
@@ -52,6 +53,20 @@ struct MykeMode: View {
     
     func move(from source: IndexSet, to destination: Int) {
         selectedTimeZones.move(fromOffsets: source, toOffset: destination)
+    }
+    
+    func fudgedAbbreviation(for tz: TimeZone) -> String? {
+        guard let abbreviation = tz.abbreviation(for: selectedDate) else { return nil }
+        let isDaylightSavingTime = tz.isDaylightSavingTime(for: selectedDate)
+        if tz.identifier == "Europe/London" && isDaylightSavingTime {
+            return "BST"
+        }
+        if tz.identifier.starts(with: "Europe") {
+            if isDaylightSavingTime && abbreviation == "GMT+2" || !isDaylightSavingTime && abbreviation == "GMT+1" {
+                return "CET"
+            }
+        }
+        return abbreviation
     }
     
 }
