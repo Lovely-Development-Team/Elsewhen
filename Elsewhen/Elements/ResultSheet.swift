@@ -133,7 +133,7 @@ struct ResultSheet: View {
         .frame(minWidth: 0, maxWidth: .infinity)
         .background(
             Color(UIColor.secondarySystemBackground)
-                .shadow(radius: 10)
+                .shadow(radius: 5, x: 0, y: -5)
         )
     }
     

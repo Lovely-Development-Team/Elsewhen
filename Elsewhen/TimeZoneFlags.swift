@@ -7,6 +7,10 @@
 
 import Foundation
 
+func flagForTimeZone(_ zone: TimeZone) -> String {
+    return flagForTimeZone(zone.identifier)
+}
+
 func flagForTimeZone(_ zone: String) -> String {
     return timeZoneFlags[zone] ?? "🏳️"
 }
