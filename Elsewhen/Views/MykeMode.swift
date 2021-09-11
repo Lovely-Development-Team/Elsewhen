@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import UniformTypeIdentifiers
 
 struct MykeMode: View {
     
@@ -45,7 +44,10 @@ struct MykeMode: View {
                         }
                     }
                     .onDrag {
-                        NSItemProvider(item: tz.identifier.data(using: .utf8)! as NSData, typeIdentifier: UTType.utf8PlainText.identifier)
+                        let tzItemProvider = tz.itemProvider
+                        let itemProvider = NSItemProvider(object: tzItemProvider)
+                        itemProvider.suggestedName = tzItemProvider.resolvedName
+                        return itemProvider
                     }
                 }
                 .onMove(perform: move)
