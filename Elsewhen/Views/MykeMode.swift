@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UniformTypeIdentifiers
 
 struct MykeMode: View {
     
@@ -51,6 +52,12 @@ struct MykeMode: View {
                     }
                 }
                 .onMove(perform: move)
+                .onDrop(of: [UTType.json], delegate: TimeZone.TZDropDelegate(onDrop: { timezone in
+                    guard let timezone = timezone else {
+                        return
+                    }
+                    selectedTimeZones.append(timezone)
+                }))
             }
             
         }

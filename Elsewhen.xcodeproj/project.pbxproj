@@ -34,6 +34,7 @@
 		637839B526EBF8130055A10D /* FormatCodeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637839B426EBF8130055A10D /* FormatCodeExtension.swift */; };
 		637839B626EBF9690055A10D /* DateHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6378398426EB80F50055A10D /* DateHelpers.swift */; };
 		637839CB26ED11360055A10D /* TimeZone+ItemProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637839CA26ED11360055A10D /* TimeZone+ItemProvider.swift */; };
+		63DDFB9A26ED178E0021ACFD /* TimeZone+DropDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DDFB9926ED178E0021ACFD /* TimeZone+DropDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,6 +99,7 @@
 		637839B126EBF5FD0055A10D /* ConvertTimeIntentHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertTimeIntentHandling.swift; sourceTree = "<group>"; };
 		637839B426EBF8130055A10D /* FormatCodeExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatCodeExtension.swift; sourceTree = "<group>"; };
 		637839CA26ED11360055A10D /* TimeZone+ItemProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeZone+ItemProvider.swift"; sourceTree = "<group>"; };
+		63DDFB9926ED178E0021ACFD /* TimeZone+DropDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeZone+DropDelegate.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -196,6 +198,7 @@
 			children = (
 				6378397D26EA5FD60055A10D /* UIApplication+clearLaunchScreenCache.swift */,
 				637839CA26ED11360055A10D /* TimeZone+ItemProvider.swift */,
+				63DDFB9926ED178E0021ACFD /* TimeZone+DropDelegate.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -389,6 +392,7 @@
 				5EAB48DD26E624CD00B04A60 /* TimezoneChoiceView.swift in Sources */,
 				5EE70E2726ECCC0700F3F164 /* TimeCodeGeneratorView.swift in Sources */,
 				6378398726EBA7C60055A10D /* DateTimeSelection.swift in Sources */,
+				63DDFB9A26ED178E0021ACFD /* TimeZone+DropDelegate.swift in Sources */,
 				637839CB26ED11360055A10D /* TimeZone+ItemProvider.swift in Sources */,
 				6378398326EB80C30055A10D /* ResultSheet.swift in Sources */,
 				6378398526EB80F50055A10D /* DateHelpers.swift in Sources */,
