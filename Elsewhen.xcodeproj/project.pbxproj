@@ -151,10 +151,10 @@
 				5EB23B9E26E406B600203153 /* ContentView.swift */,
 				6378398426EB80F50055A10D /* DateHelpers.swift */,
 				5EB31FB626E6390D00826907 /* SearchBar.swift */,
+				5EE70E2126EC9AA500F3F164 /* TimeZoneFlags.swift */,
 				5EB23BA026E406B900203153 /* Assets.xcassets */,
 				5EB23BA226E406B900203153 /* Preview Content */,
 				6378397F26EA61AB0055A10D /* Launch Screen.storyboard */,
-				5EE70E2126EC9AA500F3F164 /* TimeZoneFlags.swift */,
 			);
 			path = Elsewhen;
 			sourceTree = "<group>";
