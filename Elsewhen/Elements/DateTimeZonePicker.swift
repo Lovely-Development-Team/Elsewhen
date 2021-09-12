@@ -10,20 +10,34 @@ import SwiftUI
 struct DateTimeZonePicker: View {
     
     @Binding var selectedDate: Date
-    @Binding var selectedTimeZone: String
+    @Binding var selectedTimeZone: TimeZone
+    
+    var showDate: Bool = true
     
     var body: some View {
         Group {
-            DatePicker("Date", selection: $selectedDate)
-                .datePickerStyle(.graphical)
-                .padding(.top)
+            
+            if showDate {
+                DatePicker("Date", selection: $selectedDate)
+                    .datePickerStyle(.graphical)
+                    .padding(.top)
+            } else {
+                HStack {
+                    Text("Time")
+                        .fontWeight(.semibold)
+                        .padding(.horizontal, 8)
+                    Spacer()
+                    DatePicker("Time", selection: $selectedDate, displayedComponents: [.hourAndMinute])
+                        .datePickerStyle(.graphical)
+                }
+            }
             
             HStack {
                 Text("Time zone")
                     .fontWeight(.semibold)
                 Spacer()
                 NavigationLink(destination: TimezoneChoiceView(selectedTimeZone: $selectedTimeZone)) {
-                    Text(selectedTimeZone.replacingOccurrences(of: "_", with: " "))
+                    Text(selectedTimeZone.identifier.replacingOccurrences(of: "_", with: " "))
                         .foregroundColor(.primary)
                         .padding(.vertical, 8)
                         .padding(.horizontal, 10)
@@ -42,6 +56,6 @@ struct DateTimeZonePicker: View {
 
 struct DateTimeZonePicker_Previews: PreviewProvider {
     static var previews: some View {
-        DateTimeZonePicker(selectedDate: .constant(Date()), selectedTimeZone: .constant("Europe/London"))
+        DateTimeZonePicker(selectedDate: .constant(Date()), selectedTimeZone: .constant(TimeZone(identifier: "Europe/London")!), showDate: false)
     }
 }

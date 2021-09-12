@@ -11,8 +11,14 @@ struct TimezoneChoiceView: View {
     
     @Environment(\.presentationMode) private var presentationMode
     
-    @Binding var selectedTimeZone: String
+    @Binding var selectedTimeZone: TimeZone
     @State private var searchTerm: String = ""
+    
+    private var filteredTimeZones: [TimeZone] {
+        return TimeZone.knownTimeZoneIdentifiers.compactMap { tz in
+            TimeZone(identifier: tz)
+        }.filter { $0.matches(searchTerm: searchTerm) }
+    }
     
     var body: some View {
         List {
@@ -20,18 +26,18 @@ struct TimezoneChoiceView: View {
                 .padding(.horizontal, -10)
             ForEach(filteredTimeZones(by: searchTerm), id: \.self) { tz in
                 Button(action: {
-                    self.selectedTimeZone = tz.identifier
+                    self.selectedTimeZone = tz
                     presentationMode.wrappedValue.dismiss()
                 }) {
                     HStack {
-                        Text(tz.identifier.replacingOccurrences(of: "_", with: " "))
+                        Text(tz.friendlyName)
                         Spacer()
                         if let abbreviation = tz.abbreviation() {
                             Text(abbreviation)
-                                .foregroundColor(selectedTimeZone == tz.identifier ? .accentColor : .secondary)
+                                .foregroundColor(selectedTimeZone == tz ? .accentColor : .secondary)
                         }
                     }
-                    .foregroundColor(selectedTimeZone == tz.identifier ? .accentColor : .primary)
+                    .foregroundColor(selectedTimeZone == tz ? .accentColor : .primary)
                 }
             }
         }
@@ -42,6 +48,6 @@ struct TimezoneChoiceView: View {
 
 struct TimezoneChoiceView_Previews: PreviewProvider {
     static var previews: some View {
-        TimezoneChoiceView(selectedTimeZone: .constant("Europe/London"))
+        TimezoneChoiceView(selectedTimeZone: .constant(TimeZone(identifier: "Europe/London")!))
     }
 }

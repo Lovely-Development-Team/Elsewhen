@@ -6,14 +6,15 @@
 //
 
 import SwiftUI
+import MobileCoreServices
 
 struct MykeMode: View {
     
-//    @State private var selectedDate: Date = Date(timeIntervalSince1970: TimeInterval(1639239835))
-//    @State private var selectedDate: Date = Date(timeIntervalSince1970: TimeInterval(1631892600))
+    //    @State private var selectedDate: Date = Date(timeIntervalSince1970: TimeInterval(1639239835))
+    //    @State private var selectedDate: Date = Date(timeIntervalSince1970: TimeInterval(1631892600))
     
     @Binding var selectedDate: Date
-    @Binding var selectedTimeZone: String
+    @Binding var selectedTimeZone: TimeZone
     
     @State private var selectedFormatStyle: DateFormat = dateFormats[0]
     
@@ -24,13 +25,29 @@ struct MykeMode: View {
         TimeZone(identifier: "Europe/Budapest")!,
     ]
     
+    @State private var showCopied: Bool = false
+    
+#if os(iOS)
+//    @State private var selectionFeedbackGenerator: UISelectionFeedbackGenerator? = nil
+    @State private var notificationFeedbackGenerator: UINotificationFeedbackGenerator? = nil
+#endif
+    
     func selectedTimeInZone(_ zone: TimeZone) -> String {
         let df = DateFormatter()
         df.dateStyle = .none
         df.timeStyle = .short
         df.timeZone = zone
         df.locale = Locale(identifier: "en/us")
-        return df.string(from: convert(date: selectedDate, from: TimeZone(identifier: selectedTimeZone)!, to: TimeZone.current))
+        return df.string(from: convert(date: selectedDate, from: selectedTimeZone, to: TimeZone.current))
+    }
+    
+    func generateTimesAndFlagsText() -> String {
+        var text = "\n"
+        for tz in selectedTimeZones {
+            let abbr = fudgedAbbreviation(for: tz) ?? ""
+            text += "\(flagForTimeZone(tz)) - \(selectedTimeInZone(tz)) \(abbr)\n"
+        }
+        return text
     }
     
     var body: some View {
@@ -38,11 +55,13 @@ struct MykeMode: View {
         NavigationView {
             
             ScrollView(showsIndicators: true) {
-                DateTimeZonePicker(selectedDate: $selectedDate, selectedTimeZone: $selectedTimeZone)
                 
-                Text("Time Zones:")
-                    .font(.headline)
-                    .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                Group {
+                    
+                    DateTimeZonePicker(selectedDate: $selectedDate, selectedTimeZone: $selectedTimeZone, showDate: false)
+                    
+                }
+                .padding(.horizontal, 8)
                 
                 List {
                     ForEach(selectedTimeZones, id: \.self) { tz in
@@ -66,8 +85,40 @@ struct MykeMode: View {
                 .listStyle(PlainListStyle())
                 .scaledToFill()
                 
+                Button(action: {
+#if os(iOS)
+                    notificationFeedbackGenerator = UINotificationFeedbackGenerator()
+                    notificationFeedbackGenerator?.prepare()
+#endif
+                    UIPasteboard.general.setValue(generateTimesAndFlagsText(),
+                                                  forPasteboardType: kUTTypePlainText as String)
+                    withAnimation {
+                        showCopied = true
+#if os(iOS)
+                        notificationFeedbackGenerator?.notificationOccurred(.success)
+#endif
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                        withAnimation {
+                            showCopied = false
+                        }
+#if os(iOS)
+                        notificationFeedbackGenerator = nil
+#endif
+                    }
+                }) {
+                    Text(showCopied ? "Copied ✓" : "Copy Times & Flags")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                }
+                .padding(.horizontal)
+                .padding(.vertical, 5)
+                .background(
+                    RoundedRectangle(cornerRadius: 15, style: .continuous)
+                        .fill(Color.accentColor)
+                )
+                
             }
-            .padding(.horizontal)
             .navigationTitle("Myke Mode")
             .navigationBarTitleDisplayMode(.inline)
         }
@@ -97,6 +148,6 @@ struct MykeMode: View {
 
 struct MykeMode_Previews: PreviewProvider {
     static var previews: some View {
-        MykeMode(selectedDate: .constant(Date()), selectedTimeZone: .constant("America/Los_Angeles"))
+        MykeMode(selectedDate: .constant(Date()), selectedTimeZone: .constant(TimeZone(identifier: "America/Los_Angeles")!))
     }
 }

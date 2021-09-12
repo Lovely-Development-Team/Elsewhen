@@ -12,19 +12,12 @@ import UniformTypeIdentifiers
 struct TimeCodeGeneratorView: View {
     
     @Binding var selectedDate: Date
-    @Binding var selectedTimeZone: String
+    @Binding var selectedTimeZone: TimeZone
     @State private var selectedFormatStyle: DateFormat = dateFormats[0]
     @State private var showLocalTimeInstead: Bool = false
     
     private var discordFormat: String {
-        var timeIntervalSince1970 = Int(selectedDate.timeIntervalSince1970)
-        
-        if let tz = TimeZone(identifier: selectedTimeZone) {
-            timeIntervalSince1970 = Int(convertSelectedDate(from: tz, to: TimeZone.current).timeIntervalSince1970)
-        } else {
-            logger.warning("\(selectedTimeZone, privacy: .public) is not a valid timezone identifier!")
-        }
-        
+        let timeIntervalSince1970 = Int(convertSelectedDate(from: selectedTimeZone, to: TimeZone.current).timeIntervalSince1970)
         return "<t:\(timeIntervalSince1970):\(selectedFormatStyle.code.rawValue)>"
     }
     
@@ -56,6 +49,6 @@ struct TimeCodeGeneratorView: View {
 
 struct TimeCodeGeneratorView_Previews: PreviewProvider {
     static var previews: some View {
-        TimeCodeGeneratorView(selectedDate: .constant(Date()), selectedTimeZone: .constant("Europe/London"))
+        TimeCodeGeneratorView(selectedDate: .constant(Date()), selectedTimeZone: .constant(TimeZone(identifier: "Europe/London")!))
     }
 }

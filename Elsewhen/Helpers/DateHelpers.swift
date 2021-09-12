@@ -38,8 +38,26 @@ func convert(date: Date, from initialTimezone: TimeZone, to targetTimezone: Time
     return date.addingTimeInterval(offset)
 }
 
-func formatTimeZoneName(_ zone: String) -> String {
-    zone.replacingOccurrences(of: "_", with: " ")
+extension TimeZone {
+    
+    var friendlyName: String {
+        identifier.replacingOccurrences(of: "_", with: " ")
+    }
+    
+    func matches(searchTerm: String) -> Bool {
+        let st = searchTerm.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+        if st == "" {
+            return true
+        }
+        if identifier.lowercased().contains(st) || friendlyName.lowercased().contains(st) {
+            return true
+        }
+        if let abbreviation = abbreviation(), abbreviation.lowercased().contains(st) {
+            return true
+        }
+        return false
+    }
+    
 }
 
 func format(date: Date, in timezone: TimeZone, with formatCode: FormatCode) -> String {
