@@ -38,28 +38,6 @@ func convert(date: Date, from initialTimezone: TimeZone, to targetTimezone: Time
     return date.addingTimeInterval(offset)
 }
 
-extension TimeZone {
-    
-    var friendlyName: String {
-        identifier.replacingOccurrences(of: "_", with: " ")
-    }
-    
-    func matches(searchTerm: String) -> Bool {
-        let st = searchTerm.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
-        if st == "" {
-            return true
-        }
-        if identifier.lowercased().contains(st) || friendlyName.lowercased().contains(st) {
-            return true
-        }
-        if let abbreviation = abbreviation(), abbreviation.lowercased().contains(st) {
-            return true
-        }
-        return false
-    }
-    
-}
-
 func format(date: Date, in timezone: TimeZone, with formatCode: FormatCode) -> String {
     let dateFormatter = DateFormatter()
     switch formatCode {
@@ -97,20 +75,42 @@ func discordFormat(for date: Date, in timezone: String, with formatCode: FormatC
     return "<t:\(timeIntervalSince1970):\(formatCode.rawValue)>"
 }
 
-func filteredTimeZones(by searchTerm: String) -> [TimeZone] {
-    let st = searchTerm.trimmingCharacters(in: .whitespaces).lowercased().replacingOccurrences(of: " ", with: "_")
-    return TimeZone.knownTimeZoneIdentifiers.compactMap { tz in
-        TimeZone(identifier: tz)
-    }.filter { tz in
+extension TimeZone {
+    
+    var friendlyName: String {
+        identifier.replacingOccurrences(of: "_", with: " ")
+    }
+    
+    var flag: String {
+        flagForTimeZone(self)
+    }
+    
+    func matches(searchTerm: String) -> Bool {
+        let st = searchTerm.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
         if st == "" {
             return true
         }
-        if tz.identifier.lowercased().contains(st) {
+        if identifier.lowercased().contains(st) || friendlyName.lowercased().contains(st) {
             return true
         }
-        if let abbreviation = tz.abbreviation(), abbreviation.lowercased().contains(st) {
+        if let abbreviation = abbreviation(), abbreviation.lowercased().contains(st) {
             return true
         }
         return false
     }
+    
+    func fudgedAbbreviation(for selectedDate: Date) -> String? {
+        guard let abbreviation = abbreviation(for: selectedDate) else { return nil }
+        let isDaylightSavingTime = isDaylightSavingTime(for: selectedDate)
+        if identifier == "Europe/London" && isDaylightSavingTime {
+            return "BST"
+        }
+        if identifier.starts(with: "Europe") {
+            if isDaylightSavingTime && abbreviation == "GMT+2" || !isDaylightSavingTime && abbreviation == "GMT+1" {
+                return "CET"
+            }
+        }
+        return abbreviation
+    }
+    
 }

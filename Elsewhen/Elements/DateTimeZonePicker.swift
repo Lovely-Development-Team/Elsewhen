@@ -36,7 +36,7 @@ struct DateTimeZonePicker: View {
                 Text("Time zone")
                     .fontWeight(.semibold)
                 Spacer()
-                NavigationLink(destination: TimezoneChoiceView(selectedTimeZone: $selectedTimeZone)) {
+                NavigationLink(destination: TimezoneChoiceView(selectedTimeZone: $selectedTimeZone, selectedTimeZones: .constant([]), selectedDate: $selectedDate, selectMultiple: false)) {
                     Text(selectedTimeZone.identifier.replacingOccurrences(of: "_", with: " "))
                         .foregroundColor(.primary)
                         .padding(.vertical, 8)

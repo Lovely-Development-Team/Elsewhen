@@ -11,8 +11,8 @@ import UniformTypeIdentifiers
 
 struct TimeCodeGeneratorView: View {
     
-    @Binding var selectedDate: Date
-    @Binding var selectedTimeZone: TimeZone
+    @State private var selectedDate = Date()
+    @State private var selectedTimeZone: TimeZone = TimeZone.current
     @State private var selectedFormatStyle: DateFormat = dateFormats[0]
     @State private var showLocalTimeInstead: Bool = false
     
@@ -49,6 +49,6 @@ struct TimeCodeGeneratorView: View {
 
 struct TimeCodeGeneratorView_Previews: PreviewProvider {
     static var previews: some View {
-        TimeCodeGeneratorView(selectedDate: .constant(Date()), selectedTimeZone: .constant(TimeZone(identifier: "Europe/London")!))
+        TimeCodeGeneratorView()
     }
 }
