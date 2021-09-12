@@ -15,7 +15,7 @@ struct ContentView: View {
     @State private var selectedTab: Int = 1
     
     @State private var selectedDate = Date()
-    @State private var selectedTimeZone: String = TimeZone.current.identifier
+    @State private var selectedTimeZone: TimeZone = TimeZone.current
     
     var body: some View {
         TabView(selection: $selectedTab) {

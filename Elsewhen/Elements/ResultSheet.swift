@@ -11,7 +11,7 @@ import MobileCoreServices
 struct ResultSheet: View {
     // MARK: Parameters
     let selectedDate: Date
-    let selectedTimeZone: String
+    let selectedTimeZone: TimeZone
     let discordFormat: String
     @Binding var showLocalTimeInstead: Bool
     @Binding var selectedFormatStyle: DateFormat
@@ -27,27 +27,26 @@ struct ResultSheet: View {
     var body: some View {
         VStack {
             VStack {
-                let selectedTimezoneIdentifier = TimeZone(identifier: selectedTimeZone)!
                 
                 if !showLocalTimeInstead {
                     
-                    Text(format(date: convertSelectedDate(from: selectedTimezoneIdentifier, to: selectedTimezoneIdentifier), in: selectedTimezoneIdentifier, with: selectedFormatStyle.code))
+                    Text(format(date: convertSelectedDate(from: selectedTimeZone, to: selectedTimeZone), in: selectedTimeZone, with: selectedFormatStyle.code))
                         .multilineTextAlignment(.center)
                         .font(.headline)
                         .foregroundColor(.primary)
                     
                 } else {
                     
-                    Text(format(date: convertSelectedDate(from: selectedTimezoneIdentifier, to: TimeZone.current), in: TimeZone.current, with: selectedFormatStyle.code))
+                    Text(format(date: convertSelectedDate(from: selectedTimeZone, to: TimeZone.current), in: TimeZone.current, with: selectedFormatStyle.code))
                         .multilineTextAlignment(.center)
                         .font(.headline)
                         .foregroundColor(.primary)
                     
                 }
                 
-                if selectedTimezoneIdentifier != TimeZone.current {
+                if selectedTimeZone != TimeZone.current {
                     
-                    Text(showLocalTimeInstead ? "for you (\(formatTimeZoneName(TimeZone.current.identifier)))" : "in \(formatTimeZoneName(selectedTimeZone))")
+                    Text(showLocalTimeInstead ? "for you (\(TimeZone.current.friendlyName))" : "in \(selectedTimeZone.friendlyName)")
                         .foregroundColor(.secondary)
                     
                 }

@@ -10,7 +10,7 @@ import SwiftUI
 struct DateTimeSelection: View {
     @Binding var selectedFormatStyle: DateFormat
     @Binding var selectedDate: Date
-    @Binding var selectedTimeZone: String
+    @Binding var selectedTimeZone: TimeZone
     
     var body: some View {
         Group {
@@ -38,7 +38,7 @@ struct DateTimeSelection: View {
             
             Button(action: {
                 self.selectedDate = Date()
-                self.selectedTimeZone = TimeZone.current.identifier
+                self.selectedTimeZone = TimeZone.current
             }) {
                 Text("Reset")
             }
