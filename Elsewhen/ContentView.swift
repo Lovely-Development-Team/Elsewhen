@@ -12,17 +12,14 @@ import os.log
 
 struct ContentView: View {
     
-    @State private var selectedTab: Int = 1
-    
-    @State private var selectedDate = Date()
-    @State private var selectedTimeZone: TimeZone = TimeZone.current
+    @State private var selectedTab: Int = 0
     
     var body: some View {
         TabView(selection: $selectedTab) {
-            TimeCodeGeneratorView(selectedDate: $selectedDate, selectedTimeZone: $selectedTimeZone)
+            TimeCodeGeneratorView()
                 .tabItem { Label("Time Codes", systemImage: "clock") }
                 .tag(0)
-            MykeMode(selectedDate: $selectedDate, selectedTimeZone: $selectedTimeZone)
+            MykeMode()
                 .tabItem { Label("Myke Mode", systemImage: "keyboard") }
                 .tag(1)
         }
