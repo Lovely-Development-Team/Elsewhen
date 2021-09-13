@@ -107,17 +107,28 @@ extension TimeZone {
     }
     
     func fudgedAbbreviation(for selectedDate: Date) -> String? {
+        
+        if identifier.starts(with: "America/") {
+            if let localizedName = localizedName(for: .generic
+                                                                                     , locale: Locale(identifier: "en_US")) {
+                return localizedName.replacingOccurrences(of: " Time", with: "")
+            }
+        }
+        
         guard let abbreviation = abbreviation(for: selectedDate) else { return nil }
         let isDaylightSavingTime = isDaylightSavingTime(for: selectedDate)
         if identifier == "Europe/London" && isDaylightSavingTime {
             return "BST"
         }
+        
         if identifier.starts(with: "Europe") {
             if isDaylightSavingTime && abbreviation == "GMT+2" || !isDaylightSavingTime && abbreviation == "GMT+1" {
                 return "CET"
             }
         }
+        
         return abbreviation
+        
     }
     
 }

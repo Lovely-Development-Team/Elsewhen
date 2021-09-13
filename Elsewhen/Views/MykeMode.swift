@@ -16,6 +16,7 @@ struct MykeMode: View {
     @State private var selectedFormatStyle: DateFormat = dateFormats[0]
     
     @State private var selectedTimeZones: [TimeZone] = []
+    @State private var timeZonesUsingEUFlag: Set<TimeZone> = []
     
     @State private var showCopied: Bool = false
     
@@ -28,7 +29,6 @@ struct MykeMode: View {
         df.dateStyle = .none
         df.timeStyle = .short
         df.timeZone = zone
-        df.locale = Locale(identifier: "en/us")
         return df.string(from: convert(date: selectedDate, from: selectedTimeZone, to: TimeZone.current))
     }
     
@@ -39,6 +39,13 @@ struct MykeMode: View {
             text += "\(flagForTimeZone(tz)) - \(selectedTimeInZone(tz)) \(abbr)\n"
         }
         return text
+    }
+    
+    func flagForTimeZone(_ tz: TimeZone) -> String {
+        if timeZonesUsingEUFlag.contains(tz) {
+            return "🇪🇺"
+        }
+        return tz.flag
     }
     
     var body: some View {
@@ -67,7 +74,7 @@ struct MykeMode: View {
                                     Text(tz.friendlyName)
                                         .font(.caption)
                                         .foregroundColor(.secondary)
-                                    Text("\(tz.flag) \(selectedTimeInZone(tz))")
+                                    Text("\(flagForTimeZone(tz)) \(selectedTimeInZone(tz))")
                                 }
                                 Spacer()
                                 if let abbreviation = tz.fudgedAbbreviation(for: selectedDate) {
@@ -80,6 +87,20 @@ struct MykeMode: View {
                                 let itemProvider = NSItemProvider(object: tzItemProvider)
                                 itemProvider.suggestedName = tzItemProvider.resolvedName
                                 return itemProvider
+                            }
+                            .contextMenu {
+                                if tz.identifier.starts(with: "Europe/") {
+                                    Button(action: {
+                                        timeZonesUsingEUFlag.remove(tz)
+                                    }) {
+                                        Label("Use country flag", systemImage: "flag")
+                                    }
+                                    Button(action: {
+                                        timeZonesUsingEUFlag.insert(tz)
+                                    }) {
+                                        Label("Use European Union flag", systemImage: "flag.fill")
+                                    }
+                                }
                             }
                         }
                         .onMove(perform: move)
@@ -137,9 +158,13 @@ struct MykeMode: View {
         .navigationViewStyle(StackNavigationViewStyle())
         .onAppear {
             selectedTimeZones = UserDefaults.standard.mykeModeTimeZones
+            timeZonesUsingEUFlag = UserDefaults.standard.mykeModeTimeZonesUsingEUFlag
         }
         .onChange(of: selectedTimeZones) { newValue in
             UserDefaults.standard.mykeModeTimeZones = newValue
+        }
+        .onChange(of: timeZonesUsingEUFlag) { newValue in
+            UserDefaults.standard.mykeModeTimeZonesUsingEUFlag = newValue
         }
         
     }
