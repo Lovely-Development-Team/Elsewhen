@@ -66,7 +66,7 @@ struct TimezoneChoiceView: View {
             }
         }
         .listStyle(PlainListStyle())
-        .navigationTitle("Timezone")
+        .navigationTitle("Time Zones")
     }
 }
 
