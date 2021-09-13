@@ -17,12 +17,6 @@ struct TimezoneChoiceView: View {
     var selectMultiple: Bool
     @State private var searchTerm: String = ""
     
-    private var filteredTimeZones: [TimeZone] {
-        return TimeZone.knownTimeZoneIdentifiers.compactMap { tz in
-            TimeZone(identifier: tz)
-        }.filter { $0.matches(searchTerm: searchTerm) }
-    }
-    
     private func timeZoneIsSelected(_ tz: TimeZone) -> Bool {
         if selectMultiple {
             return selectedTimeZones.contains(tz)
@@ -35,7 +29,7 @@ struct TimezoneChoiceView: View {
         List {
             SearchBar(text: $searchTerm, placeholder: "Search...")
                 .padding(.horizontal, -10)
-            ForEach(filteredTimeZones(by: searchTerm), id: \.self) { tz in
+            ForEach(TimeZone.filtered(by: searchTerm), id: \.self) { tz in
                 Button(action: {
                     if self.selectMultiple {
                         if let index = self.selectedTimeZones.firstIndex(of: tz) {

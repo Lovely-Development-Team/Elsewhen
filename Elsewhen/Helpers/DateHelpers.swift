@@ -85,6 +85,13 @@ extension TimeZone {
         flagForTimeZone(self)
     }
     
+    static func filtered(by searchTerm: String) -> [TimeZone] {
+        let st = searchTerm.trimmingCharacters(in: .whitespaces).lowercased().replacingOccurrences(of: " ", with: "_")
+        return TimeZone.knownTimeZoneIdentifiers.compactMap { tz in
+            TimeZone(identifier: tz)
+        }.filter { $0.matches(searchTerm: st) }
+    }
+    
     func matches(searchTerm: String) -> Bool {
         let st = searchTerm.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
         if st == "" {

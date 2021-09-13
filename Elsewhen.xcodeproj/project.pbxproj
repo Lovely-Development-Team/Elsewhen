@@ -7,23 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5E9BD44F26EE512E00383233 /* TimeZoneFlags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE70E2126EC9AA500F3F164 /* TimeZoneFlags.swift */; };
 		5E9BD45126EEA11900383233 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9BD45026EEA11900383233 /* UserDefaults.swift */; };
+		5E9BD45526EF446900383233 /* DateHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9BD45226EF446900383233 /* DateHelpers.swift */; };
+		5E9BD45626EF446900383233 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9BD45326EF446900383233 /* SearchBar.swift */; };
+		5E9BD45726EF446900383233 /* TimeZoneFlags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9BD45426EF446900383233 /* TimeZoneFlags.swift */; };
+		5E9BD45926EF44B700383233 /* MykeMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9BD45826EF44B700383233 /* MykeMode.swift */; };
+		5E9BD45A26EF45FB00383233 /* DateHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9BD45226EF446900383233 /* DateHelpers.swift */; };
+		5E9BD45B26EF460D00383233 /* TimeZoneFlags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9BD45426EF446900383233 /* TimeZoneFlags.swift */; };
 		5EAB48DD26E624CD00B04A60 /* TimezoneChoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAB48DC26E624CD00B04A60 /* TimezoneChoiceView.swift */; };
 		5EB23B9D26E406B600203153 /* ElsewhenApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB23B9C26E406B600203153 /* ElsewhenApp.swift */; };
 		5EB23B9F26E406B600203153 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB23B9E26E406B600203153 /* ContentView.swift */; };
 		5EB23BA126E406B900203153 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5EB23BA026E406B900203153 /* Assets.xcassets */; };
 		5EB23BA426E406B900203153 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5EB23BA326E406B900203153 /* Preview Assets.xcassets */; };
-		5EB31FB726E6390D00826907 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB31FB626E6390D00826907 /* SearchBar.swift */; };
-		5EE70E2226EC9AA600F3F164 /* TimeZoneFlags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE70E2126EC9AA500F3F164 /* TimeZoneFlags.swift */; };
-		5EE70E2426ECBEED00F3F164 /* MykeMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE70E2326ECBEED00F3F164 /* MykeMode.swift */; };
 		5EE70E2726ECCC0700F3F164 /* TimeCodeGeneratorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE70E2626ECCC0700F3F164 /* TimeCodeGeneratorView.swift */; };
 		5EE70E2A26ED21AA00F3F164 /* DateTimeZonePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE70E2926ED21AA00F3F164 /* DateTimeZonePicker.swift */; };
 		635C8FA726E66E8300361B08 /* DiscordFormattedDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635C8FA626E66E8300361B08 /* DiscordFormattedDate.swift */; };
 		6378397E26EA5FD60055A10D /* UIApplication+clearLaunchScreenCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6378397D26EA5FD60055A10D /* UIApplication+clearLaunchScreenCache.swift */; };
 		6378398026EA61AB0055A10D /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6378397F26EA61AB0055A10D /* Launch Screen.storyboard */; };
 		6378398326EB80C30055A10D /* ResultSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6378398226EB80C30055A10D /* ResultSheet.swift */; };
-		6378398526EB80F50055A10D /* DateHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6378398426EB80F50055A10D /* DateHelpers.swift */; };
 		6378398726EBA7C60055A10D /* DateTimeSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6378398626EBA7C60055A10D /* DateTimeSelection.swift */; };
 		6378398F26EBF4750055A10D /* Intents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6378398E26EBF4750055A10D /* Intents.framework */; };
 		6378399226EBF4750055A10D /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6378399126EBF4750055A10D /* IntentHandler.swift */; };
@@ -35,7 +36,6 @@
 		637839B026EBF4910055A10D /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 637839AF26EBF4910055A10D /* Intents.intentdefinition */; };
 		637839B226EBF5FD0055A10D /* ConvertTimeIntentHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637839B126EBF5FD0055A10D /* ConvertTimeIntentHandling.swift */; };
 		637839B526EBF8130055A10D /* FormatCodeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637839B426EBF8130055A10D /* FormatCodeExtension.swift */; };
-		637839B626EBF9690055A10D /* DateHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6378398426EB80F50055A10D /* DateHelpers.swift */; };
 		637839B826ECAF830055A10D /* InTimeZoneExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637839B726ECAF830055A10D /* InTimeZoneExtension.swift */; };
 		637839BA26ECB58D0055A10D /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 637839AF26EBF4910055A10D /* Intents.intentdefinition */; };
 		637839BD26ECB8C20055A10D /* Loggers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637839BC26ECB8C10055A10D /* Loggers.swift */; };
@@ -80,22 +80,22 @@
 
 /* Begin PBXFileReference section */
 		5E9BD45026EEA11900383233 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
+		5E9BD45226EF446900383233 /* DateHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateHelpers.swift; sourceTree = "<group>"; };
+		5E9BD45326EF446900383233 /* SearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
+		5E9BD45426EF446900383233 /* TimeZoneFlags.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeZoneFlags.swift; sourceTree = "<group>"; };
+		5E9BD45826EF44B700383233 /* MykeMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MykeMode.swift; sourceTree = "<group>"; };
 		5EAB48DC26E624CD00B04A60 /* TimezoneChoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimezoneChoiceView.swift; sourceTree = "<group>"; };
 		5EB23B9926E406B600203153 /* Elsewhen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Elsewhen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EB23B9C26E406B600203153 /* ElsewhenApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElsewhenApp.swift; sourceTree = "<group>"; };
 		5EB23B9E26E406B600203153 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		5EB23BA026E406B900203153 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5EB23BA326E406B900203153 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		5EB31FB626E6390D00826907 /* SearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
-		5EE70E2126EC9AA500F3F164 /* TimeZoneFlags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeZoneFlags.swift; sourceTree = "<group>"; };
-		5EE70E2326ECBEED00F3F164 /* MykeMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MykeMode.swift; sourceTree = "<group>"; };
 		5EE70E2626ECCC0700F3F164 /* TimeCodeGeneratorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCodeGeneratorView.swift; sourceTree = "<group>"; };
 		5EE70E2926ED21AA00F3F164 /* DateTimeZonePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTimeZonePicker.swift; sourceTree = "<group>"; };
 		635C8FA626E66E8300361B08 /* DiscordFormattedDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscordFormattedDate.swift; sourceTree = "<group>"; };
 		6378397D26EA5FD60055A10D /* UIApplication+clearLaunchScreenCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+clearLaunchScreenCache.swift"; sourceTree = "<group>"; };
 		6378397F26EA61AB0055A10D /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		6378398226EB80C30055A10D /* ResultSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultSheet.swift; sourceTree = "<group>"; };
-		6378398426EB80F50055A10D /* DateHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHelpers.swift; sourceTree = "<group>"; };
 		6378398626EBA7C60055A10D /* DateTimeSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTimeSelection.swift; sourceTree = "<group>"; };
 		6378398C26EBF4750055A10D /* Discord Helper Intents.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Discord Helper Intents.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6378398E26EBF4750055A10D /* Intents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Intents.framework; path = System/Library/Frameworks/Intents.framework; sourceTree = SDKROOT; };
@@ -176,11 +176,7 @@
 				5EE70E2826ED0EE700F3F164 /* Helpers */,
 				5EB23B9C26E406B600203153 /* ElsewhenApp.swift */,
 				5EB23B9E26E406B600203153 /* ContentView.swift */,
-				5EE70E2326ECBEED00F3F164 /* MykeMode.swift */,
-				6378398426EB80F50055A10D /* DateHelpers.swift */,
 				637839BC26ECB8C10055A10D /* Loggers.swift */,
-				5EB31FB626E6390D00826907 /* SearchBar.swift */,
-				5EE70E2126EC9AA500F3F164 /* TimeZoneFlags.swift */,
 				5EB23BA026E406B900203153 /* Assets.xcassets */,
 				5EB23BA226E406B900203153 /* Preview Content */,
 				6378397F26EA61AB0055A10D /* Launch Screen.storyboard */,
@@ -200,7 +196,7 @@
 			isa = PBXGroup;
 			children = (
 				5EE70E2626ECCC0700F3F164 /* TimeCodeGeneratorView.swift */,
-				5EE70E2326ECBEED00F3F164 /* MykeMode.swift */,
+				5E9BD45826EF44B700383233 /* MykeMode.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -208,9 +204,9 @@
 		5EE70E2826ED0EE700F3F164 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				6378398426EB80F50055A10D /* DateHelpers.swift */,
-				5EB31FB626E6390D00826907 /* SearchBar.swift */,
-				5EE70E2126EC9AA500F3F164 /* TimeZoneFlags.swift */,
+				5E9BD45226EF446900383233 /* DateHelpers.swift */,
+				5E9BD45326EF446900383233 /* SearchBar.swift */,
+				5E9BD45426EF446900383233 /* TimeZoneFlags.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -410,22 +406,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				5EE70E2A26ED21AA00F3F164 /* DateTimeZonePicker.swift in Sources */,
-				5EE70E2226EC9AA600F3F164 /* TimeZoneFlags.swift in Sources */,
 				5EB23B9F26E406B600203153 /* ContentView.swift in Sources */,
-				5EE70E2426ECBEED00F3F164 /* MykeMode.swift in Sources */,
-				5EB31FB726E6390D00826907 /* SearchBar.swift in Sources */,
 				6378397E26EA5FD60055A10D /* UIApplication+clearLaunchScreenCache.swift in Sources */,
+				5E9BD45926EF44B700383233 /* MykeMode.swift in Sources */,
 				5EAB48DD26E624CD00B04A60 /* TimezoneChoiceView.swift in Sources */,
 				637839BD26ECB8C20055A10D /* Loggers.swift in Sources */,
 				5EE70E2726ECCC0700F3F164 /* TimeCodeGeneratorView.swift in Sources */,
 				6378398726EBA7C60055A10D /* DateTimeSelection.swift in Sources */,
+				5E9BD45726EF446900383233 /* TimeZoneFlags.swift in Sources */,
 				637839CB26ED11360055A10D /* TimeZone+ItemProvider.swift in Sources */,
 				6378398326EB80C30055A10D /* ResultSheet.swift in Sources */,
 				5E9BD45126EEA11900383233 /* UserDefaults.swift in Sources */,
-				6378398526EB80F50055A10D /* DateHelpers.swift in Sources */,
 				635C8FA726E66E8300361B08 /* DiscordFormattedDate.swift in Sources */,
+				5E9BD45626EF446900383233 /* SearchBar.swift in Sources */,
 				637839BA26ECB58D0055A10D /* Intents.intentdefinition in Sources */,
 				5EB23B9D26E406B600203153 /* ElsewhenApp.swift in Sources */,
+				5E9BD45526EF446900383233 /* DateHelpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -433,13 +429,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5E9BD44F26EE512E00383233 /* TimeZoneFlags.swift in Sources */,
 				637839B026EBF4910055A10D /* Intents.intentdefinition in Sources */,
 				6378399226EBF4750055A10D /* IntentHandler.swift in Sources */,
 				637839B526EBF8130055A10D /* FormatCodeExtension.swift in Sources */,
 				637839BE26ECB8CE0055A10D /* Loggers.swift in Sources */,
-				637839B626EBF9690055A10D /* DateHelpers.swift in Sources */,
 				637839B226EBF5FD0055A10D /* ConvertTimeIntentHandling.swift in Sources */,
+				5E9BD45A26EF45FB00383233 /* DateHelpers.swift in Sources */,
+				5E9BD45B26EF460D00383233 /* TimeZoneFlags.swift in Sources */,
 				637839B826ECAF830055A10D /* InTimeZoneExtension.swift in Sources */,
 				637839C126ECBA5B0055A10D /* NSUserInfoKeys.swift in Sources */,
 			);
