@@ -132,9 +132,10 @@ struct ResultSheet: View {
         .frame(minWidth: 0, maxWidth: .infinity)
         .background(
             Color(UIColor.secondarySystemBackground)
-                .shadow(radius: 5, x: 0, y: -5)
-                .opacity(0.5)
+                .cornerRadius(15)
+                .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 0)
         )
+        .padding()
     }
     
     func convertSelectedDate(from initialTimezone: TimeZone, to targetTimezone: TimeZone) -> Date {

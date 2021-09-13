@@ -16,6 +16,8 @@ struct TimeCodeGeneratorView: View {
     @State private var selectedFormatStyle: DateFormat = dateFormats[0]
     @State private var showLocalTimeInstead: Bool = false
     
+    @State private var resultSheetMaxHeight: CGFloat?
+    
     private var discordFormat: String {
         let timeIntervalSince1970 = Int(convertSelectedDate(from: selectedTimeZone, to: TimeZone.current).timeIntervalSince1970)
         return "<t:\(timeIntervalSince1970):\(selectedFormatStyle.code.rawValue)>"
@@ -23,13 +25,23 @@ struct TimeCodeGeneratorView: View {
     
     var body: some View {
         NavigationView {
-            VStack(spacing: 0) {
+            ZStack(alignment: .bottom) {
                 
                 ScrollView(showsIndicators: true) {
                     DateTimeSelection(selectedFormatStyle: $selectedFormatStyle, selectedDate: $selectedDate, selectedTimeZone: $selectedTimeZone)
+                        .padding(.bottom, (resultSheetMaxHeight ?? 0) / 2 + 20)
                 }
                 
                 ResultSheet(selectedDate: selectedDate, selectedTimeZone: selectedTimeZone, discordFormat: discordFormat, showLocalTimeInstead: $showLocalTimeInstead, selectedFormatStyle: $selectedFormatStyle)
+                .background(GeometryReader { geometry in
+                    Color.clear.preference(
+                        key: ResultSheetHeightPreferenceKey.self,
+                        value: geometry.size.width
+                    )
+                })
+                .onPreferenceChange(ResultSheetHeightPreferenceKey.self) {
+                    resultSheetMaxHeight = $0
+                }
                 
             }
             .edgesIgnoringSafeArea(.horizontal)
@@ -44,6 +56,16 @@ struct TimeCodeGeneratorView: View {
     
     func convertSelectedDate(from initialTimezone: TimeZone, to targetTimezone: TimeZone) -> Date {
         return convert(date: selectedDate, from: initialTimezone, to: targetTimezone)
+    }
+}
+
+private extension TimeCodeGeneratorView {
+    struct ResultSheetHeightPreferenceKey: PreferenceKey {
+        static let defaultValue: CGFloat = 0
+        static func reduce(value: inout CGFloat,
+                           nextValue: () -> CGFloat) {
+            value = max(value, nextValue())
+        }
     }
 }
 

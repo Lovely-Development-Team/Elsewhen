@@ -24,6 +24,8 @@ struct MykeMode: View {
     @State private var notificationFeedbackGenerator: UINotificationFeedbackGenerator? = nil
 #endif
     
+    @State private var buttonMaxHeight: CGFloat?
+    
     func selectedTimeInZone(_ zone: TimeZone) -> String {
         let df = DateFormatter()
         df.dateStyle = .none
@@ -52,105 +54,109 @@ struct MykeMode: View {
         
         NavigationView {
             
-            VStack(spacing: 0) {
+            ZStack(alignment: .top) {
+                
                 VStack {
+                    DateTimeZonePicker(selectedDate: $selectedDate, selectedTimeZone: $selectedTimeZone, showDate: false)
                     
-                    Group {
+                    HStack {
                         
-                        DateTimeZonePicker(selectedDate: $selectedDate, selectedTimeZone: $selectedTimeZone, showDate: false)
+                        NavigationLink(destination: TimezoneChoiceView(selectedTimeZone: .constant(TimeZone.current), selectedTimeZones: $selectedTimeZones, selectedDate: $selectedDate, selectMultiple: true)) {
+                            Text("Choose time zones…")
+                        }
+                        .padding(.vertical)
+                        
+                        Spacer()
+                        
+                        Button(action: {
+#if os(iOS)
+                            notificationFeedbackGenerator = UINotificationFeedbackGenerator()
+                            notificationFeedbackGenerator?.prepare()
+#endif
+                            UIPasteboard.general.setValue(generateTimesAndFlagsText(),
+                                                          forPasteboardType: kUTTypePlainText as String)
+                            withAnimation {
+                                showCopied = true
+#if os(iOS)
+                                notificationFeedbackGenerator?.notificationOccurred(.success)
+#endif
+                            }
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                withAnimation {
+                                    showCopied = false
+                                }
+#if os(iOS)
+                                notificationFeedbackGenerator = nil
+#endif
+                            }
+                        }) {
+                            Text(showCopied ? "Copied ✓" : "Copy")
+                                .font(.headline)
+                                .foregroundColor(.white)
+                        }
+                        .padding(.horizontal)
+                        .padding(.vertical, 5)
+                        .background(
+                            RoundedRectangle(cornerRadius: 15, style: .continuous)
+                                .fill(Color.accentColor)
+                                .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 0)
+                        )
                         
                     }
                     .padding(.horizontal, 8)
                     
-                    NavigationLink(destination: TimezoneChoiceView(selectedTimeZone: .constant(TimeZone.current), selectedTimeZones: $selectedTimeZones, selectedDate: $selectedDate, selectMultiple: true)) {
-                        Text("Choose time zones…")
-                    }
-                    .padding(.top)
-                    
-                    List {
-                        ForEach(selectedTimeZones, id: \.self) { tz in
-                            HStack {
-                                VStack(alignment: .leading) {
-                                    Text(tz.friendlyName)
-                                        .font(.caption)
-                                        .foregroundColor(.secondary)
-                                    Text("\(flagForTimeZone(tz)) \(selectedTimeInZone(tz))")
-                                }
-                                Spacer()
-                                if let abbreviation = tz.fudgedAbbreviation(for: selectedDate) {
-                                    Text(abbreviation)
-                                        .foregroundColor(.secondary)
-                                }
+                }
+                .padding(.horizontal, 8)
+                .background(GeometryReader { geometry in
+                    Color.clear.preference(
+                        key: ButtonHeightPreferenceKey.self,
+                        value: geometry.size.width
+                    )
+                })
+                .onPreferenceChange(ButtonHeightPreferenceKey.self) {
+                    buttonMaxHeight = $0
+                }
+                
+                List {
+                    ForEach(selectedTimeZones, id: \.self) { tz in
+                        HStack {
+                            VStack(alignment: .leading) {
+                                Text(tz.friendlyName)
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+                                Text("\(flagForTimeZone(tz)) \(selectedTimeInZone(tz))")
                             }
-                            .onDrag {
-                                let tzItemProvider = tz.itemProvider
-                                let itemProvider = NSItemProvider(object: tzItemProvider)
-                                itemProvider.suggestedName = tzItemProvider.resolvedName
-                                return itemProvider
+                            Spacer()
+                            if let abbreviation = tz.fudgedAbbreviation(for: selectedDate) {
+                                Text(abbreviation)
+                                    .foregroundColor(.secondary)
                             }
-                            .contextMenu {
-                                if tz.identifier.starts(with: "Europe/") {
-                                    Button(action: {
-                                        timeZonesUsingEUFlag.remove(tz)
-                                    }) {
-                                        Label("Use country flag", systemImage: "flag")
-                                    }
-                                    Button(action: {
-                                        timeZonesUsingEUFlag.insert(tz)
-                                    }) {
-                                        Label("Use European Union flag", systemImage: "flag.fill")
-                                    }
+                        }
+                        .onDrag {
+                            let tzItemProvider = tz.itemProvider
+                            let itemProvider = NSItemProvider(object: tzItemProvider)
+                            itemProvider.suggestedName = tzItemProvider.resolvedName
+                            return itemProvider
+                        }
+                        .contextMenu {
+                            if tz.identifier.starts(with: "Europe/") {
+                                Button(action: {
+                                    timeZonesUsingEUFlag.remove(tz)
+                                }) {
+                                    Label("Use country flag", systemImage: "flag")
+                                }
+                                Button(action: {
+                                    timeZonesUsingEUFlag.insert(tz)
+                                }) {
+                                    Label("Use European Union flag", systemImage: "flag.fill")
                                 }
                             }
                         }
-                        .onMove(perform: move)
                     }
-                    .listStyle(PlainListStyle())
-                    
+                    .onMove(perform: move)
                 }
-                
-                Spacer()
-                
-                Button(action: {
-#if os(iOS)
-                    notificationFeedbackGenerator = UINotificationFeedbackGenerator()
-                    notificationFeedbackGenerator?.prepare()
-#endif
-                    UIPasteboard.general.setValue(generateTimesAndFlagsText(),
-                                                  forPasteboardType: kUTTypePlainText as String)
-                    withAnimation {
-                        showCopied = true
-#if os(iOS)
-                        notificationFeedbackGenerator?.notificationOccurred(.success)
-#endif
-                    }
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                        withAnimation {
-                            showCopied = false
-                        }
-#if os(iOS)
-                        notificationFeedbackGenerator = nil
-#endif
-                    }
-                }) {
-                    Text(showCopied ? "Copied ✓" : "Copy Times & Flags")
-                        .font(.headline)
-                        .foregroundColor(.white)
-                }
-                .padding(.horizontal)
-                .padding(.vertical, 5)
-                .background(
-                    RoundedRectangle(cornerRadius: 15, style: .continuous)
-                        .fill(Color.accentColor)
-                )
-                .padding()
-                .frame(minWidth: 0, maxWidth: .infinity)
-                .background(
-                    Color(UIColor.secondarySystemBackground)
-                        .shadow(radius: 5, x: 0, y: -5)
-                        .opacity(0.5)
-                )
-                
+                .listStyle(PlainListStyle())
+                .padding(.top, (buttonMaxHeight ?? 0) / 2)
             }
             .navigationTitle("Myke Mode")
             .navigationBarTitleDisplayMode(.inline)
@@ -173,6 +179,16 @@ struct MykeMode: View {
         selectedTimeZones.move(fromOffsets: source, toOffset: destination)
     }
     
+}
+
+private extension MykeMode {
+    struct ButtonHeightPreferenceKey: PreferenceKey {
+        static let defaultValue: CGFloat = 0
+        static func reduce(value: inout CGFloat,
+                           nextValue: () -> CGFloat) {
+            value = max(value, nextValue())
+        }
+    }
 }
 
 struct MykeMode_Previews: PreviewProvider {
