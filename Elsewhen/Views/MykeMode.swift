@@ -148,7 +148,6 @@ struct MykeMode: View {
                 .background(
                     Color(UIColor.secondarySystemBackground)
                         .shadow(radius: 5, x: 0, y: -5)
-                        .opacity(0.5)
                 )
                 
             }

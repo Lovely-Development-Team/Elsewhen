@@ -14,6 +14,16 @@ struct ContentView: View {
     
     @State private var selectedTab: Int = 0
     
+    init() {
+        // Disables the shadow pixel above the topbar
+        UITabBar.appearance().clipsToBounds = true
+        
+        // Forces an opaque background on the tabbar, regardless of what is below it.
+        UITabBar.appearance().isTranslucent = true
+        UITabBar.appearance().backgroundColor = UIColor.secondarySystemBackground
+        UITabBar.appearance().backgroundImage = UIImage()
+    }
+    
     var body: some View {
         TabView(selection: $selectedTab) {
             TimeCodeGeneratorView()
