@@ -19,6 +19,9 @@ struct ElsewhenApp: App {
                 "Europe/London",
                 "Europe/Rome",
             ],
+            UserDefaults.mykeModeTimeZoneIdentifiersUsingEUFlagKey: [
+                "Europe/Rome",
+            ],
         ])
     }
     

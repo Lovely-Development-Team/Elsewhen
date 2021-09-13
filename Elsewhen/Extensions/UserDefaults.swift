@@ -10,11 +10,7 @@ import Foundation
 extension UserDefaults {
     
     static let mykeModeTimeZoneIdentifiersKey = "mykeModeTimeZoneIdentifiers"
-    
-    @objc fileprivate var mykeModeTimeZoneIdentifiers: [String] {
-        get { array(forKey: Self.mykeModeTimeZoneIdentifiersKey) as? [String] ?? [] }
-        set { set(newValue, forKey: Self.mykeModeTimeZoneIdentifiersKey) }
-    }
+    static let mykeModeTimeZoneIdentifiersUsingEUFlagKey = "mykeModeTimeZoneIdentifiersUsingEUFlag"
     
     var mykeModeTimeZones: [TimeZone] {
         get {
@@ -23,6 +19,16 @@ extension UserDefaults {
         }
         set {
             set(newValue.map { $0.identifier }, forKey: Self.mykeModeTimeZoneIdentifiersKey)
+        }
+    }
+    
+    var mykeModeTimeZonesUsingEUFlag: Set<TimeZone> {
+        get {
+            guard let identifiers = array(forKey: Self.mykeModeTimeZoneIdentifiersUsingEUFlagKey) as? [String] else { return [] }
+            return Set(identifiers.compactMap { TimeZone(identifier: $0) })
+        }
+        set {
+            set(newValue.map { $0.identifier }, forKey: Self.mykeModeTimeZoneIdentifiersUsingEUFlagKey)
         }
     }
     
