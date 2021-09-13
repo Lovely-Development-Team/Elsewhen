@@ -56,7 +56,7 @@ struct MykeMode: View {
                     .padding(.horizontal, 8)
                     
                     NavigationLink(destination: TimezoneChoiceView(selectedTimeZone: .constant(TimeZone.current), selectedTimeZones: $selectedTimeZones, selectedDate: $selectedDate, selectMultiple: true)) {
-                        Text("Choose Time Zones…")
+                        Text("Choose time zones…")
                     }
                     .padding(.top)
                     
