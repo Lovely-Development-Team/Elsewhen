@@ -15,17 +15,11 @@ struct MykeMode: View {
     
     @State private var selectedFormatStyle: DateFormat = dateFormats[0]
     
-    @State private var selectedTimeZones: [TimeZone] = [
-//        TimeZone(identifier: "America/Los_Angeles")!,
-//        TimeZone(identifier: "America/New_York")!,
-//        TimeZone(identifier: "Europe/London")!,
-//        TimeZone(identifier: "Europe/Budapest")!,
-    ]
+    @State private var selectedTimeZones: [TimeZone] = []
     
     @State private var showCopied: Bool = false
     
 #if os(iOS)
-    //    @State private var selectionFeedbackGenerator: UISelectionFeedbackGenerator? = nil
     @State private var notificationFeedbackGenerator: UINotificationFeedbackGenerator? = nil
 #endif
     

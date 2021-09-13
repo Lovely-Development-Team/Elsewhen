@@ -9,6 +9,19 @@ import SwiftUI
 
 @main
 struct ElsewhenApp: App {
+    
+    init() {
+        UserDefaults.standard.register(defaults: [
+            UserDefaults.mykeModeTimeZoneIdentifiersKey: [
+                "America/Los_Angeles",
+                "America/Chicago",
+                "America/New_York",
+                "Europe/London",
+                "Europe/Rome",
+            ],
+        ])
+    }
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
