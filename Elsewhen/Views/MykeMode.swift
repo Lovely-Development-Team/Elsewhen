@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import MobileCoreServices
+import UniformTypeIdentifiers
 
 struct MykeMode: View {
     
@@ -74,7 +74,7 @@ struct MykeMode: View {
                             notificationFeedbackGenerator?.prepare()
 #endif
                             UIPasteboard.general.setValue(generateTimesAndFlagsText(),
-                                                          forPasteboardType: kUTTypePlainText as String)
+                                                          forPasteboardType: UTType.utf8PlainText.identifier)
                             withAnimation {
                                 showCopied = true
 #if os(iOS)
