@@ -11,6 +11,7 @@ extension UserDefaults {
     
     static let mykeModeTimeZoneIdentifiersKey = "mykeModeTimeZoneIdentifiers"
     static let mykeModeTimeZoneIdentifiersUsingEUFlagKey = "mykeModeTimeZoneIdentifiersUsingEUFlag"
+    static let favouriteTimeZoneIdentifiersKey = "favouriteTimeZoneIdentifiers"
     
     var mykeModeTimeZones: [TimeZone] {
         get {
@@ -29,6 +30,16 @@ extension UserDefaults {
         }
         set {
             set(newValue.map { $0.identifier }, forKey: Self.mykeModeTimeZoneIdentifiersUsingEUFlagKey)
+        }
+    }
+    
+    var favouriteTimeZones: Set<TimeZone> {
+        get {
+            guard let identifiers = array(forKey: Self.favouriteTimeZoneIdentifiersKey) as? [String] else { return [] }
+            return Set(identifiers.compactMap {TimeZone(identifier: $0) })
+        }
+        set {
+            set(newValue.map { $0.identifier }, forKey: Self.favouriteTimeZoneIdentifiersKey)
         }
     }
     

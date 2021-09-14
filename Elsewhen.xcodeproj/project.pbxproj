@@ -14,6 +14,7 @@
 		5E9BD45926EF44B700383233 /* MykeMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9BD45826EF44B700383233 /* MykeMode.swift */; };
 		5E9BD45A26EF45FB00383233 /* DateHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9BD45226EF446900383233 /* DateHelpers.swift */; };
 		5E9BD45B26EF460D00383233 /* TimeZoneFlags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9BD45426EF446900383233 /* TimeZoneFlags.swift */; };
+		5E9BD45F26F0962D00383233 /* TimeZoneChoiceItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9BD45E26F0962D00383233 /* TimeZoneChoiceItem.swift */; };
 		5EAB48DD26E624CD00B04A60 /* TimezoneChoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAB48DC26E624CD00B04A60 /* TimezoneChoiceView.swift */; };
 		5EB23B9D26E406B600203153 /* ElsewhenApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB23B9C26E406B600203153 /* ElsewhenApp.swift */; };
 		5EB23B9F26E406B600203153 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB23B9E26E406B600203153 /* ContentView.swift */; };
@@ -84,6 +85,7 @@
 		5E9BD45326EF446900383233 /* SearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		5E9BD45426EF446900383233 /* TimeZoneFlags.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeZoneFlags.swift; sourceTree = "<group>"; };
 		5E9BD45826EF44B700383233 /* MykeMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MykeMode.swift; sourceTree = "<group>"; };
+		5E9BD45E26F0962D00383233 /* TimeZoneChoiceItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeZoneChoiceItem.swift; sourceTree = "<group>"; };
 		5EAB48DC26E624CD00B04A60 /* TimezoneChoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimezoneChoiceView.swift; sourceTree = "<group>"; };
 		5EB23B9926E406B600203153 /* Elsewhen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Elsewhen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EB23B9C26E406B600203153 /* ElsewhenApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElsewhenApp.swift; sourceTree = "<group>"; };
@@ -226,6 +228,7 @@
 			children = (
 				635C8FA626E66E8300361B08 /* DiscordFormattedDate.swift */,
 				5EAB48DC26E624CD00B04A60 /* TimezoneChoiceView.swift */,
+				5E9BD45E26F0962D00383233 /* TimeZoneChoiceItem.swift */,
 				6378398226EB80C30055A10D /* ResultSheet.swift */,
 				6378398626EBA7C60055A10D /* DateTimeSelection.swift */,
 				5EE70E2926ED21AA00F3F164 /* DateTimeZonePicker.swift */,
@@ -421,6 +424,7 @@
 				5E9BD45626EF446900383233 /* SearchBar.swift in Sources */,
 				637839BA26ECB58D0055A10D /* Intents.intentdefinition in Sources */,
 				5EB23B9D26E406B600203153 /* ElsewhenApp.swift in Sources */,
+				5E9BD45F26F0962D00383233 /* TimeZoneChoiceItem.swift in Sources */,
 				5E9BD45526EF446900383233 /* DateHelpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
