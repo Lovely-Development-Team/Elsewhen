@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import MobileCoreServices
+import UniformTypeIdentifiers
 
 struct ResultSheet: View {
     // MARK: Parameters
@@ -91,7 +91,7 @@ struct ResultSheet: View {
                     notificationFeedbackGenerator?.prepare()
                     #endif
                     UIPasteboard.general.setValue(self.discordFormat,
-                                                  forPasteboardType: kUTTypePlainText as String)
+                                                  forPasteboardType: UTType.utf8PlainText.identifier)
                     withAnimation {
                         showCopied = true
                         #if os(iOS)
