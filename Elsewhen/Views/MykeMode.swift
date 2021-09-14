@@ -158,7 +158,7 @@ struct MykeMode: View {
                 .listStyle(PlainListStyle())
                 .padding(.top, (buttonMaxHeight ?? 0) / 2)
             }
-            .navigationTitle("Myke Mode")
+            .navigationTitle("Time List")
             .navigationBarTitleDisplayMode(.inline)
         }
         .navigationViewStyle(StackNavigationViewStyle())
