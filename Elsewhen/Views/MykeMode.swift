@@ -154,6 +154,7 @@ struct MykeMode: View {
                         }
                     }
                     .onMove(perform: move)
+                    .onDelete(perform: delete)
                 }
                 .listStyle(PlainListStyle())
                 .padding(.top, (buttonMaxHeight ?? 0) / 2)
@@ -177,6 +178,10 @@ struct MykeMode: View {
     
     func move(from source: IndexSet, to destination: Int) {
         selectedTimeZones.move(fromOffsets: source, toOffset: destination)
+    }
+    
+    func delete(at offsets: IndexSet) {
+        selectedTimeZones.remove(atOffsets: offsets)
     }
     
 }
