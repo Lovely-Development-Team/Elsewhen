@@ -20,7 +20,7 @@ struct ContentView: View {
                 .tabItem { Label("Time Codes", systemImage: "clock") }
                 .tag(0)
             MykeMode()
-                .tabItem { Label("Myke Mode", systemImage: "keyboard") }
+                .tabItem { Label("Time List", systemImage: "list.dash") }
                 .tag(1)
         }
     }
