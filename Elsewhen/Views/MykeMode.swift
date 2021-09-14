@@ -107,6 +107,7 @@ struct MykeMode: View {
                     
                 }
                 .padding(.horizontal, 8)
+                .frame(minWidth: 0, maxWidth: 390)
                 .background(GeometryReader { geometry in
                     Color.clear.preference(
                         key: ButtonHeightPreferenceKey.self,
