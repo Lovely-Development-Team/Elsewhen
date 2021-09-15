@@ -98,17 +98,6 @@ private extension TimeCodeGeneratorView {
     }
 }
 
-extension UIDevice {
-    static var isIPad: Bool {
-        UIDevice.current.userInterfaceIdiom == .pad
-    }
-    
-    static var isIPhone: Bool {
-        UIDevice.current.userInterfaceIdiom == .phone
-    }
-}
-
-
 struct TimeCodeGeneratorView_Previews: PreviewProvider {
     static var previews: some View {
         TimeCodeGeneratorView()
