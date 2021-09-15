@@ -17,10 +17,7 @@ struct TimezoneChoiceView: View {
     var selectMultiple: Bool
     @State private var searchTerm: String = ""
     
-    @State private var favouriteTimeZones: Set<TimeZone> = [
-        TimeZone(identifier: "Europe/London")!,
-        TimeZone(identifier: "Africa/Algiers")!,
-    ]
+    @State private var favouriteTimeZones: Set<TimeZone> = []
     
     private var sortedFilteredTimeZones: [TimeZone] {
         TimeZone.filtered(by: searchTerm).sorted {
