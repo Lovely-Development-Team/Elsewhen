@@ -622,7 +622,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Elsewhen/Elsewhen.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_ASSET_PATHS = "\"Elsewhen/Preview Content\"";
 				DEVELOPMENT_TEAM = QRVYSKD5TN;
 				ENABLE_PREVIEWS = YES;
@@ -656,7 +656,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Elsewhen/Elsewhen.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_ASSET_PATHS = "\"Elsewhen/Preview Content\"";
 				DEVELOPMENT_TEAM = QRVYSKD5TN;
 				ENABLE_PREVIEWS = YES;
@@ -686,7 +686,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = QRVYSKD5TN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Discord Helper Intents/Info.plist";
@@ -712,7 +712,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = QRVYSKD5TN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Discord Helper Intents/Info.plist";
@@ -738,7 +738,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = QRVYSKD5TN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Discord Helper IntentsUI/Info.plist";
@@ -764,7 +764,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = QRVYSKD5TN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Discord Helper IntentsUI/Info.plist";
