@@ -22,6 +22,7 @@ struct MykeMode: View {
     
 #if os(iOS)
     @State private var notificationFeedbackGenerator: UINotificationFeedbackGenerator? = nil
+    let mediumImpactFeedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
 #endif
     
     @State private var showTimeZoneSheet: Bool = false
@@ -144,6 +145,9 @@ struct MykeMode: View {
                         .contentShape(Rectangle())
                         .onTapGesture {
                             if tz.isMemberOfEuropeanUnion {
+#if os(iOS)
+                                mediumImpactFeedbackGenerator.impactOccurred()
+#endif
                                 if timeZonesUsingEUFlag.contains(tz) {
                                     timeZonesUsingEUFlag.remove(tz)
                                 } else {
