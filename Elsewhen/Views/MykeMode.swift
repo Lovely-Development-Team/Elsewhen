@@ -140,17 +140,12 @@ struct MykeMode: View {
                             return itemProvider
                         }
                         .contentShape(Rectangle())
-                        .contextMenu {
+                        .onTapGesture {
                             if tz.isMemberOfEuropeanUnion {
-                                Button(action: {
+                                if timeZonesUsingEUFlag.contains(tz) {
                                     timeZonesUsingEUFlag.remove(tz)
-                                }) {
-                                    Label("Use country flag", systemImage: "flag")
-                                }
-                                Button(action: {
+                                } else {
                                     timeZonesUsingEUFlag.insert(tz)
-                                }) {
-                                    Label("Use European Union flag", systemImage: "flag.fill")
                                 }
                             }
                         }
