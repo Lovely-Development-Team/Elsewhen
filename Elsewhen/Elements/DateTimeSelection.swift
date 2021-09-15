@@ -12,6 +12,10 @@ struct DateTimeSelection: View {
     @Binding var selectedDate: Date
     @Binding var selectedTimeZone: TimeZone
     
+#if os(iOS)
+    let mediumImpactFeedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
+#endif
+    
     var body: some View {
         Group {
             
@@ -37,6 +41,9 @@ struct DateTimeSelection: View {
             .padding(.bottom, 10)
             
             Button(action: {
+#if os(iOS)
+                mediumImpactFeedbackGenerator.impactOccurred()
+#endif
                 self.selectedDate = Date()
                 self.selectedTimeZone = TimeZone.current
             }) {
