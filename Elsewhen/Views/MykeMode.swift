@@ -60,6 +60,7 @@ struct MykeMode: View {
                 
                 VStack {
                     DateTimeZonePicker(selectedDate: $selectedDate, selectedTimeZone: $selectedTimeZone, showDate: false)
+                        .labelsHidden()
                     
                     HStack {
                         
