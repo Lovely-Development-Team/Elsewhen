@@ -112,7 +112,7 @@ struct TimeCodeGeneratorView: View, KeyboardReadable {
             showLocalTimeInstead = false
         }
         .onReceive(keyboardPublisher) { newIsKeyboardVisible in
-            if UIDevice.current.userInterfaceIdiom == .phone {
+            if DeviceType.isPhone() {
                 isKeyboardVisible = newIsKeyboardVisible
             }
         }
