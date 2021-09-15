@@ -85,6 +85,10 @@ extension TimeZone {
         flagForTimeZone(self)
     }
     
+    var isMemberOfEuropeanUnion: Bool {
+        europeanUnionTimeZones.contains(self.identifier)
+    }
+    
     static func filtered(by searchTerm: String) -> [TimeZone] {
         let st = searchTerm.trimmingCharacters(in: .whitespaces).lowercased().replacingOccurrences(of: " ", with: "_")
         return TimeZone.knownTimeZoneIdentifiers.compactMap { tz in

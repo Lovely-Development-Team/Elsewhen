@@ -139,8 +139,9 @@ struct MykeMode: View {
                             itemProvider.suggestedName = tzItemProvider.resolvedName
                             return itemProvider
                         }
+                        .contentShape(Rectangle())
                         .contextMenu {
-                            if tz.identifier.starts(with: "Europe/") {
+                            if tz.isMemberOfEuropeanUnion {
                                 Button(action: {
                                     timeZonesUsingEUFlag.remove(tz)
                                 }) {
