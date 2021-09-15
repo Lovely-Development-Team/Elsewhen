@@ -45,6 +45,7 @@
 		637839C126ECBA5B0055A10D /* NSUserInfoKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637839C026ECBA5B0055A10D /* NSUserInfoKeys.swift */; };
 		637839C226ECBA680055A10D /* NSUserInfoKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637839C026ECBA5B0055A10D /* NSUserInfoKeys.swift */; };
 		637839CB26ED11360055A10D /* TimeZone+ItemProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637839CA26ED11360055A10D /* TimeZone+ItemProvider.swift */; };
+		63DDFB9C26F23DF00021ACFD /* DeviceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DDFB9B26F23DF00021ACFD /* DeviceType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -116,6 +117,7 @@
 		637839BC26ECB8C10055A10D /* Loggers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loggers.swift; sourceTree = "<group>"; };
 		637839C026ECBA5B0055A10D /* NSUserInfoKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSUserInfoKeys.swift; sourceTree = "<group>"; };
 		637839CA26ED11360055A10D /* TimeZone+ItemProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeZone+ItemProvider.swift"; sourceTree = "<group>"; };
+		63DDFB9B26F23DF00021ACFD /* DeviceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceType.swift; sourceTree = "<group>"; };
 		D5F5DE5E26ED1C9800851D98 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -209,6 +211,7 @@
 				5E9BD45226EF446900383233 /* DateHelpers.swift */,
 				5E9BD45326EF446900383233 /* SearchBar.swift */,
 				5E9BD45426EF446900383233 /* TimeZoneFlags.swift */,
+				63DDFB9B26F23DF00021ACFD /* DeviceType.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -426,6 +429,7 @@
 				5EB23B9D26E406B600203153 /* ElsewhenApp.swift in Sources */,
 				5E9BD45F26F0962D00383233 /* TimeZoneChoiceItem.swift in Sources */,
 				5E9BD45526EF446900383233 /* DateHelpers.swift in Sources */,
+				63DDFB9C26F23DF00021ACFD /* DeviceType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
