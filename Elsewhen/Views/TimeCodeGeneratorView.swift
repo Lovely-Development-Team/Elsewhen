@@ -77,8 +77,10 @@ struct TimeCodeGeneratorView: View, KeyboardReadable {
             showLocalTimeInstead = false
         }
         .onReceive(keyboardPublisher) { newIsKeyboardVisible in
-                        isKeyboardVisible = newIsKeyboardVisible
-                    }
+            if UIDevice.current.userInterfaceIdiom == .phone {
+                isKeyboardVisible = newIsKeyboardVisible
+            }
+        }
     }
     
     func convertSelectedDate(from initialTimezone: TimeZone, to targetTimezone: TimeZone) -> Date {
@@ -95,6 +97,17 @@ private extension TimeCodeGeneratorView {
         }
     }
 }
+
+extension UIDevice {
+    static var isIPad: Bool {
+        UIDevice.current.userInterfaceIdiom == .pad
+    }
+    
+    static var isIPhone: Bool {
+        UIDevice.current.userInterfaceIdiom == .phone
+    }
+}
+
 
 struct TimeCodeGeneratorView_Previews: PreviewProvider {
     static var previews: some View {
