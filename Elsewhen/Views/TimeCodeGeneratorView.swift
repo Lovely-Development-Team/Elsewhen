@@ -26,7 +26,7 @@ extension KeyboardReadable {
                 .publisher(for: UIResponder.keyboardWillHideNotification)
                 .map { _ in false }
         )
-        .eraseToAnyPublisher()
+            .eraseToAnyPublisher()
     }
 }
 
@@ -40,6 +40,8 @@ struct TimeCodeGeneratorView: View, KeyboardReadable {
     @State private var resultSheetMaxHeight: CGFloat?
     
     @State private var isKeyboardVisible = false
+    @State private var showResultsSheet = false
+    @State private var resultsSheetOffset = 20.0
     
     private var discordFormat: String {
         let timeIntervalSince1970 = Int(convertSelectedDate(from: selectedTimeZone, to: TimeZone.current).timeIntervalSince1970)
@@ -56,16 +58,17 @@ struct TimeCodeGeneratorView: View, KeyboardReadable {
                 }
                 if !isKeyboardVisible {
                     ResultSheet(selectedDate: selectedDate, selectedTimeZone: selectedTimeZone, discordFormat: discordFormat, showLocalTimeInstead: $showLocalTimeInstead, selectedFormatStyle: $selectedFormatStyle)
-                    .background(GeometryReader { geometry in
-                        Color.clear.preference(
-                            key: ResultSheetHeightPreferenceKey.self,
-                            value: geometry.size.width
-                        )
-                    })
-                    .onPreferenceChange(ResultSheetHeightPreferenceKey.self) {
-                        resultSheetMaxHeight = $0
-                    }
-                
+                        .opacity(showResultsSheet ? 1 : 0)
+                        .background(GeometryReader { geometry in
+                            Color.clear.preference(
+                                key: ResultSheetHeightPreferenceKey.self,
+                                value: geometry.size.width
+                            )
+                        })
+                        .onPreferenceChange(ResultSheetHeightPreferenceKey.self) {
+                            resultSheetMaxHeight = $0
+                        }
+                        .offset(x: 0.0, y: resultsSheetOffset)
                 }
             }
             .edgesIgnoringSafeArea(.horizontal)
@@ -79,6 +82,14 @@ struct TimeCodeGeneratorView: View, KeyboardReadable {
         .onReceive(keyboardPublisher) { newIsKeyboardVisible in
             if UIDevice.current.userInterfaceIdiom == .phone {
                 isKeyboardVisible = newIsKeyboardVisible
+            }
+        }
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                withAnimation {
+                    self.showResultsSheet = true
+                    self.resultsSheetOffset = 0.0
+                }
             }
         }
     }
