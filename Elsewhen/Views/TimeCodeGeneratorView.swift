@@ -49,33 +49,64 @@ struct TimeCodeGeneratorView: View, KeyboardReadable {
     }
     
     var body: some View {
-        NavigationView {
-            ZStack(alignment: .bottom) {
+        ZStack(alignment: .bottom) {
+            
+            ScrollView {
                 
-                ScrollView(showsIndicators: true) {
-                    DateTimeSelection(selectedFormatStyle: $selectedFormatStyle, selectedDate: $selectedDate, selectedTimeZone: $selectedTimeZone)
-                        .padding(.bottom, (resultSheetMaxHeight ?? 0) / 2 + 20)
-                }
-                if !isKeyboardVisible {
-                    ResultSheet(selectedDate: selectedDate, selectedTimeZone: selectedTimeZone, discordFormat: discordFormat, showLocalTimeInstead: $showLocalTimeInstead, selectedFormatStyle: $selectedFormatStyle)
-                        .opacity(showResultsSheet ? 1 : 0)
-                        .background(GeometryReader { geometry in
-                            Color.clear.preference(
-                                key: ResultSheetHeightPreferenceKey.self,
-                                value: geometry.size.width
-                            )
-                        })
-                        .onPreferenceChange(ResultSheetHeightPreferenceKey.self) {
-                            resultSheetMaxHeight = $0
+                DateTimeSelection(selectedFormatStyle: $selectedFormatStyle, selectedDate: $selectedDate, selectedTimeZone: $selectedTimeZone)
+                
+                VStack(spacing: 0) {
+                
+                    DiscordFormattedDate(text: discordFormat)
+                        .padding(.bottom, 8)
+                    
+                    Text("Date and time representative of components only; may not match exact Discord formatting.")
+                        .multilineTextAlignment(.center)
+                        .font(.caption2)
+                        .foregroundColor(.secondary)
+                        .padding(.horizontal)
+                        .padding(.bottom, 20)
+                    
+                    Button(action: {
+//                        activeSheet = .egg
+                    }, label: {
+                        HStack {
+                            Text("From the Lovely Developers")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                            Image("l2culogosvg")
+                                .renderingMode(.template)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .foregroundColor(.secondary)
+                                .frame(height: 15)
+                                .accessibility(hidden: true)
+                                
                         }
-                        .offset(x: 0.0, y: resultsSheetOffset)
+                    })
+                        .buttonStyle(PlainButtonStyle())
+                        .padding(.vertical, 5)
+                    
                 }
+                .padding(.horizontal)
+                .padding(.bottom, (resultSheetMaxHeight ?? 0) / 2)
+                
             }
-            .edgesIgnoringSafeArea(.horizontal)
-            .navigationTitle("Discord Time Code Generator")
-            .navigationBarTitleDisplayMode(.inline)
+            if !isKeyboardVisible {
+                ResultSheet(selectedDate: selectedDate, selectedTimeZone: selectedTimeZone, discordFormat: discordFormat, showLocalTimeInstead: $showLocalTimeInstead, selectedFormatStyle: $selectedFormatStyle)
+                    .opacity(showResultsSheet ? 1 : 0)
+                    .background(GeometryReader { geometry in
+                        Color.clear.preference(
+                            key: ResultSheetHeightPreferenceKey.self,
+                            value: geometry.size.width
+                        )
+                    })
+                    .onPreferenceChange(ResultSheetHeightPreferenceKey.self) {
+                        resultSheetMaxHeight = $0
+                    }
+                    .offset(x: 0.0, y: resultsSheetOffset)
+            }
         }
-        .navigationViewStyle(StackNavigationViewStyle())
         .onChange(of: selectedTimeZone) { _ in
             showLocalTimeInstead = false
         }
