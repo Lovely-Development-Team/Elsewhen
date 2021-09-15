@@ -24,6 +24,7 @@ struct MykeMode: View {
     @State private var notificationFeedbackGenerator: UINotificationFeedbackGenerator? = nil
 #endif
     
+    @State private var showTimeZoneSheet: Bool = false
     @State private var buttonMaxHeight: CGFloat?
     
     func selectedTimeInZone(_ zone: TimeZone) -> String {
@@ -61,7 +62,9 @@ struct MykeMode: View {
                     
                     HStack {
                         
-                        NavigationLink(destination: TimezoneChoiceView(selectedTimeZone: .constant(TimeZone.current), selectedTimeZones: $selectedTimeZones, selectedDate: $selectedDate, selectMultiple: true)) {
+                        Button(action: {
+                            self.showTimeZoneSheet = true
+                        }) {
                             Text("Choose time zones…")
                         }
                         .padding(.vertical)
@@ -158,6 +161,18 @@ struct MykeMode: View {
             }
             .navigationTitle("Time List")
             .navigationBarTitleDisplayMode(.inline)
+        }
+        .sheet(isPresented: $showTimeZoneSheet) {
+            NavigationView {
+                TimezoneChoiceView(selectedTimeZone: .constant(TimeZone.current), selectedTimeZones: $selectedTimeZones, selectedDate: $selectedDate, selectMultiple: true)
+                    .navigationBarItems(trailing:
+                                            Button(action: {
+                        self.showTimeZoneSheet = false
+                    }) {
+                        Text("Done")
+                    }
+                    )
+            }
         }
         .navigationViewStyle(StackNavigationViewStyle())
         .onAppear {

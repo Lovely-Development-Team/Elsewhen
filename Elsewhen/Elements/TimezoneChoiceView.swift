@@ -9,14 +9,13 @@ import SwiftUI
 
 struct TimezoneChoiceView: View {
     
-    @Environment(\.presentationMode) private var presentationMode
-    
     @Binding var selectedTimeZone: TimeZone
     @Binding var selectedTimeZones: [TimeZone]
     @Binding var selectedDate: Date
     var selectMultiple: Bool
-    @State private var searchTerm: String = ""
+    var done: (() -> ())?
     
+    @State private var searchTerm: String = ""
     @State private var favouriteTimeZones: Set<TimeZone> = []
     
     private var sortedFilteredTimeZones: [TimeZone] {
@@ -58,9 +57,7 @@ struct TimezoneChoiceView: View {
                         }
                     } else {
                         self.selectedTimeZone = tz
-                    }
-                    if !selectMultiple {
-                        presentationMode.wrappedValue.dismiss()
+                        done?()
                     }
                 }) {
                     TimeZoneChoiceItem(tz: tz, isSelected: timeZoneIsSelected(tz), abbreviation: tz.fudgedAbbreviation(for: selectedDate), favouriteTimeZones: $favouriteTimeZones)
@@ -69,6 +66,7 @@ struct TimezoneChoiceView: View {
         }
         .listStyle(PlainListStyle())
         .navigationTitle("Time Zones")
+        .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             favouriteTimeZones = UserDefaults.standard.favouriteTimeZones
         }

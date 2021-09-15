@@ -13,6 +13,7 @@ struct DateTimeZonePicker: View {
     @Binding var selectedTimeZone: TimeZone
     
     var showDate: Bool = true
+    @State private var showTimeZoneChoiceSheet: Bool = false
     
     var body: some View {
         Group {
@@ -36,20 +37,29 @@ struct DateTimeZonePicker: View {
                 Text("Time zone")
                     .fontWeight(.semibold)
                 Spacer()
-                NavigationLink(destination: TimezoneChoiceView(selectedTimeZone: $selectedTimeZone, selectedTimeZones: .constant([]), selectedDate: $selectedDate, selectMultiple: false)) {
-                    Text(selectedTimeZone.identifier.replacingOccurrences(of: "_", with: " "))
-                        .foregroundColor(.primary)
-                        .padding(.vertical, 8)
-                        .padding(.horizontal, 10)
-                        .background(
-                            RoundedRectangle(cornerRadius: 10, style: .continuous)
-                                .fill(Color(UIColor.secondarySystemBackground))
-                        )
+                Button(action: {
+                    self.showTimeZoneChoiceSheet = true
+                }) {
+                Text(selectedTimeZone.identifier.replacingOccurrences(of: "_", with: " "))
+                    .foregroundColor(.primary)
+                    .padding(.vertical, 8)
+                    .padding(.horizontal, 10)
+                    .background(
+                        RoundedRectangle(cornerRadius: 10, style: .continuous)
+                            .fill(Color(UIColor.secondarySystemBackground))
+                    )
                 }
             }
             .padding(.horizontal, 8)
             .padding(.bottom, 10)
             .frame(minWidth: 0, maxWidth: 390)
+            .sheet(isPresented: $showTimeZoneChoiceSheet) {
+                NavigationView {
+                    TimezoneChoiceView(selectedTimeZone: $selectedTimeZone, selectedTimeZones: .constant([]), selectedDate: $selectedDate, selectMultiple: false) {
+                        showTimeZoneChoiceSheet = false
+                    }
+                }
+            }
         }
     }
 }
