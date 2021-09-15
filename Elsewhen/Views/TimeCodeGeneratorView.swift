@@ -77,7 +77,6 @@ struct TimeCodeGeneratorView: View, KeyboardReadable {
             showLocalTimeInstead = false
         }
         .onReceive(keyboardPublisher) { newIsKeyboardVisible in
-                        print("Is keyboard visible? ", newIsKeyboardVisible)
                         isKeyboardVisible = newIsKeyboardVisible
                     }
     }
