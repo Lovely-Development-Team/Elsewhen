@@ -42,6 +42,7 @@ struct TimeCodeGeneratorView: View, KeyboardReadable {
     @State private var isKeyboardVisible = false
     @State private var showResultsSheet = false
     @State private var resultsSheetOffset = 20.0
+    @State private var showEasterEggSheet = false
     
     private var discordFormat: String {
         let timeIntervalSince1970 = Int(convertSelectedDate(from: selectedTimeZone, to: TimeZone.current).timeIntervalSince1970)
@@ -68,7 +69,7 @@ struct TimeCodeGeneratorView: View, KeyboardReadable {
                         .padding(.bottom, 20)
                     
                     Button(action: {
-//                        activeSheet = .egg
+                        showEasterEggSheet = true
                     }, label: {
                         HStack {
                             Text("From the Lovely Developers")
@@ -122,6 +123,9 @@ struct TimeCodeGeneratorView: View, KeyboardReadable {
                     self.resultsSheetOffset = 0.0
                 }
             }
+        }
+        .sheet(isPresented: $showEasterEggSheet) {
+            EasterEggView()
         }
     }
     
