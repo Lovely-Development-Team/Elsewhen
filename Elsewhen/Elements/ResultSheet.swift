@@ -83,8 +83,6 @@ struct ResultSheet: View {
             }
             
             Group {
-                DiscordFormattedDate(text: discordFormat)
-                
                 Button(action: {
                     #if os(iOS)
                     notificationFeedbackGenerator = UINotificationFeedbackGenerator()
@@ -118,11 +116,6 @@ struct ResultSheet: View {
                         .fill(Color.accentColor)
                 )
                 .padding(.bottom, 8)
-                
-                Text("Date and time representative of components only; may not match exact Discord formatting.")
-                    .multilineTextAlignment(.center)
-                    .font(.caption2)
-                    .foregroundColor(.secondary)
                 
             }
             .padding(.horizontal)
