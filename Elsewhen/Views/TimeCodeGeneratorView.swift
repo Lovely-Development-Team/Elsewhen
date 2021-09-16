@@ -31,46 +31,49 @@ struct TimeCodeGeneratorView: View, KeyboardReadable {
     var body: some View {
         ZStack(alignment: .bottom) {
             
-            ScrollView {
-                
-                DateTimeSelection(selectedFormatStyle: $selectedFormatStyle, selectedDate: $selectedDate, selectedTimeZone: $selectedTimeZone)
-                
-                VStack(spacing: 0) {
-                
-                    DiscordFormattedDate(text: discordFormat)
-                        .padding(.bottom, 8)
+            VStack(spacing: 0) {
+                Rectangle().fill(.clear).frame(height: 1)
+                ScrollView {
                     
-                    Text("Date and time representative of components only; may not match exact Discord formatting.")
-                        .multilineTextAlignment(.center)
-                        .font(.caption2)
-                        .foregroundColor(.secondary)
-                        .padding(.horizontal)
-                        .padding(.bottom, 20)
+                    DateTimeSelection(selectedFormatStyle: $selectedFormatStyle, selectedDate: $selectedDate, selectedTimeZone: $selectedTimeZone)
                     
-                    Button(action: {
-                        showEasterEggSheet = true
-                    }, label: {
-                        HStack {
-                            Text("From the Lovely Developers")
-                                .font(.caption)
-                                .foregroundColor(.secondary)
-                            Image("l2culogosvg")
-                                .renderingMode(.template)
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .foregroundColor(.secondary)
-                                .frame(height: 15)
-                                .accessibility(hidden: true)
-                                
-                        }
-                    })
-                        .buttonStyle(PlainButtonStyle())
-                        .padding(.vertical, 5)
+                    VStack(spacing: 0) {
+                    
+                        DiscordFormattedDate(text: discordFormat)
+                            .padding(.bottom, 8)
+                        
+                        Text("Date and time representative of components only; may not match exact Discord formatting.")
+                            .multilineTextAlignment(.center)
+                            .font(.caption2)
+                            .foregroundColor(.secondary)
+                            .padding(.horizontal)
+                            .padding(.bottom, 20)
+                        
+                        Button(action: {
+                            showEasterEggSheet = true
+                        }, label: {
+                            HStack {
+                                Text("From the Lovely Developers")
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+                                Image("l2culogosvg")
+                                    .renderingMode(.template)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .foregroundColor(.secondary)
+                                    .frame(height: 15)
+                                    .accessibility(hidden: true)
+                                    
+                            }
+                        })
+                            .buttonStyle(PlainButtonStyle())
+                            .padding(.vertical, 5)
+                        
+                    }
+                    .padding(.horizontal)
+                    .padding(.bottom, (resultSheetMaxHeight ?? 0) / 2)
                     
                 }
-                .padding(.horizontal)
-                .padding(.bottom, (resultSheetMaxHeight ?? 0) / 2)
-                
             }
             if !isKeyboardVisible {
                 ResultSheet(selectedDate: selectedDate, selectedTimeZone: selectedTimeZone, discordFormat: discordFormat, showLocalTimeInstead: $showLocalTimeInstead, selectedFormatStyle: $selectedFormatStyle)
