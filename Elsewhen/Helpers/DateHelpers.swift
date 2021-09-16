@@ -107,6 +107,11 @@ extension TimeZone {
         if let abbreviation = abbreviation(), abbreviation.lowercased().contains(st) {
             return true
         }
+        if identifier.starts(with: "America/") {
+            if let localizedName = localizedName(for: .generic, locale: Locale(identifier: "en_US")), localizedName.lowercased().contains(st) {
+                return true
+            }
+        }
         return false
     }
     
