@@ -29,6 +29,9 @@ struct ContentView: View {
     }
     
     var body: some View {
+        #if os(macOS)
+        Spacer()
+        #endif
         TabView(selection: $selectedTab) {
             TimeCodeGeneratorView()
                 .overlay(Rectangle().frame(width: nil, height: 1, alignment: .bottom).foregroundColor(Color.secondary.opacity(0.5)), alignment: .bottom)
