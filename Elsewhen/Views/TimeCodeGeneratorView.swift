@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import MobileCoreServices
 import UniformTypeIdentifiers
 
 struct TimeCodeGeneratorView: View, KeyboardReadable {

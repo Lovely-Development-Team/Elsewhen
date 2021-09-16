@@ -6,7 +6,9 @@
 //
 
 import Foundation
+#if canImport(UIKit)
 import UIKit
+#endif
 import Combine
 
 protocol KeyboardReadable {
@@ -14,6 +16,7 @@ protocol KeyboardReadable {
 }
 
 extension KeyboardReadable {
+#if canImport(UIKit)
     var keyboardPublisher: AnyPublisher<Bool, Never> {
         Publishers.Merge(
             NotificationCenter.default
@@ -26,4 +29,9 @@ extension KeyboardReadable {
         )
             .eraseToAnyPublisher()
     }
+    #else
+    var keyboardPublisher: AnyPublisher<Bool, Never> {
+        Just(false).eraseToAnyPublisher()
+    }
+    #endif
 }

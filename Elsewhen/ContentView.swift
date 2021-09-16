@@ -5,9 +5,10 @@
 //  Created by Ben Cardy on 04/09/2021.
 //
 
+#if canImport(UIKit)
 import UIKit
+#endif
 import SwiftUI
-import MobileCoreServices
 import UniformTypeIdentifiers
 import os.log
 
@@ -16,6 +17,7 @@ struct ContentView: View {
     @State private var selectedTab: Int = 0
     
     init() {
+#if canImport(UIKit)
         // Disables the shadow pixel above the topbar
         UITabBar.appearance().clipsToBounds = true
 
@@ -23,6 +25,7 @@ struct ContentView: View {
         UITabBar.appearance().isTranslucent = true
         UITabBar.appearance().backgroundColor = UIColor.secondarySystemBackground
         UITabBar.appearance().backgroundImage = UIImage()
+#endif
     }
     
     var body: some View {

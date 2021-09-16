@@ -88,8 +88,7 @@ struct ResultSheet: View {
                     notificationFeedbackGenerator = UINotificationFeedbackGenerator()
                     notificationFeedbackGenerator?.prepare()
                     #endif
-                    UIPasteboard.general.setValue(self.discordFormat,
-                                                  forPasteboardType: UTType.utf8PlainText.identifier)
+                    EWPasteboard.set(self.discordFormat, forType: UTType.utf8PlainText)
                     withAnimation {
                         showCopied = true
                         #if os(iOS)
@@ -124,7 +123,7 @@ struct ResultSheet: View {
         .padding(.vertical)
         .frame(minWidth: 0, maxWidth: .infinity)
         .background(
-            Color(UIColor.secondarySystemBackground)
+            Color.secondarySystemBackground
                 .cornerRadius(15)
                 .shadow(color: Color.primary.opacity(0.3), radius: 5, x: 0, y: 0)
         )
