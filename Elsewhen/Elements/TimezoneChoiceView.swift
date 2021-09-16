@@ -45,8 +45,10 @@ struct TimezoneChoiceView: View {
     
     var body: some View {
         List {
+            #if os(iOS)
             SearchBar(text: $searchTerm, placeholder: "Search...")
                 .padding(.horizontal, -10)
+            #endif
             ForEach(sortedFilteredTimeZones, id: \.self) { tz in
                 Button(action: {
                     if self.selectMultiple {
@@ -66,7 +68,7 @@ struct TimezoneChoiceView: View {
         }
         .listStyle(PlainListStyle())
         .navigationTitle("Time Zones")
-        .navigationBarTitleDisplayMode(.inline)
+        .inlineNavigationBarTitle()
         .onAppear {
             favouriteTimeZones = UserDefaults.standard.favouriteTimeZones
         }

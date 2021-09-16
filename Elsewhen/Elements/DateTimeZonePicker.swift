@@ -46,7 +46,7 @@ struct DateTimeZonePicker: View {
                     .padding(.horizontal, 10)
                     .background(
                         RoundedRectangle(cornerRadius: 10, style: .continuous)
-                            .fill(Color(UIColor.secondarySystemBackground))
+                            .fill(Color.secondarySystemBackground)
                     )
                 }
             }

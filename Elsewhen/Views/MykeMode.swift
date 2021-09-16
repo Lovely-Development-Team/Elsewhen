@@ -52,6 +52,12 @@ struct MykeMode: View {
         return tz.flag
     }
     
+    #if os(iOS)
+    static let navigationViewStyle = StackNavigationViewStyle()
+    #else
+    static let navigationViewStyle = DefaultNavigationViewStyle()
+    #endif
+    
     var body: some View {
         
         ZStack(alignment: .top) {
@@ -78,8 +84,7 @@ struct MykeMode: View {
                         notificationFeedbackGenerator = UINotificationFeedbackGenerator()
                         notificationFeedbackGenerator?.prepare()
 #endif
-                        UIPasteboard.general.setValue(generateTimesAndFlagsText(),
-                                                      forPasteboardType: UTType.utf8PlainText.identifier)
+                        EWPasteboard.set(generateTimesAndFlagsText(), forType: UTType.utf8PlainText)
                         withAnimation {
                             showCopied = true
 #if os(iOS)
@@ -165,6 +170,7 @@ struct MykeMode: View {
         }
         .sheet(isPresented: $showTimeZoneSheet) {
             NavigationView {
+                #if os(iOS)
                 TimezoneChoiceView(selectedTimeZone: .constant(TimeZone.current), selectedTimeZones: $selectedTimeZones, selectedDate: $selectedDate, selectMultiple: true)
                     .navigationBarItems(trailing:
                                             Button(action: {
@@ -173,9 +179,12 @@ struct MykeMode: View {
                         Text("Done")
                     }
                     )
+                #else
+                TimezoneChoiceView(selectedTimeZone: .constant(TimeZone.current), selectedTimeZones: $selectedTimeZones, selectedDate: $selectedDate, selectMultiple: true)
+                #endif
             }
         }
-        .navigationViewStyle(StackNavigationViewStyle())
+        .navigationViewStyle(Self.navigationViewStyle)
         .onAppear {
             selectedTimeZones = UserDefaults.standard.mykeModeTimeZones
             timeZonesUsingEUFlag = UserDefaults.standard.mykeModeTimeZonesUsingEUFlag

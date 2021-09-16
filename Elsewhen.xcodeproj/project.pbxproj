@@ -26,6 +26,37 @@
 		5EE2D2CF26F28CE100D61875 /* KeyboardHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE2D2CE26F28CE000D61875 /* KeyboardHelpers.swift */; };
 		5EE70E2726ECCC0700F3F164 /* TimeCodeGeneratorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE70E2626ECCC0700F3F164 /* TimeCodeGeneratorView.swift */; };
 		5EE70E2A26ED21AA00F3F164 /* DateTimeZonePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE70E2926ED21AA00F3F164 /* DateTimeZonePicker.swift */; };
+		6346AD6426F3BF1400E406D0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6346AD6326F3BF1400E406D0 /* Preview Assets.xcassets */; };
+		6346AD6E26F3BF1400E406D0 /* MacElsewhenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6346AD6D26F3BF1400E406D0 /* MacElsewhenTests.swift */; };
+		6346AD7826F3BF1400E406D0 /* MacElsewhenUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6346AD7726F3BF1400E406D0 /* MacElsewhenUITests.swift */; };
+		6346AD7A26F3BF1400E406D0 /* MacElsewhenUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6346AD7926F3BF1400E406D0 /* MacElsewhenUITestsLaunchTests.swift */; };
+		6346AD8426F3C14900E406D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5EB23BA026E406B900203153 /* Assets.xcassets */; };
+		6346AD8526F3C14A00E406D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5EB23BA026E406B900203153 /* Assets.xcassets */; };
+		6346AD8626F3C14A00E406D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5EB23BA026E406B900203153 /* Assets.xcassets */; };
+		6346AD8726F3C15C00E406D0 /* ElsewhenApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB23B9C26E406B600203153 /* ElsewhenApp.swift */; };
+		6346AD8826F3C16500E406D0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB23B9E26E406B600203153 /* ContentView.swift */; };
+		6346AD8926F3C16700E406D0 /* Loggers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637839BC26ECB8C10055A10D /* Loggers.swift */; };
+		6346AD8A26F3C19E00E406D0 /* TimeCodeGeneratorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE70E2626ECCC0700F3F164 /* TimeCodeGeneratorView.swift */; };
+		6346AD8B26F3C1A100E406D0 /* MykeMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9BD45826EF44B700383233 /* MykeMode.swift */; };
+		6346AD8C26F3C1A300E406D0 /* EasterEggView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE2D2CC26F2717E00D61875 /* EasterEggView.swift */; };
+		6346AD8D26F3C1B600E406D0 /* KeyboardHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE2D2CE26F28CE000D61875 /* KeyboardHelpers.swift */; };
+		6346AD8E26F3C1DD00E406D0 /* DateHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9BD45226EF446900383233 /* DateHelpers.swift */; };
+		6346AD8F26F3C1E400E406D0 /* ResultSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6378398226EB80C30055A10D /* ResultSheet.swift */; };
+		6346AD9026F3C1EC00E406D0 /* TimezoneChoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAB48DC26E624CD00B04A60 /* TimezoneChoiceView.swift */; };
+		6346AD9126F3C1EF00E406D0 /* DiscordFormattedDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635C8FA626E66E8300361B08 /* DiscordFormattedDate.swift */; };
+		6346AD9226F3C1F100E406D0 /* DateTimeSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6378398626EBA7C60055A10D /* DateTimeSelection.swift */; };
+		6346AD9326F3C1F400E406D0 /* DateTimeZonePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE70E2926ED21AA00F3F164 /* DateTimeZonePicker.swift */; };
+		6346AD9426F3C1F800E406D0 /* TimeZoneChoiceItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9BD45E26F0962D00383233 /* TimeZoneChoiceItem.swift */; };
+		6346AD9526F3C22C00E406D0 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9BD45026EEA11900383233 /* UserDefaults.swift */; };
+		6346AD9626F3C23500E406D0 /* TimeZone+ItemProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637839CA26ED11360055A10D /* TimeZone+ItemProvider.swift */; };
+		6346AD9726F3C23E00E406D0 /* DeviceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DDFB9B26F23DF00021ACFD /* DeviceType.swift */; };
+		6346AD9826F3C2B800E406D0 /* TimeZoneFlags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9BD45426EF446900383233 /* TimeZoneFlags.swift */; };
+		6346AD9A26F3C33D00E406D0 /* PasteboardHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6346AD9926F3C33D00E406D0 /* PasteboardHelpers.swift */; };
+		6346AD9B26F3C47F00E406D0 /* PasteboardHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6346AD9926F3C33D00E406D0 /* PasteboardHelpers.swift */; };
+		6346AD9D26F3C4EE00E406D0 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6346AD9C26F3C4EE00E406D0 /* Color.swift */; };
+		6346AD9E26F3C56D00E406D0 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6346AD9C26F3C4EE00E406D0 /* Color.swift */; };
+		6346ADA126F3C5E900E406D0 /* InlineNavigationBarTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6346ADA026F3C5E900E406D0 /* InlineNavigationBarTitle.swift */; };
+		6346ADA226F3C5EC00E406D0 /* InlineNavigationBarTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6346ADA026F3C5E900E406D0 /* InlineNavigationBarTitle.swift */; };
 		635C8FA726E66E8300361B08 /* DiscordFormattedDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635C8FA626E66E8300361B08 /* DiscordFormattedDate.swift */; };
 		6378397E26EA5FD60055A10D /* UIApplication+clearLaunchScreenCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6378397D26EA5FD60055A10D /* UIApplication+clearLaunchScreenCache.swift */; };
 		6378398026EA61AB0055A10D /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6378397F26EA61AB0055A10D /* Launch Screen.storyboard */; };
@@ -53,6 +84,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		6346AD6A26F3BF1400E406D0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5EB23B9126E406B600203153 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6346AD5926F3BF1300E406D0;
+			remoteInfo = MacElsewhen;
+		};
+		6346AD7426F3BF1400E406D0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5EB23B9126E406B600203153 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6346AD5926F3BF1300E406D0;
+			remoteInfo = MacElsewhen;
+		};
 		637839A226EBF4750055A10D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5EB23B9126E406B600203153 /* Project object */;
@@ -101,6 +146,17 @@
 		5EE2D2CE26F28CE000D61875 /* KeyboardHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHelpers.swift; sourceTree = "<group>"; };
 		5EE70E2626ECCC0700F3F164 /* TimeCodeGeneratorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCodeGeneratorView.swift; sourceTree = "<group>"; };
 		5EE70E2926ED21AA00F3F164 /* DateTimeZonePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTimeZonePicker.swift; sourceTree = "<group>"; };
+		6346AD5A26F3BF1300E406D0 /* MacElsewhen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacElsewhen.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6346AD6326F3BF1400E406D0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		6346AD6926F3BF1400E406D0 /* MacElsewhenTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MacElsewhenTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6346AD6D26F3BF1400E406D0 /* MacElsewhenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacElsewhenTests.swift; sourceTree = "<group>"; };
+		6346AD7326F3BF1400E406D0 /* MacElsewhenUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MacElsewhenUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6346AD7726F3BF1400E406D0 /* MacElsewhenUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacElsewhenUITests.swift; sourceTree = "<group>"; };
+		6346AD7926F3BF1400E406D0 /* MacElsewhenUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacElsewhenUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		6346AD9926F3C33D00E406D0 /* PasteboardHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasteboardHelpers.swift; sourceTree = "<group>"; };
+		6346AD9C26F3C4EE00E406D0 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		6346ADA026F3C5E900E406D0 /* InlineNavigationBarTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InlineNavigationBarTitle.swift; sourceTree = "<group>"; };
+		6346ADA326F3C8D300E406D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		635C8FA626E66E8300361B08 /* DiscordFormattedDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscordFormattedDate.swift; sourceTree = "<group>"; };
 		6378397D26EA5FD60055A10D /* UIApplication+clearLaunchScreenCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+clearLaunchScreenCache.swift"; sourceTree = "<group>"; };
 		6378397F26EA61AB0055A10D /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
@@ -135,6 +191,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6346AD5726F3BF1300E406D0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6346AD6626F3BF1400E406D0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6346AD7026F3BF1400E406D0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6378398926EBF4750055A10D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -160,6 +237,9 @@
 				5EB23B9B26E406B600203153 /* Elsewhen */,
 				6378399026EBF4750055A10D /* Discord Helper Intents */,
 				6378399B26EBF4750055A10D /* Discord Helper IntentsUI */,
+				6346AD5B26F3BF1300E406D0 /* MacElsewhen */,
+				6346AD6C26F3BF1400E406D0 /* MacElsewhenTests */,
+				6346AD7626F3BF1400E406D0 /* MacElsewhenUITests */,
 				6378398D26EBF4750055A10D /* Frameworks */,
 				5EB23B9A26E406B600203153 /* Products */,
 			);
@@ -171,6 +251,9 @@
 				5EB23B9926E406B600203153 /* Elsewhen.app */,
 				6378398C26EBF4750055A10D /* Discord Helper Intents.appex */,
 				6378399826EBF4750055A10D /* Discord Helper IntentsUI.appex */,
+				6346AD5A26F3BF1300E406D0 /* MacElsewhen.app */,
+				6346AD6926F3BF1400E406D0 /* MacElsewhenTests.xctest */,
+				6346AD7326F3BF1400E406D0 /* MacElsewhenUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -184,6 +267,7 @@
 				6378398126EB7F510055A10D /* Elements */,
 				6378397C26EA5FA50055A10D /* Extensions */,
 				5EE70E2826ED0EE700F3F164 /* Helpers */,
+				6346AD9F26F3C5D500E406D0 /* ViewModifiers */,
 				5EB23B9C26E406B600203153 /* ElsewhenApp.swift */,
 				5EB23B9E26E406B600203153 /* ContentView.swift */,
 				637839BC26ECB8C10055A10D /* Loggers.swift */,
@@ -220,8 +304,51 @@
 				5E9BD45426EF446900383233 /* TimeZoneFlags.swift */,
 				63DDFB9B26F23DF00021ACFD /* DeviceType.swift */,
 				5EE2D2CE26F28CE000D61875 /* KeyboardHelpers.swift */,
+				6346AD9926F3C33D00E406D0 /* PasteboardHelpers.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		6346AD5B26F3BF1300E406D0 /* MacElsewhen */ = {
+			isa = PBXGroup;
+			children = (
+				6346ADA326F3C8D300E406D0 /* Info.plist */,
+				6346AD6226F3BF1400E406D0 /* Preview Content */,
+			);
+			path = MacElsewhen;
+			sourceTree = "<group>";
+		};
+		6346AD6226F3BF1400E406D0 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				6346AD6326F3BF1400E406D0 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		6346AD6C26F3BF1400E406D0 /* MacElsewhenTests */ = {
+			isa = PBXGroup;
+			children = (
+				6346AD6D26F3BF1400E406D0 /* MacElsewhenTests.swift */,
+			);
+			path = MacElsewhenTests;
+			sourceTree = "<group>";
+		};
+		6346AD7626F3BF1400E406D0 /* MacElsewhenUITests */ = {
+			isa = PBXGroup;
+			children = (
+				6346AD7726F3BF1400E406D0 /* MacElsewhenUITests.swift */,
+				6346AD7926F3BF1400E406D0 /* MacElsewhenUITestsLaunchTests.swift */,
+			);
+			path = MacElsewhenUITests;
+			sourceTree = "<group>";
+		};
+		6346AD9F26F3C5D500E406D0 /* ViewModifiers */ = {
+			isa = PBXGroup;
+			children = (
+				6346ADA026F3C5E900E406D0 /* InlineNavigationBarTitle.swift */,
+			);
+			path = ViewModifiers;
 			sourceTree = "<group>";
 		};
 		6378397C26EA5FA50055A10D /* Extensions */ = {
@@ -230,6 +357,7 @@
 				6378397D26EA5FD60055A10D /* UIApplication+clearLaunchScreenCache.swift */,
 				637839CA26ED11360055A10D /* TimeZone+ItemProvider.swift */,
 				5E9BD45026EEA11900383233 /* UserDefaults.swift */,
+				6346AD9C26F3C4EE00E406D0 /* Color.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -311,6 +439,59 @@
 			productReference = 5EB23B9926E406B600203153 /* Elsewhen.app */;
 			productType = "com.apple.product-type.application";
 		};
+		6346AD5926F3BF1300E406D0 /* MacElsewhen */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6346AD8126F3BF1400E406D0 /* Build configuration list for PBXNativeTarget "MacElsewhen" */;
+			buildPhases = (
+				6346AD5626F3BF1300E406D0 /* Sources */,
+				6346AD5726F3BF1300E406D0 /* Frameworks */,
+				6346AD5826F3BF1300E406D0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MacElsewhen;
+			productName = MacElsewhen;
+			productReference = 6346AD5A26F3BF1300E406D0 /* MacElsewhen.app */;
+			productType = "com.apple.product-type.application";
+		};
+		6346AD6826F3BF1400E406D0 /* MacElsewhenTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6346AD8226F3BF1400E406D0 /* Build configuration list for PBXNativeTarget "MacElsewhenTests" */;
+			buildPhases = (
+				6346AD6526F3BF1400E406D0 /* Sources */,
+				6346AD6626F3BF1400E406D0 /* Frameworks */,
+				6346AD6726F3BF1400E406D0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6346AD6B26F3BF1400E406D0 /* PBXTargetDependency */,
+			);
+			name = MacElsewhenTests;
+			productName = MacElsewhenTests;
+			productReference = 6346AD6926F3BF1400E406D0 /* MacElsewhenTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		6346AD7226F3BF1400E406D0 /* MacElsewhenUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6346AD8326F3BF1400E406D0 /* Build configuration list for PBXNativeTarget "MacElsewhenUITests" */;
+			buildPhases = (
+				6346AD6F26F3BF1400E406D0 /* Sources */,
+				6346AD7026F3BF1400E406D0 /* Frameworks */,
+				6346AD7126F3BF1400E406D0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6346AD7526F3BF1400E406D0 /* PBXTargetDependency */,
+			);
+			name = MacElsewhenUITests;
+			productName = MacElsewhenUITests;
+			productReference = 6346AD7326F3BF1400E406D0 /* MacElsewhenUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		6378398B26EBF4750055A10D /* Discord Helper Intents */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 637839AE26EBF4760055A10D /* Build configuration list for PBXNativeTarget "Discord Helper Intents" */;
@@ -358,6 +539,17 @@
 					5EB23B9826E406B600203153 = {
 						CreatedOnToolsVersion = 13.0;
 					};
+					6346AD5926F3BF1300E406D0 = {
+						CreatedOnToolsVersion = 13.0;
+					};
+					6346AD6826F3BF1400E406D0 = {
+						CreatedOnToolsVersion = 13.0;
+						TestTargetID = 6346AD5926F3BF1300E406D0;
+					};
+					6346AD7226F3BF1400E406D0 = {
+						CreatedOnToolsVersion = 13.0;
+						TestTargetID = 6346AD5926F3BF1300E406D0;
+					};
 					6378398B26EBF4750055A10D = {
 						CreatedOnToolsVersion = 13.0;
 					};
@@ -382,6 +574,9 @@
 				5EB23B9826E406B600203153 /* Elsewhen */,
 				6378398B26EBF4750055A10D /* Discord Helper Intents */,
 				6378399726EBF4750055A10D /* Discord Helper IntentsUI */,
+				6346AD5926F3BF1300E406D0 /* MacElsewhen */,
+				6346AD6826F3BF1400E406D0 /* MacElsewhenTests */,
+				6346AD7226F3BF1400E406D0 /* MacElsewhenUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -394,6 +589,31 @@
 				6378398026EA61AB0055A10D /* Launch Screen.storyboard in Resources */,
 				5EB23BA426E406B900203153 /* Preview Assets.xcassets in Resources */,
 				5EB23BA126E406B900203153 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6346AD5826F3BF1300E406D0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6346AD8426F3C14900E406D0 /* Assets.xcassets in Resources */,
+				6346AD6426F3BF1400E406D0 /* Preview Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6346AD6726F3BF1400E406D0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6346AD8526F3C14A00E406D0 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6346AD7126F3BF1400E406D0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6346AD8626F3C14A00E406D0 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -423,6 +643,8 @@
 			files = (
 				5EE70E2A26ED21AA00F3F164 /* DateTimeZonePicker.swift in Sources */,
 				5EB23B9F26E406B600203153 /* ContentView.swift in Sources */,
+				6346AD9D26F3C4EE00E406D0 /* Color.swift in Sources */,
+				6346AD9A26F3C33D00E406D0 /* PasteboardHelpers.swift in Sources */,
 				6378397E26EA5FD60055A10D /* UIApplication+clearLaunchScreenCache.swift in Sources */,
 				5E9BD45926EF44B700383233 /* MykeMode.swift in Sources */,
 				5EE2D2CF26F28CE100D61875 /* KeyboardHelpers.swift in Sources */,
@@ -442,6 +664,52 @@
 				5E9BD45F26F0962D00383233 /* TimeZoneChoiceItem.swift in Sources */,
 				5E9BD45526EF446900383233 /* DateHelpers.swift in Sources */,
 				63DDFB9C26F23DF00021ACFD /* DeviceType.swift in Sources */,
+				6346ADA126F3C5E900E406D0 /* InlineNavigationBarTitle.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6346AD5626F3BF1300E406D0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6346AD8926F3C16700E406D0 /* Loggers.swift in Sources */,
+				6346AD9226F3C1F100E406D0 /* DateTimeSelection.swift in Sources */,
+				6346ADA226F3C5EC00E406D0 /* InlineNavigationBarTitle.swift in Sources */,
+				6346AD9326F3C1F400E406D0 /* DateTimeZonePicker.swift in Sources */,
+				6346AD8B26F3C1A100E406D0 /* MykeMode.swift in Sources */,
+				6346AD9426F3C1F800E406D0 /* TimeZoneChoiceItem.swift in Sources */,
+				6346AD9026F3C1EC00E406D0 /* TimezoneChoiceView.swift in Sources */,
+				6346AD9826F3C2B800E406D0 /* TimeZoneFlags.swift in Sources */,
+				6346AD9626F3C23500E406D0 /* TimeZone+ItemProvider.swift in Sources */,
+				6346AD9726F3C23E00E406D0 /* DeviceType.swift in Sources */,
+				6346AD8C26F3C1A300E406D0 /* EasterEggView.swift in Sources */,
+				6346AD8826F3C16500E406D0 /* ContentView.swift in Sources */,
+				6346AD8D26F3C1B600E406D0 /* KeyboardHelpers.swift in Sources */,
+				6346AD8E26F3C1DD00E406D0 /* DateHelpers.swift in Sources */,
+				6346AD9E26F3C56D00E406D0 /* Color.swift in Sources */,
+				6346AD8A26F3C19E00E406D0 /* TimeCodeGeneratorView.swift in Sources */,
+				6346AD9526F3C22C00E406D0 /* UserDefaults.swift in Sources */,
+				6346AD9B26F3C47F00E406D0 /* PasteboardHelpers.swift in Sources */,
+				6346AD8F26F3C1E400E406D0 /* ResultSheet.swift in Sources */,
+				6346AD8726F3C15C00E406D0 /* ElsewhenApp.swift in Sources */,
+				6346AD9126F3C1EF00E406D0 /* DiscordFormattedDate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6346AD6526F3BF1400E406D0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6346AD6E26F3BF1400E406D0 /* MacElsewhenTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6346AD6F26F3BF1400E406D0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6346AD7826F3BF1400E406D0 /* MacElsewhenUITests.swift in Sources */,
+				6346AD7A26F3BF1400E406D0 /* MacElsewhenUITestsLaunchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -474,6 +742,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		6346AD6B26F3BF1400E406D0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6346AD5926F3BF1300E406D0 /* MacElsewhen */;
+			targetProxy = 6346AD6A26F3BF1400E406D0 /* PBXContainerItemProxy */;
+		};
+		6346AD7526F3BF1400E406D0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6346AD5926F3BF1300E406D0 /* MacElsewhen */;
+			targetProxy = 6346AD7426F3BF1400E406D0 /* PBXContainerItemProxy */;
+		};
 		637839A326EBF4750055A10D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 6378399726EBF4750055A10D /* Discord Helper IntentsUI */;
@@ -690,6 +968,164 @@
 			};
 			name = Release;
 		};
+		6346AD7B26F3BF1400E406D0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 17;
+				DEVELOPMENT_ASSET_PATHS = "\"MacElsewhen/Preview Content\"";
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MacElsewhen/Info.plist;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.rosmearyorchard.Discord-Helper";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		6346AD7C26F3BF1400E406D0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 17;
+				DEVELOPMENT_ASSET_PATHS = "\"MacElsewhen/Preview Content\"";
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MacElsewhen/Info.plist;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.rosmearyorchard.Discord-Helper";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		6346AD7D26F3BF1400E406D0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = org.dwrs.MacElsewhenTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MacElsewhen.app/Contents/MacOS/MacElsewhen";
+			};
+			name = Debug;
+		};
+		6346AD7E26F3BF1400E406D0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = org.dwrs.MacElsewhenTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MacElsewhen.app/Contents/MacOS/MacElsewhen";
+			};
+			name = Release;
+		};
+		6346AD7F26F3BF1400E406D0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = org.dwrs.MacElsewhenUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = MacElsewhen;
+			};
+			name = Debug;
+		};
+		6346AD8026F3BF1400E406D0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = org.dwrs.MacElsewhenUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = MacElsewhen;
+			};
+			name = Release;
+		};
 		637839A926EBF4760055A10D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -811,6 +1247,33 @@
 			buildConfigurations = (
 				5EB23BA826E406B900203153 /* Debug */,
 				5EB23BA926E406B900203153 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6346AD8126F3BF1400E406D0 /* Build configuration list for PBXNativeTarget "MacElsewhen" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6346AD7B26F3BF1400E406D0 /* Debug */,
+				6346AD7C26F3BF1400E406D0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6346AD8226F3BF1400E406D0 /* Build configuration list for PBXNativeTarget "MacElsewhenTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6346AD7D26F3BF1400E406D0 /* Debug */,
+				6346AD7E26F3BF1400E406D0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6346AD8326F3BF1400E406D0 /* Build configuration list for PBXNativeTarget "MacElsewhenUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6346AD7F26F3BF1400E406D0 /* Debug */,
+				6346AD8026F3BF1400E406D0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
