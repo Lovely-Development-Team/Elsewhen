@@ -54,115 +54,115 @@ struct MykeMode: View {
     
     var body: some View {
         
-            ZStack(alignment: .top) {
+        ZStack(alignment: .top) {
+            
+            VStack {
                 
-                VStack {
+                DateTimeZonePicker(selectedDate: $selectedDate, selectedTimeZone: $selectedTimeZone, showDate: false)
+                    .labelsHidden()
+                    .padding(.top, 5)
+                
+                HStack {
                     
-                    DateTimeZonePicker(selectedDate: $selectedDate, selectedTimeZone: $selectedTimeZone, showDate: false)
-                        .labelsHidden()
-                        .padding(.top, 5)
-                    
-                    HStack {
-                        
-                        Button(action: {
-                            self.showTimeZoneSheet = true
-                        }) {
-                            Text("Choose time zones…")
-                        }
-                        .padding(.vertical)
-                        
-                        Spacer()
-                        
-                        Button(action: {
-#if os(iOS)
-                            notificationFeedbackGenerator = UINotificationFeedbackGenerator()
-                            notificationFeedbackGenerator?.prepare()
-#endif
-                            UIPasteboard.general.setValue(generateTimesAndFlagsText(),
-                                                          forPasteboardType: UTType.utf8PlainText.identifier)
-                            withAnimation {
-                                showCopied = true
-#if os(iOS)
-                                notificationFeedbackGenerator?.notificationOccurred(.success)
-#endif
-                            }
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                                withAnimation {
-                                    showCopied = false
-                                }
-#if os(iOS)
-                                notificationFeedbackGenerator = nil
-#endif
-                            }
-                        }) {
-                            Text(showCopied ? "Copied ✓" : "Copy")
-                                .font(.headline)
-                                .foregroundColor(.white)
-                        }
-                        .padding(.horizontal)
-                        .padding(.vertical, 5)
-                        .background(
-                            RoundedRectangle(cornerRadius: 15, style: .continuous)
-                                .fill(Color.accentColor)
-                        )
-                        
+                    Button(action: {
+                        self.showTimeZoneSheet = true
+                    }) {
+                        Text("Choose time zones…")
                     }
-                    .padding(.horizontal, 8)
+                    .padding(.vertical)
+                    
+                    Spacer()
+                    
+                    Button(action: {
+#if os(iOS)
+                        notificationFeedbackGenerator = UINotificationFeedbackGenerator()
+                        notificationFeedbackGenerator?.prepare()
+#endif
+                        UIPasteboard.general.setValue(generateTimesAndFlagsText(),
+                                                      forPasteboardType: UTType.utf8PlainText.identifier)
+                        withAnimation {
+                            showCopied = true
+#if os(iOS)
+                            notificationFeedbackGenerator?.notificationOccurred(.success)
+#endif
+                        }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                            withAnimation {
+                                showCopied = false
+                            }
+#if os(iOS)
+                            notificationFeedbackGenerator = nil
+#endif
+                        }
+                    }) {
+                        Text(showCopied ? "Copied ✓" : "Copy")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                    }
+                    .padding(.horizontal)
+                    .padding(.vertical, 5)
+                    .background(
+                        RoundedRectangle(cornerRadius: 15, style: .continuous)
+                            .fill(Color.accentColor)
+                    )
                     
                 }
                 .padding(.horizontal, 8)
-                .frame(minWidth: 0, maxWidth: 390)
-                .background(GeometryReader { geometry in
-                    Color.clear.preference(
-                        key: ButtonHeightPreferenceKey.self,
-                        value: geometry.size.width
-                    )
-                })
-                .onPreferenceChange(ButtonHeightPreferenceKey.self) {
-                    buttonMaxHeight = $0
-                }
                 
-                List {
-                    ForEach(selectedTimeZones, id: \.self) { tz in
-                        HStack {
-                            VStack(alignment: .leading) {
-                                Text(tz.friendlyName)
-                                    .font(.caption)
-                                    .foregroundColor(.secondary)
-                                Text("\(flagForTimeZone(tz)) \(selectedTimeInZone(tz))")
-                            }
-                            Spacer()
-                            if let abbreviation = tz.fudgedAbbreviation(for: selectedDate) {
-                                Text(abbreviation)
-                                    .foregroundColor(.secondary)
-                            }
+            }
+            .padding(.horizontal, 8)
+            .frame(minWidth: 0, maxWidth: 390)
+            .background(GeometryReader { geometry in
+                Color.clear.preference(
+                    key: ButtonHeightPreferenceKey.self,
+                    value: geometry.size.width
+                )
+            })
+            .onPreferenceChange(ButtonHeightPreferenceKey.self) {
+                buttonMaxHeight = $0
+            }
+            
+            List {
+                ForEach(selectedTimeZones, id: \.self) { tz in
+                    HStack {
+                        VStack(alignment: .leading) {
+                            Text(tz.friendlyName)
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                            Text("\(flagForTimeZone(tz)) \(selectedTimeInZone(tz))")
                         }
-                        .onDrag {
-                            let tzItemProvider = tz.itemProvider
-                            let itemProvider = NSItemProvider(object: tzItemProvider)
-                            itemProvider.suggestedName = tzItemProvider.resolvedName
-                            return itemProvider
+                        Spacer()
+                        if let abbreviation = tz.fudgedAbbreviation(for: selectedDate) {
+                            Text(abbreviation)
+                                .foregroundColor(.secondary)
                         }
-                        .contentShape(Rectangle())
-                        .onTapGesture {
-                            if tz.isMemberOfEuropeanUnion {
+                    }
+                    .onDrag {
+                        let tzItemProvider = tz.itemProvider
+                        let itemProvider = NSItemProvider(object: tzItemProvider)
+                        itemProvider.suggestedName = tzItemProvider.resolvedName
+                        return itemProvider
+                    }
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        if tz.isMemberOfEuropeanUnion {
 #if os(iOS)
-                                mediumImpactFeedbackGenerator.impactOccurred()
+                            mediumImpactFeedbackGenerator.impactOccurred()
 #endif
-                                if timeZonesUsingEUFlag.contains(tz) {
-                                    timeZonesUsingEUFlag.remove(tz)
-                                } else {
-                                    timeZonesUsingEUFlag.insert(tz)
-                                }
+                            if timeZonesUsingEUFlag.contains(tz) {
+                                timeZonesUsingEUFlag.remove(tz)
+                            } else {
+                                timeZonesUsingEUFlag.insert(tz)
                             }
                         }
                     }
-                    .onMove(perform: move)
-                    .onDelete(perform: delete)
                 }
-                .listStyle(PlainListStyle())
-                .padding(.top, (buttonMaxHeight ?? 0) / 2)
+                .onMove(perform: move)
+                .onDelete(perform: delete)
             }
+            .listStyle(PlainListStyle())
+            .padding(.top, (buttonMaxHeight ?? 0) / 2)
+        }
         .sheet(isPresented: $showTimeZoneSheet) {
             NavigationView {
                 TimezoneChoiceView(selectedTimeZone: .constant(TimeZone.current), selectedTimeZones: $selectedTimeZones, selectedDate: $selectedDate, selectMultiple: true)
