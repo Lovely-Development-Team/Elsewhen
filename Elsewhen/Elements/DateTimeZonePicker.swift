@@ -19,9 +19,19 @@ struct DateTimeZonePicker: View {
         Group {
             
             if showDate {
+                #if os(macOS)
+                HStack {
+                    Spacer().layoutPriority(1)
+                    DatePicker("", selection: $selectedDate)
+                        .datePickerStyle(.graphical)
+                    Spacer().layoutPriority(1)
+                }
+                .padding(.top)
+                #else
                 DatePicker("Date", selection: $selectedDate)
                     .datePickerStyle(.graphical)
                     .padding(.top)
+                #endif
             } else {
                 HStack {
                     Text("Time")
