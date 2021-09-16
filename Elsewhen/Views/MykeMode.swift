@@ -54,13 +54,13 @@ struct MykeMode: View {
     
     var body: some View {
         
-        NavigationView {
-            
             ZStack(alignment: .top) {
                 
                 VStack {
+                    
                     DateTimeZonePicker(selectedDate: $selectedDate, selectedTimeZone: $selectedTimeZone, showDate: false)
                         .labelsHidden()
+                        .padding(.top, 5)
                     
                     HStack {
                         
@@ -163,9 +163,6 @@ struct MykeMode: View {
                 .listStyle(PlainListStyle())
                 .padding(.top, (buttonMaxHeight ?? 0) / 2)
             }
-            .navigationTitle("Time List")
-            .navigationBarTitleDisplayMode(.inline)
-        }
         .sheet(isPresented: $showTimeZoneSheet) {
             NavigationView {
                 TimezoneChoiceView(selectedTimeZone: .constant(TimeZone.current), selectedTimeZones: $selectedTimeZones, selectedDate: $selectedDate, selectMultiple: true)
