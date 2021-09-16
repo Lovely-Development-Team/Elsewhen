@@ -37,17 +37,8 @@ struct DateTimeZonePicker: View {
                 Text("Time zone")
                     .fontWeight(.semibold)
                 Spacer()
-                Button(action: {
+                SelectTimeZoneButton(selectedTimeZone: $selectedTimeZone) {
                     self.showTimeZoneChoiceSheet = true
-                }) {
-                Text(selectedTimeZone.identifier.replacingOccurrences(of: "_", with: " "))
-                    .foregroundColor(.primary)
-                    .padding(.vertical, 8)
-                    .padding(.horizontal, 10)
-                    .background(
-                        RoundedRectangle(cornerRadius: 10, style: .continuous)
-                            .fill(Color.secondarySystemBackground)
-                    )
                 }
             }
             .padding(.horizontal, 8)
