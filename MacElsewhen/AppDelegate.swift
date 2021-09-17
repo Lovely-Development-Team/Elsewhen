@@ -29,4 +29,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let servicesItem = appMenu?.item(withTitle: "Services")
         servicesItem?.tag = MenuTag.services.rawValue
     }
+    
+    func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
+        return UserDefaults.standard.shouldTerminateAfterLastWindowClosed
+    }
 }
