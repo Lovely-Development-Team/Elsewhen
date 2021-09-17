@@ -15,7 +15,7 @@ class WindowManager: NSObject, NSWindowRestoration {
     }
     
     static func restoreWindow(withIdentifier identifier: NSUserInterfaceItemIdentifier, state: NSCoder, completionHandler: @escaping (NSWindow?, Error?) -> Void) {
-        if identifier.rawValue == "Preferences" {
+        if identifier == PreferencesWindowController.windowIdentifier {
             completionHandler(Self.shared.createPrefsWindow(), nil)
             return
         } else {
@@ -128,10 +128,6 @@ class WindowManager: NSObject, NSWindowRestoration {
     @objc func openPreferences() {
         let window = createPrefsWindow()
         NSApp.activate(ignoringOtherApps: true)
-        // We should probably be doing more to remember window position, but for now we'll just centre it.
-        if window?.isVisible == false {
-            window?.center()
-        }
         window?.makeKeyAndOrderFront(self)
     }
     

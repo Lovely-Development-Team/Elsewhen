@@ -10,6 +10,7 @@ import os.log
 import SwiftUI
 
 class PreferencesWindowController: NSWindowController, NSWindowDelegate {
+    static let windowIdentifier = NSUserInterfaceItemIdentifier("PreferencesWindow")
     
     static let width: CGFloat = 400
     static let height: CGFloat = 200
@@ -17,26 +18,20 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate {
     init() {
         let content = NSHostingController(rootView: PreferencesView().frame(minWidth: Self.width, maxWidth: .infinity, minHeight: Self.height, maxHeight: .infinity))
         let window = NSWindow(contentViewController: content)
-        window.identifier = NSUserInterfaceItemIdentifier("Preferences-\(UUID().uuidString)")
+        window.identifier = Self.windowIdentifier
         window.title = "Preferences"
-//        window.setContentSize(NSSize(width: Self.width, height: Self.height))
-        window.setFrameAutosaveName("PreferencesWindow")
         super.init(window: window)
+        window.delegate = self
+        self.windowFrameAutosaveName = "PreferencesWindow"
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func awakeFromNib() {
-        self.windowFrameAutosaveName = "PreferencesWindow"
-    }
-    
     override func windowDidLoad() {
         super.windowDidLoad()
-        self.shouldCascadeWindows = false
         self.window?.restorationClass = WindowManager.self
         // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
     }
-
 }
