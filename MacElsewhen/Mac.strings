@@ -1,0 +1,11 @@
+/* 
+  Mac.strings
+  Elsewhen
+
+  Created by David Stephens on 17/09/2021.
+  
+*/
+
+"OpenMI" = "Open %@";
+"PreferencesMI" = "Preferences...";
+"QuitMI" = "Quit %@";
