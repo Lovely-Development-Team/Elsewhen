@@ -17,21 +17,18 @@ enum MenuTag: Int {
 class MainMenuController: NSObject {
     static let appMenuIdentifier = NSUserInterfaceItemIdentifier("AppMenu")
     
-
+    static let expectedItems: [MenuItem?] = [nil, MenuItem.separator, MenuItem.prefs, nil, MenuItem.separator, nil, nil, nil, MenuItem.separator, nil]
 }
 
 extension MainMenuController: NSMenuDelegate {
-    private var expectedItems: [MenuItem?] {
-        [nil, MenuItem.separator, MenuItem.prefs, nil, MenuItem.separator, nil, nil]
-    }
     
     func numberOfItems(in menu: NSMenu) -> Int {
-        return 7
+        return Self.expectedItems.count
     }
     
     func menu(_ menu: NSMenu, update item: NSMenuItem, at index: Int, shouldCancel: Bool) -> Bool {
         if menu.identifier == Self.appMenuIdentifier {
-            guard let expectedItem = expectedItems[index] else {
+            guard let expectedItem = Self.expectedItems[index] else {
                 return true
             }
             guard !item.isSeparatorItem,
@@ -42,9 +39,12 @@ extension MainMenuController: NSMenuDelegate {
             if item.tag == expectedItem.tag?.rawValue {
                 expectedItem.update(menuItem: item)
             } else {
-                let newMenuItem = NSMenuItem()
-                expectedItem.update(menuItem: newMenuItem)
-                menu.insertItem(newMenuItem, at: index)
+                // Put the item we expected above this one
+                let endMenuItem = menu.item(at: menu.items.endIndex-1) ?? NSMenuItem()
+                let menuItem = endMenuItem.title == "" && endMenuItem.isSeparatorItem == false ? endMenuItem : NSMenuItem()
+                expectedItem.update(menuItem: menuItem)
+                menu.removeItem(menuItem)
+                menu.insertItem(menuItem, at: index)
             }
             return true
         } else {
