@@ -9,7 +9,7 @@ import Cocoa
 import SwiftUI
 import Combine
 
-class StatusBarPopoverDelegate: NSObject, NSPopoverDelegate {
+class StatusBarPopoverController: NSObject, NSPopoverDelegate {
     var attachedPopover: NSPopover?
     var detachedWindows: Set<NSWindow> = Set()
     

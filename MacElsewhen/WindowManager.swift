@@ -41,7 +41,7 @@ class WindowManager: NSObject, NSWindowRestoration {
                 let windows = NSApp.windows.filter { window in
                     window != notifyingObject && !(window is NSPanel)
                 }
-                if windows.count == 1 && windows.first == StatusItemHandler.shared.buttonWindow {
+                if windows.count == 1 && windows.first == StatusItemController.shared.buttonWindow {
                     NSApp.setActivationPolicy(.accessory)
                 } else if (NSApp.activationPolicy() != .regular) {
                     NSApp.setActivationPolicy(.regular)
@@ -68,7 +68,7 @@ class WindowManager: NSObject, NSWindowRestoration {
     }
     
     private func createPrefsWindow() -> NSWindow? {
-        StatusItemHandler.shared.setButton(state: .off)
+        StatusItemController.shared.setButton(state: .off)
         let controller: NSWindowController
         if let existingController = self.prefsWindowController {
             controller = existingController

@@ -8,13 +8,14 @@
 import Cocoa
 import Combine
 
-class StatusItemHandler: NSObject {
-    static let shared: StatusItemHandler = StatusItemHandler()
-    private(set) var statusItem: NSStatusItem? = nil
+class StatusItemController: NSObject {
+    static let shared: StatusItemController = StatusItemController()
+    private var statusItem: NSStatusItem? = nil
     var buttonWindow: NSWindow? {
         statusItem?.button?.window
     }
-    let popoverDelegate = StatusBarPopoverDelegate()
+    let popoverDelegate = StatusBarPopoverController()
+    let menuDelegate = StatusBarMenuController()
     var preferenceCancellable: AnyCancellable?
     
     private override init() {
@@ -60,7 +61,7 @@ class StatusItemHandler: NSObject {
             return
         }
         if event.isRightClick || event.isOtherClick {
-            StatusBarMenuDelegate.shared.popupAtMouseLocation()
+            menuDelegate.popupAtMouseLocation()
         } else {
             popoverDelegate.show(relativeTo: statusItem.button!.visibleRect, of: statusItem.button!)
         }
