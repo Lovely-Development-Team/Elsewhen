@@ -15,7 +15,7 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate {
     static let height: CGFloat = 200
     
     init() {
-        let content = NSHostingController(rootView: Text("Preferences here").frame(minWidth: Self.width, maxWidth: .infinity, minHeight: Self.height, maxHeight: .infinity))
+        let content = NSHostingController(rootView: PreferencesView().frame(minWidth: Self.width, maxWidth: .infinity, minHeight: Self.height, maxHeight: .infinity))
         let window = NSWindow(contentViewController: content)
         window.identifier = NSUserInterfaceItemIdentifier("Preferences-\(UUID().uuidString)")
         window.title = "Preferences"

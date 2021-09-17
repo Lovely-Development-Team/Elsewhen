@@ -47,40 +47,8 @@ struct MenuItemSection {
     }
 }
 
-struct MenuItem {
-    private let title: String
-    private let target: AnyObject?
-    private let action: Selector?
-    private let keyEquivalent: String
-    let isSeparator: Bool
-    
-    init(title: String, target: AnyObject?, action: Selector?, keyEquivalent: String = "") {
-        self.title = title
-        self.target = target
-        self.action = action
-        self.keyEquivalent = keyEquivalent
-        self.isSeparator = false
-    }
-    
-    init(isSeparator: Bool) {
-        self.title = ""
-        self.target = nil
-        self.action = nil
-        self.keyEquivalent = ""
-        self.isSeparator = isSeparator
-    }
-    
-    func update(menuItem item: NSMenuItem) {
-        item.title = self.title
-        item.target = self.target
-        item.action = self.action
-        item.keyEquivalent = self.keyEquivalent
-    }
-}
-
 extension MenuItem {
     static let open = MenuItem(title: String.localizedStringWithFormat(NSLocalizedString("OpenMI", tableName: "Mac", comment: "Open app"), Bundle.displayName), target: WindowManager.shared, action: #selector(WindowManager.openMain))
-    static let prefs = MenuItem(title: NSLocalizedString("PreferencesMI", tableName: "Mac", comment: "preferences"), target: WindowManager.shared, action: #selector(WindowManager.openPreferences))
     static let quit = MenuItem(title: String.localizedStringWithFormat(NSLocalizedString("QuitMI", tableName: "Mac", comment: "quit"), Bundle.displayName), target: NSApp, action: #selector(NSApp.terminate(_:)))
 }
 
@@ -123,6 +91,6 @@ class StatusBarMenuDelegate: NSObject, NSMenuDelegate {
     
     
     func menuDidClose(_ menu: NSMenu) {
-        StatusItemHandler.shared.statusItem.button?.state = .off
+        StatusItemHandler.shared.statusItem?.button?.state = .off
     }
 }
