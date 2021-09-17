@@ -34,15 +34,19 @@ class WindowManager: NSObject, NSWindowRestoration {
         super.init()
         observePrefs()
         NotificationCenter.default.publisher(for: NSWindow.willCloseNotification, object: nil)
-            .sink { notification in
+            .compactMap { notification -> NSWindow? in
                 guard let notifyingObject = notification.object as? NSWindow else {
                     uiLogger.error("Sender of willCloseNotification was not an NSWindow!")
-                    return
+                    return nil
                 }
-                let windows = NSApp.windows.filter { window in
-                    window != notifyingObject
+                return notifyingObject
+            }
+            .filter { $0.level == .normal }
+            .sink { closingWindow in
+                let normalWindows = NSApp.windows.filter { window in
+                    window != closingWindow
                 }
-                if windows.count == 1 && windows.first?.identifier == StatusItemController.windowIdentifier {
+                if normalWindows.count == 1 && normalWindows[0].identifier == StatusItemController.windowIdentifier {
                     NSApp.setActivationPolicy(.accessory)
                 } else if (NSApp.activationPolicy() != .regular) {
                     NSApp.setActivationPolicy(.regular)
