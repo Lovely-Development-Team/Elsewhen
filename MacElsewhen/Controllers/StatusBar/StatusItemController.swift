@@ -10,6 +10,8 @@ import Combine
 
 class StatusItemController: NSObject {
     static let shared: StatusItemController = StatusItemController()
+    static let windowIdentifier = NSUserInterfaceItemIdentifier("StatusItem")
+    
     private var statusItem: NSStatusItem? = nil
     var buttonWindow: NSWindow? {
         statusItem?.button?.window
@@ -44,6 +46,7 @@ class StatusItemController: NSObject {
         image?.size = NSSize(width: 18, height: 18)
         statusButton?.image = image
         statusButton?.sendAction(on: [.leftMouseDown, .rightMouseDown, .otherMouseDown, .directTouch])
+        statusButton?.window?.identifier = Self.windowIdentifier
         self.statusItem = statusItem
     }
     
