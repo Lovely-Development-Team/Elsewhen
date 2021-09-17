@@ -9,14 +9,12 @@ import Cocoa
 
 class AppDelegate: NSObject, NSApplicationDelegate {
     var windowManager: WindowManager!
-    var statusBarMenuDelegate: StatusBarMenuDelegate?
-    var statusItemHandler: StatusItemHandler?
+    var statusItemController: StatusItemController!
     let mainMenuController = MainMenuController()
     
     func applicationWillFinishLaunching(_ notification: Notification) {
         self.windowManager = WindowManager.shared
-        self.statusBarMenuDelegate = StatusBarMenuDelegate.shared
-        self.statusItemHandler = StatusItemHandler.shared
+        self.statusItemController = StatusItemController.shared
         let mainMenu = NSApp.mainMenu
         let appMenuItem = mainMenu?.item(at: 0)
         let appMenu = appMenuItem?.submenu

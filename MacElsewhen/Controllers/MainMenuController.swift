@@ -8,12 +8,6 @@
 import Foundation
 import AppKit
 
-enum MenuTag: Int {
-    case about
-    case services
-    case preferences
-}
-
 class MainMenuController: NSObject {
     static let appMenuIdentifier = NSUserInterfaceItemIdentifier("AppMenu")
     
@@ -50,9 +44,5 @@ extension MainMenuController: NSMenuDelegate {
         } else {
             return false
         }
-    }
-    
-    func menuWillOpen(_ menu: NSMenu) {
-        print("opened")
     }
 }
