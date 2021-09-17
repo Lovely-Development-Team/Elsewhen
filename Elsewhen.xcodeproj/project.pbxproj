@@ -92,6 +92,10 @@
 		63A90DD126F4298A00CACCB9 /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A90DCF26F4295F00CACCB9 /* Bundle.swift */; };
 		63A90DD326F42B7200CACCB9 /* Mac.strings in Resources */ = {isa = PBXBuildFile; fileRef = 63A90DD226F42B7200CACCB9 /* Mac.strings */; };
 		63A90DD826F42F2F00CACCB9 /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A90DD726F42F2F00CACCB9 /* PreferencesWindowController.swift */; };
+		63A90DDB26F4AC2100CACCB9 /* PreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A90DDA26F4AC2100CACCB9 /* PreferencesView.swift */; };
+		63A90DDD26F4AC5900CACCB9 /* MacUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A90DDC26F4AC5900CACCB9 /* MacUserDefaults.swift */; };
+		63A90DE126F4C3BE00CACCB9 /* MainMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A90DE026F4C3BE00CACCB9 /* MainMenuController.swift */; };
+		63A90DE426F4CAA900CACCB9 /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A90DE326F4CAA900CACCB9 /* MenuItem.swift */; };
 		63DDFB9C26F23DF00021ACFD /* DeviceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DDFB9B26F23DF00021ACFD /* DeviceType.swift */; };
 /* End PBXBuildFile section */
 
@@ -201,6 +205,10 @@
 		63A90DCF26F4295F00CACCB9 /* Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
 		63A90DD226F42B7200CACCB9 /* Mac.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Mac.strings; sourceTree = "<group>"; };
 		63A90DD726F42F2F00CACCB9 /* PreferencesWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesWindowController.swift; sourceTree = "<group>"; };
+		63A90DDA26F4AC2100CACCB9 /* PreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesView.swift; sourceTree = "<group>"; };
+		63A90DDC26F4AC5900CACCB9 /* MacUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacUserDefaults.swift; sourceTree = "<group>"; };
+		63A90DE026F4C3BE00CACCB9 /* MainMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuController.swift; sourceTree = "<group>"; };
+		63A90DE326F4CAA900CACCB9 /* MenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
 		63DDFB9B26F23DF00021ACFD /* DeviceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceType.swift; sourceTree = "<group>"; };
 		D5F5DE5E26ED1C9800851D98 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -334,6 +342,7 @@
 		6346AD5B26F3BF1300E406D0 /* MacElsewhen */ = {
 			isa = PBXGroup;
 			children = (
+				63A90DE226F4CA9F00CACCB9 /* Model */,
 				63A90DD526F42F1500CACCB9 /* Views */,
 				63A90DD926F4326F00CACCB9 /* Controllers */,
 				63A90DC626F4265B00CACCB9 /* Extensions */,
@@ -450,6 +459,7 @@
 			isa = PBXGroup;
 			children = (
 				63A90DC726F4266400CACCB9 /* NSEvent.swift */,
+				63A90DDC26F4AC5900CACCB9 /* MacUserDefaults.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -468,6 +478,7 @@
 			isa = PBXGroup;
 			children = (
 				63A90DD626F42F1E00CACCB9 /* Windows */,
+				63A90DDA26F4AC2100CACCB9 /* PreferencesView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -484,8 +495,17 @@
 			isa = PBXGroup;
 			children = (
 				63A90DD426F42C5900CACCB9 /* StatusBar */,
+				63A90DE026F4C3BE00CACCB9 /* MainMenuController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		63A90DE226F4CA9F00CACCB9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				63A90DE326F4CAA900CACCB9 /* MenuItem.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -765,16 +785,20 @@
 				6346AD8826F3C16500E406D0 /* ContentView.swift in Sources */,
 				6346AD8D26F3C1B600E406D0 /* KeyboardHelpers.swift in Sources */,
 				63A90DCA26F4278600CACCB9 /* AppDelegate.swift in Sources */,
+				63A90DE126F4C3BE00CACCB9 /* MainMenuController.swift in Sources */,
 				6346AD8E26F3C1DD00E406D0 /* DateHelpers.swift in Sources */,
 				63A90DCC26F4280200CACCB9 /* StatusBarMenuDelegate.swift in Sources */,
 				63A90DC526F4263500CACCB9 /* StatusItemHandler.swift in Sources */,
 				6346AD9E26F3C56D00E406D0 /* Color.swift in Sources */,
+				63A90DDD26F4AC5900CACCB9 /* MacUserDefaults.swift in Sources */,
 				6346AD8A26F3C19E00E406D0 /* TimeCodeGeneratorView.swift in Sources */,
 				6346AD9526F3C22C00E406D0 /* UserDefaults.swift in Sources */,
 				63A90DC326F4255E00CACCB9 /* WindowManager.swift in Sources */,
 				63A90DC826F4266400CACCB9 /* NSEvent.swift in Sources */,
 				6346AD9B26F3C47F00E406D0 /* PasteboardHelpers.swift in Sources */,
 				6346AD8F26F3C1E400E406D0 /* ResultSheet.swift in Sources */,
+				63A90DDB26F4AC2100CACCB9 /* PreferencesView.swift in Sources */,
+				63A90DE426F4CAA900CACCB9 /* MenuItem.swift in Sources */,
 				6346AD8726F3C15C00E406D0 /* ElsewhenApp.swift in Sources */,
 				6346AD9126F3C1EF00E406D0 /* DiscordFormattedDate.swift in Sources */,
 			);

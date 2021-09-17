@@ -33,15 +33,15 @@ class WindowManager: NSObject, NSWindowRestoration {
         super.init()
         observePrefs()
         NotificationCenter.default.publisher(for: NSWindow.willCloseNotification, object: nil)
-            .sink { [weak self] notification in
+            .sink { notification in
                 guard let notifyingObject = notification.object as? NSWindow else {
                     uiLogger.error("Sender of willCloseNotification was not an NSWindow!")
                     return
                 }
                 let windows = NSApp.windows.filter { window in
-                    window != notifyingObject
+                    window != notifyingObject && !(window is NSPanel)
                 }
-                if windows.count == 1 && windows.first == StatusItemHandler.shared.statusItem.button?.window {
+                if windows.count == 1 && windows.first == StatusItemHandler.shared.buttonWindow {
                     NSApp.setActivationPolicy(.accessory)
                 } else if (NSApp.activationPolicy() != .regular) {
                     NSApp.setActivationPolicy(.regular)
@@ -68,7 +68,7 @@ class WindowManager: NSObject, NSWindowRestoration {
     }
     
     private func createPrefsWindow() -> NSWindow? {
-        StatusItemHandler.shared.statusItem.button?.state = .off
+        StatusItemHandler.shared.setButton(state: .off)
         let controller: NSWindowController
         if let existingController = self.prefsWindowController {
             controller = existingController
@@ -81,6 +81,7 @@ class WindowManager: NSObject, NSWindowRestoration {
     }
     
     @objc func openMain() {
+        NSApp.setActivationPolicy(.regular)
         let window = NSApp.mainWindow
         NSApp.activate(ignoringOtherApps: true)
         window?.center()
