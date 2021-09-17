@@ -28,12 +28,13 @@ class WindowManager: NSObject, NSWindowRestoration {
     var initialWindowController: NSWindowController?
     private var prefsWindowController: NSWindowController? = NSApp.windows.first { $0.title == "Preferences" }?.windowController
     
-    private var cancellables: [AnyCancellable] = []
+    private var allWindowsWillCloseCancellable: AnyCancellable? = nil
+    private var prefsWindowWillCloseCancellable: AnyCancellable? = nil
     
     private override init() {
         super.init()
         observePrefs()
-        NotificationCenter.default.publisher(for: NSWindow.willCloseNotification, object: nil)
+        allWindowsWillCloseCancellable = NotificationCenter.default.publisher(for: NSWindow.willCloseNotification, object: nil)
             .compactMap { notification -> NSWindow? in
                 guard let notifyingObject = notification.object as? NSWindow else {
                     uiLogger.error("Sender of willCloseNotification was not an NSWindow!")
@@ -52,14 +53,13 @@ class WindowManager: NSObject, NSWindowRestoration {
                     NSApp.setActivationPolicy(.regular)
                 }
             }
-            .store(in: &cancellables)
     }
     
     private func observePrefs() {
         guard let prefsWindow = prefsWindowController?.window else {
             return
         }
-        NotificationCenter.default.publisher(for: NSWindow.willCloseNotification, object: prefsWindow)
+        prefsWindowWillCloseCancellable = NotificationCenter.default.publisher(for: NSWindow.willCloseNotification, object: prefsWindow)
             .sink { [weak self] notification in
                 guard let notifyingObject = notification.object as? NSWindow else {
                     uiLogger.error("Sender of willCloseNotification was not an NSWindow!")
@@ -69,7 +69,6 @@ class WindowManager: NSObject, NSWindowRestoration {
                     self?.prefsWindowController = nil
                 }
             }
-            .store(in: &cancellables)
     }
     
     private func createPrefsWindow() -> NSWindow? {
