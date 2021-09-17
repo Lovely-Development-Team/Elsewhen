@@ -34,7 +34,6 @@
 		6346AD8526F3C14A00E406D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5EB23BA026E406B900203153 /* Assets.xcassets */; };
 		6346AD8626F3C14A00E406D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5EB23BA026E406B900203153 /* Assets.xcassets */; };
 		6346AD8726F3C15C00E406D0 /* ElsewhenApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB23B9C26E406B600203153 /* ElsewhenApp.swift */; };
-		6346AD8826F3C16500E406D0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB23B9E26E406B600203153 /* ContentView.swift */; };
 		6346AD8926F3C16700E406D0 /* Loggers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637839BC26ECB8C10055A10D /* Loggers.swift */; };
 		6346AD8A26F3C19E00E406D0 /* TimeCodeGeneratorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE70E2626ECCC0700F3F164 /* TimeCodeGeneratorView.swift */; };
 		6346AD8B26F3C1A100E406D0 /* MykeMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9BD45826EF44B700383233 /* MykeMode.swift */; };
@@ -99,6 +98,7 @@
 		63A90DE626F4D48200CACCB9 /* MenuItemSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A90DE526F4D48200CACCB9 /* MenuItemSection.swift */; };
 		63A90DE826F4D49E00CACCB9 /* MenuItemContents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A90DE726F4D49E00CACCB9 /* MenuItemContents.swift */; };
 		63A90DEA26F4D67600CACCB9 /* MenuTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A90DE926F4D67600CACCB9 /* MenuTag.swift */; };
+		63A90DED26F5402900CACCB9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A90DEC26F5402900CACCB9 /* ContentView.swift */; };
 		63DDFB9C26F23DF00021ACFD /* DeviceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DDFB9B26F23DF00021ACFD /* DeviceType.swift */; };
 /* End PBXBuildFile section */
 
@@ -215,6 +215,7 @@
 		63A90DE526F4D48200CACCB9 /* MenuItemSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemSection.swift; sourceTree = "<group>"; };
 		63A90DE726F4D49E00CACCB9 /* MenuItemContents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemContents.swift; sourceTree = "<group>"; };
 		63A90DE926F4D67600CACCB9 /* MenuTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTag.swift; sourceTree = "<group>"; };
+		63A90DEC26F5402900CACCB9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		63DDFB9B26F23DF00021ACFD /* DeviceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceType.swift; sourceTree = "<group>"; };
 		D5F5DE5E26ED1C9800851D98 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -356,6 +357,7 @@
 				6346AD6226F3BF1400E406D0 /* Preview Content */,
 				63A90DC226F4255E00CACCB9 /* WindowManager.swift */,
 				63A90DC926F4278600CACCB9 /* AppDelegate.swift */,
+				63A90DEC26F5402900CACCB9 /* ContentView.swift */,
 				63A90DD226F42B7200CACCB9 /* Mac.strings */,
 			);
 			path = MacElsewhen;
@@ -784,6 +786,7 @@
 				6346AD9326F3C1F400E406D0 /* DateTimeZonePicker.swift in Sources */,
 				6346AD8B26F3C1A100E406D0 /* MykeMode.swift in Sources */,
 				6346AD9426F3C1F800E406D0 /* TimeZoneChoiceItem.swift in Sources */,
+				63A90DED26F5402900CACCB9 /* ContentView.swift in Sources */,
 				6346AD9026F3C1EC00E406D0 /* TimezoneChoiceView.swift in Sources */,
 				6346AD9826F3C2B800E406D0 /* TimeZoneFlags.swift in Sources */,
 				6346AD9626F3C23500E406D0 /* TimeZone+ItemProvider.swift in Sources */,
@@ -792,7 +795,6 @@
 				6346AD9726F3C23E00E406D0 /* DeviceType.swift in Sources */,
 				63A90DE626F4D48200CACCB9 /* MenuItemSection.swift in Sources */,
 				6346AD8C26F3C1A300E406D0 /* EasterEggView.swift in Sources */,
-				6346AD8826F3C16500E406D0 /* ContentView.swift in Sources */,
 				6346AD8D26F3C1B600E406D0 /* KeyboardHelpers.swift in Sources */,
 				63A90DCA26F4278600CACCB9 /* AppDelegate.swift in Sources */,
 				63A90DE126F4C3BE00CACCB9 /* MainMenuController.swift in Sources */,
