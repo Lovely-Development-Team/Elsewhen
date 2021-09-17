@@ -9,6 +9,9 @@ import SwiftUI
 
 @main
 struct ElsewhenApp: App {
+    #if os(macOS)
+    @NSApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
+    #endif
     
     init() {
         UserDefaults.standard.register(defaults: [
