@@ -31,6 +31,7 @@ extension MainMenuController: NSMenuDelegate {
             }
             
             if item.tag == expectedItem.tag?.rawValue {
+                // We've tagged this, so it's "ours" and we'll just update it
                 expectedItem.update(menuItem: item)
             } else {
                 // Put the item we expected above this one

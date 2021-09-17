@@ -9,8 +9,9 @@ import Cocoa
 import Combine
 
 class StatusItemController: NSObject {
-    static let shared: StatusItemController = StatusItemController()
     static let windowIdentifier = NSUserInterfaceItemIdentifier("StatusItem")
+    
+    static let shared: StatusItemController = StatusItemController()
     
     private var statusItem: NSStatusItem? = nil
     var buttonWindow: NSWindow? {
@@ -72,5 +73,6 @@ class StatusItemController: NSObject {
     
     func setButton(state: NSControl.StateValue) {
         self.statusItem?.button?.state = state
+        self.statusItem?.button?.highlight(false)
     }
 }
