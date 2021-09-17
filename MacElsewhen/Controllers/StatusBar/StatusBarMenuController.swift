@@ -48,8 +48,6 @@ class StatusBarMenuController: NSObject, NSMenuDelegate {
         return true
     }
     
-    
-    
     func menuDidClose(_ menu: NSMenu) {
         StatusItemController.shared.setButton(state: .off)
     }

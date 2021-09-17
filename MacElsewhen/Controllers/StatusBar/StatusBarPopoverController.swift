@@ -13,8 +13,6 @@ class StatusBarPopoverController: NSObject, NSPopoverDelegate {
     var attachedPopover: NSPopover?
     var detachedWindows: Set<NSWindow> = Set()
     
-    private var cancellables: [AnyCancellable] = []
-    
     private func contentsViewController() -> NSViewController {
         let vc = NSHostingController(rootView: ContentView().frame(width: 400, height: 570, alignment: .center))
         return vc
@@ -62,6 +60,7 @@ class StatusBarPopoverController: NSObject, NSPopoverDelegate {
                 return
             }
             guard let window = popover.contentViewController?.view.window else {
+                uiLogger.warning("Could not find window associated with popover")
                 return
             }
             detachedWindows.remove(window)
