@@ -34,27 +34,40 @@ class WindowManager: NSObject, NSWindowRestoration {
     private override init() {
         super.init()
         observePrefs()
+        observeWindowClose()
+    }
+    
+    /**
+     Subscribes to window closure notifications so we can remove/add our dock icon when necessary.
+     */
+    private func observeWindowClose() {
         allWindowsWillCloseCancellable = NotificationCenter.default.publisher(for: NSWindow.willCloseNotification, object: nil)
             .compactMap { notification -> NSWindow? in
+                // This should always succeed, but best not to assume
                 guard let notifyingObject = notification.object as? NSWindow else {
                     uiLogger.error("Sender of willCloseNotification was not an NSWindow!")
                     return nil
                 }
                 return notifyingObject
             }
+        // Menus, the status bar item, etc all count as windows closing but shouldn't trigger the mode swift
             .filter { $0.level == .normal }
             .sink { closingWindow in
-                let normalWindows = NSApp.windows.filter { window in
-                    window != closingWindow
-                }
+                // The window that's currently closing shouldn't be included in our count
+                let normalWindows = NSApp.windows.filter { $0 != closingWindow }
                 if normalWindows.count == 1 && normalWindows[0].identifier == StatusItemController.windowIdentifier {
+                    // There's only one window and it's the status bar, we should remove our dock icon.
                     NSApp.setActivationPolicy(.accessory)
                 } else if (NSApp.activationPolicy() != .regular) {
+                    // In any other scenario, we should have a dock icon
                     NSApp.setActivationPolicy(.regular)
                 }
             }
     }
     
+    /**
+     Subscribes to pref window closure so we can nil the reference and allow it to be de-allocated.
+     */
     private func observePrefs() {
         guard let prefsWindow = prefsWindowController?.window else {
             return
@@ -73,6 +86,7 @@ class WindowManager: NSObject, NSWindowRestoration {
     
     private func createPrefsWindow() -> NSWindow? {
         let controller: NSWindowController
+        // If we already have a pefsWindowController, preferences is already open and we should bring that forward
         if let existingController = self.prefsWindowController {
             controller = existingController
         } else {
@@ -83,15 +97,20 @@ class WindowManager: NSObject, NSWindowRestoration {
         return controller.window
     }
     
+    /**
+     Find the "primary"
+     */
     private func findPrimaryWindow() -> NSWindow? {
         if let mainWindow = NSApp.mainWindow {
             return mainWindow
         }
+        // If there's no main window, we'll take the frontmost "normal" window
         if let firstWindow =  NSApp.orderedWindows.first(where: { window in
             window.level == .normal
         }) {
             return firstWindow
         }
+        // We haven't found any appropriate windows; hand back the window from when the app was initially opened
         return initialWindowController?.window
     }
     
@@ -109,7 +128,10 @@ class WindowManager: NSObject, NSWindowRestoration {
     @objc func openPreferences() {
         let window = createPrefsWindow()
         NSApp.activate(ignoringOtherApps: true)
-        window?.center()
+        // We should probably be doing more to remember window position, but for now we'll just centre it.
+        if window?.isVisible == false {
+            window?.center()
+        }
         window?.makeKeyAndOrderFront(self)
     }
     
