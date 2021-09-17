@@ -39,9 +39,9 @@ class WindowManager: NSObject, NSWindowRestoration {
                     return
                 }
                 let windows = NSApp.windows.filter { window in
-                    window != notifyingObject && !(window is NSPanel)
+                    window != notifyingObject
                 }
-                if windows.count == 1 && windows.first == StatusItemController.shared.buttonWindow {
+                if windows.count == 1 && windows.first?.identifier == StatusItemController.windowIdentifier {
                     NSApp.setActivationPolicy(.accessory)
                 } else if (NSApp.activationPolicy() != .regular) {
                     NSApp.setActivationPolicy(.regular)
