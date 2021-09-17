@@ -16,7 +16,7 @@ class StatusBarPopoverDelegate: NSObject, NSPopoverDelegate {
     private var cancellables: [AnyCancellable] = []
     
     private func contentsViewController() -> NSViewController {
-        let vc = NSHostingController(rootView: ContentView().frame(width: 300, height: 400, alignment: .center))
+        let vc = NSHostingController(rootView: ContentView().frame(width: 400, height: 570, alignment: .center))
         return vc
     }
     
