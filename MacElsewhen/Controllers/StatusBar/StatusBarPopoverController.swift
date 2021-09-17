@@ -65,6 +65,7 @@ class StatusBarPopoverController: NSObject, NSPopoverDelegate {
                 return
             }
             detachedWindows.remove(window)
+            attachedPopover = nil
         }
     }
     
