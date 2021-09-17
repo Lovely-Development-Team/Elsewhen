@@ -25,6 +25,7 @@ class WindowManager: NSObject, NSWindowRestoration {
     }
     
     static let shared = WindowManager()
+    var initialWindowController: NSWindowController?
     private var prefsWindowController: NSWindowController? = NSApp.windows.first { $0.title == "Preferences" }?.windowController
     
     private var cancellables: [AnyCancellable] = []
@@ -68,7 +69,6 @@ class WindowManager: NSObject, NSWindowRestoration {
     }
     
     private func createPrefsWindow() -> NSWindow? {
-        StatusItemController.shared.setButton(state: .off)
         let controller: NSWindowController
         if let existingController = self.prefsWindowController {
             controller = existingController
@@ -80,12 +80,27 @@ class WindowManager: NSObject, NSWindowRestoration {
         return controller.window
     }
     
+    private func findPrimaryWindow() -> NSWindow? {
+        if let mainWindow = NSApp.mainWindow {
+            return mainWindow
+        }
+        if let firstWindow =  NSApp.orderedWindows.first(where: { window in
+            window.level == .normal
+        }) {
+            return firstWindow
+        }
+        return initialWindowController?.window
+    }
+    
     @objc func openMain() {
-        NSApp.setActivationPolicy(.regular)
-        let window = NSApp.mainWindow
-        NSApp.activate(ignoringOtherApps: true)
-        window?.center()
-        window?.makeKeyAndOrderFront(self)
+        if NSApp.activationPolicy() != .regular {
+            NSApp.setActivationPolicy(.regular)
+        }
+        let firstNormalWindow = self.findPrimaryWindow()
+        firstNormalWindow?.makeKeyAndOrderFront(self)
+        if !NSApp.isActive {
+            NSApp.activate(ignoringOtherApps: true)
+        }
     }
     
     @objc func openPreferences() {

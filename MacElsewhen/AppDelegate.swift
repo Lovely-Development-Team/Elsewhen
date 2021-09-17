@@ -28,6 +28,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         servicesItem?.tag = MenuTag.services.rawValue
     }
     
+    func applicationDidFinishLaunching(_ notification: Notification) {
+        let window = NSApp.orderedWindows.first { window in
+            window.level == .normal
+        }
+        windowManager.initialWindowController = window?.windowController
+    }
+    
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
         return UserDefaults.standard.shouldTerminateAfterLastWindowClosed
     }
