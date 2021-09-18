@@ -28,9 +28,11 @@ struct ElsewhenApp: App {
     
     var body: some Scene {
         WindowGroup {
+            #if os(macOS)
+            MacContentView()
+            #else
             ContentView()
-        }.commands {
-            SidebarCommands()
+            #endif
         }
     }
 }
