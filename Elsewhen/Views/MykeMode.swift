@@ -20,10 +20,9 @@ struct MykeMode: View {
     
     @State private var showCopied: Bool = false
     
-#if os(iOS)
-    @State private var notificationFeedbackGenerator: UINotificationFeedbackGenerator? = nil
+    #if os(iOS)
     let mediumImpactFeedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
-#endif
+    #endif
     
     @State private var showTimeZoneSheet: Bool = false
     @State private var buttonMaxHeight: CGFloat?
@@ -79,37 +78,7 @@ struct MykeMode: View {
                     
                     Spacer()
                     
-                    Button(action: {
-#if os(iOS)
-                        notificationFeedbackGenerator = UINotificationFeedbackGenerator()
-                        notificationFeedbackGenerator?.prepare()
-#endif
-                        EWPasteboard.set(generateTimesAndFlagsText(), forType: UTType.utf8PlainText)
-                        withAnimation {
-                            showCopied = true
-#if os(iOS)
-                            notificationFeedbackGenerator?.notificationOccurred(.success)
-#endif
-                        }
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                            withAnimation {
-                                showCopied = false
-                            }
-#if os(iOS)
-                            notificationFeedbackGenerator = nil
-#endif
-                        }
-                    }) {
-                        Text(showCopied ? "Copied ✓" : "Copy")
-                            .font(.headline)
-                            .foregroundColor(.white)
-                    }
-                    .padding(.horizontal)
-                    .padding(.vertical, 5)
-                    .background(
-                        RoundedRectangle(cornerRadius: 15, style: .continuous)
-                            .fill(Color.accentColor)
-                    )
+                    CopyButton(text: "Copy", generateText: generateTimesAndFlagsText, showCopied: $showCopied)
                     
                 }
                 .padding(.horizontal, 8)
