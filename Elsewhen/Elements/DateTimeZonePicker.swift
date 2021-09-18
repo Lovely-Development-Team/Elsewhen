@@ -15,16 +15,28 @@ struct DateTimeZonePicker: View {
     var showDate: Bool = true
     @State private var showTimeZoneChoiceSheet: Bool = false
     
+    #if os(macOS)
+    static let timePickerStyle = DefaultDatePickerStyle.automatic
+    #else
+    static let timePickerStyle = GraphicalDatePickerStyle.graphical
+    #endif
+    
+    #if os(macOS)
+    static let frameMaxWidth: CGFloat = .infinity
+    #else
+    static let frameMaxWidth: CGFloat = 390
+    #endif
+    
     var body: some View {
         Group {
             
             if showDate {
                 #if os(macOS)
                 HStack {
-                    Spacer().layoutPriority(1)
-                    DatePicker("", selection: $selectedDate)
+                    DatePicker("", selection: $selectedDate, displayedComponents: [.date])
                         .datePickerStyle(.graphical)
-                    Spacer().layoutPriority(1)
+                    DatePicker("", selection: $selectedDate, displayedComponents: [.hourAndMinute])
+                        .datePickerStyle(Self.timePickerStyle)
                 }
                 .padding(.top)
                 #else
@@ -38,8 +50,13 @@ struct DateTimeZonePicker: View {
                         .fontWeight(.semibold)
                         .padding(.horizontal, 8)
                     Spacer()
+                    #if os(macOS)
                     DatePicker("Time", selection: $selectedDate, displayedComponents: [.hourAndMinute])
-                        .datePickerStyle(.graphical)
+                        .datePickerStyle(Self.timePickerStyle)
+                    #else
+                    DatePicker("Time", selection: $selectedDate, displayedComponents: [.hourAndMinute])
+                        .datePickerStyle(Self.timePickerStyle)
+                    #endif
                 }
             }
             
