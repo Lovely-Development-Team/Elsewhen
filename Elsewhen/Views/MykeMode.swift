@@ -89,7 +89,7 @@ struct MykeMode: View {
             .background(GeometryReader { geometry in
                 Color.clear.preference(
                     key: ButtonHeightPreferenceKey.self,
-                    value: geometry.size.width
+                    value: geometry.size.height
                 )
             })
             .onPreferenceChange(ButtonHeightPreferenceKey.self) {
@@ -135,7 +135,7 @@ struct MykeMode: View {
                 .onDelete(perform: delete)
             }
             .listStyle(PlainListStyle())
-            .padding(.top, (buttonMaxHeight ?? 0) / 2)
+            .padding(.top, (buttonMaxHeight ?? 0))
         }
         .sheet(isPresented: $showTimeZoneSheet) {
             NavigationView {
