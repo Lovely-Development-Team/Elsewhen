@@ -8,11 +8,13 @@
 import SwiftUI
 
 struct DateTimeZonePicker: View {
-    
+    // MARK: Parameters
     @Binding var selectedDate: Date
     @Binding var selectedTimeZone: TimeZone
-    
     var showDate: Bool = true
+    let maxWidth: CGFloat?
+    
+    // MARK: State
     @State private var showTimeZoneChoiceSheet: Bool = false
     @State private var selectTimeZoneButtonMaxWidth: CGFloat?
     
@@ -42,6 +44,9 @@ struct DateTimeZonePicker: View {
                         .padding(.horizontal, 8)
                 }
                 .padding(.top)
+                // Need to figure out the "proper" way to remove the datepicker's padding,
+                // 16 is just a fudge value that looks okay by-eye.
+                .frame(maxWidth: maxWidth.map { $0 + 16 })
                 #else
                 DatePicker("Date", selection: $selectedDate)
                     .datePickerStyle(.graphical)
@@ -51,7 +56,6 @@ struct DateTimeZonePicker: View {
                 HStack {
                     Text("Time")
                         .fontWeight(.semibold)
-                        .padding(.horizontal, 8)
                     Spacer()
                     #if os(macOS)
                     DatePicker("Time", selection: $selectedDate, displayedComponents: [.hourAndMinute])
@@ -81,9 +85,8 @@ struct DateTimeZonePicker: View {
                     selectTimeZoneButtonMaxWidth = $0
                 }
             }
-            .padding(.horizontal, 8)
             .padding(.bottom, 10)
-            .frame(minWidth: 0, maxWidth: 390)
+            .frame(minWidth: 0, maxWidth: maxWidth)
             .sheet(isPresented: $showTimeZoneChoiceSheet) {
                 NavigationView {
                     TimezoneChoiceView(selectedTimeZone: $selectedTimeZone, selectedTimeZones: .constant([]), selectedDate: $selectedDate, selectMultiple: false) {
@@ -92,6 +95,7 @@ struct DateTimeZonePicker: View {
                 }
             }
         }
+        .frame(maxWidth: .infinity)
     }
 }
 
@@ -107,6 +111,6 @@ private extension DateTimeZonePicker {
 
 struct DateTimeZonePicker_Previews: PreviewProvider {
     static var previews: some View {
-        DateTimeZonePicker(selectedDate: .constant(Date()), selectedTimeZone: .constant(TimeZone(identifier: "Europe/London")!), showDate: false)
+        DateTimeZonePicker(selectedDate: .constant(Date()), selectedTimeZone: .constant(TimeZone(identifier: "Europe/London")!), showDate: false, maxWidth: nil)
     }
 }

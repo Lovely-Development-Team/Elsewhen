@@ -16,10 +16,12 @@ struct DateTimeSelection: View {
     let mediumImpactFeedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
 #endif
     
+    @State private var dateFormatsMaxWidth: CGFloat?
+    
     var body: some View {
         Group {
             
-            DateTimeZonePicker(selectedDate: $selectedDate, selectedTimeZone: $selectedTimeZone)
+            DateTimeZonePicker(selectedDate: $selectedDate, selectedTimeZone: $selectedTimeZone, maxWidth: dateFormatsMaxWidth)
             
             HStack(spacing: 5) {
                 ForEach(dateFormats, id: \.self) { formatStyle in
@@ -39,6 +41,15 @@ struct DateTimeSelection: View {
                 }
             }
             .padding(.bottom, 10)
+            .background(GeometryReader { geometry in
+                Color.clear.preference(
+                    key: DateFormatsWidthPreferenceKey.self,
+                    value: geometry.size.width
+                )
+            })
+            .onPreferenceChange(DateFormatsWidthPreferenceKey.self) {
+                dateFormatsMaxWidth = $0
+            }
             
             Button(action: {
 #if os(iOS)
@@ -53,5 +64,15 @@ struct DateTimeSelection: View {
             
         }
         .padding(.horizontal)
+    }
+}
+
+private extension DateTimeSelection {
+    struct DateFormatsWidthPreferenceKey: PreferenceKey {
+        static let defaultValue: CGFloat = 0
+        static func reduce(value: inout CGFloat,
+                           nextValue: () -> CGFloat) {
+            value = max(value, nextValue())
+        }
     }
 }
