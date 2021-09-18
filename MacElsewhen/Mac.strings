@@ -9,3 +9,6 @@
 "OpenMI" = "Open %@";
 "PreferencesMI" = "Preferences...";
 "QuitMI" = "Quit %@";
+
+"TimeCodeLabel" = "Time Codes";
+"TimeListLabel" = "Time List";
