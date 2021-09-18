@@ -25,7 +25,7 @@ struct MykeMode: View {
     #endif
     
     @State private var showTimeZoneSheet: Bool = false
-    @State private var buttonMaxHeight: CGFloat?
+    @State private var selectionViewMaxHeight: CGFloat?
     
     func selectedTimeInZone(_ zone: TimeZone) -> String {
         let df = DateFormatter()
@@ -88,12 +88,12 @@ struct MykeMode: View {
             .frame(minWidth: 0, maxWidth: 390)
             .background(GeometryReader { geometry in
                 Color.clear.preference(
-                    key: ButtonHeightPreferenceKey.self,
+                    key: ViewHeightPreferenceKey.self,
                     value: geometry.size.height
                 )
             })
-            .onPreferenceChange(ButtonHeightPreferenceKey.self) {
-                buttonMaxHeight = $0
+            .onPreferenceChange(ViewHeightPreferenceKey.self) {
+                selectionViewMaxHeight = $0
             }
             
             List {
@@ -135,7 +135,7 @@ struct MykeMode: View {
                 .onDelete(perform: delete)
             }
             .listStyle(PlainListStyle())
-            .padding(.top, (buttonMaxHeight ?? 0))
+            .padding(.top, (selectionViewMaxHeight ?? 0))
         }
         .sheet(isPresented: $showTimeZoneSheet) {
             NavigationView {
@@ -178,7 +178,7 @@ struct MykeMode: View {
 }
 
 private extension MykeMode {
-    struct ButtonHeightPreferenceKey: PreferenceKey {
+    struct ViewHeightPreferenceKey: PreferenceKey {
         static let defaultValue: CGFloat = 0
         static func reduce(value: inout CGFloat,
                            nextValue: () -> CGFloat) {
