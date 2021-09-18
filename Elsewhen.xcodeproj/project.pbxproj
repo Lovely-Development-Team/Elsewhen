@@ -222,6 +222,7 @@
 		63A90DEE26F5465D00CACCB9 /* ContentTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentTabViewController.swift; sourceTree = "<group>"; };
 		63A90DF326F5F3A000CACCB9 /* MacContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacContentView.swift; sourceTree = "<group>"; };
 		63A90DF726F60AB700CACCB9 /* CopyButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyButton.swift; sourceTree = "<group>"; };
+		63D3654426F63C1C002DD793 /* MacElsewhen.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MacElsewhen.entitlements; sourceTree = "<group>"; };
 		63DDFB9B26F23DF00021ACFD /* DeviceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceType.swift; sourceTree = "<group>"; };
 		D5F5DE5E26ED1C9800851D98 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -355,6 +356,7 @@
 		6346AD5B26F3BF1300E406D0 /* MacElsewhen */ = {
 			isa = PBXGroup;
 			children = (
+				63D3654426F63C1C002DD793 /* MacElsewhen.entitlements */,
 				63A90DE226F4CA9F00CACCB9 /* Model */,
 				63A90DD526F42F1500CACCB9 /* Views */,
 				63A90DD926F4326F00CACCB9 /* Controllers */,
@@ -1124,11 +1126,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
+				CODE_SIGN_ENTITLEMENTS = MacElsewhen/MacElsewhen.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 17;
 				DEVELOPMENT_ASSET_PATHS = "\"MacElsewhen/Preview Content\"";
 				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1155,11 +1160,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
+				CODE_SIGN_ENTITLEMENTS = MacElsewhen/MacElsewhen.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 17;
 				DEVELOPMENT_ASSET_PATHS = "\"MacElsewhen/Preview Content\"";
 				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
