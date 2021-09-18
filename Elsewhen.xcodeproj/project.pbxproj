@@ -101,6 +101,8 @@
 		63A90DEF26F5465D00CACCB9 /* ContentTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A90DEE26F5465D00CACCB9 /* ContentTabViewController.swift */; };
 		63A90DF426F5F3A000CACCB9 /* MacContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A90DF326F5F3A000CACCB9 /* MacContentView.swift */; };
 		63A90DF526F5F6A000CACCB9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB23B9E26E406B600203153 /* ContentView.swift */; };
+		63A90DF826F60AB700CACCB9 /* CopyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A90DF726F60AB700CACCB9 /* CopyButton.swift */; };
+		63A90DF926F60BF600CACCB9 /* CopyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A90DF726F60AB700CACCB9 /* CopyButton.swift */; };
 		63DDFB9C26F23DF00021ACFD /* DeviceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DDFB9B26F23DF00021ACFD /* DeviceType.swift */; };
 /* End PBXBuildFile section */
 
@@ -219,6 +221,7 @@
 		63A90DE926F4D67600CACCB9 /* MenuTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTag.swift; sourceTree = "<group>"; };
 		63A90DEE26F5465D00CACCB9 /* ContentTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentTabViewController.swift; sourceTree = "<group>"; };
 		63A90DF326F5F3A000CACCB9 /* MacContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacContentView.swift; sourceTree = "<group>"; };
+		63A90DF726F60AB700CACCB9 /* CopyButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyButton.swift; sourceTree = "<group>"; };
 		63DDFB9B26F23DF00021ACFD /* DeviceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceType.swift; sourceTree = "<group>"; };
 		D5F5DE5E26ED1C9800851D98 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -414,6 +417,7 @@
 		6378398126EB7F510055A10D /* Elements */ = {
 			isa = PBXGroup;
 			children = (
+				63A90DF626F60AAB00CACCB9 /* Buttons */,
 				635C8FA626E66E8300361B08 /* DiscordFormattedDate.swift */,
 				5EAB48DC26E624CD00B04A60 /* TimezoneChoiceView.swift */,
 				5E9BD45E26F0962D00383233 /* TimeZoneChoiceItem.swift */,
@@ -529,6 +533,14 @@
 			children = (
 			);
 			path = Elements;
+			sourceTree = "<group>";
+		};
+		63A90DF626F60AAB00CACCB9 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				63A90DF726F60AB700CACCB9 /* CopyButton.swift */,
+			);
+			path = Buttons;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -776,6 +788,7 @@
 				6378398326EB80C30055A10D /* ResultSheet.swift in Sources */,
 				5E9BD45126EEA11900383233 /* UserDefaults.swift in Sources */,
 				635C8FA726E66E8300361B08 /* DiscordFormattedDate.swift in Sources */,
+				63A90DF826F60AB700CACCB9 /* CopyButton.swift in Sources */,
 				5E9BD45626EF446900383233 /* SearchBar.swift in Sources */,
 				637839BA26ECB58D0055A10D /* Intents.intentdefinition in Sources */,
 				5EB23B9D26E406B600203153 /* ElsewhenApp.swift in Sources */,
@@ -792,6 +805,7 @@
 			files = (
 				6346ADA626F3D55300E406D0 /* SelectTimeZoneButton.swift in Sources */,
 				6346AD8926F3C16700E406D0 /* Loggers.swift in Sources */,
+				63A90DF926F60BF600CACCB9 /* CopyButton.swift in Sources */,
 				63A90DD126F4298A00CACCB9 /* Bundle.swift in Sources */,
 				6346AD9226F3C1F100E406D0 /* DateTimeSelection.swift in Sources */,
 				6346ADA226F3C5EC00E406D0 /* InlineNavigationBarTitle.swift in Sources */,

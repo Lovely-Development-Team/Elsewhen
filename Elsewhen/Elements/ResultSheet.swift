@@ -83,37 +83,7 @@ struct ResultSheet: View {
             }
             
             Group {
-                Button(action: {
-                    #if os(iOS)
-                    notificationFeedbackGenerator = UINotificationFeedbackGenerator()
-                    notificationFeedbackGenerator?.prepare()
-                    #endif
-                    EWPasteboard.set(self.discordFormat, forType: UTType.utf8PlainText)
-                    withAnimation {
-                        showCopied = true
-                        #if os(iOS)
-                        notificationFeedbackGenerator?.notificationOccurred(.success)
-                        #endif
-                    }
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                        withAnimation {
-                            showCopied = false
-                        }
-                        #if os(iOS)
-                        notificationFeedbackGenerator = nil
-                        #endif
-                    }
-                }) {
-                    Text(showCopied ? "Copied ✓" : "Copy Discord Code")
-                        .font(.headline)
-                        .foregroundColor(.white)
-                }
-                .padding(.horizontal)
-                .padding(.vertical, 5)
-                .background(
-                    RoundedRectangle(cornerRadius: 15, style: .continuous)
-                        .fill(Color.accentColor)
-                )
+                CopyButton(text: "Copy Discord Code", generateText: { self.discordFormat }, showCopied: $showCopied)
                 .padding(.bottom, 8)
                 
             }
