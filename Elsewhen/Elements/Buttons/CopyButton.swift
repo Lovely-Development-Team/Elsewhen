@@ -17,10 +17,9 @@ struct CopyButton: View {
     // MARK: State
     #if os(iOS)
     @State private var notificationFeedbackGenerator: UINotificationFeedbackGenerator? = nil
-    let mediumImpactFeedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
     #endif
     
-    var body: some View {
+    var button: some View {
         Button(action: {
             #if os(iOS)
             notificationFeedbackGenerator = UINotificationFeedbackGenerator()
@@ -52,6 +51,15 @@ struct CopyButton: View {
             RoundedRectangle(cornerRadius: 15, style: .continuous)
                 .fill(Color.accentColor)
         )
+    }
+    
+    var body: some View {
+        #if os(macOS)
+        button
+            .buttonStyle(PlainButtonStyle())
+        #else
+        button
+        #endif
     }
 }
 
