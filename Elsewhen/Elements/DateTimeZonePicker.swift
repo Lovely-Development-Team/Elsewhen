@@ -14,6 +14,7 @@ struct DateTimeZonePicker: View {
     
     var showDate: Bool = true
     @State private var showTimeZoneChoiceSheet: Bool = false
+    @State private var selectTimeZoneButtonMaxWidth: CGFloat?
     
     #if os(macOS)
     static let timePickerStyle = DefaultDatePickerStyle.automatic
@@ -37,6 +38,8 @@ struct DateTimeZonePicker: View {
                         .datePickerStyle(.graphical)
                     DatePicker("", selection: $selectedDate, displayedComponents: [.hourAndMinute])
                         .datePickerStyle(Self.timePickerStyle)
+                        .frame(maxWidth: selectTimeZoneButtonMaxWidth)
+                        .padding(.horizontal, 8)
                 }
                 .padding(.top)
                 #else
@@ -53,6 +56,7 @@ struct DateTimeZonePicker: View {
                     #if os(macOS)
                     DatePicker("Time", selection: $selectedDate, displayedComponents: [.hourAndMinute])
                         .datePickerStyle(Self.timePickerStyle)
+                        .frame(maxWidth: selectTimeZoneButtonMaxWidth)
                     #else
                     DatePicker("Time", selection: $selectedDate, displayedComponents: [.hourAndMinute])
                         .datePickerStyle(Self.timePickerStyle)
@@ -67,6 +71,15 @@ struct DateTimeZonePicker: View {
                 SelectTimeZoneButton(selectedTimeZone: $selectedTimeZone) {
                     self.showTimeZoneChoiceSheet = true
                 }
+                .background(GeometryReader { geometry in
+                    Color.clear.preference(
+                        key: SelectTimeZoneButtonWidthPreferenceKey.self,
+                        value: geometry.size.width
+                    )
+                })
+                .onPreferenceChange(SelectTimeZoneButtonWidthPreferenceKey.self) {
+                    selectTimeZoneButtonMaxWidth = $0
+                }
             }
             .padding(.horizontal, 8)
             .padding(.bottom, 10)
@@ -78,6 +91,16 @@ struct DateTimeZonePicker: View {
                     }
                 }
             }
+        }
+    }
+}
+
+private extension DateTimeZonePicker {
+    struct SelectTimeZoneButtonWidthPreferenceKey: PreferenceKey {
+        static let defaultValue: CGFloat = 0
+        static func reduce(value: inout CGFloat,
+                           nextValue: () -> CGFloat) {
+            value = max(value, nextValue())
         }
     }
 }
