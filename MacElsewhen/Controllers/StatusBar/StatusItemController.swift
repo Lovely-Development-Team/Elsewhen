@@ -43,7 +43,7 @@ class StatusItemController: NSObject {
         statusButton?.target = self
         statusButton?.action = #selector(onClick)
         statusButton?.title = Bundle.displayName
-        let image = NSImage(named: "Elsewhen")
+        let image = NSImage(named: "ElsewhenStatusItem")
         image?.size = NSSize(width: 18, height: 18)
         statusButton?.image = image
         statusButton?.sendAction(on: [.leftMouseDown, .rightMouseDown, .otherMouseDown, .directTouch])
