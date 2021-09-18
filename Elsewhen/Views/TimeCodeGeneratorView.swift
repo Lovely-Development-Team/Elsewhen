@@ -70,7 +70,7 @@ struct TimeCodeGeneratorView: View, KeyboardReadable {
                         
                     }
                     .padding(.horizontal)
-                    .padding(.bottom, (resultSheetMaxHeight ?? 0) / 2)
+                    .padding(.bottom, (resultSheetMaxHeight ?? 0))
                     
                 }
             }
@@ -80,7 +80,7 @@ struct TimeCodeGeneratorView: View, KeyboardReadable {
                     .background(GeometryReader { geometry in
                         Color.clear.preference(
                             key: ResultSheetHeightPreferenceKey.self,
-                            value: geometry.size.width
+                            value: geometry.size.height
                         )
                     })
                     .onPreferenceChange(ResultSheetHeightPreferenceKey.self) {
