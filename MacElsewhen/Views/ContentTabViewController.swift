@@ -15,7 +15,7 @@ class ContentTabViewController: NSTabViewController {
         
         addSwiftUITab(containing: TimeCodeGeneratorView(), label: "TimeCodeLabel", image: NSImage(systemSymbolName: "clock", accessibilityDescription: nil))
                 
-        addSwiftUITab(containing: MykeMode(), label: "TimeListLabel", image: NSImage(systemSymbolName: "list.dash", accessibilityDescription: nil))
+        addSwiftUITab(containing: MykeMode().padding(.top), label: "TimeListLabel", image: NSImage(systemSymbolName: "list.dash", accessibilityDescription: nil))
         
         tabStyle = .toolbar
     }
