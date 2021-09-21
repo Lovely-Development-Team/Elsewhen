@@ -50,6 +50,7 @@ class SelectTimeZoneWindowController: NSWindowController {
         self._selectedTimeZones = selectedTimeZonesInput
         let rootView = Self.createChoiceView(selectedTimeZone: selectedTimeZone, selectedDate: selectedDate, selectedTimeZones: selectedTimeZonesInput, selectMultiple: selectedTimeZones != nil, height: self.height)
         contentViewController = NSHostingController(rootView: rootView)
+        window?.title = selectedTimeZones == nil ? "Select a Time Zone" : "Select Time Zones"
     }
     
     required init?(coder: NSCoder) {

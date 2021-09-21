@@ -43,6 +43,18 @@ struct TimezoneChoiceView: View {
         }
     }
     
+    func isFavouriteBinding(for tz: TimeZone) -> Binding<Bool> {
+        Binding {
+            favouriteTimeZones.contains(tz)
+        } set: { newValue in
+            if newValue {
+                favouriteTimeZones.insert(tz)
+            } else {
+                favouriteTimeZones.remove(tz)
+            }
+        }
+    }
+    
     var body: some View {
         List {
             #if os(iOS)
@@ -52,18 +64,25 @@ struct TimezoneChoiceView: View {
             Divider()
             #endif
             ForEach(sortedFilteredTimeZones, id: \.self) { tz in
+                let isFavourite = isFavouriteBinding(for: tz)
                 #if os(macOS)
-                TimeZoneChoiceItem(tz: tz, isSelected: timeZoneIsSelected(tz), abbreviation: tz.fudgedAbbreviation(for: selectedDate), favouriteTimeZones: $favouriteTimeZones)
-                    .contentShape(Rectangle())
-                    .onTapGesture {
-                        onSelect(tz: tz)
+                TimeZoneChoiceItem(tz: tz, isSelected: timeZoneIsSelected(tz), abbreviation: tz.fudgedAbbreviation(for: selectedDate), isFavourite: isFavourite)
+                .contentShape(Rectangle())
+                .onTapGesture {
+                    onSelect(tz: tz)
+                }.contextMenu {
+                    Button(action: {
+                        isFavourite.wrappedValue.toggle()
+                    }) {
+                        Label(isFavourite.wrappedValue ? "Unstar" : "Star", systemImage: isFavourite.wrappedValue ? "star.slash" : "star")
                     }
+                }
                 Divider()
                 #else
                 Button(action: {
                     onSelect(tz: tz)
                 }) {
-                    TimeZoneChoiceItem(tz: tz, isSelected: timeZoneIsSelected(tz), abbreviation: tz.fudgedAbbreviation(for: selectedDate), favouriteTimeZones: $favouriteTimeZones)
+                    TimeZoneChoiceItem(tz: tz, isSelected: timeZoneIsSelected(tz), abbreviation: tz.fudgedAbbreviation(for: selectedDate), isFavourite: isFavourite)
                 }
                 #endif
             }
