@@ -71,7 +71,11 @@ struct MykeMode: View {
                 HStack {
                     
                     Button(action: {
+                        #if os(macOS)
+                        WindowManager.shared.openSelectTimeZones(selectedTimeZone: .constant(TimeZone.current), selectedDate: $selectedDate, selectedTimeZones: $selectedTimeZones)
+                        #else
                         self.showTimeZoneSheet = true
+                        #endif
                     }) {
                         Text("Choose time zones…")
                     }
