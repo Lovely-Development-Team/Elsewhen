@@ -14,7 +14,8 @@ struct TimeZoneChoiceCell: View {
     @Binding var isFavourite: Bool
     let onSelect: (TimeZone) -> ()
     
-    var body: some View {
+    @ViewBuilder
+    var content: some View {
         #if os(macOS)
         TimeZoneChoiceItem(tz: tz, isSelected: isSelected, abbreviation: abbreviation, isFavourite: $isFavourite)
             .contentShape(Rectangle())
@@ -35,6 +36,22 @@ struct TimeZoneChoiceCell: View {
             TimeZoneChoiceItem(tz: tz, isSelected: isSelected, abbreviation: abbreviation, isFavourite: $isFavourite)
         }
         #endif
+    }
+    
+    var body: some View {
+        if #available(iOS 15.0, macOS 12.0, *) {
+            content
+                .swipeActions(edge: .leading, allowsFullSwipe: true) {
+                    Button{
+                        isFavourite.toggle()
+                    } label: {
+                        Label(isFavourite ? "Unstar" : "Star", systemImage: isFavourite ? "star.slash" : "star.fill")
+                    }
+                    .tint(isFavourite ? nil : .yellow)
+                }
+        } else {
+            content
+        }
     }
 }
 
