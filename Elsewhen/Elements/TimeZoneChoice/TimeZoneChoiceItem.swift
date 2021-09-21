@@ -18,20 +18,7 @@ struct TimeZoneChoiceItem: View {
     
     var body: some View {
         HStack {
-            if isFavourite {
-                #if os(macOS)
-                Image(systemName: "star.fill")
-                    .foregroundColor(.yellow)
-                    .onTapGesture(perform: onStarClicked)
-                #else
-                Image(systemName: "star.fill")
-                    .foregroundColor(.yellow)
-                #endif
-            } else if DeviceType.isMac() {
-                Image(systemName: "star")
-                    .foregroundColor(.yellow)
-                    .onTapGesture(perform: onStarClicked)
-            }
+            FavouriteIndicator(isFavourite: $isFavourite)
             Text(tz.friendlyName)
             Spacer()
             if let abbreviation = abbreviation {
@@ -45,17 +32,15 @@ struct TimeZoneChoiceItem: View {
         .foregroundColor(isSelected ? .accentColor : .primary)
         .contextMenu {
             Button(action: {
-                onStarClicked()
+                isFavourite.toggle()
             }) {
                 Label(isFavourite ? "Unstar" : "Star", systemImage: isFavourite ? "star.slash" : "star")
             }
         }
+        .onChange(of: isFavourite, perform: { newValue in
+            viewId += 1
+        })
         .id(viewId)
-    }
-    
-    func onStarClicked() {
-        isFavourite.toggle()
-        viewId += 1
     }
 }
 
