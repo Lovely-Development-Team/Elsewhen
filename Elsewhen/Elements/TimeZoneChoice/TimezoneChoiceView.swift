@@ -65,26 +65,7 @@ struct TimezoneChoiceView: View {
             #endif
             ForEach(sortedFilteredTimeZones, id: \.self) { tz in
                 let isFavourite = isFavouriteBinding(for: tz)
-                #if os(macOS)
-                TimeZoneChoiceItem(tz: tz, isSelected: timeZoneIsSelected(tz), abbreviation: tz.fudgedAbbreviation(for: selectedDate), isFavourite: isFavourite)
-                .contentShape(Rectangle())
-                .onTapGesture {
-                    onSelect(tz: tz)
-                }.contextMenu {
-                    Button(action: {
-                        isFavourite.wrappedValue.toggle()
-                    }) {
-                        Label(isFavourite.wrappedValue ? "Unstar" : "Star", systemImage: isFavourite.wrappedValue ? "star.slash" : "star")
-                    }
-                }
-                Divider()
-                #else
-                Button(action: {
-                    onSelect(tz: tz)
-                }) {
-                    TimeZoneChoiceItem(tz: tz, isSelected: timeZoneIsSelected(tz), abbreviation: tz.fudgedAbbreviation(for: selectedDate), isFavourite: isFavourite)
-                }
-                #endif
+                TimeZoneChoiceCell(tz: tz, isSelected: timeZoneIsSelected(tz), abbreviation: tz.fudgedAbbreviation(for: selectedDate), isFavourite: isFavourite, onSelect: onSelect(tz:))
             }
         }
         .listStyle(PlainListStyle())
