@@ -73,7 +73,11 @@ struct DateTimeZonePicker: View {
                     .fontWeight(.semibold)
                 Spacer()
                 SelectTimeZoneButton(selectedTimeZone: $selectedTimeZone) {
+                    #if os(macOS)
+                    WindowManager.shared.openSelectTimeZones(selectedTimeZone: $selectedTimeZone, selectedDate: $selectedDate)
+                    #else
                     self.showTimeZoneChoiceSheet = true
+                    #endif
                 }
                 .background(GeometryReader { geometry in
                     Color.clear.preference(
