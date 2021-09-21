@@ -18,4 +18,12 @@ enum DeviceType {
         return false
         #endif
     }
+    
+    static func isMac() -> Bool {
+        #if os(macOS)
+        return true
+        #else
+        return false
+        #endif
+    }
 }

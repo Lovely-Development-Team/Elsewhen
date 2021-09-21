@@ -13,6 +13,7 @@ struct TimeZoneChoiceItem: View {
     var isSelected: Bool
     var abbreviation: String?
     @Binding var favouriteTimeZones: Set<TimeZone>
+    
     @State var viewId: Int = 0
     
     var body: some View {
@@ -21,6 +22,11 @@ struct TimeZoneChoiceItem: View {
             if isFavourite {
                 Image(systemName: "star.fill")
                     .foregroundColor(.yellow)
+                    .onTapGesture(perform: { onFavourite(isFavourite) })
+            } else if DeviceType.isMac() {
+                Image(systemName: "star")
+                    .foregroundColor(.yellow)
+                    .onTapGesture(perform: { onFavourite(isFavourite) })
             }
             Text(tz.friendlyName)
             Spacer()
@@ -35,17 +41,21 @@ struct TimeZoneChoiceItem: View {
         .foregroundColor(isSelected ? .accentColor : .primary)
         .contextMenu {
             Button(action: {
-                if isFavourite {
-                    favouriteTimeZones.remove(tz)
-                } else {
-                    favouriteTimeZones.insert(tz)
-                }
-                viewId += 1
+                onFavourite(isFavourite)
             }) {
                 Label(isFavourite ? "Unstar" : "Star", systemImage: isFavourite ? "star.slash" : "star")
             }
         }
         .id(viewId)
+    }
+    
+    func onFavourite(_ isFavourite: Bool) {
+        if isFavourite {
+            favouriteTimeZones.remove(tz)
+        } else {
+            favouriteTimeZones.insert(tz)
+        }
+        viewId += 1
     }
 }
 
