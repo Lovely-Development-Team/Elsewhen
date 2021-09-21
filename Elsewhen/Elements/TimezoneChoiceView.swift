@@ -48,22 +48,24 @@ struct TimezoneChoiceView: View {
             #if os(iOS)
             SearchBar(text: $searchTerm, placeholder: "Search...")
                 .padding(.horizontal, -10)
+            #else
+            Divider()
             #endif
             ForEach(sortedFilteredTimeZones, id: \.self) { tz in
-                Button(action: {
-                    if self.selectMultiple {
-                        if let index = self.selectedTimeZones.firstIndex(of: tz) {
-                            self.selectedTimeZones.remove(at: index)
-                        } else {
-                            self.selectedTimeZones.append(tz)
-                        }
-                    } else {
-                        self.selectedTimeZone = tz
-                        done?()
+                #if os(macOS)
+                TimeZoneChoiceItem(tz: tz, isSelected: timeZoneIsSelected(tz), abbreviation: tz.fudgedAbbreviation(for: selectedDate), favouriteTimeZones: $favouriteTimeZones)
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        onSelect(tz: tz)
                     }
+                Divider()
+                #else
+                Button(action: {
+                    onSelect(tz: tz)
                 }) {
                     TimeZoneChoiceItem(tz: tz, isSelected: timeZoneIsSelected(tz), abbreviation: tz.fudgedAbbreviation(for: selectedDate), favouriteTimeZones: $favouriteTimeZones)
                 }
+                #endif
             }
         }
         .listStyle(PlainListStyle())
@@ -74,6 +76,19 @@ struct TimezoneChoiceView: View {
         }
         .onChange(of: favouriteTimeZones) { newValue in
             UserDefaults.standard.favouriteTimeZones = newValue
+        }
+    }
+    
+    func onSelect(tz: TimeZone) {
+        if self.selectMultiple {
+            if let index = self.selectedTimeZones.firstIndex(of: tz) {
+                self.selectedTimeZones.remove(at: index)
+            } else {
+                self.selectedTimeZones.append(tz)
+            }
+        } else {
+            self.selectedTimeZone = tz
+            done?()
         }
     }
 }
