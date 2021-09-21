@@ -12,21 +12,25 @@ struct TimeZoneChoiceItem: View {
     var tz: TimeZone
     var isSelected: Bool
     var abbreviation: String?
-    @Binding var favouriteTimeZones: Set<TimeZone>
+    @Binding var isFavourite: Bool
     
     @State var viewId: Int = 0
     
     var body: some View {
-        let isFavourite = favouriteTimeZones.contains(tz)
         HStack {
             if isFavourite {
+                #if os(macOS)
                 Image(systemName: "star.fill")
                     .foregroundColor(.yellow)
-                    .onTapGesture(perform: { onFavourite(isFavourite) })
+                    .onTapGesture(perform: onStarClicked)
+                #else
+                Image(systemName: "star.fill")
+                    .foregroundColor(.yellow)
+                #endif
             } else if DeviceType.isMac() {
                 Image(systemName: "star")
                     .foregroundColor(.yellow)
-                    .onTapGesture(perform: { onFavourite(isFavourite) })
+                    .onTapGesture(perform: onStarClicked)
             }
             Text(tz.friendlyName)
             Spacer()
@@ -41,7 +45,7 @@ struct TimeZoneChoiceItem: View {
         .foregroundColor(isSelected ? .accentColor : .primary)
         .contextMenu {
             Button(action: {
-                onFavourite(isFavourite)
+                onStarClicked()
             }) {
                 Label(isFavourite ? "Unstar" : "Star", systemImage: isFavourite ? "star.slash" : "star")
             }
@@ -49,18 +53,14 @@ struct TimeZoneChoiceItem: View {
         .id(viewId)
     }
     
-    func onFavourite(_ isFavourite: Bool) {
-        if isFavourite {
-            favouriteTimeZones.remove(tz)
-        } else {
-            favouriteTimeZones.insert(tz)
-        }
+    func onStarClicked() {
+        isFavourite.toggle()
         viewId += 1
     }
 }
 
 struct TimeZoneChoiceItem_Previews: PreviewProvider {
     static var previews: some View {
-        TimeZoneChoiceItem(tz: TimeZone(identifier: "Europe/London")!, isSelected: true, abbreviation: nil, favouriteTimeZones: .constant([TimeZone(identifier: "Europe/London")!]))
+        TimeZoneChoiceItem(tz: TimeZone(identifier: "Europe/London")!, isSelected: true, abbreviation: nil, isFavourite: .constant(true))
     }
 }
