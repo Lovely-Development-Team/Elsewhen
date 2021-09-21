@@ -173,7 +173,7 @@ class WindowManager: NSObject, NSWindowRestoration, NSWindowDelegate {
                 newWindow.setFrame(panelFrame, display: true, animate: false)
             }
         }
-        newWindow.orderFront(self)
+        newWindow.makeKeyAndOrderFront(self)
     }
     
     func closePreferences() {

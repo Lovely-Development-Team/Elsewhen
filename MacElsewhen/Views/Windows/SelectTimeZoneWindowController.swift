@@ -33,7 +33,6 @@ class SelectTimeZoneWindowController: NSWindowController {
             backing: .buffered, defer: false)
         window.identifier = Self.windowIdentifier
         window.title = selectedTimeZones == nil ? "Select a Time Zone" : "Select Time Zones"
-        window.becomesKeyOnlyIfNeeded = true
         window.restorationClass = WindowManager.self
         window.contentView = content
         super.init(window: window)
