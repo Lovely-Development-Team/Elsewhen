@@ -19,7 +19,7 @@ struct DateTimeZonePicker: View {
     @State private var selectTimeZoneButtonMaxWidth: CGFloat?
     
     #if os(macOS)
-    static let timePickerStyle = DefaultDatePickerStyle.automatic
+    static let timePickerStyle = DefaultDatePickerStyle()
     #else
     static let timePickerStyle = GraphicalDatePickerStyle.graphical
     #endif
@@ -37,7 +37,7 @@ struct DateTimeZonePicker: View {
                 #if os(macOS)
                 HStack {
                     DatePicker("", selection: $selectedDate, displayedComponents: [.date])
-                        .datePickerStyle(.graphical)
+                        .datePickerStyle(GraphicalDatePickerStyle())
                     DatePicker("", selection: $selectedDate, displayedComponents: [.hourAndMinute])
                         .datePickerStyle(Self.timePickerStyle)
                         .frame(maxWidth: selectTimeZoneButtonMaxWidth)
