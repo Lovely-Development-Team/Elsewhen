@@ -22,11 +22,7 @@ struct TimeZoneChoiceCell: View {
             .onTapGesture {
                 onSelect(tz)
             }.contextMenu {
-                Button(action: {
-                    isFavourite.toggle()
-                }) {
-                    Label(isFavourite ? "Unstar" : "Star", systemImage: isFavourite ? "star.slash" : "star")
-                }
+                StarUnstarButton(isStarred: $isFavourite)
             }
         Divider()
         #else
@@ -43,12 +39,7 @@ struct TimeZoneChoiceCell: View {
         if #available(iOS 15.0, *) {
             content
                 .swipeActions(edge: .leading, allowsFullSwipe: true) {
-                    Button {
-                        isFavourite.toggle()
-                    } label: {
-                        Label(isFavourite ? "Unstar" : "Star", systemImage: isFavourite ? "star.slash" : "star.fill")
-                    }
-                    .tint(isFavourite ? nil : Color.yellow)
+                    StarUnstarButton(isStarred: $isFavourite)
                 }
         } else {
             content
