@@ -39,19 +39,23 @@ struct TimeZoneChoiceCell: View {
     }
     
     var body: some View {
-        if #available(iOS 15.0, macOS 12.0, *) {
+        #if os(iOS)
+        if #available(iOS 15.0, *) {
             content
                 .swipeActions(edge: .leading, allowsFullSwipe: true) {
-                    Button{
+                    Button {
                         isFavourite.toggle()
                     } label: {
                         Label(isFavourite ? "Unstar" : "Star", systemImage: isFavourite ? "star.slash" : "star.fill")
                     }
-                    .tint(isFavourite ? nil : .yellow)
+                    .tint(isFavourite ? nil : Color.yellow)
                 }
         } else {
             content
         }
+        #else
+        content
+        #endif
     }
 }
 
