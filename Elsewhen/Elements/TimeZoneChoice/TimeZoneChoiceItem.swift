@@ -31,11 +31,7 @@ struct TimeZoneChoiceItem: View {
         }
         .foregroundColor(isSelected ? .accentColor : .primary)
         .contextMenu {
-            Button(action: {
-                isFavourite.toggle()
-            }) {
-                Label(isFavourite ? "Unstar" : "Star", systemImage: isFavourite ? "star.slash" : "star")
-            }
+            StarUnstarButton(isStarred: $isFavourite)
         }
         .onChange(of: isFavourite, perform: { newValue in
             viewId += 1
