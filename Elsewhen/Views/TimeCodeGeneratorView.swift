@@ -31,7 +31,7 @@ struct TimeCodeGeneratorView: View, KeyboardReadable {
         ZStack(alignment: .bottom) {
             
             VStack(spacing: 0) {
-                Rectangle().fill(.clear).frame(height: 1)
+                Rectangle().fill(Color.clear).frame(height: 1)
                 ScrollView {
                     
                     DateTimeSelection(selectedFormatStyle: $selectedFormatStyle, selectedDate: $selectedDate, selectedTimeZone: $selectedTimeZone)
