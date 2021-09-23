@@ -48,25 +48,10 @@ struct TimeCodeGeneratorView: View, KeyboardReadable {
                             .padding(.horizontal)
                             .padding(.bottom, 20)
                         
-                        Button(action: {
+                        EasterEggButton {
                             showEasterEggSheet = true
-                        }, label: {
-                            HStack {
-                                Text("From the Lovely Developers")
-                                    .font(.caption)
-                                    .foregroundColor(.secondary)
-                                Image("l2culogosvg")
-                                    .renderingMode(.template)
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .foregroundColor(.secondary)
-                                    .frame(height: 15)
-                                    .accessibility(hidden: true)
-                                    
-                            }
-                        })
-                            .buttonStyle(PlainButtonStyle())
-                            .padding(.vertical, 5)
+                        }
+                        .padding(.vertical, 5)
                         
                     }
                     .padding(.horizontal)
