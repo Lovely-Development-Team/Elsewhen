@@ -28,6 +28,8 @@
 		5EE70E2A26ED21AA00F3F164 /* DateTimeZonePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE70E2926ED21AA00F3F164 /* DateTimeZonePicker.swift */; };
 		631E3F2226FCE9B60025F080 /* SelectedTimeZoneCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631E3F2126FCE9B60025F080 /* SelectedTimeZoneCell.swift */; };
 		631E3F2326FCEC140025F080 /* SelectedTimeZoneCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631E3F2126FCE9B60025F080 /* SelectedTimeZoneCell.swift */; };
+		631E3F2526FCEF1F0025F080 /* DeleteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631E3F2426FCEF1F0025F080 /* DeleteButton.swift */; };
+		631E3F2626FCEFEC0025F080 /* DeleteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631E3F2426FCEF1F0025F080 /* DeleteButton.swift */; };
 		6346AD6426F3BF1400E406D0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6346AD6326F3BF1400E406D0 /* Preview Assets.xcassets */; };
 		6346AD6E26F3BF1400E406D0 /* MacElsewhenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6346AD6D26F3BF1400E406D0 /* MacElsewhenTests.swift */; };
 		6346AD7826F3BF1400E406D0 /* MacElsewhenUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6346AD7726F3BF1400E406D0 /* MacElsewhenUITests.swift */; };
@@ -181,6 +183,7 @@
 		5EE70E2626ECCC0700F3F164 /* TimeCodeGeneratorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCodeGeneratorView.swift; sourceTree = "<group>"; };
 		5EE70E2926ED21AA00F3F164 /* DateTimeZonePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTimeZonePicker.swift; sourceTree = "<group>"; };
 		631E3F2126FCE9B60025F080 /* SelectedTimeZoneCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedTimeZoneCell.swift; sourceTree = "<group>"; };
+		631E3F2426FCEF1F0025F080 /* DeleteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteButton.swift; sourceTree = "<group>"; };
 		6346AD5A26F3BF1300E406D0 /* MacElsewhen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacElsewhen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6346AD6326F3BF1400E406D0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		6346AD6926F3BF1400E406D0 /* MacElsewhenTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MacElsewhenTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -570,6 +573,7 @@
 				63A90DF726F60AB700CACCB9 /* CopyButton.swift */,
 				63A915F626FB42CE0027B18D /* StarUnstarButton.swift */,
 				638B47BC26FC98D700B26B26 /* EasterEggButton.swift */,
+				631E3F2426FCEF1F0025F080 /* DeleteButton.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -824,6 +828,7 @@
 				5EAB48DD26E624CD00B04A60 /* TimezoneChoiceView.swift in Sources */,
 				637839BD26ECB8C20055A10D /* Loggers.swift in Sources */,
 				5EE70E2726ECCC0700F3F164 /* TimeCodeGeneratorView.swift in Sources */,
+				631E3F2526FCEF1F0025F080 /* DeleteButton.swift in Sources */,
 				638B47BD26FC98D900B26B26 /* EasterEggButton.swift in Sources */,
 				5EE2D2CD26F2717E00D61875 /* EasterEggView.swift in Sources */,
 				6378398726EBA7C60055A10D /* DateTimeSelection.swift in Sources */,
@@ -887,6 +892,7 @@
 				63A90DC326F4255E00CACCB9 /* WindowManager.swift in Sources */,
 				63A90DC826F4266400CACCB9 /* NSEvent.swift in Sources */,
 				6346AD9B26F3C47F00E406D0 /* PasteboardHelpers.swift in Sources */,
+				631E3F2626FCEFEC0025F080 /* DeleteButton.swift in Sources */,
 				6346AD8F26F3C1E400E406D0 /* ResultSheet.swift in Sources */,
 				63A90DDB26F4AC2100CACCB9 /* PreferencesView.swift in Sources */,
 				63A90DE426F4CAA900CACCB9 /* MenuItem.swift in Sources */,

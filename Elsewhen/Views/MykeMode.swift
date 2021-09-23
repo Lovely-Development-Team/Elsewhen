@@ -116,6 +116,11 @@ struct MykeMode: View {
                                 }
                             }
                         }
+                        .contextMenu {
+                            DeleteButton {
+                                selectedTimeZones.removeAll { $0 == tz }
+                            }
+                        }
                 }
                 .onMove(perform: move)
                 .onDelete(perform: delete)
