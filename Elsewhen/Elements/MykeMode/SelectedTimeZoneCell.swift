@@ -27,6 +27,7 @@ struct SelectedTimeZoneCell: View {
                     .foregroundColor(.secondary)
             }
         }
+        .contentShape(Rectangle())
         .onDrag {
             let tzItemProvider = tz.itemProvider
             let itemProvider = NSItemProvider(object: tzItemProvider)
