@@ -26,6 +26,8 @@
 		5EE2D2CF26F28CE100D61875 /* KeyboardHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE2D2CE26F28CE000D61875 /* KeyboardHelpers.swift */; };
 		5EE70E2726ECCC0700F3F164 /* TimeCodeGeneratorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE70E2626ECCC0700F3F164 /* TimeCodeGeneratorView.swift */; };
 		5EE70E2A26ED21AA00F3F164 /* DateTimeZonePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE70E2926ED21AA00F3F164 /* DateTimeZonePicker.swift */; };
+		631E3F2226FCE9B60025F080 /* SelectedTimeZoneCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631E3F2126FCE9B60025F080 /* SelectedTimeZoneCell.swift */; };
+		631E3F2326FCEC140025F080 /* SelectedTimeZoneCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631E3F2126FCE9B60025F080 /* SelectedTimeZoneCell.swift */; };
 		6346AD6426F3BF1400E406D0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6346AD6326F3BF1400E406D0 /* Preview Assets.xcassets */; };
 		6346AD6E26F3BF1400E406D0 /* MacElsewhenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6346AD6D26F3BF1400E406D0 /* MacElsewhenTests.swift */; };
 		6346AD7826F3BF1400E406D0 /* MacElsewhenUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6346AD7726F3BF1400E406D0 /* MacElsewhenUITests.swift */; };
@@ -178,6 +180,7 @@
 		5EE2D2CE26F28CE000D61875 /* KeyboardHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHelpers.swift; sourceTree = "<group>"; };
 		5EE70E2626ECCC0700F3F164 /* TimeCodeGeneratorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCodeGeneratorView.swift; sourceTree = "<group>"; };
 		5EE70E2926ED21AA00F3F164 /* DateTimeZonePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTimeZonePicker.swift; sourceTree = "<group>"; };
+		631E3F2126FCE9B60025F080 /* SelectedTimeZoneCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedTimeZoneCell.swift; sourceTree = "<group>"; };
 		6346AD5A26F3BF1300E406D0 /* MacElsewhen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacElsewhen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6346AD6326F3BF1400E406D0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		6346AD6926F3BF1400E406D0 /* MacElsewhenTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MacElsewhenTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -367,6 +370,14 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		631E3F2026FCE9910025F080 /* MykeMode */ = {
+			isa = PBXGroup;
+			children = (
+				631E3F2126FCE9B60025F080 /* SelectedTimeZoneCell.swift */,
+			);
+			path = MykeMode;
+			sourceTree = "<group>";
+		};
 		6346AD5B26F3BF1300E406D0 /* MacElsewhen */ = {
 			isa = PBXGroup;
 			children = (
@@ -433,6 +444,7 @@
 		6378398126EB7F510055A10D /* Elements */ = {
 			isa = PBXGroup;
 			children = (
+				631E3F2026FCE9910025F080 /* MykeMode */,
 				63C51BA926FA33FB00145662 /* TimeZoneChoice */,
 				63A90DF626F60AAB00CACCB9 /* Buttons */,
 				635C8FA626E66E8300361B08 /* DiscordFormattedDate.swift */,
@@ -807,6 +819,7 @@
 				6378397E26EA5FD60055A10D /* UIApplication+clearLaunchScreenCache.swift in Sources */,
 				5E9BD45926EF44B700383233 /* MykeMode.swift in Sources */,
 				63C51BAB26FA343600145662 /* TimeZoneChoiceCell.swift in Sources */,
+				631E3F2226FCE9B60025F080 /* SelectedTimeZoneCell.swift in Sources */,
 				5EE2D2CF26F28CE100D61875 /* KeyboardHelpers.swift in Sources */,
 				5EAB48DD26E624CD00B04A60 /* TimezoneChoiceView.swift in Sources */,
 				637839BD26ECB8C20055A10D /* Loggers.swift in Sources */,
@@ -879,6 +892,7 @@
 				63A90DE426F4CAA900CACCB9 /* MenuItem.swift in Sources */,
 				63A90DEF26F5465D00CACCB9 /* ContentTabViewController.swift in Sources */,
 				63A90DEA26F4D67600CACCB9 /* MenuTag.swift in Sources */,
+				631E3F2326FCEC140025F080 /* SelectedTimeZoneCell.swift in Sources */,
 				6346AD8726F3C15C00E406D0 /* ElsewhenApp.swift in Sources */,
 				6346AD9126F3C1EF00E406D0 /* DiscordFormattedDate.swift in Sources */,
 			);

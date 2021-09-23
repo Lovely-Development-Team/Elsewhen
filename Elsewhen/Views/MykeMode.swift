@@ -103,38 +103,19 @@ struct MykeMode: View {
             
             List {
                 ForEach(selectedTimeZones, id: \.self) { tz in
-                    HStack {
-                        VStack(alignment: .leading) {
-                            Text(tz.friendlyName)
-                                .font(.caption)
-                                .foregroundColor(.secondary)
-                            Text("\(flagForTimeZone(tz)) \(selectedTimeInZone(tz))")
-                        }
-                        Spacer()
-                        if let abbreviation = tz.fudgedAbbreviation(for: selectedDate) {
-                            Text(abbreviation)
-                                .foregroundColor(.secondary)
-                        }
-                    }
-                    .onDrag {
-                        let tzItemProvider = tz.itemProvider
-                        let itemProvider = NSItemProvider(object: tzItemProvider)
-                        itemProvider.suggestedName = tzItemProvider.resolvedName
-                        return itemProvider
-                    }
-                    .contentShape(Rectangle())
-                    .onTapGesture {
-                        if tz.isMemberOfEuropeanUnion {
-#if os(iOS)
-                            mediumImpactFeedbackGenerator.impactOccurred()
-#endif
-                            if timeZonesUsingEUFlag.contains(tz) {
-                                timeZonesUsingEUFlag.remove(tz)
-                            } else {
-                                timeZonesUsingEUFlag.insert(tz)
+                    SelectedTimeZoneCell(tz: tz, flag: flagForTimeZone(tz), timeInZone: selectedTimeInZone(tz), selectedDate: selectedDate)
+                        .onTapGesture {
+                            if tz.isMemberOfEuropeanUnion {
+                                #if os(iOS)
+                                mediumImpactFeedbackGenerator.impactOccurred()
+                                #endif
+                                if timeZonesUsingEUFlag.contains(tz) {
+                                    timeZonesUsingEUFlag.remove(tz)
+                                } else {
+                                    timeZonesUsingEUFlag.insert(tz)
+                                }
                             }
                         }
-                    }
                 }
                 .onMove(perform: move)
                 .onDelete(perform: delete)
