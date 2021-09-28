@@ -4,7 +4,5 @@
 <dict>
 	<key>CFBundleIconName</key>
 	<string>AppIcon</string>
-	<key>CFBundleName</key>
-	<string>Elsewhen</string>
 </dict>
 </plist>
