@@ -45,21 +45,11 @@ struct CopyButton: View {
                 .font(.headline)
                 .foregroundColor(.white)
         }
-        .padding(.horizontal)
-        .padding(.vertical, 5)
-        .background(
-            RoundedRectangle(cornerRadius: 15, style: .continuous)
-                .fill(Color.accentColor)
-        )
+        .roundedRectangle()
     }
     
     var body: some View {
-        #if os(macOS)
         button
-            .buttonStyle(PlainButtonStyle())
-        #else
-        button
-        #endif
     }
 }
 

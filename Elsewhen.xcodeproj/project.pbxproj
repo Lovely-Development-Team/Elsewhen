@@ -63,6 +63,8 @@
 		6346ADA526F3D4E600E406D0 /* SelectTimeZoneButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6346ADA426F3D4E600E406D0 /* SelectTimeZoneButton.swift */; };
 		6346ADA626F3D55300E406D0 /* SelectTimeZoneButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6346ADA426F3D4E600E406D0 /* SelectTimeZoneButton.swift */; };
 		635C8FA726E66E8300361B08 /* DiscordFormattedDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635C8FA626E66E8300361B08 /* DiscordFormattedDate.swift */; };
+		635CE6E52703264F006BC7D3 /* RoundedRectangleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635CE6E42703264F006BC7D3 /* RoundedRectangleButton.swift */; };
+		635CE6E627032750006BC7D3 /* RoundedRectangleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635CE6E42703264F006BC7D3 /* RoundedRectangleButton.swift */; };
 		6378397E26EA5FD60055A10D /* UIApplication+clearLaunchScreenCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6378397D26EA5FD60055A10D /* UIApplication+clearLaunchScreenCache.swift */; };
 		6378398026EA61AB0055A10D /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6378397F26EA61AB0055A10D /* Launch Screen.storyboard */; };
 		6378398326EB80C30055A10D /* ResultSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6378398226EB80C30055A10D /* ResultSheet.swift */; };
@@ -197,6 +199,7 @@
 		6346ADA326F3C8D300E406D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		6346ADA426F3D4E600E406D0 /* SelectTimeZoneButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTimeZoneButton.swift; sourceTree = "<group>"; };
 		635C8FA626E66E8300361B08 /* DiscordFormattedDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscordFormattedDate.swift; sourceTree = "<group>"; };
+		635CE6E42703264F006BC7D3 /* RoundedRectangleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedRectangleButton.swift; sourceTree = "<group>"; };
 		6378397D26EA5FD60055A10D /* UIApplication+clearLaunchScreenCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+clearLaunchScreenCache.swift"; sourceTree = "<group>"; };
 		6378397F26EA61AB0055A10D /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		6378398226EB80C30055A10D /* ResultSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultSheet.swift; sourceTree = "<group>"; };
@@ -428,6 +431,7 @@
 			isa = PBXGroup;
 			children = (
 				6346ADA026F3C5E900E406D0 /* InlineNavigationBarTitle.swift */,
+				635CE6E42703264F006BC7D3 /* RoundedRectangleButton.swift */,
 			);
 			path = ViewModifiers;
 			sourceTree = "<group>";
@@ -817,6 +821,7 @@
 				6346ADA526F3D4E600E406D0 /* SelectTimeZoneButton.swift in Sources */,
 				5EE70E2A26ED21AA00F3F164 /* DateTimeZonePicker.swift in Sources */,
 				63A915F726FB42CE0027B18D /* StarUnstarButton.swift in Sources */,
+				635CE6E52703264F006BC7D3 /* RoundedRectangleButton.swift in Sources */,
 				5EB23B9F26E406B600203153 /* ContentView.swift in Sources */,
 				6346AD9D26F3C4EE00E406D0 /* Color.swift in Sources */,
 				6346AD9A26F3C33D00E406D0 /* PasteboardHelpers.swift in Sources */,
@@ -881,6 +886,7 @@
 				63A90DE126F4C3BE00CACCB9 /* MainMenuController.swift in Sources */,
 				6346AD8E26F3C1DD00E406D0 /* DateHelpers.swift in Sources */,
 				63A90DCC26F4280200CACCB9 /* StatusBarMenuController.swift in Sources */,
+				635CE6E627032750006BC7D3 /* RoundedRectangleButton.swift in Sources */,
 				63A90DC526F4263500CACCB9 /* StatusItemController.swift in Sources */,
 				6346AD9E26F3C56D00E406D0 /* Color.swift in Sources */,
 				63A90DDD26F4AC5900CACCB9 /* MacUserDefaults.swift in Sources */,
