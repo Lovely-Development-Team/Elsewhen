@@ -30,18 +30,34 @@ struct DateTimeZonePicker: View {
     static let frameMaxWidth: CGFloat = 390
     #endif
     
+    #if os(macOS)
+    @State private var isPresentingDatePopover = false
+    #endif
+    
     var body: some View {
         Group {
             
             if showDate {
                 #if os(macOS)
-                HStack {
-                    DatePicker("", selection: $selectedDate, displayedComponents: [.date])
-                        .datePickerStyle(GraphicalDatePickerStyle())
+                VStack {
+                    Button {
+                        isPresentingDatePopover = true
+                    } label: {
+                        Text("\(selectedDate, style: .date)")
+                    }
+                    .roundedRectangle()
+                    .popover(isPresented: $isPresentingDatePopover, arrowEdge: .top) {
+                        Group {
+                            MacDatePicker(selectedDate: $selectedDate)
+                                .padding(8)
+                        }.background(Color(NSColor.controlColor))
+                    }
+                    Spacer(minLength: 20)
                     DatePicker("", selection: $selectedDate, displayedComponents: [.hourAndMinute])
                         .datePickerStyle(Self.timePickerStyle)
                         .frame(maxWidth: selectTimeZoneButtonMaxWidth)
                         .padding(.horizontal, 8)
+                    Spacer(minLength: 20)
                 }
                 .padding(.top)
                 // Need to figure out the "proper" way to remove the datepicker's padding,
