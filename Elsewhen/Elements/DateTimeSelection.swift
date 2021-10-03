@@ -11,6 +11,7 @@ struct DateTimeSelection: View {
     @Binding var selectedFormatStyle: DateFormat
     @Binding var selectedDate: Date
     @Binding var selectedTimeZone: TimeZone
+    @Binding var appendRelative: Bool
     
 #if os(iOS)
     let mediumImpactFeedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
@@ -26,7 +27,11 @@ struct DateTimeSelection: View {
             HStack(spacing: 5) {
                 ForEach(dateFormats, id: \.self) { formatStyle in
                     Button(action: {
-                        self.selectedFormatStyle = formatStyle
+                        if self.selectedFormatStyle == formatStyle && appendRelative {
+                            self.selectedFormatStyle = relativeDateFormat
+                        } else {
+                            self.selectedFormatStyle = formatStyle
+                        }
                     }) {
                         Label(formatStyle.name, systemImage: formatStyle.icon)
                             .labelStyle(IconOnlyLabelStyle())
@@ -39,6 +44,22 @@ struct DateTimeSelection: View {
                             )
                     }.buttonStyle(PlainButtonStyle())
                 }
+                Button(action: {
+                    if self.selectedFormatStyle != relativeDateFormat {
+                        self.appendRelative.toggle()
+                    }
+                }) {
+                    Label(relativeDateFormat.name, systemImage: relativeDateFormat.icon)
+                        .labelStyle(IconOnlyLabelStyle())
+                        .foregroundColor(appendRelative && selectedFormatStyle != relativeDateFormat ? .secondary : .white)
+                        .font(.title)
+                        .frame(width: 50, height: 50)
+                        .background(
+                            RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                .strokeBorder(appendRelative && selectedFormatStyle != relativeDateFormat ? Color.accentColor : Color.clear, lineWidth: 3)
+                                .background(RoundedRectangle(cornerRadius: 10, style: .continuous).fill(appendRelative ? (selectedFormatStyle == relativeDateFormat ? Color.accentColor : Color(UIColor.secondarySystemBackground)) : .secondary))
+                        )
+                }.buttonStyle(PlainButtonStyle())
             }
             .padding(.bottom, 10)
             .background(GeometryReader { geometry in
