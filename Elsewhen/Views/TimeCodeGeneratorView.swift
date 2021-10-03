@@ -14,7 +14,7 @@ struct TimeCodeGeneratorView: View, KeyboardReadable {
     @State private var selectedTimeZone: TimeZone = TimeZone.current
     @State private var selectedFormatStyle: DateFormat = dateFormats[0]
     @State private var showLocalTimeInstead: Bool = false
-    @State private var appendRelative: Bool = true
+    @State private var appendRelative: Bool = false
     
     @State private var resultSheetMaxHeight: CGFloat?
     
