@@ -82,6 +82,23 @@ extension TimeZone {
         identifier.replacingOccurrences(of: "_", with: " ")
     }
     
+    var identifierContinent: String {
+        String(identifier.split(separator: "/")[0])
+    }
+    
+    var identifierWithoutContinent: String {
+        let parts = identifier.split(separator: "/", maxSplits: 1)
+        return String(parts[parts.count > 1 ? 1 : 0])
+    }
+    
+    var friendlyIdentifierContinent: String {
+        identifierContinent.replacingOccurrences(of: "_", with: " ")
+    }
+    
+    var friendlyIdentifierWithoutContinent: String {
+        identifierWithoutContinent.replacingOccurrences(of: "_", with: " ")
+    }
+    
     var flag: String {
         flagForTimeZone(self)
     }

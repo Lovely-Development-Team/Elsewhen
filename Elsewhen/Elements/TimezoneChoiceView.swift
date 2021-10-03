@@ -35,6 +35,16 @@ struct TimezoneChoiceView: View {
         }
     }
     
+    private var groupedTimeZones: [String: [TimeZone]] {
+        Dictionary(grouping: sortedFilteredTimeZones) { tz in
+            if favouriteTimeZones.contains(tz) {
+                return "1 Favourites"
+            } else {
+                return tz.friendlyIdentifierContinent
+            }
+        }
+    }
+    
     private func timeZoneIsSelected(_ tz: TimeZone) -> Bool {
         if selectMultiple {
             return selectedTimeZones.contains(tz)
@@ -47,20 +57,24 @@ struct TimezoneChoiceView: View {
         List {
             SearchBar(text: $searchTerm, placeholder: "Search...")
                 .padding(.horizontal, -10)
-            ForEach(sortedFilteredTimeZones, id: \.self) { tz in
-                Button(action: {
-                    if self.selectMultiple {
-                        if let index = self.selectedTimeZones.firstIndex(of: tz) {
-                            self.selectedTimeZones.remove(at: index)
-                        } else {
-                            self.selectedTimeZones.append(tz)
+            ForEach(Array(groupedTimeZones.keys).sorted(), id: \.self) { groupName in
+                Section(header: Text(groupName.replacingOccurrences(of: "1 ", with: ""))) {
+                    ForEach(groupedTimeZones[groupName]!, id: \.self) { tz in
+                        Button(action: {
+                            if self.selectMultiple {
+                                if let index = self.selectedTimeZones.firstIndex(of: tz) {
+                                    self.selectedTimeZones.remove(at: index)
+                                } else {
+                                    self.selectedTimeZones.append(tz)
+                                }
+                            } else {
+                                self.selectedTimeZone = tz
+                                done?()
+                            }
+                        }) {
+                            TimeZoneChoiceItem(tz: tz, isSelected: timeZoneIsSelected(tz), abbreviation: tz.fudgedAbbreviation(for: selectedDate), favouriteTimeZones: $favouriteTimeZones)
                         }
-                    } else {
-                        self.selectedTimeZone = tz
-                        done?()
                     }
-                }) {
-                    TimeZoneChoiceItem(tz: tz, isSelected: timeZoneIsSelected(tz), abbreviation: tz.fudgedAbbreviation(for: selectedDate), favouriteTimeZones: $favouriteTimeZones)
                 }
             }
         }

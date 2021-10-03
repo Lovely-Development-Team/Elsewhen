@@ -17,19 +17,30 @@ struct TimeZoneChoiceItem: View {
     
     var body: some View {
         let isFavourite = favouriteTimeZones.contains(tz)
-        HStack {
-            if isFavourite {
-                Image(systemName: "star.fill")
-                    .foregroundColor(.yellow)
-            }
-            Text(tz.friendlyName)
-            Spacer()
-            if let abbreviation = abbreviation {
-                Text(abbreviation)
-                    .foregroundColor(.secondary)
-            }
-            if isSelected {
-                Image(systemName: "checkmark")
+        VStack(alignment: .leading) {
+            HStack {
+                Button(action: {
+                    if isFavourite {
+                        favouriteTimeZones.remove(tz)
+                    } else {
+                        favouriteTimeZones.insert(tz)
+                    }
+                }) {
+                    Image(systemName: isFavourite ? "star.fill" : "star")
+                        .foregroundColor(isFavourite ? .yellow : .secondary)
+                }
+                if isFavourite {
+                    
+                }
+                Text(tz.friendlyIdentifierWithoutContinent)
+                Spacer()
+                if let abbreviation = abbreviation {
+                    Text(abbreviation)
+                        .foregroundColor(.secondary)
+                }
+                if isSelected {
+                    Image(systemName: "checkmark")
+                }
             }
         }
         .foregroundColor(isSelected ? .accentColor : .primary)
