@@ -13,6 +13,7 @@ struct ResultSheet: View {
     let selectedDate: Date
     let selectedTimeZone: TimeZone
     let discordFormat: String
+    let appendRelative: Bool
     @Binding var showLocalTimeInstead: Bool
     @Binding var selectedFormatStyle: DateFormat
     
@@ -24,20 +25,29 @@ struct ResultSheet: View {
     @State private var notificationFeedbackGenerator: UINotificationFeedbackGenerator? = nil
     #endif
     
+    private func getDateFormat(date: Date, in timezone: TimeZone, with formatCode: FormatCode) -> String {
+        var formatted = format(date: date, in: timezone, with: formatCode)
+        if appendRelative && formatCode != .R {
+            let relative = format(date: date, in: timezone, with: FormatCode.R)
+            formatted = "\(formatted) (\(relative))"
+        }
+        return formatted
+    }
+    
     var body: some View {
         VStack {
             VStack {
                 
                 if !showLocalTimeInstead {
                     
-                    Text(format(date: convertSelectedDate(from: selectedTimeZone, to: selectedTimeZone), in: selectedTimeZone, with: selectedFormatStyle.code))
+                    Text(getDateFormat(date: convertSelectedDate(from: selectedTimeZone, to: selectedTimeZone), in: selectedTimeZone, with: selectedFormatStyle.code))
                         .multilineTextAlignment(.center)
                         .font(.headline)
                         .foregroundColor(.primary)
                     
                 } else {
                     
-                    Text(format(date: convertSelectedDate(from: selectedTimeZone, to: TimeZone.current), in: TimeZone.current, with: selectedFormatStyle.code))
+                    Text(getDateFormat(date: convertSelectedDate(from: selectedTimeZone, to: TimeZone.current), in: TimeZone.current, with: selectedFormatStyle.code))
                         .multilineTextAlignment(.center)
                         .font(.headline)
                         .foregroundColor(.primary)
