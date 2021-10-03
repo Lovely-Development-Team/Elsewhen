@@ -14,6 +14,7 @@ struct TimeCodeGeneratorView: View, KeyboardReadable {
     @State private var selectedTimeZone: TimeZone = TimeZone.current
     @State private var selectedFormatStyle: DateFormat = dateFormats[0]
     @State private var showLocalTimeInstead: Bool = false
+    @State private var appendRelative: Bool = true
     
     @State private var resultSheetMaxHeight: CGFloat?
     
@@ -24,7 +25,11 @@ struct TimeCodeGeneratorView: View, KeyboardReadable {
     
     private var discordFormat: String {
         let timeIntervalSince1970 = Int(convertSelectedDate(from: selectedTimeZone, to: TimeZone.current).timeIntervalSince1970)
-        return "<t:\(timeIntervalSince1970):\(selectedFormatStyle.code.rawValue)>"
+        var returnString = "<t:\(timeIntervalSince1970):\(selectedFormatStyle.code.rawValue)>"
+        if appendRelative && selectedFormatStyle != relativeDateFormat {
+            returnString = "\(returnString) (<t:\(timeIntervalSince1970):\(relativeDateFormat.code.rawValue)>)"
+        }
+        return returnString
     }
     
     var body: some View {
@@ -34,7 +39,7 @@ struct TimeCodeGeneratorView: View, KeyboardReadable {
                 Rectangle().fill(Color.clear).frame(height: 1)
                 ScrollView {
                     
-                    DateTimeSelection(selectedFormatStyle: $selectedFormatStyle, selectedDate: $selectedDate, selectedTimeZone: $selectedTimeZone)
+                    DateTimeSelection(selectedFormatStyle: $selectedFormatStyle, selectedDate: $selectedDate, selectedTimeZone: $selectedTimeZone, appendRelative: $appendRelative)
                     
                     VStack(spacing: 0) {
                     
@@ -60,7 +65,7 @@ struct TimeCodeGeneratorView: View, KeyboardReadable {
                 }
             }
             if !isKeyboardVisible {
-                ResultSheet(selectedDate: selectedDate, selectedTimeZone: selectedTimeZone, discordFormat: discordFormat, showLocalTimeInstead: $showLocalTimeInstead, selectedFormatStyle: $selectedFormatStyle)
+                ResultSheet(selectedDate: selectedDate, selectedTimeZone: selectedTimeZone, discordFormat: discordFormat, appendRelative: appendRelative, showLocalTimeInstead: $showLocalTimeInstead, selectedFormatStyle: $selectedFormatStyle)
                     .opacity(showResultsSheet ? 1 : 0)
                     .background(GeometryReader { geometry in
                         Color.clear.preference(
