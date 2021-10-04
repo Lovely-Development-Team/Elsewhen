@@ -1126,9 +1126,9 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Elsewhen/Elsewhen.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 17;
+				CURRENT_PROJECT_VERSION = 19;
 				DEVELOPMENT_ASSET_PATHS = "\"Elsewhen/Preview Content\"";
-				DEVELOPMENT_TEAM = QRVYSKD5TN;
+				DEVELOPMENT_TEAM = 56477RN8FN;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Elsewhen/Info.plist;
@@ -1144,7 +1144,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.rosmearyorchard.Discord-Helper";
+				PRODUCT_BUNDLE_IDENTIFIER = uk.co.bencardy.Elsewhen;
 				PRODUCT_NAME = Elsewhen;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1160,9 +1160,9 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Elsewhen/Elsewhen.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 17;
+				CURRENT_PROJECT_VERSION = 19;
 				DEVELOPMENT_ASSET_PATHS = "\"Elsewhen/Preview Content\"";
-				DEVELOPMENT_TEAM = QRVYSKD5TN;
+				DEVELOPMENT_TEAM = 56477RN8FN;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Elsewhen/Info.plist;
@@ -1178,7 +1178,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.rosmearyorchard.Discord-Helper";
+				PRODUCT_BUNDLE_IDENTIFIER = uk.co.bencardy.Elsewhen;
 				PRODUCT_NAME = Elsewhen;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1196,7 +1196,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 18;
+				CURRENT_PROJECT_VERSION = 19;
 				DEVELOPMENT_ASSET_PATHS = "\"MacElsewhen/Preview Content\"";
 				DEVELOPMENT_TEAM = B5RJS337LA;
 				ENABLE_APP_SANDBOX = YES;
@@ -1213,7 +1213,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.3;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.rosmearyorchard.Discord-Helper";
+				PRODUCT_BUNDLE_IDENTIFIER = uk.co.bencardy.Elsewhen;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1231,7 +1231,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 18;
+				CURRENT_PROJECT_VERSION = 19;
 				DEVELOPMENT_ASSET_PATHS = "\"MacElsewhen/Preview Content\"";
 				DEVELOPMENT_TEAM = B5RJS337LA;
 				ENABLE_APP_SANDBOX = YES;
@@ -1248,7 +1248,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.3;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.rosmearyorchard.Discord-Helper";
+				PRODUCT_BUNDLE_IDENTIFIER = uk.co.bencardy.Elsewhen;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1263,7 +1263,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 19;
 				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1288,7 +1288,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 19;
 				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1312,7 +1312,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 19;
 				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1336,7 +1336,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 19;
 				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1358,8 +1358,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 17;
-				DEVELOPMENT_TEAM = QRVYSKD5TN;
+				CURRENT_PROJECT_VERSION = 19;
+				DEVELOPMENT_TEAM = 56477RN8FN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Discord Helper Intents/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Elsewhen Intents";
@@ -1371,7 +1371,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.rosmearyorchard.Discord-Helper.Elsewhen-Intents";
+				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.bencardy.Elsewhen.Elsewhen-Intents";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1384,8 +1384,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 17;
-				DEVELOPMENT_TEAM = QRVYSKD5TN;
+				CURRENT_PROJECT_VERSION = 19;
+				DEVELOPMENT_TEAM = 56477RN8FN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Discord Helper Intents/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Elsewhen Intents";
@@ -1397,7 +1397,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.rosmearyorchard.Discord-Helper.Elsewhen-Intents";
+				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.bencardy.Elsewhen.Elsewhen-Intents";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1410,8 +1410,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 17;
-				DEVELOPMENT_TEAM = QRVYSKD5TN;
+				CURRENT_PROJECT_VERSION = 19;
+				DEVELOPMENT_TEAM = 56477RN8FN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Discord Helper IntentsUI/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Discord Helper IntentsUI";
@@ -1423,7 +1423,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.rosmearyorchard.Discord-Helper.Discord-Helper-IntentsUI";
+				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.bencardy.Elsewhen.Discord-Helper-IntentsUI";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1436,8 +1436,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 17;
-				DEVELOPMENT_TEAM = QRVYSKD5TN;
+				CURRENT_PROJECT_VERSION = 19;
+				DEVELOPMENT_TEAM = 56477RN8FN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Discord Helper IntentsUI/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Discord Helper IntentsUI";
@@ -1449,7 +1449,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.rosmearyorchard.Discord-Helper.Discord-Helper-IntentsUI";
+				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.bencardy.Elsewhen.Discord-Helper-IntentsUI";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
