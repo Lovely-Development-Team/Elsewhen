@@ -25,6 +25,7 @@ struct MykeMode: View {
     #endif
     
     @State private var showTimeZoneSheet: Bool = false
+    @State private var showTimeZonePopover: Bool = false
     @State private var selectionViewMaxHeight: CGFloat?
     
     func selectedTimeInZone(_ zone: TimeZone) -> String {
@@ -72,12 +73,17 @@ struct MykeMode: View {
                     
                     Button(action: {
                         #if os(macOS)
-                        WindowManager.shared.openSelectTimeZones(selectedTimeZone: .constant(TimeZone.current), selectedDate: $selectedDate, selectedTimeZones: $selectedTimeZones)
+//                        WindowManager.shared.openSelectTimeZones(selectedTimeZone: .constant(TimeZone.current), selectedDate: $selectedDate, selectedTimeZones: $selectedTimeZones)
+                        self.showTimeZonePopover = true
                         #else
                         self.showTimeZoneSheet = true
                         #endif
                     }) {
                         Text("Choose time zones…")
+                    }
+                    .popover(isPresented: $showTimeZonePopover) {
+                        TimezoneChoiceView(selectedTimeZone: .constant(TimeZone.current), selectedTimeZones: $selectedTimeZones, selectedDate: $selectedDate, selectMultiple: true)
+                            .frame(minWidth: 300)
                     }
                     .padding(.vertical)
                     
