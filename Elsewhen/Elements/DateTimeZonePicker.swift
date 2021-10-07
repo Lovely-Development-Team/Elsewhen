@@ -16,6 +16,7 @@ struct DateTimeZonePicker: View {
     
     // MARK: State
     @State private var showTimeZoneChoiceSheet: Bool = false
+    @State private var showTimeZoneChoicePopover: Bool = false
     @State private var selectTimeZoneButtonMaxWidth: CGFloat?
     
     #if os(macOS)
@@ -90,7 +91,7 @@ struct DateTimeZonePicker: View {
                 Spacer()
                 SelectTimeZoneButton(selectedTimeZone: $selectedTimeZone) {
                     #if os(macOS)
-                    WindowManager.shared.openSelectTimeZones(selectedTimeZone: $selectedTimeZone, selectedDate: $selectedDate)
+                    showTimeZoneChoicePopover = true
                     #else
                     self.showTimeZoneChoiceSheet = true
                     #endif
@@ -103,6 +104,12 @@ struct DateTimeZonePicker: View {
                 })
                 .onPreferenceChange(SelectTimeZoneButtonWidthPreferenceKey.self) {
                     selectTimeZoneButtonMaxWidth = $0
+                }
+                .popover(isPresented: $showTimeZoneChoicePopover) {
+                    TimezoneChoiceView(selectedTimeZone: $selectedTimeZone, selectedTimeZones: .constant([]), selectedDate: $selectedDate, selectMultiple: false) {
+                        showTimeZoneChoicePopover = false
+                    }
+                    .frame(minWidth: 300)
                 }
             }
             .padding(.bottom, 10)
