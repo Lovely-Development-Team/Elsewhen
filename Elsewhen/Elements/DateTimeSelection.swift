@@ -19,6 +19,17 @@ struct DateTimeSelection: View {
     
     @State private var dateFormatsMaxWidth: CGFloat?
     
+    var relativeDateButtonBackground: Color {
+        guard appendRelative else {
+            return .secondary
+        }
+        if selectedFormatStyle == relativeDateFormat {
+            return Color.accentColor
+        } else {
+            return Color.secondarySystemBackground
+        }
+    }
+    
     var body: some View {
         Group {
             
@@ -57,7 +68,7 @@ struct DateTimeSelection: View {
                         .background(
                             RoundedRectangle(cornerRadius: 10, style: .continuous)
                                 .strokeBorder(appendRelative && selectedFormatStyle != relativeDateFormat ? Color.accentColor : Color.clear, lineWidth: 3)
-                                .background(RoundedRectangle(cornerRadius: 10, style: .continuous).fill(appendRelative ? (selectedFormatStyle == relativeDateFormat ? Color.accentColor : Color(UIColor.secondarySystemBackground)) : .secondary))
+                                .background(RoundedRectangle(cornerRadius: 10, style: .continuous).fill(relativeDateButtonBackground))
                         )
                 }.buttonStyle(PlainButtonStyle())
             }
