@@ -105,11 +105,11 @@ struct DateTimeZonePicker: View {
                 .onPreferenceChange(SelectTimeZoneButtonWidthPreferenceKey.self) {
                     selectTimeZoneButtonMaxWidth = $0
                 }
-                .popover(isPresented: $showTimeZoneChoicePopover) {
+                .popover(isPresented: $showTimeZoneChoicePopover, arrowEdge: .leading) {
                     TimezoneChoiceView(selectedTimeZone: $selectedTimeZone, selectedTimeZones: .constant([]), selectedDate: $selectedDate, selectMultiple: false) {
                         showTimeZoneChoicePopover = false
                     }
-                    .frame(minWidth: 300)
+                    .frame(minWidth: 300, minHeight: 300)
                 }
             }
             .padding(.bottom, 10)
