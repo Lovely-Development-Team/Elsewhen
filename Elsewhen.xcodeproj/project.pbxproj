@@ -114,6 +114,7 @@
 		63A90DF926F60BF600CACCB9 /* CopyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A90DF726F60AB700CACCB9 /* CopyButton.swift */; };
 		63A915F726FB42CE0027B18D /* StarUnstarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A915F626FB42CE0027B18D /* StarUnstarButton.swift */; };
 		63A915F826FB42D60027B18D /* StarUnstarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A915F626FB42CE0027B18D /* StarUnstarButton.swift */; };
+		63B08863271097AF00CA9980 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9BD45026EEA11900383233 /* UserDefaults.swift */; };
 		63C51BA526F9C9C900145662 /* SelectTimeZoneWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C51BA426F9C9C900145662 /* SelectTimeZoneWindowController.swift */; };
 		63C51BA726FA32D400145662 /* FavouriteIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C51BA626FA32D400145662 /* FavouriteIndicator.swift */; };
 		63C51BA826FA333200145662 /* FavouriteIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C51BA626FA32D400145662 /* FavouriteIndicator.swift */; };
@@ -942,6 +943,7 @@
 				637839B026EBF4910055A10D /* Intents.intentdefinition in Sources */,
 				6378399226EBF4750055A10D /* IntentHandler.swift in Sources */,
 				637839B526EBF8130055A10D /* FormatCodeExtension.swift in Sources */,
+				63B08863271097AF00CA9980 /* UserDefaults.swift in Sources */,
 				637839BE26ECB8CE0055A10D /* Loggers.swift in Sources */,
 				637839B226EBF5FD0055A10D /* ConvertTimeIntentHandling.swift in Sources */,
 				5E9BD45A26EF45FB00383233 /* DateHelpers.swift in Sources */,

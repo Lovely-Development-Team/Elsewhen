@@ -14,7 +14,7 @@ struct ElsewhenApp: App {
     #endif
     
     init() {
-        UserDefaults.standard.register(defaults: [
+        UserDefaults.shared.register(defaults: [
             UserDefaults.mykeModeTimeZoneIdentifiersKey: [
                 "America/Los_Angeles",
                 "America/Chicago",
