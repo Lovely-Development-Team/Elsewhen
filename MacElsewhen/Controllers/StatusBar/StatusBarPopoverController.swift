@@ -38,7 +38,12 @@ class StatusBarPopoverController: NSObject, NSPopoverDelegate {
     }
     
     func detachableWindow(for popover: NSPopover) -> NSWindow? {
-        return nil
+        let window = NSWindow()
+        window.contentViewController = self.contentsViewController()
+        window.isMovableByWindowBackground = true
+        window.styleMask = [.titled, .closable, .miniaturizable]
+        window.isReleasedWhenClosed = false
+        return window
     }
     
     func popoverDidDetach(_ popover: NSPopover) {
