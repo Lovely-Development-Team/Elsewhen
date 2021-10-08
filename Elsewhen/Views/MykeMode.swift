@@ -81,9 +81,9 @@ struct MykeMode: View {
                     }) {
                         Text("Choose time zones…")
                     }
-                    .popover(isPresented: $showTimeZonePopover) {
+                    .popover(isPresented: $showTimeZonePopover, arrowEdge: .leading) {
                         TimezoneChoiceView(selectedTimeZone: .constant(TimeZone.current), selectedTimeZones: $selectedTimeZones, selectedDate: $selectedDate, selectMultiple: true)
-                            .frame(minWidth: 300)
+                            .frame(minWidth: 300, minHeight: 300)
                     }
                     .padding(.vertical)
                     
