@@ -152,14 +152,14 @@ struct MykeMode: View {
         }
         .navigationViewStyle(Self.navigationViewStyle)
         .onAppear {
-            selectedTimeZones = UserDefaults.standard.mykeModeTimeZones
-            timeZonesUsingEUFlag = UserDefaults.standard.mykeModeTimeZonesUsingEUFlag
+            selectedTimeZones = UserDefaults.shared.mykeModeTimeZones
+            timeZonesUsingEUFlag = UserDefaults.shared.mykeModeTimeZonesUsingEUFlag
         }
         .onChange(of: selectedTimeZones) { newValue in
-            UserDefaults.standard.mykeModeTimeZones = newValue
+            UserDefaults.shared.mykeModeTimeZones = newValue
         }
         .onChange(of: timeZonesUsingEUFlag) { newValue in
-            UserDefaults.standard.mykeModeTimeZonesUsingEUFlag = newValue
+            UserDefaults.shared.mykeModeTimeZonesUsingEUFlag = newValue
         }
         
     }

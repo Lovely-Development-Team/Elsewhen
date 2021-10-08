@@ -72,10 +72,10 @@ struct TimezoneChoiceView: View {
         .navigationTitle("Time Zones")
         .inlineNavigationBarTitle()
         .onAppear {
-            favouriteTimeZones = UserDefaults.standard.favouriteTimeZones
+            favouriteTimeZones = UserDefaults.shared.favouriteTimeZones
         }
         .onChange(of: favouriteTimeZones) { newValue in
-            UserDefaults.standard.favouriteTimeZones = newValue
+            UserDefaults.shared.favouriteTimeZones = newValue
         }
     }
     

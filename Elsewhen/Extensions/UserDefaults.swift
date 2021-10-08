@@ -43,4 +43,6 @@ extension UserDefaults {
         }
     }
     
+    // Type-safe access to UserDefaults shared with the extension
+    static let shared = UserDefaults(suiteName: "group.uk.co.bencardy.Elsewhen")!
 }
