@@ -75,19 +75,19 @@ func discordFormat(for date: Date, in timezone: TimeZone, with formatCode: Forma
     return formattedString
 }
 
-func stringFor(time date: Date, in zone: TimeZone) -> String {
+func stringFor(time date: Date, in zone: TimeZone, sourceZone: TimeZone) -> String {
     let df = DateFormatter()
     df.dateStyle = .none
     df.timeStyle = .short
     df.timeZone = zone
-    return df.string(from: convert(date: date, from: zone, to: TimeZone.current))
+    return df.string(from: convert(date: date, from: sourceZone, to: TimeZone.current))
 }
 
-func stringForTimesAndFlags<TZSequence>(of date: Date, in tz: TimeZone, for timezones: TZSequence) -> String where TZSequence: Collection, TZSequence.Element == TimeZone {
+func stringForTimesAndFlags<TZSequence>(of date: Date, in sourceZone: TimeZone, for timezones: TZSequence) -> String where TZSequence: Collection, TZSequence.Element == TimeZone {
     var text = "\n"
     for tz in timezones {
         let abbr = tz.fudgedAbbreviation(for: date) ?? ""
-        text += "\(flagForTimeZone(tz)) - \(stringFor(time: date, in: tz)) \(abbr)\n"
+        text += "\(flagForTimeZone(tz)) - \(stringFor(time: date, in: tz, sourceZone: sourceZone)) \(abbr)\n"
     }
     return text
 }
