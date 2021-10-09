@@ -181,6 +181,8 @@
 		5EB23B9E26E406B600203153 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		5EB23BA026E406B900203153 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5EB23BA326E406B900203153 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		5EBEEE8027123373001501EC /* Discord Helper Intents.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Discord Helper Intents.entitlements"; sourceTree = "<group>"; };
+		5EBEEE8127123385001501EC /* Discord Helper IntentsUI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Discord Helper IntentsUI.entitlements"; sourceTree = "<group>"; };
 		5EE2D2CC26F2717E00D61875 /* EasterEggView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasterEggView.swift; sourceTree = "<group>"; };
 		5EE2D2CE26F28CE000D61875 /* KeyboardHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHelpers.swift; sourceTree = "<group>"; };
 		5EE70E2626ECCC0700F3F164 /* TimeCodeGeneratorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCodeGeneratorView.swift; sourceTree = "<group>"; };
@@ -478,6 +480,7 @@
 		6378399026EBF4750055A10D /* Discord Helper Intents */ = {
 			isa = PBXGroup;
 			children = (
+				5EBEEE8027123373001501EC /* Discord Helper Intents.entitlements */,
 				637839B326EBF7F90055A10D /* Extensions */,
 				6378399126EBF4750055A10D /* IntentHandler.swift */,
 				637839B126EBF5FD0055A10D /* ConvertTimeIntentHandling.swift */,
@@ -491,6 +494,7 @@
 		6378399B26EBF4750055A10D /* Discord Helper IntentsUI */ = {
 			isa = PBXGroup;
 			children = (
+				5EBEEE8127123385001501EC /* Discord Helper IntentsUI.entitlements */,
 				6378399C26EBF4750055A10D /* IntentViewController.swift */,
 				6378399E26EBF4750055A10D /* MainInterface.storyboard */,
 				637839A126EBF4750055A10D /* Info.plist */,
@@ -1357,6 +1361,7 @@
 		637839A926EBF4760055A10D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "Discord Helper Intents/Discord Helper Intents.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 19;
 				DEVELOPMENT_TEAM = 56477RN8FN;
@@ -1383,6 +1388,7 @@
 		637839AA26EBF4760055A10D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "Discord Helper Intents/Discord Helper Intents.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 19;
 				DEVELOPMENT_TEAM = 56477RN8FN;
@@ -1409,6 +1415,7 @@
 		637839AB26EBF4760055A10D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "Discord Helper IntentsUI/Discord Helper IntentsUI.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 19;
 				DEVELOPMENT_TEAM = 56477RN8FN;
@@ -1435,6 +1442,7 @@
 		637839AC26EBF4760055A10D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "Discord Helper IntentsUI/Discord Helper IntentsUI.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 19;
 				DEVELOPMENT_TEAM = 56477RN8FN;
