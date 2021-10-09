@@ -29,7 +29,7 @@ struct MykeMode: View {
     @State private var selectionViewMaxHeight: CGFloat?
     
     func generateTimesAndFlagsText() -> String {
-        generateTimesAndFlagsString(of: selectedDate, in: selectedTimeZone, for: selectedTimeZones)
+        stringForTimesAndFlags(of: selectedDate, in: selectedTimeZone, for: selectedTimeZones)
     }
     
     func flagForTimeZone(_ tz: TimeZone) -> String {
@@ -37,6 +37,10 @@ struct MykeMode: View {
             return "🇪🇺"
         }
         return tz.flag
+    }
+    
+    func stringForSelectedTime(in zone: TimeZone) -> String {
+        stringFor(time: selectedDate, in: zone)
     }
     
     #if os(iOS)
@@ -96,7 +100,7 @@ struct MykeMode: View {
             
             List {
                 ForEach(selectedTimeZones, id: \.self) { tz in
-                    SelectedTimeZoneCell(tz: tz, flag: flagForTimeZone(tz), timeInZone: selectedTimeInZone(selectedDate, tz), selectedDate: selectedDate)
+                    SelectedTimeZoneCell(tz: tz, flag: flagForTimeZone(tz), timeInZone: stringForSelectedTime(in: tz), selectedDate: selectedDate)
                         .onTapGesture {
                             if tz.isMemberOfEuropeanUnion {
                                 #if os(iOS)
