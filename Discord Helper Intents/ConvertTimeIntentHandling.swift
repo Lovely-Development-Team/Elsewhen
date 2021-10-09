@@ -54,7 +54,7 @@ class ConvertTimeIntentHandler: NSObject, ConvertTimeIntentHandling {
         let timezoneIdentifier = intent.timezone?.identifier
         let timezone = timezoneIdentifier.flatMap { TimeZone(identifier: $0) } ?? TimeZone.current
         let response = ConvertTimeIntentResponse(code: .success, userActivity: userActivity)
-        response.discordFormat = discordFormat(for: date, in: timezone.identifier, with: formatCode)
+        response.discordFormat = discordFormat(for: date, in: timezone, with: formatCode, appendRelative: false)
         response.humanFormat = format(date: date, in: timezone, with: formatCode)
         completion(response)
     }

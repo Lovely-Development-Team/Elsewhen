@@ -64,13 +64,13 @@ func format(date: Date, in timezone: TimeZone, with formatCode: FormatCode) -> S
     return dateFormatter.string(from: date)
 }
 
-func discordFormat(for date: Date, in timezone: String, with formatCode: FormatCode) -> String {
-    var timeIntervalSince1970 = Int(date.timeIntervalSince1970)
+func discordFormat(for date: Date, in timezone: TimeZone, with formatCode: FormatCode, appendRelative: Bool) -> String {
+    let timeIntervalSince1970 = Int(convert(date: date, from: timezone, to: TimeZone.current).timeIntervalSince1970)
     
-    if let tz = TimeZone(identifier: timezone) {
-        timeIntervalSince1970 = Int(convert(date: date, from: tz, to: TimeZone.current).timeIntervalSince1970)
-    } else {
-        logger.warning("\(date, privacy: .public) is not a valid timezone identifier!")
+    let formattedString = "<t:\(timeIntervalSince1970):\(formatCode.rawValue)>"
+    
+    if appendRelative && formatCode != .R {
+        return formattedString + " (<t:\(timeIntervalSince1970):\(relativeDateFormat.code.rawValue)>)"
     }
     
     return "<t:\(timeIntervalSince1970):\(formatCode.rawValue)>"
