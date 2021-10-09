@@ -40,7 +40,7 @@ struct MykeMode: View {
     }
     
     func stringForSelectedTime(in zone: TimeZone) -> String {
-        stringFor(time: selectedDate, in: zone)
+        stringFor(time: selectedDate, in: zone, sourceZone: selectedTimeZone)
     }
     
     #if os(iOS)
