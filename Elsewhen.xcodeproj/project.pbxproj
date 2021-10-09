@@ -91,6 +91,7 @@
 		638A72D62711B75C00E0171D /* TimeZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638A72D52711B75C00E0171D /* TimeZone.swift */; };
 		638A72D72711B77300E0171D /* TimeZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638A72D52711B75C00E0171D /* TimeZone.swift */; };
 		638A72D82711B77300E0171D /* TimeZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638A72D52711B75C00E0171D /* TimeZone.swift */; };
+		638A72DA2711D20E00E0171D /* ConvertTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638A72D92711D20E00E0171D /* ConvertTests.swift */; };
 		638A72DC2711D9A600E0171D /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638A72DB2711D9A600E0171D /* TimeInterval.swift */; };
 		638A72DD2711D9CB00E0171D /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638A72DB2711D9A600E0171D /* TimeInterval.swift */; };
 		638B47BD26FC98D900B26B26 /* EasterEggButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638B47BC26FC98D700B26B26 /* EasterEggButton.swift */; };
@@ -232,6 +233,7 @@
 		637839C026ECBA5B0055A10D /* NSUserInfoKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSUserInfoKeys.swift; sourceTree = "<group>"; };
 		637839CA26ED11360055A10D /* TimeZone+ItemProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeZone+ItemProvider.swift"; sourceTree = "<group>"; };
 		638A72D52711B75C00E0171D /* TimeZone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeZone.swift; sourceTree = "<group>"; };
+		638A72D92711D20E00E0171D /* ConvertTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertTests.swift; sourceTree = "<group>"; };
 		638A72DB2711D9A600E0171D /* TimeInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeInterval.swift; sourceTree = "<group>"; };
 		638B47BC26FC98D700B26B26 /* EasterEggButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasterEggButton.swift; sourceTree = "<group>"; };
 		63A90DC226F4255E00CACCB9 /* WindowManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowManager.swift; sourceTree = "<group>"; };
@@ -426,6 +428,7 @@
 			isa = PBXGroup;
 			children = (
 				6346AD6D26F3BF1400E406D0 /* MacElsewhenTests.swift */,
+				638A72D92711D20E00E0171D /* ConvertTests.swift */,
 			);
 			path = MacElsewhenTests;
 			sourceTree = "<group>";
@@ -937,6 +940,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6346AD6E26F3BF1400E406D0 /* MacElsewhenTests.swift in Sources */,
+				638A72DA2711D20E00E0171D /* ConvertTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
