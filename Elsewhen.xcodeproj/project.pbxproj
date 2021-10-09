@@ -88,6 +88,9 @@
 		637839C126ECBA5B0055A10D /* NSUserInfoKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637839C026ECBA5B0055A10D /* NSUserInfoKeys.swift */; };
 		637839C226ECBA680055A10D /* NSUserInfoKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637839C026ECBA5B0055A10D /* NSUserInfoKeys.swift */; };
 		637839CB26ED11360055A10D /* TimeZone+ItemProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637839CA26ED11360055A10D /* TimeZone+ItemProvider.swift */; };
+		638A72D62711B75C00E0171D /* TimeZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638A72D52711B75C00E0171D /* TimeZone.swift */; };
+		638A72D72711B77300E0171D /* TimeZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638A72D52711B75C00E0171D /* TimeZone.swift */; };
+		638A72D82711B77300E0171D /* TimeZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638A72D52711B75C00E0171D /* TimeZone.swift */; };
 		638B47BD26FC98D900B26B26 /* EasterEggButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638B47BC26FC98D700B26B26 /* EasterEggButton.swift */; };
 		638B47BE26FC99DF00B26B26 /* EasterEggButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638B47BC26FC98D700B26B26 /* EasterEggButton.swift */; };
 		63A90DC326F4255E00CACCB9 /* WindowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A90DC226F4255E00CACCB9 /* WindowManager.swift */; };
@@ -226,6 +229,7 @@
 		637839BC26ECB8C10055A10D /* Loggers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loggers.swift; sourceTree = "<group>"; };
 		637839C026ECBA5B0055A10D /* NSUserInfoKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSUserInfoKeys.swift; sourceTree = "<group>"; };
 		637839CA26ED11360055A10D /* TimeZone+ItemProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeZone+ItemProvider.swift"; sourceTree = "<group>"; };
+		638A72D52711B75C00E0171D /* TimeZone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeZone.swift; sourceTree = "<group>"; };
 		638B47BC26FC98D700B26B26 /* EasterEggButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasterEggButton.swift; sourceTree = "<group>"; };
 		63A90DC226F4255E00CACCB9 /* WindowManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowManager.swift; sourceTree = "<group>"; };
 		63A90DC426F4263500CACCB9 /* StatusItemController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusItemController.swift; sourceTree = "<group>"; };
@@ -449,6 +453,7 @@
 				5E9BD45026EEA11900383233 /* UserDefaults.swift */,
 				6346AD9C26F3C4EE00E406D0 /* Color.swift */,
 				63A90DCF26F4295F00CACCB9 /* Bundle.swift */,
+				638A72D52711B75C00E0171D /* TimeZone.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -843,6 +848,7 @@
 				5EE70E2726ECCC0700F3F164 /* TimeCodeGeneratorView.swift in Sources */,
 				631E3F2526FCEF1F0025F080 /* DeleteButton.swift in Sources */,
 				638B47BD26FC98D900B26B26 /* EasterEggButton.swift in Sources */,
+				638A72D62711B75C00E0171D /* TimeZone.swift in Sources */,
 				5EE2D2CD26F2717E00D61875 /* EasterEggView.swift in Sources */,
 				6378398726EBA7C60055A10D /* DateTimeSelection.swift in Sources */,
 				5E9BD45726EF446900383233 /* TimeZoneFlags.swift in Sources */,
@@ -899,6 +905,7 @@
 				63A90DC526F4263500CACCB9 /* StatusItemController.swift in Sources */,
 				6346AD9E26F3C56D00E406D0 /* Color.swift in Sources */,
 				63A90DDD26F4AC5900CACCB9 /* MacUserDefaults.swift in Sources */,
+				638A72D82711B77300E0171D /* TimeZone.swift in Sources */,
 				6346AD8A26F3C19E00E406D0 /* TimeCodeGeneratorView.swift in Sources */,
 				63A90DF426F5F3A000CACCB9 /* MacContentView.swift in Sources */,
 				63A90DF526F5F6A000CACCB9 /* ContentView.swift in Sources */,
@@ -950,6 +957,7 @@
 				5E9BD45B26EF460D00383233 /* TimeZoneFlags.swift in Sources */,
 				637839B826ECAF830055A10D /* InTimeZoneExtension.swift in Sources */,
 				637839C126ECBA5B0055A10D /* NSUserInfoKeys.swift in Sources */,
+				638A72D72711B77300E0171D /* TimeZone.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
