@@ -23,13 +23,8 @@ struct TimeCodeGeneratorView: View, KeyboardReadable {
     @State private var resultsSheetOffset = 20.0
     @State private var showEasterEggSheet = false
     
-    private var discordFormat: String {
-        let timeIntervalSince1970 = Int(convertSelectedDate(from: selectedTimeZone, to: TimeZone.current).timeIntervalSince1970)
-        var returnString = "<t:\(timeIntervalSince1970):\(selectedFormatStyle.code.rawValue)>"
-        if appendRelative && selectedFormatStyle != relativeDateFormat {
-            returnString = "\(returnString) (<t:\(timeIntervalSince1970):\(relativeDateFormat.code.rawValue)>)"
-        }
-        return returnString
+    private var discordFormatString: String {
+        return discordFormat(for: selectedDate, in: selectedTimeZone, with: selectedFormatStyle.code, appendRelative: appendRelative)
     }
     
     var body: some View {
@@ -43,7 +38,7 @@ struct TimeCodeGeneratorView: View, KeyboardReadable {
                     
                     VStack(spacing: 0) {
                     
-                        DiscordFormattedDate(text: discordFormat)
+                        DiscordFormattedDate(text: discordFormatString)
                             .padding(.bottom, 8)
                         
                         Text("Date and time representative of components only; may not match exact Discord formatting.")
@@ -65,7 +60,7 @@ struct TimeCodeGeneratorView: View, KeyboardReadable {
                 }
             }
             if !isKeyboardVisible {
-                ResultSheet(selectedDate: selectedDate, selectedTimeZone: selectedTimeZone, discordFormat: discordFormat, appendRelative: appendRelative, showLocalTimeInstead: $showLocalTimeInstead, selectedFormatStyle: $selectedFormatStyle)
+                ResultSheet(selectedDate: selectedDate, selectedTimeZone: selectedTimeZone, discordFormat: discordFormatString, appendRelative: appendRelative, showLocalTimeInstead: $showLocalTimeInstead, selectedFormatStyle: $selectedFormatStyle)
                     .opacity(showResultsSheet ? 1 : 0)
                     .background(GeometryReader { geometry in
                         Color.clear.preference(
