@@ -94,5 +94,8 @@ func stringForTimesAndFlags<TZSequence>(of date: Date, in sourceZone: TimeZone, 
 
 func filter<TZSequence>(timezones: TZSequence, by searchTerm: String) -> [TimeZone] where TZSequence: Collection, TZSequence.Element == TimeZone {
     let st = searchTerm.trimmingCharacters(in: .whitespaces).lowercased().replacingOccurrences(of: " ", with: "_")
+    guard !st.isEmpty else {
+        return Array(timezones)
+    }
     return timezones.filter { $0.matches(searchTerm: st) }
 }
