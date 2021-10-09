@@ -120,7 +120,9 @@
 		63A90DF926F60BF600CACCB9 /* CopyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A90DF726F60AB700CACCB9 /* CopyButton.swift */; };
 		63A915F726FB42CE0027B18D /* StarUnstarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A915F626FB42CE0027B18D /* StarUnstarButton.swift */; };
 		63A915F826FB42D60027B18D /* StarUnstarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A915F626FB42CE0027B18D /* StarUnstarButton.swift */; };
+		63B0886227108DEF00CA9980 /* TimeListIntentHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B0886127108DEF00CA9980 /* TimeListIntentHandling.swift */; };
 		63B08863271097AF00CA9980 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9BD45026EEA11900383233 /* UserDefaults.swift */; };
+		63B0886527109E6200CA9980 /* CommonResolution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B0886427109E6200CA9980 /* CommonResolution.swift */; };
 		63C51BA526F9C9C900145662 /* SelectTimeZoneWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C51BA426F9C9C900145662 /* SelectTimeZoneWindowController.swift */; };
 		63C51BA726FA32D400145662 /* FavouriteIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C51BA626FA32D400145662 /* FavouriteIndicator.swift */; };
 		63C51BA826FA333200145662 /* FavouriteIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C51BA626FA32D400145662 /* FavouriteIndicator.swift */; };
@@ -256,6 +258,8 @@
 		63A90DF326F5F3A000CACCB9 /* MacContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacContentView.swift; sourceTree = "<group>"; };
 		63A90DF726F60AB700CACCB9 /* CopyButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyButton.swift; sourceTree = "<group>"; };
 		63A915F626FB42CE0027B18D /* StarUnstarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarUnstarButton.swift; sourceTree = "<group>"; };
+		63B0886127108DEF00CA9980 /* TimeListIntentHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeListIntentHandling.swift; sourceTree = "<group>"; };
+		63B0886427109E6200CA9980 /* CommonResolution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonResolution.swift; sourceTree = "<group>"; };
 		63C51BA426F9C9C900145662 /* SelectTimeZoneWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTimeZoneWindowController.swift; sourceTree = "<group>"; };
 		63C51BA626FA32D400145662 /* FavouriteIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteIndicator.swift; sourceTree = "<group>"; };
 		63C51BAA26FA343600145662 /* TimeZoneChoiceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeZoneChoiceCell.swift; sourceTree = "<group>"; };
@@ -497,9 +501,11 @@
 				637839B326EBF7F90055A10D /* Extensions */,
 				6378399126EBF4750055A10D /* IntentHandler.swift */,
 				637839B126EBF5FD0055A10D /* ConvertTimeIntentHandling.swift */,
+				63B0886127108DEF00CA9980 /* TimeListIntentHandling.swift */,
 				637839AF26EBF4910055A10D /* Intents.intentdefinition */,
 				D5F5DE5F26ED1C9800851D98 /* Info.plist */,
 				637839C026ECBA5B0055A10D /* NSUserInfoKeys.swift */,
+				63B0886427109E6200CA9980 /* CommonResolution.swift */,
 			);
 			path = "Discord Helper Intents";
 			sourceTree = "<group>";
@@ -963,9 +969,11 @@
 				63B08863271097AF00CA9980 /* UserDefaults.swift in Sources */,
 				637839BE26ECB8CE0055A10D /* Loggers.swift in Sources */,
 				637839B226EBF5FD0055A10D /* ConvertTimeIntentHandling.swift in Sources */,
+				63B0886227108DEF00CA9980 /* TimeListIntentHandling.swift in Sources */,
 				5E9BD45A26EF45FB00383233 /* DateHelpers.swift in Sources */,
 				5E9BD45B26EF460D00383233 /* TimeZoneFlags.swift in Sources */,
 				637839B826ECAF830055A10D /* InTimeZoneExtension.swift in Sources */,
+				63B0886527109E6200CA9980 /* CommonResolution.swift in Sources */,
 				637839C126ECBA5B0055A10D /* NSUserInfoKeys.swift in Sources */,
 				638A72D72711B77300E0171D /* TimeZone.swift in Sources */,
 			);

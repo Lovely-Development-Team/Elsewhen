@@ -15,6 +15,8 @@ class IntentHandler: INExtension {
         switch intent {
         case is ConvertTimeIntent:
             return ConvertTimeIntentHandler()
+        case is GetTimeListIntent:
+            return TimeListIntentHandling()
         default:
             return self
         }

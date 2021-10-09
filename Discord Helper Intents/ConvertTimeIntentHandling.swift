@@ -29,14 +29,7 @@ class ConvertTimeIntentHandler: NSObject, ConvertTimeIntentHandling {
     }
     
     func provideTimezoneOptionsCollection(for intent: ConvertTimeIntent, searchTerm: String?, with completion: @escaping (INObjectCollection<INTimezone>?, Error?) -> Void) {
-        if let searchTerm = searchTerm {
-            let searchResults = TimeZone.filtered(by: searchTerm)
-            let convertedTimezones = searchResults.map { INTimezone(from: $0) }
-            completion(.init(items: convertedTimezones), nil)
-        } else {
-            let searchResults = TimeZone.filtered(by: "")
-            let convertedTimezones = searchResults.map { INTimezone(from: $0) }
-            completion(.init(items: convertedTimezones), nil)        }
+        completion(.init(items: timezoneOptions(in: .all, for: searchTerm)), nil)
     }
     
     func handle(intent: ConvertTimeIntent, completion: @escaping (ConvertTimeIntentResponse) -> Void) {

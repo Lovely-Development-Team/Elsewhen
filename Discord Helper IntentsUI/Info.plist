@@ -9,6 +9,7 @@
 			<key>IntentsSupported</key>
 			<array>
 				<string>ConvertTimeIntent</string>
+				<string>GetTimeListIntent</string>
 			</array>
 		</dict>
 		<key>NSExtensionMainStoryboard</key>

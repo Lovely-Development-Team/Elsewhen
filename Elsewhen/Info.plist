@@ -5,6 +5,7 @@
 	<key>NSUserActivityTypes</key>
 	<array>
 		<string>ConvertTimeIntent</string>
+		<string>GetTimeListIntent</string>
 	</array>
 </dict>
 </plist>
