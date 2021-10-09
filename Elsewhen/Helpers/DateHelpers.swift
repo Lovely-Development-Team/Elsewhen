@@ -72,11 +72,26 @@ func discordFormat(for date: Date, in timezone: TimeZone, with formatCode: Forma
     if appendRelative && formatCode != .R {
         return formattedString + " (<t:\(timeIntervalSince1970):\(relativeDateFormat.code.rawValue)>)"
     }
-    
-    return "<t:\(timeIntervalSince1970):\(formatCode.rawValue)>"
+    return formattedString
 }
 
-    
+func selectedTimeInZone(_ date: Date, _ zone: TimeZone) -> String {
+    let df = DateFormatter()
+    df.dateStyle = .none
+    df.timeStyle = .short
+    df.timeZone = zone
+    return df.string(from: convert(date: date, from: zone, to: TimeZone.current))
+}
+
+func generateTimesAndFlagsString<TZSequence>(of date: Date, in tz: TimeZone, for timezones: TZSequence) -> String where TZSequence: Collection, TZSequence.Element == TimeZone {
+    var text = "\n"
+    for tz in timezones {
+        let abbr = tz.fudgedAbbreviation(for: date) ?? ""
+        text += "\(flagForTimeZone(tz)) - \(selectedTimeInZone(date, tz)) \(abbr)\n"
+    }
+    return text
+}
+
 func filter(timezones: [TimeZone], by searchTerm: String) -> [TimeZone] {
     let st = searchTerm.trimmingCharacters(in: .whitespaces).lowercased().replacingOccurrences(of: " ", with: "_")
     return timezones.filter { $0.matches(searchTerm: st) }

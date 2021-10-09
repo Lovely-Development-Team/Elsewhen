@@ -28,21 +28,8 @@ struct MykeMode: View {
     @State private var showTimeZonePopover: Bool = false
     @State private var selectionViewMaxHeight: CGFloat?
     
-    func selectedTimeInZone(_ zone: TimeZone) -> String {
-        let df = DateFormatter()
-        df.dateStyle = .none
-        df.timeStyle = .short
-        df.timeZone = zone
-        return df.string(from: convert(date: selectedDate, from: selectedTimeZone, to: TimeZone.current))
-    }
-    
     func generateTimesAndFlagsText() -> String {
-        var text = "\n"
-        for tz in selectedTimeZones {
-            let abbr = tz.fudgedAbbreviation(for: selectedDate) ?? ""
-            text += "\(flagForTimeZone(tz)) - \(selectedTimeInZone(tz)) \(abbr)\n"
-        }
-        return text
+        generateTimesAndFlagsString(of: selectedDate, in: selectedTimeZone, for: selectedTimeZones)
     }
     
     func flagForTimeZone(_ tz: TimeZone) -> String {
@@ -109,7 +96,7 @@ struct MykeMode: View {
             
             List {
                 ForEach(selectedTimeZones, id: \.self) { tz in
-                    SelectedTimeZoneCell(tz: tz, flag: flagForTimeZone(tz), timeInZone: selectedTimeInZone(tz), selectedDate: selectedDate)
+                    SelectedTimeZoneCell(tz: tz, flag: flagForTimeZone(tz), timeInZone: selectedTimeInZone(selectedDate, tz), selectedDate: selectedDate)
                         .onTapGesture {
                             if tz.isMemberOfEuropeanUnion {
                                 #if os(iOS)
