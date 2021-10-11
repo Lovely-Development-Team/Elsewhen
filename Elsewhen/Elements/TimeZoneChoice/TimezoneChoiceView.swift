@@ -19,9 +19,13 @@ struct TimezoneChoiceView: View {
     @State private var favouriteTimeZones: Set<TimeZone> = []
     
     private var sortedFilteredTimeZones: [TimeZone] {
-        TimeZone.filtered(by: searchTerm).sorted {
+        let selectedTimeZonesSet = Set(selectedTimeZones)
+        return TimeZone.filtered(by: searchTerm).sorted {
             let t0IsFavourite = favouriteTimeZones.contains($0)
             let t1IsFavourite = favouriteTimeZones.contains($1)
+            let t0IsSelected = selectedTimeZonesSet.contains($0)
+            let t1IsSelected = selectedTimeZonesSet.contains($1)
+            
             if t0IsFavourite && t1IsFavourite {
                 return $0.identifier < $1.identifier
             }
@@ -31,6 +35,17 @@ struct TimezoneChoiceView: View {
             if t1IsFavourite {
                 return false
             }
+            
+            if t0IsSelected && t1IsSelected {
+                return $0.identifier < $1.identifier
+            }
+            if t0IsSelected {
+                return true
+            }
+            if t1IsSelected {
+                return false
+            }
+            
             return $0.identifier < $1.identifier
         }
     }
