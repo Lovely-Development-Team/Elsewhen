@@ -215,9 +215,9 @@
 	<key>INIntentDefinitionNamespace</key>
 	<string>ypDtPf</string>
 	<key>INIntentDefinitionSystemVersion</key>
-	<string>20G95</string>
+	<string>20G165</string>
 	<key>INIntentDefinitionToolsBuildVersion</key>
-	<string>13A5212g</string>
+	<string>13A233</string>
 	<key>INIntentDefinitionToolsVersion</key>
 	<string>13.0</string>
 	<key>INIntents</key>
@@ -508,6 +508,8 @@
 			<string>download</string>
 			<key>INIntentConfigurable</key>
 			<true/>
+			<key>INIntentDescription</key>
+			<string>Convert a time into the local time in a set of other timezones</string>
 			<key>INIntentDescriptionID</key>
 			<string>P0Iyrz</string>
 			<key>INIntentLastParameterTag</key>
