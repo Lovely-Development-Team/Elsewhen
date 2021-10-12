@@ -10,6 +10,9 @@ import UniformTypeIdentifiers
 
 struct TimeCodeGeneratorView: View, KeyboardReadable {
     
+    @EnvironmentObject private var orientationObserver: OrientationObserver
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    
     @State private var selectedDate = Date()
     @State private var selectedTimeZone: TimeZone = TimeZone.current
     @State private var selectedFormatStyle: DateFormat = dateFormats[0]
@@ -28,38 +31,68 @@ struct TimeCodeGeneratorView: View, KeyboardReadable {
     }
     
     var body: some View {
+        
         ZStack(alignment: .bottom) {
             
-            VStack(spacing: 0) {
-                Rectangle().fill(Color.clear).frame(height: 1)
-                ScrollView {
+            if orientationObserver.currentOrientation == .landscape && horizontalSizeClass == .regular {
+                
+                VStack {
+                                    
+                    DateTimeSelection(selectedFormatStyle: $selectedFormatStyle, selectedDate: $selectedDate, selectedTimeZone: $selectedTimeZone, appendRelative: $appendRelative, showLocalTimeInstead: $showLocalTimeInstead)
+                        .padding(.top, 30)
                     
-                    DateTimeSelection(selectedFormatStyle: $selectedFormatStyle, selectedDate: $selectedDate, selectedTimeZone: $selectedTimeZone, appendRelative: $appendRelative)
+                    Spacer()
                     
-                    VStack(spacing: 0) {
-                    
-                        DiscordFormattedDate(text: discordFormatString)
-                            .padding(.bottom, 8)
-                        
+                    HStack {
                         Text("Date and time representative of components only; may not match exact Discord formatting.")
                             .multilineTextAlignment(.center)
                             .font(.caption2)
                             .foregroundColor(.secondary)
                             .padding(.horizontal)
-                            .padding(.bottom, 20)
                         
                         EasterEggButton {
                             showEasterEggSheet = true
                         }
-                        .padding(.vertical, 5)
-                        
                     }
-                    .padding(.horizontal)
-                    .padding(.bottom, (resultSheetMaxHeight ?? 0))
+                    .padding(.bottom, 20)
                     
                 }
+                
+            } else {
+            
+                VStack(spacing: 0) {
+                    Rectangle().fill(Color.clear).frame(height: 1)
+                    ScrollView {
+                        
+                        DateTimeSelection(selectedFormatStyle: $selectedFormatStyle, selectedDate: $selectedDate, selectedTimeZone: $selectedTimeZone, appendRelative: $appendRelative, showLocalTimeInstead: $showLocalTimeInstead)
+                        
+                        VStack(spacing: 0) {
+                            
+                            DiscordFormattedDate(text: discordFormatString)
+                                .padding(.bottom, 8)
+                            
+                            Text("Date and time representative of components only; may not match exact Discord formatting.")
+                                .multilineTextAlignment(.center)
+                                .font(.caption2)
+                                .foregroundColor(.secondary)
+                                .padding(.horizontal)
+                                .padding(.bottom, 20)
+                            
+                            EasterEggButton {
+                                showEasterEggSheet = true
+                            }
+                            .padding(.vertical, 5)
+                            
+                        }
+                        .padding(.horizontal)
+                        .padding(.bottom, (resultSheetMaxHeight ?? 0))
+                        
+                    }
+                }
+                
             }
-            if !isKeyboardVisible {
+            
+            if !isKeyboardVisible && (orientationObserver.currentOrientation == .portrait || horizontalSizeClass == .compact) {
                 ResultSheet(selectedDate: selectedDate, selectedTimeZone: selectedTimeZone, discordFormat: discordFormatString, appendRelative: appendRelative, showLocalTimeInstead: $showLocalTimeInstead, selectedFormatStyle: $selectedFormatStyle)
                     .opacity(showResultsSheet ? 1 : 0)
                     .background(GeometryReader { geometry in
@@ -72,7 +105,9 @@ struct TimeCodeGeneratorView: View, KeyboardReadable {
                         resultSheetMaxHeight = $0
                     }
                     .offset(x: 0.0, y: resultsSheetOffset)
+                    .padding(.horizontal)
             }
+            
         }
         .onChange(of: selectedTimeZone) { _ in
             showLocalTimeInstead = false
@@ -112,6 +147,10 @@ private extension TimeCodeGeneratorView {
 
 struct TimeCodeGeneratorView_Previews: PreviewProvider {
     static var previews: some View {
-        TimeCodeGeneratorView()
+        if #available(iOS 15.0, *) {
+            TimeCodeGeneratorView().previewInterfaceOrientation(.landscapeLeft)
+        } else {
+            TimeCodeGeneratorView()
+        }
     }
 }
