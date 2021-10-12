@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5E5F42B827163E510022C7D1 /* Orientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5F42B727163E500022C7D1 /* Orientation.swift */; };
 		5E9BD45126EEA11900383233 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9BD45026EEA11900383233 /* UserDefaults.swift */; };
 		5E9BD45526EF446900383233 /* DateHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9BD45226EF446900383233 /* DateHelpers.swift */; };
 		5E9BD45626EF446900383233 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9BD45326EF446900383233 /* SearchBar.swift */; };
@@ -178,6 +179,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		5E5F42B727163E500022C7D1 /* Orientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Orientation.swift; sourceTree = "<group>"; };
 		5E9BD45026EEA11900383233 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		5E9BD45226EF446900383233 /* DateHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateHelpers.swift; sourceTree = "<group>"; };
 		5E9BD45326EF446900383233 /* SearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
@@ -390,6 +392,7 @@
 				63DDFB9B26F23DF00021ACFD /* DeviceType.swift */,
 				5EE2D2CE26F28CE000D61875 /* KeyboardHelpers.swift */,
 				6346AD9926F3C33D00E406D0 /* PasteboardHelpers.swift */,
+				5E5F42B727163E500022C7D1 /* Orientation.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -869,6 +872,7 @@
 				63A90DD026F4295F00CACCB9 /* Bundle.swift in Sources */,
 				637839CB26ED11360055A10D /* TimeZone+ItemProvider.swift in Sources */,
 				6378398326EB80C30055A10D /* ResultSheet.swift in Sources */,
+				5E5F42B827163E510022C7D1 /* Orientation.swift in Sources */,
 				63C51BA726FA32D400145662 /* FavouriteIndicator.swift in Sources */,
 				5E9BD45126EEA11900383233 /* UserDefaults.swift in Sources */,
 				635C8FA726E66E8300361B08 /* DiscordFormattedDate.swift in Sources */,
