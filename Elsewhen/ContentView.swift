@@ -48,6 +48,10 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        if #available(iOS 15.0, *) {
+            ContentView().previewInterfaceOrientation(.landscapeRight).environmentObject(OrientationObserver.shared)
+        } else {
+            ContentView()
+        }
     }
 }
