@@ -127,7 +127,22 @@ struct MykeMode: View {
             
             if orientationObserver.currentOrientation == .landscape && horizontalSizeClass == .regular {
                 
+                HStack(alignment: .top) {
                 
+                    VStack {
+                        Text("Time Zone List")
+                            .font(.title)
+                            .padding()
+                            .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                        timeZoneList
+                    }
+                    
+                    VStack {
+                        dateTimeZonePicker
+                    }
+                    .padding()
+                    
+                }
                 
             } else {
         
