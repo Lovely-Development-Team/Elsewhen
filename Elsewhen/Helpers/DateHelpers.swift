@@ -83,11 +83,17 @@ func stringFor(time date: Date, in zone: TimeZone, sourceZone: TimeZone) -> Stri
     return df.string(from: convert(date: date, from: sourceZone, to: TimeZone.current))
 }
 
-func stringForTimesAndFlags<TZSequence>(of date: Date, in sourceZone: TimeZone, for timezones: TZSequence) -> String where TZSequence: Collection, TZSequence.Element == TimeZone {
+func stringForTimesAndFlags<TZSequence>(of date: Date, in sourceZone: TimeZone, for timezones: TZSequence, timeZonesUsingEUFlag: Set<TimeZone>) -> String where TZSequence: Collection, TZSequence.Element == TimeZone {
     var text = "\n"
     for tz in timezones {
         let abbr = tz.fudgedAbbreviation(for: date) ?? ""
-        text += "\(flagForTimeZone(tz)) - \(stringFor(time: date, in: tz, sourceZone: sourceZone)) \(abbr)\n"
+        let flag: String
+        if timeZonesUsingEUFlag.contains(tz) {
+            flag = "🇪🇺"
+        } else {
+            flag = flagForTimeZone(tz)
+        }
+        text += "\(flag) - \(stringFor(time: date, in: tz, sourceZone: sourceZone)) \(abbr)\n"
     }
     return text
 }
