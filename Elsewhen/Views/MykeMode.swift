@@ -32,7 +32,7 @@ struct MykeMode: View {
     @State private var selectionViewMaxHeight: CGFloat?
     
     func generateTimesAndFlagsText() -> String {
-        stringForTimesAndFlags(of: selectedDate, in: selectedTimeZone, for: selectedTimeZones)
+        stringForTimesAndFlags(of: selectedDate, in: selectedTimeZone, for: selectedTimeZones, timeZonesUsingEUFlag: timeZonesUsingEUFlag)
     }
     
     func flagForTimeZone(_ tz: TimeZone) -> String {
@@ -139,6 +139,17 @@ struct MykeMode: View {
                     
                     VStack {
                         dateTimeZonePicker
+                        
+                        Group {
+                            Text("Text to be copied:")
+                                .padding(.top)
+                            Text(generateTimesAndFlagsText())
+                                .padding(.horizontal)
+                        }
+                        .foregroundColor(.secondary)
+                        .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                        .padding(.horizontal, 8)
+                        
                     }
                     .padding()
                     
