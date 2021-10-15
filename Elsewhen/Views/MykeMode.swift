@@ -114,6 +114,7 @@ struct MykeMode: View {
                 Spacer()
                 
                 CopyButton(text: "Copy", generateText: generateTimesAndFlagsText, showCopied: $showCopied)
+                ShareButton(generateText: generateTimesAndFlagsText)
                 
             }
             .padding(.horizontal, 8)

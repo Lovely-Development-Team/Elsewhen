@@ -92,11 +92,12 @@ struct ResultSheet: View {
                 }
             }
             
-            Group {
+            HStack {
+                Image(systemName: "square.and.arrow.up").opacity(0)
                 CopyButton(text: "Copy Discord Code", generateText: { self.discordFormat }, showCopied: $showCopied)
-                .padding(.bottom, 8)
-                
+                ShareButton(generateText: { self.discordFormat })
             }
+            .padding(.bottom, 8)
             .padding(.horizontal)
             
         }
