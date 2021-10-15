@@ -1,5 +1,5 @@
 *                     @Lovely-Development-Team/mottobotto-builders
 
-*.swift                  @dwrss @benbacardi @RosemaryOrchard @grey280
-*.xcodeproj/*            @dwrss @benbacardi @RosemaryOrchard @grey280
-CODEOWNERS               @dwrss @benbacardi @RosemaryOrchard @grey280
+*.swift                  @dwrss @benbacardi @RosemaryOrchard @majdkoshakji
+*.xcodeproj/*            @dwrss @benbacardi @RosemaryOrchard @majdkoshakji
+CODEOWNERS               @dwrss @benbacardi @RosemaryOrchard @majdkoshakji
