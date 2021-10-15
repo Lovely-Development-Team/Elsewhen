@@ -38,6 +38,10 @@ class OrientationObserver: ObservableObject {
             .store(in: &disposables)
     }
     
+    deinit {
+        UIDevice.current.endGeneratingDeviceOrientationNotifications()
+    }
+    
     func changeOrientation(to orientation: DeviceOrientation) {
         currentOrientation = orientation
     }
