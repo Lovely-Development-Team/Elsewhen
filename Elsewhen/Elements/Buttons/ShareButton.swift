@@ -11,7 +11,6 @@ struct ShareButton: View {
     
     let generateText: () -> String
     
-    @State private var showShareSheet: Bool = false
     @State private var showSharePopover: Bool = false
     
     var body: some View {
@@ -19,13 +18,10 @@ struct ShareButton: View {
             if DeviceType.isPad() {
                 showSharePopover = true
             } else {
-                showShareSheet = true
+                postShowShareSheet(with: [generateText()])
             }
         }) {
             Image(systemName: "square.and.arrow.up")
-        }
-        .sheet(isPresented: $showShareSheet) {
-            ActivityView(activityItems: [generateText()])
         }
         .popover(isPresented: $showSharePopover) {
             ActivityView(activityItems: [generateText()])
