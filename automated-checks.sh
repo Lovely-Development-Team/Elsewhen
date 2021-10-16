@@ -1,6 +1,6 @@
 set -ex
 FILE=build_app
-FILE_HASH=$(sha3sum $FILE)
+FILE_HASH=$(sha3sum $FILE || echo "")
 
 LAST_BUILD_FILE=last_build
 LAST_BUILD_HASH=$(cat $LAST_BUILD_FILE || echo "") 2>/dev/null
@@ -14,7 +14,7 @@ LAST_ICON_HASH=$((cat $LAST_ICON_FILE || echo "") 2>/dev/null)
 CHANGE_ICON=false
 
 # PR body
-BODY=$(cat $FILE)
+BODY=$(cat $FILE || echo "")
 
 PROJECT_FILE=$(find . -maxdepth 1 -name '*.xcodeproj')
 
@@ -42,9 +42,8 @@ if test -f "$FILE" -a "$FILE_HASH" != "$LAST_BUILD_HASH"; then
 	# Store hash of this build file
 	sha3sum $FILE > $LAST_BUILD_FILE
 	# Remove file & continue PR
-	rm $FILE
+	git rm $FILE || rm $FILE
 	git add "$PROJECT_FILE/project.pbxproj"
-	git add "$FILE"
 	if "$CHANGE_ICON" == "true"; then
 		git add Elsewhen/Assets.xcassets/AppIcon.appiconset/*
 	fi
