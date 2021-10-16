@@ -15,6 +15,7 @@ import os.log
 struct ContentView: View {
     
     @State private var selectedTab: Int = 0
+    @State private var showShareSheet: ShareSheetItem? = nil
     
     init() {
 #if canImport(UIKit)
@@ -45,7 +46,17 @@ struct ContentView: View {
                 .tag(1)
             
         }
-            
+        .sheet(item: $showShareSheet) { item in
+            #if !os(macOS)
+            ActivityView(activityItems: item.items)
+            #endif
+        }
+        .onReceive(NotificationCenter.default.publisher(for: .EWShouldOpenShareSheet, object: appDelegate())) { notification in
+            guard let activityItems = notification.userInfo?[ActivityItemsKey] as? [Any] else {
+                return
+            }
+            showShareSheet = .init(items: activityItems)
+        }
     }
     
 }
