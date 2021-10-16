@@ -11,6 +11,8 @@ import UIKit
 #endif
 
 enum DeviceType {
+    
+    @inlinable
     static func isPhone() -> Bool {
         #if os(iOS)
         return UIDevice.current.userInterfaceIdiom == .phone
@@ -19,6 +21,16 @@ enum DeviceType {
         #endif
     }
     
+    @inlinable
+    public static func isPad() -> Bool {
+        #if os(iOS)
+        return UIDevice().userInterfaceIdiom == .pad
+        #else
+        return false
+        #endif
+    }
+    
+    @inlinable
     static func isMac() -> Bool {
         #if os(macOS)
         return true
