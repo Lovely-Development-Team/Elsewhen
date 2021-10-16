@@ -8,10 +8,12 @@
 import SwiftUI
 import UniformTypeIdentifiers
 
-struct MykeMode: View {
+struct MykeMode: View, OrientationObserving {
     
+    #if !os(macOS)
     @EnvironmentObject private var orientationObserver: OrientationObserver
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    #endif
     
     @State private var selectedDate = Date()
     @State private var selectedTimeZone: TimeZone = TimeZone.current
@@ -114,7 +116,9 @@ struct MykeMode: View {
                 Spacer()
                 
                 CopyButton(text: "Copy", generateText: generateTimesAndFlagsText, showCopied: $showCopied)
+                #if !os(macOS)
                 ShareButton(generateText: generateTimesAndFlagsText)
+                #endif
                 
             }
             .padding(.horizontal, 8)
@@ -126,7 +130,7 @@ struct MykeMode: View {
         
         Group {
             
-            if orientationObserver.currentOrientation == .landscape && horizontalSizeClass == .regular {
+            if isOrientationLandscape && isRegularHorizontalSize {
                 
                 HStack(alignment: .top) {
                 
@@ -237,10 +241,14 @@ private extension MykeMode {
 
 struct MykeMode_Previews: PreviewProvider {
     static var previews: some View {
+        #if !os(macOS)
         if #available(iOS 15.0, *) {
             MykeMode().previewInterfaceOrientation(.landscapeLeft).environmentObject(OrientationObserver.shared)
         } else {
             MykeMode()
         }
+        #else
+        MykeMode()
+        #endif
     }
 }
