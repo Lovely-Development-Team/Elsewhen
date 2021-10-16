@@ -8,10 +8,12 @@
 import SwiftUI
 import UniformTypeIdentifiers
 
-struct TimeCodeGeneratorView: View, KeyboardReadable {
+struct TimeCodeGeneratorView: View, KeyboardReadable, OrientationObserving {
     
+    #if !os(macOS)
     @EnvironmentObject private var orientationObserver: OrientationObserver
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    #endif
     
     @State private var selectedDate = Date()
     @State private var selectedTimeZone: TimeZone = TimeZone.current
@@ -34,7 +36,7 @@ struct TimeCodeGeneratorView: View, KeyboardReadable {
         
         ZStack(alignment: .bottom) {
             
-            if orientationObserver.currentOrientation == .landscape && horizontalSizeClass == .regular {
+            if isOrientationLandscape && isRegularHorizontalSize {
                 
                 VStack {
                                     
@@ -92,7 +94,7 @@ struct TimeCodeGeneratorView: View, KeyboardReadable {
                 
             }
             
-            if !isKeyboardVisible && (orientationObserver.currentOrientation == .portrait || horizontalSizeClass == .compact) {
+            if !isKeyboardVisible && (isOrientationPortrait || isCompactHorizontalSize) {
                 ResultSheet(selectedDate: selectedDate, selectedTimeZone: selectedTimeZone, discordFormat: discordFormatString, appendRelative: appendRelative, showLocalTimeInstead: $showLocalTimeInstead, selectedFormatStyle: $selectedFormatStyle)
                     .opacity(showResultsSheet ? 1 : 0)
                     .background(GeometryReader { geometry in
@@ -147,10 +149,14 @@ private extension TimeCodeGeneratorView {
 
 struct TimeCodeGeneratorView_Previews: PreviewProvider {
     static var previews: some View {
+        #if !os(macOS)
         if #available(iOS 15.0, *) {
             TimeCodeGeneratorView().previewInterfaceOrientation(.landscapeLeft)
         } else {
             TimeCodeGeneratorView()
         }
+        #else
+        TimeCodeGeneratorView()
+        #endif
     }
 }

@@ -7,10 +7,12 @@
 
 import SwiftUI
 
-struct DateTimeSelection: View {
+struct DateTimeSelection: View, OrientationObserving {
     
+    #if !os(macOS)
     @EnvironmentObject private var orientationObserver: OrientationObserver
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    #endif
     
     @Binding var selectedFormatStyle: DateFormat
     @Binding var selectedDate: Date
@@ -68,7 +70,7 @@ struct DateTimeSelection: View {
     var body: some View {
         Group {
             
-            if orientationObserver.currentOrientation == .landscape && horizontalSizeClass == .regular {
+            if isOrientationLandscape && isRegularHorizontalSize {
                 
                 HStack(alignment: .top, spacing: 20) {
                     
