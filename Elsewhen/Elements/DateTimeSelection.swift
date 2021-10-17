@@ -10,8 +10,8 @@ import SwiftUI
 struct DateTimeSelection: View, OrientationObserving {
     
     #if !os(macOS)
-    @EnvironmentObject private var orientationObserver: OrientationObserver
-    @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    @EnvironmentObject internal var orientationObserver: OrientationObserver
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass: UserInterfaceSizeClass?
     #endif
     
     @Binding var selectedFormatStyle: DateFormat

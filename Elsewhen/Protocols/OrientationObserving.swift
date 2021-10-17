@@ -11,7 +11,7 @@ import SwiftUI
 protocol OrientationObserving {
     #if !os(macOS)
     var orientationObserver: OrientationObserver { get }
-    var horizontalSizeClass: UserInterfaceSizeClass { get }
+    var horizontalSizeClass: UserInterfaceSizeClass? { get }
     #endif
 }
 

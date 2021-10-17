@@ -11,7 +11,7 @@ import UniformTypeIdentifiers
 struct MykeMode: View, OrientationObserving {
     
     #if !os(macOS)
-    @EnvironmentObject private var orientationObserver: OrientationObserver
+    @EnvironmentObject internal var orientationObserver: OrientationObserver
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     #endif
     
