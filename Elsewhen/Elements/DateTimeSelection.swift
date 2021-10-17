@@ -9,10 +9,10 @@ import SwiftUI
 
 struct DateTimeSelection: View, OrientationObserving {
     
-    #if !os(macOS)
+#if !os(macOS)
     @EnvironmentObject internal var orientationObserver: OrientationObserver
     @Environment(\.horizontalSizeClass) var horizontalSizeClass: UserInterfaceSizeClass?
-    #endif
+#endif
     
     @Binding var selectedFormatStyle: DateFormat
     @Binding var selectedDate: Date
@@ -27,13 +27,14 @@ struct DateTimeSelection: View, OrientationObserving {
     @State private var dateFormatsMaxWidth: CGFloat?
     
     var relativeDateButtonBackground: Color {
-        guard appendRelative else {
-            return .secondary
-        }
         if selectedFormatStyle == relativeDateFormat {
             return Color.accentColor
         } else {
-            return Color.secondarySystemBackground
+            if appendRelative {
+                return Color.secondarySystemBackground
+            } else {
+                return .secondary
+            }
         }
     }
     
@@ -60,11 +61,23 @@ struct DateTimeSelection: View, OrientationObserving {
     
     private func reset() {
 #if os(iOS)
-            mediumImpactFeedbackGenerator.impactOccurred()
+        mediumImpactFeedbackGenerator.impactOccurred()
 #endif
-            self.selectedDate = Date()
-            self.selectedTimeZone = TimeZone.current
+        self.selectedDate = Date()
+        self.selectedTimeZone = TimeZone.current
         
+    }
+    
+    private func switchToRelativeFormat() {
+        mediumImpactFeedbackGenerator.impactOccurred()
+        self.selectedFormatStyle = relativeDateFormat
+        self.appendRelative = false
+    }
+    
+    private func toggleAppendRelativeFormat() {
+        if self.selectedFormatStyle != relativeDateFormat {
+            self.appendRelative.toggle()
+        }
     }
     
     var body: some View {
@@ -88,7 +101,7 @@ struct DateTimeSelection: View, OrientationObserving {
                     VStack {
                         
                         VStack(alignment: .leading) {
-                        
+                            
                             ForEach(dateFormats, id: \.self) { formatStyle in
                                 Button(action: {
                                     formatStyleTapped(formatStyle)
@@ -104,11 +117,7 @@ struct DateTimeSelection: View, OrientationObserving {
                             
                             Divider()
                             
-                            Button(action: {
-                                if self.selectedFormatStyle != relativeDateFormat {
-                                    self.appendRelative.toggle()
-                                }
-                            }) {
+                            Button(action: {}) {
                                 HStack {
                                     Label(relativeDateFormat.name, systemImage: relativeDateFormat.icon)
                                         .labelStyle(IconOnlyLabelStyle())
@@ -124,6 +133,8 @@ struct DateTimeSelection: View, OrientationObserving {
                                         .foregroundColor(appendRelative || selectedFormatStyle == relativeDateFormat ? Color.accentColor : Color.secondary)
                                 }
                                 .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                                .onTapGesture(perform: toggleAppendRelativeFormat)
+                                .onLongPressGesture(perform: switchToRelativeFormat)
                             }
                             
                         }
@@ -140,7 +151,7 @@ struct DateTimeSelection: View, OrientationObserving {
                 .padding(20)
                 
             } else {
-            
+                
                 DateTimeZonePicker(selectedDate: $selectedDate, selectedTimeZone: $selectedTimeZone, maxWidth: dateFormatsMaxWidth)
                 
                 HStack(spacing: 5) {
@@ -159,11 +170,7 @@ struct DateTimeSelection: View, OrientationObserving {
                                 )
                         }.buttonStyle(PlainButtonStyle())
                     }
-                    Button(action: {
-                        if self.selectedFormatStyle != relativeDateFormat {
-                            self.appendRelative.toggle()
-                        }
-                    }) {
+                    Button(action: {}) {
                         Label(relativeDateFormat.name, systemImage: relativeDateFormat.icon)
                             .labelStyle(IconOnlyLabelStyle())
                             .foregroundColor(appendRelative && selectedFormatStyle != relativeDateFormat ? .secondary : .white)
@@ -174,7 +181,9 @@ struct DateTimeSelection: View, OrientationObserving {
                                     .strokeBorder(appendRelative && selectedFormatStyle != relativeDateFormat ? Color.accentColor : Color.clear, lineWidth: 3)
                                     .background(RoundedRectangle(cornerRadius: 10, style: .continuous).fill(relativeDateButtonBackground))
                             )
-                    }.buttonStyle(PlainButtonStyle())
+                            .onTapGesture(perform: toggleAppendRelativeFormat)
+                            .onLongPressGesture(perform: switchToRelativeFormat)
+                    }
                 }
                 .padding(.bottom, 10)
                 .background(GeometryReader { geometry in
