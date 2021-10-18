@@ -169,6 +169,7 @@ struct MykeMode: View, OrientationObserving {
                         
                     }
                     .padding(.horizontal, 8)
+                    .padding(.bottom, 10)
                     .frame(minWidth: 0, maxWidth: 390)
                     .background(GeometryReader { geometry in
                         Color.clear.preference(
