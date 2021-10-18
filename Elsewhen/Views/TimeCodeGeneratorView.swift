@@ -42,6 +42,7 @@ struct TimeCodeGeneratorView: View, KeyboardReadable, OrientationObserving {
                                     
                     DateTimeSelection(selectedFormatStyle: $selectedFormatStyle, selectedDate: $selectedDate, selectedTimeZone: $selectedTimeZone, appendRelative: $appendRelative, showLocalTimeInstead: $showLocalTimeInstead)
                         .padding(.top, 30)
+                        .accessibilitySortPriority(2)
                     
                     Spacer()
                     
@@ -57,8 +58,10 @@ struct TimeCodeGeneratorView: View, KeyboardReadable, OrientationObserving {
                         }
                     }
                     .padding(.bottom, 20)
+                    .accessibilitySortPriority(0)
                     
                 }
+                .accessibilitySortPriority(2)
                 
             } else {
             
@@ -67,6 +70,7 @@ struct TimeCodeGeneratorView: View, KeyboardReadable, OrientationObserving {
                     ScrollView {
                         
                         DateTimeSelection(selectedFormatStyle: $selectedFormatStyle, selectedDate: $selectedDate, selectedTimeZone: $selectedTimeZone, appendRelative: $appendRelative, showLocalTimeInstead: $showLocalTimeInstead)
+                            .accessibilitySortPriority(2)
                         
                         VStack(spacing: 0) {
                             
@@ -88,9 +92,11 @@ struct TimeCodeGeneratorView: View, KeyboardReadable, OrientationObserving {
                         }
                         .padding(.horizontal)
                         .padding(.bottom, (resultSheetMaxHeight ?? 0))
+                        .accessibilitySortPriority(0)
                         
                     }
                 }
+                .accessibilitySortPriority(2)
                 
             }
             
@@ -108,9 +114,11 @@ struct TimeCodeGeneratorView: View, KeyboardReadable, OrientationObserving {
                     }
                     .offset(x: 0.0, y: resultsSheetOffset)
                     .padding(.horizontal)
+                    .accessibilitySortPriority(1)
             }
             
         }
+        .accessibilityElement(children: .contain)
         .onChange(of: selectedTimeZone) { _ in
             showLocalTimeInstead = false
         }
