@@ -81,6 +81,7 @@ struct DateTimeZonePicker: View {
                     #else
                     DatePicker("Time", selection: $selectedDate, displayedComponents: [.hourAndMinute])
                         .datePickerStyle(Self.timePickerStyle)
+                        .labelsHidden()
                     #endif
                 }
             }

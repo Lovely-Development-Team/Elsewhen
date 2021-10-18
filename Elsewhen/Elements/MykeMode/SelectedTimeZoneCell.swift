@@ -20,6 +20,7 @@ struct SelectedTimeZoneCell: View {
                     .font(.caption)
                     .foregroundColor(.secondary)
                 Text("\(flag) \(timeInZone)")
+                    .accessibility(hidden: true)
             }
             Spacer()
             if let abbreviation = tz.fudgedAbbreviation(for: selectedDate) {
@@ -27,6 +28,7 @@ struct SelectedTimeZoneCell: View {
                     .foregroundColor(.secondary)
             }
         }
+        .accessibilityElement(children: .combine)
         .contentShape(Rectangle())
         .onDrag {
             let tzItemProvider = tz.itemProvider

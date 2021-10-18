@@ -15,6 +15,7 @@ struct DiscordFormattedDate: View {
         Text(text)
             .font(.system(.body, design: .monospaced))
             .multilineTextAlignment(.center)
+            .accessibility(hidden: true)
             .foregroundColor(.secondary)
             .onDrag {
                 return NSItemProvider(item: text.data(using: .utf8)! as NSData, typeIdentifier: UTType.utf8PlainText.identifier)

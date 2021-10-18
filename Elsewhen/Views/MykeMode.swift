@@ -91,7 +91,6 @@ struct MykeMode: View, OrientationObserving {
         Group {
             
             DateTimeZonePicker(selectedDate: $selectedDate, selectedTimeZone: $selectedTimeZone, showDate: false, maxWidth: nil)
-                .labelsHidden()
                 .padding(.top, 5)
                 .padding(.horizontal, 8)
             
