@@ -15,20 +15,20 @@ struct DeleteButton: View {
         Button {
             onPress()
         } label: {
-            Label("Delete", systemImage: "trash")
+            Label("Remove from List", systemImage: "trash")
         }
         #else
         if #available(iOS 15.0, *) {
             Button(role: .destructive) {
                 onPress()
             } label: {
-                Label("Delete", systemImage: "trash")
+                Label("Remove from List", systemImage: "trash")
             }
         } else {
             Button {
                 onPress()
             } label: {
-                Label("Delete", systemImage: "trash")
+                Label("Remove from List", systemImage: "trash")
             }
         }
         #endif

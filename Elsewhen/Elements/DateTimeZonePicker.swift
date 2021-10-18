@@ -19,27 +19,31 @@ struct DateTimeZonePicker: View {
     @State private var showTimeZoneChoicePopover: Bool = false
     @State private var selectTimeZoneButtonMaxWidth: CGFloat?
     
-    #if os(macOS)
+#if os(macOS)
     static let timePickerStyle = DefaultDatePickerStyle()
-    #else
+#else
     static let timePickerStyle = GraphicalDatePickerStyle.graphical
-    #endif
+#endif
     
-    #if os(macOS)
+#if os(macOS)
     static let frameMaxWidth: CGFloat = .infinity
-    #else
+#else
     static let frameMaxWidth: CGFloat = 390
-    #endif
+#endif
     
-    #if os(macOS)
+#if os(macOS)
     @State private var isPresentingDatePopover = false
-    #endif
+#endif
+    
+#if os(iOS)
+    let mediumImpactFeedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
+#endif
     
     var body: some View {
         Group {
             
             if showDate {
-                #if os(macOS)
+#if os(macOS)
                 VStack {
                     Button {
                         isPresentingDatePopover = true
@@ -64,25 +68,34 @@ struct DateTimeZonePicker: View {
                 // Need to figure out the "proper" way to remove the datepicker's padding,
                 // 16 is just a fudge value that looks okay by-eye.
                 .frame(maxWidth: maxWidth.map { $0 + 16 })
-                #else
+#else
                 DatePicker("Date", selection: $selectedDate)
                     .datePickerStyle(.graphical)
                     .padding(.top)
-                #endif
+#endif
             } else {
                 HStack {
                     Text("Time")
                         .fontWeight(.semibold)
                     Spacer()
-                    #if os(macOS)
+#if os(macOS)
                     DatePicker("Time", selection: $selectedDate, displayedComponents: [.hourAndMinute])
                         .datePickerStyle(Self.timePickerStyle)
                         .frame(maxWidth: selectTimeZoneButtonMaxWidth)
-                    #else
+#else
                     DatePicker("Time", selection: $selectedDate, displayedComponents: [.hourAndMinute])
                         .datePickerStyle(Self.timePickerStyle)
                         .labelsHidden()
-                    #endif
+                    Button(action: {
+#if os(iOS)
+                        mediumImpactFeedbackGenerator.impactOccurred()
+#endif
+                        self.selectedDate = Date()
+                        
+                    }) {
+                        Text("Now")
+                    }
+#endif
                 }
             }
             
@@ -91,11 +104,11 @@ struct DateTimeZonePicker: View {
                     .fontWeight(.semibold)
                 Spacer()
                 SelectTimeZoneButton(selectedTimeZone: $selectedTimeZone) {
-                    #if os(macOS)
+#if os(macOS)
                     showTimeZoneChoicePopover = true
-                    #else
+#else
                     self.showTimeZoneChoiceSheet = true
-                    #endif
+#endif
                 }
                 .background(GeometryReader { geometry in
                     Color.clear.preference(
