@@ -97,7 +97,9 @@ struct MykeMode: View, OrientationObserving {
             #endif
         }) {
             Text("Choose time zones…")
+            #if os(macOS)
                 .foregroundColor(.primary)
+            #endif
         }
         .popover(isPresented: $showTimeZonePopover, arrowEdge: .leading) {
             TimezoneChoiceView(selectedTimeZone: .constant(TimeZone.current), selectedTimeZones: $selectedTimeZones, selectedDate: $selectedDate, selectMultiple: true)
