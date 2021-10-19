@@ -21,7 +21,7 @@ struct ContentView: View {
 #if canImport(UIKit)
         // Disables the shadow pixel above the topbar
         UITabBar.appearance().clipsToBounds = true
-
+        
         // Forces an opaque background on the tabbar, regardless of what is below it.
         UITabBar.appearance().isTranslucent = true
         UITabBar.appearance().backgroundColor = UIColor.secondarySystemBackground
@@ -30,18 +30,18 @@ struct ContentView: View {
     }
     
     var body: some View {
-        #if os(macOS)
-        Spacer()
-        #endif
-        
         TabView(selection: $selectedTab) {
-        
+            
             TimeCodeGeneratorView()
+#if !os(macOS)
                 .overlay(Rectangle().frame(width: nil, height: 1, alignment: .bottom).foregroundColor(Color.secondary.opacity(0.5)), alignment: .bottom)
+#endif
                 .tabItem { Label("Time Codes", systemImage: "clock") }
                 .tag(0)
             MykeMode()
+#if !os(macOS)
                 .overlay(Rectangle().frame(width: nil, height: 1, alignment: .bottom).foregroundColor(Color.secondary.opacity(0.5)), alignment: .bottom)
+#endif
                 .tabItem { Label("Time List", systemImage: "list.dash") }
                 .tag(1)
             

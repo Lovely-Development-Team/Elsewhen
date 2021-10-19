@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct DateTimeZonePicker: View {
+    // MARK: Environment
+    @Environment(\.isInPopover) private var isInPopover
     // MARK: Parameters
     @Binding var selectedDate: Date
     @Binding var selectedTimeZone: TimeZone
@@ -49,7 +51,7 @@ private static let pickerStackSpacing: CGFloat = 5
         Group {
             
             if showDate {
-#if os(macOS)
+                #if os(macOS)
                 HStack {
                     Button {
                         isPresentingDatePopover = true
@@ -63,7 +65,11 @@ private static let pickerStackSpacing: CGFloat = 5
                                 .padding(8)
                         }.background(Color(NSColor.controlColor))
                     }
-                    Spacer(minLength: 20)
+                    
+                    if !isInPopover {
+                        Spacer(minLength: 20)
+                    }
+                    
                     DatePicker("", selection: $selectedDate, displayedComponents: [.hourAndMinute])
                         .datePickerStyle(Self.timePickerStyle)
                         .frame(maxWidth: selectTimeZoneButtonMaxWidth)
@@ -74,18 +80,18 @@ private static let pickerStackSpacing: CGFloat = 5
                 // Need to figure out the "proper" way to remove the datepicker's padding,
                 // 16 is just a fudge value that looks okay by-eye.
                 .frame(maxWidth: maxWidth.map { $0 + 16 })
-#else
+                #else
                 DatePicker("Date", selection: $selectedDate)
                     .datePickerStyle(.graphical)
                     .padding(.top)
-#endif
+                #endif
             } else {
                 HStack {
                     Text("Time")
                         .fontWeight(.semibold)
                     Spacer()
 #if os(macOS)
-                    DatePicker("Time", selection: $selectedDate, displayedComponents: [.hourAndMinute])
+                    DatePicker("", selection: $selectedDate, displayedComponents: [.hourAndMinute])
                         .datePickerStyle(Self.timePickerStyle)
                         .frame(maxWidth: selectTimeZoneButtonMaxWidth)
 #else
@@ -133,12 +139,8 @@ private static let pickerStackSpacing: CGFloat = 5
                 }
             }
             .padding(.bottom, 10)
-            #if os(macOS)
-            .frame(minWidth: 0, maxWidth: maxWidth)
-            #else
             .padding(.horizontal, showDate ? 8 : 0)
-            .frame(minWidth: 0, maxWidth: DeviceType.isPad() ? 390 : .infinity)
-            #endif
+            .frame(minWidth: 0, maxWidth: DeviceType.isPad() || DeviceType.isMac() ? maxWidth.map { $0 + 16 } : .infinity)
             .sheet(isPresented: $showTimeZoneChoiceSheet) {
                 NavigationView {
                     TimezoneChoiceView(selectedTimeZone: $selectedTimeZone, selectedTimeZones: .constant([]), selectedDate: $selectedDate, selectMultiple: false) {
