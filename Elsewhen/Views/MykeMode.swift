@@ -59,7 +59,7 @@ struct MykeMode: View, OrientationObserving {
     var timeZoneList: some View {
         
         List {
-            ForEach(selectedTimeZones, id: \.self) { tz in
+            ForEach(selectedTimeZones, id: \.identifier) { tz in
                 SelectedTimeZoneCell(tz: tz, flag: flagForTimeZone(tz), timeInZone: stringForSelectedTime(in: tz), selectedDate: selectedDate)
                     .onTapGesture {
                         if tz.isMemberOfEuropeanUnion {
@@ -75,7 +75,11 @@ struct MykeMode: View, OrientationObserving {
                     }
                     .contextMenu {
                         DeleteButton {
-                            selectedTimeZones.removeAll { $0 == tz }
+                            DispatchQueue.main.asyncAfter(deadline: .now().advanced(by: .milliseconds(600))) {
+                                withAnimation {
+                                    selectedTimeZones.removeAll { $0 == tz }
+                                }
+                            }
                         }
                     }
             }
