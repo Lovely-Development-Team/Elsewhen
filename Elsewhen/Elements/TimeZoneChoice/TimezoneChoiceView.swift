@@ -18,6 +18,10 @@ struct TimezoneChoiceView: View {
     @State private var searchTerm: String = ""
     @State private var favouriteTimeZones: Set<TimeZone> = []
     
+    #if os(iOS)
+    let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
+    #endif
+    
     private var sortedFilteredTimeZones: [TimeZone] {
         let selectedTimeZonesSet = Set(selectedTimeZones)
         return TimeZone.filtered(by: searchTerm).sorted {
@@ -95,12 +99,18 @@ struct TimezoneChoiceView: View {
     }
     
     func onSelect(tz: TimeZone) {
+        #if os(iOS)
+        selectionFeedbackGenerator.prepare()
+        #endif
         if self.selectMultiple {
             if let index = self.selectedTimeZones.firstIndex(of: tz) {
                 self.selectedTimeZones.remove(at: index)
             } else {
                 self.selectedTimeZones.append(tz)
             }
+            #if os(iOS)
+            selectionFeedbackGenerator.selectionChanged()
+            #endif
         } else {
             self.selectedTimeZone = tz
             done?()
