@@ -133,6 +133,9 @@
 		63B0886527109E6200CA9980 /* CommonResolution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B0886427109E6200CA9980 /* CommonResolution.swift */; };
 		63BB87BB271B6B41000E8820 /* SharingHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BB87BA271B6B41000E8820 /* SharingHelpers.swift */; };
 		63BB87BC271B6B65000E8820 /* SharingHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BB87BA271B6B41000E8820 /* SharingHelpers.swift */; };
+		63BEF68C271EB9A1000CAC95 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BEF68B271EB9A1000CAC95 /* SearchBar.swift */; };
+		63BEF68E271ECDA2000CAC95 /* FormatStyleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BEF68D271ECDA2000CAC95 /* FormatStyleButton.swift */; };
+		63BEF68F271ECE25000CAC95 /* FormatStyleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BEF68D271ECDA2000CAC95 /* FormatStyleButton.swift */; };
 		63C51BA526F9C9C900145662 /* SelectTimeZoneWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C51BA426F9C9C900145662 /* SelectTimeZoneWindowController.swift */; };
 		63C51BA726FA32D400145662 /* FavouriteIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C51BA626FA32D400145662 /* FavouriteIndicator.swift */; };
 		63C51BA826FA333200145662 /* FavouriteIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C51BA626FA32D400145662 /* FavouriteIndicator.swift */; };
@@ -277,6 +280,8 @@
 		63B0886127108DEF00CA9980 /* TimeListIntentHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeListIntentHandling.swift; sourceTree = "<group>"; };
 		63B0886427109E6200CA9980 /* CommonResolution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonResolution.swift; sourceTree = "<group>"; };
 		63BB87BA271B6B41000E8820 /* SharingHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharingHelpers.swift; sourceTree = "<group>"; };
+		63BEF68B271EB9A1000CAC95 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
+		63BEF68D271ECDA2000CAC95 /* FormatStyleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatStyleButton.swift; sourceTree = "<group>"; };
 		63C51BA426F9C9C900145662 /* SelectTimeZoneWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTimeZoneWindowController.swift; sourceTree = "<group>"; };
 		63C51BA626FA32D400145662 /* FavouriteIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteIndicator.swift; sourceTree = "<group>"; };
 		63C51BAA26FA343600145662 /* TimeZoneChoiceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeZoneChoiceCell.swift; sourceTree = "<group>"; };
@@ -624,6 +629,7 @@
 			isa = PBXGroup;
 			children = (
 				635CE6E727032B33006BC7D3 /* MacDatePicker.swift */,
+				63BEF68B271EB9A1000CAC95 /* SearchBar.swift */,
 			);
 			path = Elements;
 			sourceTree = "<group>";
@@ -636,6 +642,7 @@
 				638B47BC26FC98D700B26B26 /* EasterEggButton.swift */,
 				631E3F2426FCEF1F0025F080 /* DeleteButton.swift */,
 				5ECBAA332719D62800A1BF6C /* ShareButton.swift */,
+				63BEF68D271ECDA2000CAC95 /* FormatStyleButton.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -879,6 +886,7 @@
 			files = (
 				639FFFAB271B75E7008897E8 /* OrientationObserving.swift in Sources */,
 				63087E97271B633700D6EEE8 /* NotificationName.swift in Sources */,
+				63BEF68E271ECDA2000CAC95 /* FormatStyleButton.swift in Sources */,
 				6346ADA526F3D4E600E406D0 /* SelectTimeZoneButton.swift in Sources */,
 				638A72DC2711D9A600E0171D /* TimeInterval.swift in Sources */,
 				5EE70E2A26ED21AA00F3F164 /* DateTimeZonePicker.swift in Sources */,
@@ -968,11 +976,13 @@
 				63814C9A271B719D00D900D2 /* NotificationName.swift in Sources */,
 				638A72DD2711D9CB00E0171D /* TimeInterval.swift in Sources */,
 				63A90DE826F4D49E00CACCB9 /* MenuItemContents.swift in Sources */,
+				63BEF68C271EB9A1000CAC95 /* SearchBar.swift in Sources */,
 				63A90DC326F4255E00CACCB9 /* WindowManager.swift in Sources */,
 				63A90DC826F4266400CACCB9 /* NSEvent.swift in Sources */,
 				6346AD9B26F3C47F00E406D0 /* PasteboardHelpers.swift in Sources */,
 				631E3F2626FCEFEC0025F080 /* DeleteButton.swift in Sources */,
 				6346AD8F26F3C1E400E406D0 /* ResultSheet.swift in Sources */,
+				63BEF68F271ECE25000CAC95 /* FormatStyleButton.swift in Sources */,
 				63A90DDB26F4AC2100CACCB9 /* PreferencesView.swift in Sources */,
 				63A90DE426F4CAA900CACCB9 /* MenuItem.swift in Sources */,
 				63A90DEF26F5465D00CACCB9 /* ContentTabViewController.swift in Sources */,

@@ -20,7 +20,7 @@ extension OrientationObserving {
         #if !os(macOS)
         horizontalSizeClass == .regular
         #else
-        false
+        true
         #endif
     }
     
