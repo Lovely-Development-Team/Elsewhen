@@ -28,6 +28,7 @@ struct MykeMode: View, OrientationObserving {
     
     #if os(iOS)
     let mediumImpactFeedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
+    let notificationFeedbackGenerator = UINotificationFeedbackGenerator()
     #endif
     
     @State private var showTimeZoneSheet: Bool = false
@@ -75,9 +76,15 @@ struct MykeMode: View, OrientationObserving {
                     }
                     .contextMenu {
                         DeleteButton {
+                            #if os(iOS)
+                            notificationFeedbackGenerator.prepare()
+                            #endif
                             DispatchQueue.main.asyncAfter(deadline: .now().advanced(by: .milliseconds(600))) {
                                 withAnimation {
                                     selectedTimeZones.removeAll { $0 == tz }
+                                    #if (iOS)
+                                    notificationFeedbackGenerator.notificationOccurred(.success)
+                                    #endif
                                 }
                             }
                         }
