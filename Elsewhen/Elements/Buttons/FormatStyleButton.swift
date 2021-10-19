@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct FormatStyleButton: View {
+    // MARK: Environment
+    @Environment(\.isInPopover) private var isInPopover
+    
+    // MARK: Parameters
     let formatStyle: DateFormat
     let isSelected: Bool
     let onTap: (DateFormat) -> ()
@@ -43,10 +47,13 @@ struct FormatStyleButton: View {
         }) {
             HStack {
                 formatStyleButton(for: formatStyle)
-                Text(formatStyle.name)
-                    .foregroundColor(isSelected ? Color.accentColor : .secondary)
+                    .help(Text(formatStyle.name))
+                if !isInPopover {
+                    Text(formatStyle.name)
+                        .foregroundColor(isSelected ? Color.accentColor : .secondary)
+                }
             }
-            .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+            .frame(minWidth: 0, maxWidth: .infinity, alignment: isInPopover ? .center : .leading)
         }
         .buttonStyle(Self.formatButtonStyle)
     }

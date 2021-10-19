@@ -14,6 +14,7 @@ struct SelectTimeZoneButton: View {
     #if os(macOS)
     var text: some View {
         Text(selectedTimeZone.identifier.replacingOccurrences(of: "_", with: " "))
+            .foregroundColor(.primary)
     }
     #else
     var text: some View {

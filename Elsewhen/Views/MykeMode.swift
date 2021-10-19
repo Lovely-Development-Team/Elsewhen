@@ -14,6 +14,7 @@ struct MykeMode: View, OrientationObserving {
     @EnvironmentObject internal var orientationObserver: OrientationObserver
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     #endif
+    @Environment(\.isInPopover) private var isInPopover
     
     @State private var selectedDate = Date()
     @State private var selectedTimeZone: TimeZone = TimeZone.current
@@ -86,6 +87,35 @@ struct MykeMode: View, OrientationObserving {
     }
     
     @ViewBuilder
+    var mykeModeButtons: some View {
+        Button(action: {
+            #if os(macOS)
+//                        WindowManager.shared.openSelectTimeZones(selectedTimeZone: .constant(TimeZone.current), selectedDate: $selectedDate, selectedTimeZones: $selectedTimeZones)
+            self.showTimeZonePopover = true
+            #else
+            self.showTimeZoneSheet = true
+            #endif
+        }) {
+            Text("Choose time zones…")
+                .foregroundColor(.primary)
+        }
+        .popover(isPresented: $showTimeZonePopover, arrowEdge: .leading) {
+            TimezoneChoiceView(selectedTimeZone: .constant(TimeZone.current), selectedTimeZones: $selectedTimeZones, selectedDate: $selectedDate, selectMultiple: true)
+                .frame(minWidth: 300, minHeight: 300)
+        }
+        .padding(.vertical)
+        
+        if !isInPopover {
+            Spacer()
+        }
+        
+        CopyButton(text: "Copy", generateText: generateTimesAndFlagsText, showCopied: $showCopied)
+        #if !os(macOS)
+        ShareButton(generateText: generateTimesAndFlagsText)
+        #endif
+    }
+    
+    @ViewBuilder
     var dateTimeZonePicker: some View {
         
         Group {
@@ -94,31 +124,16 @@ struct MykeMode: View, OrientationObserving {
                 .padding(.top, 5)
                 .padding(.horizontal, 8)
             
-            HStack {
-                
-                Button(action: {
-                    #if os(macOS)
-    //                        WindowManager.shared.openSelectTimeZones(selectedTimeZone: .constant(TimeZone.current), selectedDate: $selectedDate, selectedTimeZones: $selectedTimeZones)
-                    self.showTimeZonePopover = true
-                    #else
-                    self.showTimeZoneSheet = true
-                    #endif
-                }) {
-                    Text("Choose time zones…")
+            Group {
+                if isInPopover {
+                    VStack {
+                        mykeModeButtons
+                    }
+                } else {
+                    HStack {
+                        mykeModeButtons
+                    }
                 }
-                .popover(isPresented: $showTimeZonePopover, arrowEdge: .leading) {
-                    TimezoneChoiceView(selectedTimeZone: .constant(TimeZone.current), selectedTimeZones: $selectedTimeZones, selectedDate: $selectedDate, selectMultiple: true)
-                        .frame(minWidth: 300, minHeight: 300)
-                }
-                .padding(.vertical)
-                
-                Spacer()
-                
-                CopyButton(text: "Copy", generateText: generateTimesAndFlagsText, showCopied: $showCopied)
-                #if !os(macOS)
-                ShareButton(generateText: generateTimesAndFlagsText)
-                #endif
-                
             }
             .padding(.horizontal, 8)
         }

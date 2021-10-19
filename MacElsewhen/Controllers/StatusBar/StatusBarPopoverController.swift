@@ -14,7 +14,7 @@ class StatusBarPopoverController: NSObject, NSPopoverDelegate {
     var detachedWindows: Set<NSWindow> = Set()
     
     private func contentsViewController() -> NSViewController {
-        let vc = NSHostingController(rootView: ContentView().frame(width: 600, height: 650, alignment: .center))
+        let vc = NSHostingController(rootView: ContentView().frame(width: 430, height: 690, alignment: .center).environment(\.isInPopover, true))
         return vc
     }
     

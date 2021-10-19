@@ -14,6 +14,7 @@ struct TimeCodeGeneratorView: View, KeyboardReadable, OrientationObserving {
     @EnvironmentObject internal var orientationObserver: OrientationObserver
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     #endif
+    @Environment(\.isInPopover) var isInPopover
     
     @State private var selectedDate = Date()
     @State private var selectedTimeZone: TimeZone = TimeZone.current
@@ -33,33 +34,38 @@ struct TimeCodeGeneratorView: View, KeyboardReadable, OrientationObserving {
     }
     
     var body: some View {
-        
         ZStack(alignment: .bottom) {
-            
             if isOrientationLandscape && isRegularHorizontalSize {
-                
                 VStack {
-                                    
                     DateTimeSelection(selectedFormatStyle: $selectedFormatStyle, selectedDate: $selectedDate, selectedTimeZone: $selectedTimeZone, appendRelative: $appendRelative, showLocalTimeInstead: $showLocalTimeInstead)
+                        #if !os(macOS)
                         .padding(.top, 30)
+                        #endif
                         .accessibilitySortPriority(2)
                     
-                    Spacer()
+                        Spacer()
                     
-                    HStack {
-                        Text("Date and time representative of components only; may not match exact Discord formatting.")
-                            .multilineTextAlignment(.center)
-                            .font(.caption2)
-                            .foregroundColor(.secondary)
-                            .padding(.horizontal)
-                        
-                        EasterEggButton {
-                            showEasterEggSheet = true
+                    Group {
+                        if DeviceType.isMac() && isInPopover {
+                            VStack {
+                                NotRepresentativeWarning()
+                                
+                                EasterEggButton {
+                                    showEasterEggSheet = true
+                                }
+                            }
+                        } else {
+                            HStack {
+                                NotRepresentativeWarning()
+                                
+                                EasterEggButton {
+                                    showEasterEggSheet = true
+                                }
+                            }
                         }
                     }
                     .padding(.bottom, 20)
                     .accessibilitySortPriority(0)
-                    
                 }
                 .accessibilitySortPriority(2)
                 
@@ -77,11 +83,7 @@ struct TimeCodeGeneratorView: View, KeyboardReadable, OrientationObserving {
                             DiscordFormattedDate(text: discordFormatString)
                                 .padding(.bottom, 8)
                             
-                            Text("Date and time representative of components only; may not match exact Discord formatting.")
-                                .multilineTextAlignment(.center)
-                                .font(.caption2)
-                                .foregroundColor(.secondary)
-                                .padding(.horizontal)
+                            NotRepresentativeWarning()
                                 .padding(.bottom, 20)
                             
                             EasterEggButton {

@@ -9,10 +9,11 @@ import SwiftUI
 
 struct DateTimeSelection: View, OrientationObserving {
     
-#if !os(macOS)
+    #if !os(macOS)
     @EnvironmentObject internal var orientationObserver: OrientationObserver
     @Environment(\.horizontalSizeClass) var horizontalSizeClass: UserInterfaceSizeClass?
-#endif
+    #endif
+    @Environment(\.isInPopover) private var isInPopover
     
     @Binding var selectedFormatStyle: DateFormat
     @Binding var selectedDate: Date
@@ -87,72 +88,112 @@ struct DateTimeSelection: View, OrientationObserving {
     private static let landscapeLayoutPadding: CGFloat = 5
     #endif
     
+    @ViewBuilder
+    var horizontalLayout: some View {
+        VStack {
+            
+            DateTimeZonePicker(selectedDate: $selectedDate, selectedTimeZone: $selectedTimeZone, maxWidth: 376)
+            #if !os(macOS)
+                .offset(x: 0, y: -20)
+            #endif
+            
+            Button(action: reset) {
+                Text("Reset").foregroundColor(.primary)
+            }
+            
+#if os(macOS)
+            if !isInPopover {
+                ResultSheet(selectedDate: selectedDate, selectedTimeZone: selectedTimeZone, discordFormat: discordFormat(for: selectedDate, in: selectedTimeZone, with: selectedFormatStyle.code, appendRelative: appendRelative), appendRelative: appendRelative, showLocalTimeInstead: $showLocalTimeInstead, selectedFormatStyle: $selectedFormatStyle)
+                    .padding(.top, 10)
+                
+                DiscordFormattedDate(text: discordFormat(for: selectedDate, in: selectedTimeZone, with: selectedFormatStyle.code, appendRelative: appendRelative))
+            }
+            if isInPopover {
+                Spacer()
+            }
+#endif
+        }
+        .padding(.trailing)
+        
+        VStack {
+#if os(macOS)
+            if !isInPopover {
+                Spacer(minLength: 20)
+            }
+#endif
+            
+            VStack(alignment: .leading) {
+                ForEach(dateFormats, id: \.self) { formatStyle in
+#if !os(macOS)
+                    FormatStyleButton(formatStyle: formatStyle, isSelected: formatStyle == selectedFormatStyle, onTap: formatStyleTapped)
+#else
+                    FormatStyleButton(formatStyle: formatStyle, isSelected: formatStyle == selectedFormatStyle, onTap: formatStyleTapped)
+                        .padding(.bottom, 2)
+#endif
+                }
+                
+                Divider()
+                
+                Button(action: {}) {
+                    HStack {
+                        Label(relativeDateFormat.name, systemImage: relativeDateFormat.icon)
+                            .labelStyle(IconOnlyLabelStyle())
+                            .foregroundColor(appendRelative && selectedFormatStyle != relativeDateFormat ? .secondary : .white)
+                            .font(.title)
+                            .frame(width: Self.buttonFrame, height: Self.buttonFrame)
+                            .background(
+                                RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                    .strokeBorder(appendRelative && selectedFormatStyle != relativeDateFormat ? Color.accentColor : Color.clear, lineWidth: 3)
+                                    .background(RoundedRectangle(cornerRadius: 10, style: .continuous).fill(relativeDateButtonBackground))
+                            )
+                        
+                        if !isInPopover {
+                            Text(relativeDateFormat.name)
+                                .foregroundColor(appendRelative || selectedFormatStyle == relativeDateFormat ? Color.accentColor : Color.secondary)
+                        }
+                    }
+                    .frame(minWidth: 0, maxWidth: .infinity, alignment: isInPopover ? .center : .leading)
+                    .onTapGesture(perform: toggleAppendRelativeFormat)
+                    .onLongPressGesture(perform: switchToRelativeFormat)
+                }
+                .buttonStyle(Self.formatButtonStyle)
+                
+            }
+            .padding(.horizontal, 30)
+            
+            #if !os(macOS)
+            if !isInPopover {
+                ResultSheet(selectedDate: selectedDate, selectedTimeZone: selectedTimeZone, discordFormat: discordFormat(for: selectedDate, in: selectedTimeZone, with: selectedFormatStyle.code, appendRelative: appendRelative), appendRelative: appendRelative, showLocalTimeInstead: $showLocalTimeInstead, selectedFormatStyle: $selectedFormatStyle)
+                    .padding(.top, 10)
+                
+                DiscordFormattedDate(text: discordFormat(for: selectedDate, in: selectedTimeZone, with: selectedFormatStyle.code, appendRelative: appendRelative))
+            }
+            #endif
+        }
+    }
+    
     var body: some View {
         Group {
             
             if isOrientationLandscape && isRegularHorizontalSize {
                 
+                #if !os(macOS)
                 HStack(alignment: .top, spacing: 20) {
-                    
-                    VStack {
-                        
-                        DateTimeZonePicker(selectedDate: $selectedDate, selectedTimeZone: $selectedTimeZone, maxWidth: 376)
-                            .offset(x: 0, y: -20)
-                        
-                        Button(action: reset) {
-                            Text("Reset")
-                        }
-                        
-                    }
-                    
-                    VStack {
-                        
-                        VStack(alignment: .leading) {
-                            
-                            ForEach(dateFormats, id: \.self) { formatStyle in
-                                #if !os(macOS)
-                                FormatStyleButton(formatStyle: formatStyle, isSelected: formatStyle == selectedFormatStyle, onTap: formatStyleTapped)
-                                #else
-                                FormatStyleButton(formatStyle: formatStyle, isSelected: formatStyle == selectedFormatStyle, onTap: formatStyleTapped)
-                                    .padding(.bottom, 2)
-                                #endif
-                            }
-                            
-                            Divider()
-                            
-                            Button(action: {}) {
-                                HStack {
-                                    Label(relativeDateFormat.name, systemImage: relativeDateFormat.icon)
-                                        .labelStyle(IconOnlyLabelStyle())
-                                        .foregroundColor(appendRelative && selectedFormatStyle != relativeDateFormat ? .secondary : .white)
-                                        .font(.title)
-                                        .frame(width: Self.buttonFrame, height: Self.buttonFrame)
-                                        .background(
-                                            RoundedRectangle(cornerRadius: 10, style: .continuous)
-                                                .strokeBorder(appendRelative && selectedFormatStyle != relativeDateFormat ? Color.accentColor : Color.clear, lineWidth: 3)
-                                                .background(RoundedRectangle(cornerRadius: 10, style: .continuous).fill(relativeDateButtonBackground))
-                                        )
-                                    Text(relativeDateFormat.name)
-                                        .foregroundColor(appendRelative || selectedFormatStyle == relativeDateFormat ? Color.accentColor : Color.secondary)
-                                }
-                                .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                                .onTapGesture(perform: toggleAppendRelativeFormat)
-                                .onLongPressGesture(perform: switchToRelativeFormat)
-                            }
-                            .buttonStyle(Self.formatButtonStyle)
-                            
-                        }
-                        .padding(.horizontal, 30)
-                        
-                        ResultSheet(selectedDate: selectedDate, selectedTimeZone: selectedTimeZone, discordFormat: discordFormat(for: selectedDate, in: selectedTimeZone, with: selectedFormatStyle.code, appendRelative: appendRelative), appendRelative: appendRelative, showLocalTimeInstead: $showLocalTimeInstead, selectedFormatStyle: $selectedFormatStyle)
-                            .padding(.top, 10)
-                        
-                        DiscordFormattedDate(text: discordFormat(for: selectedDate, in: selectedTimeZone, with: selectedFormatStyle.code, appendRelative: appendRelative))
-                        
-                    }
-                    
+                    horizontalLayout
                 }
                 .padding(Self.landscapeLayoutPadding)
+                #else
+                HSplitView {
+                    horizontalLayout
+                }
+                .padding(Self.landscapeLayoutPadding)
+                #endif
+                
+                if isInPopover {
+                    ResultSheet(selectedDate: selectedDate, selectedTimeZone: selectedTimeZone, discordFormat: discordFormat(for: selectedDate, in: selectedTimeZone, with: selectedFormatStyle.code, appendRelative: appendRelative), appendRelative: appendRelative, showLocalTimeInstead: $showLocalTimeInstead, selectedFormatStyle: $selectedFormatStyle)
+                    
+                    DiscordFormattedDate(text: discordFormat(for: selectedDate, in: selectedTimeZone, with: selectedFormatStyle.code, appendRelative: appendRelative))
+                }
                 
             } else {
                 

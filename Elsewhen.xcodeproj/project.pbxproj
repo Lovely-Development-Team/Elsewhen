@@ -136,6 +136,10 @@
 		63BEF68C271EB9A1000CAC95 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BEF68B271EB9A1000CAC95 /* SearchBar.swift */; };
 		63BEF68E271ECDA2000CAC95 /* FormatStyleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BEF68D271ECDA2000CAC95 /* FormatStyleButton.swift */; };
 		63BEF68F271ECE25000CAC95 /* FormatStyleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BEF68D271ECDA2000CAC95 /* FormatStyleButton.swift */; };
+		63BEF693271EDE8B000CAC95 /* EnvironmentValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BEF692271EDE8B000CAC95 /* EnvironmentValues.swift */; };
+		63BEF694271EDEDD000CAC95 /* EnvironmentValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BEF692271EDE8B000CAC95 /* EnvironmentValues.swift */; };
+		63BEF696271EE275000CAC95 /* NotRepresentativeWarning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BEF695271EE275000CAC95 /* NotRepresentativeWarning.swift */; };
+		63BEF697271EE275000CAC95 /* NotRepresentativeWarning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BEF695271EE275000CAC95 /* NotRepresentativeWarning.swift */; };
 		63C51BA526F9C9C900145662 /* SelectTimeZoneWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C51BA426F9C9C900145662 /* SelectTimeZoneWindowController.swift */; };
 		63C51BA726FA32D400145662 /* FavouriteIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C51BA626FA32D400145662 /* FavouriteIndicator.swift */; };
 		63C51BA826FA333200145662 /* FavouriteIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C51BA626FA32D400145662 /* FavouriteIndicator.swift */; };
@@ -282,6 +286,8 @@
 		63BB87BA271B6B41000E8820 /* SharingHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharingHelpers.swift; sourceTree = "<group>"; };
 		63BEF68B271EB9A1000CAC95 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		63BEF68D271ECDA2000CAC95 /* FormatStyleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatStyleButton.swift; sourceTree = "<group>"; };
+		63BEF692271EDE8B000CAC95 /* EnvironmentValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentValues.swift; sourceTree = "<group>"; };
+		63BEF695271EE275000CAC95 /* NotRepresentativeWarning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotRepresentativeWarning.swift; sourceTree = "<group>"; };
 		63C51BA426F9C9C900145662 /* SelectTimeZoneWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTimeZoneWindowController.swift; sourceTree = "<group>"; };
 		63C51BA626FA32D400145662 /* FavouriteIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteIndicator.swift; sourceTree = "<group>"; };
 		63C51BAA26FA343600145662 /* TimeZoneChoiceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeZoneChoiceCell.swift; sourceTree = "<group>"; };
@@ -492,6 +498,7 @@
 				63087E96271B633500D6EEE8 /* NotificationName.swift */,
 				638A72D52711B75C00E0171D /* TimeZone.swift */,
 				638A72DB2711D9A600E0171D /* TimeInterval.swift */,
+				63BEF692271EDE8B000CAC95 /* EnvironmentValues.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -509,6 +516,7 @@
 				6346ADA426F3D4E600E406D0 /* SelectTimeZoneButton.swift */,
 				63C51BA626FA32D400145662 /* FavouriteIndicator.swift */,
 				5ECBAA312719D60E00A1BF6C /* ActivityView.swift */,
+				63BEF695271EE275000CAC95 /* NotRepresentativeWarning.swift */,
 			);
 			path = Elements;
 			sourceTree = "<group>";
@@ -908,6 +916,7 @@
 				638B47BD26FC98D900B26B26 /* EasterEggButton.swift in Sources */,
 				638A72D62711B75C00E0171D /* TimeZone.swift in Sources */,
 				5EE2D2CD26F2717E00D61875 /* EasterEggView.swift in Sources */,
+				63BEF693271EDE8B000CAC95 /* EnvironmentValues.swift in Sources */,
 				6378398726EBA7C60055A10D /* DateTimeSelection.swift in Sources */,
 				5E9BD45726EF446900383233 /* TimeZoneFlags.swift in Sources */,
 				63A90DD026F4295F00CACCB9 /* Bundle.swift in Sources */,
@@ -915,6 +924,7 @@
 				5ECBAA342719D62800A1BF6C /* ShareButton.swift in Sources */,
 				6378398326EB80C30055A10D /* ResultSheet.swift in Sources */,
 				5E5F42B827163E510022C7D1 /* Orientation.swift in Sources */,
+				63BEF696271EE275000CAC95 /* NotRepresentativeWarning.swift in Sources */,
 				63C51BA726FA32D400145662 /* FavouriteIndicator.swift in Sources */,
 				5E9BD45126EEA11900383233 /* UserDefaults.swift in Sources */,
 				635C8FA726E66E8300361B08 /* DiscordFormattedDate.swift in Sources */,
@@ -941,7 +951,9 @@
 				63A90DD126F4298A00CACCB9 /* Bundle.swift in Sources */,
 				6346AD9226F3C1F100E406D0 /* DateTimeSelection.swift in Sources */,
 				6346ADA226F3C5EC00E406D0 /* InlineNavigationBarTitle.swift in Sources */,
+				63BEF694271EDEDD000CAC95 /* EnvironmentValues.swift in Sources */,
 				6346AD9326F3C1F400E406D0 /* DateTimeZonePicker.swift in Sources */,
+				63BEF697271EE275000CAC95 /* NotRepresentativeWarning.swift in Sources */,
 				6346AD8B26F3C1A100E406D0 /* MykeMode.swift in Sources */,
 				6346AD9426F3C1F800E406D0 /* TimeZoneChoiceItem.swift in Sources */,
 				63BB87BC271B6B65000E8820 /* SharingHelpers.swift in Sources */,
