@@ -76,7 +76,7 @@ struct TimezoneChoiceView: View {
             SearchBar(text: $searchTerm, placeholder: "Search...")
                 .padding(.horizontal, -10)
             #else
-            Divider()
+            SearchBar(text: $searchTerm, placeholder: "Search...")
             #endif
             ForEach(sortedFilteredTimeZones, id: \.self) { tz in
                 let isFavourite = isFavouriteBinding(for: tz)
