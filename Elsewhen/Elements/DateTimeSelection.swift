@@ -217,3 +217,11 @@ private extension DateTimeSelection {
         }
     }
 }
+
+struct DateTimeSelection_Previews: PreviewProvider {
+    static var previews: some View {
+        VStack {
+            DateTimeSelection(selectedFormatStyle: .constant(relativeDateFormat), selectedDate: .constant(Date()), selectedTimeZone: .constant(TimeZone.init(identifier: "Europe/London")!), appendRelative: .constant(false), showLocalTimeInstead: .constant(false)).environmentObject(OrientationObserver.shared)
+        }
+    }
+}

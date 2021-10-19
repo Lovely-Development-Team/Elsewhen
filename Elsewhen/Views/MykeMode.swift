@@ -243,7 +243,7 @@ struct MykeMode_Previews: PreviewProvider {
     static var previews: some View {
         #if !os(macOS)
         if #available(iOS 15.0, *) {
-            MykeMode().previewInterfaceOrientation(.landscapeLeft).environmentObject(OrientationObserver.shared)
+            MykeMode().environmentObject(OrientationObserver.shared)
         } else {
             MykeMode()
         }

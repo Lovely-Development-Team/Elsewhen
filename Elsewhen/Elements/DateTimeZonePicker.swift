@@ -127,7 +127,12 @@ struct DateTimeZonePicker: View {
                 }
             }
             .padding(.bottom, 10)
+            #if os(macOS)
             .frame(minWidth: 0, maxWidth: maxWidth)
+            #else
+            .padding(.horizontal, showDate ? 8 : 0)
+            .frame(minWidth: 0, maxWidth: DeviceType.isPad() ? 390 : .infinity)
+            #endif
             .sheet(isPresented: $showTimeZoneChoiceSheet) {
                 NavigationView {
                     TimezoneChoiceView(selectedTimeZone: $selectedTimeZone, selectedTimeZones: .constant([]), selectedDate: $selectedDate, selectMultiple: false) {
@@ -152,6 +157,8 @@ private extension DateTimeZonePicker {
 
 struct DateTimeZonePicker_Previews: PreviewProvider {
     static var previews: some View {
-        DateTimeZonePicker(selectedDate: .constant(Date()), selectedTimeZone: .constant(TimeZone(identifier: "Europe/London")!), showDate: false, maxWidth: nil)
+        VStack {
+            DateTimeZonePicker(selectedDate: .constant(Date()), selectedTimeZone: .constant(TimeZone(identifier: "Europe/London")!), showDate: false, maxWidth: nil)
+        }
     }
 }
