@@ -103,10 +103,12 @@ struct TimezoneChoiceView: View {
         selectionFeedbackGenerator.prepare()
         #endif
         if self.selectMultiple {
-            if let index = self.selectedTimeZones.firstIndex(of: tz) {
-                self.selectedTimeZones.remove(at: index)
-            } else {
-                self.selectedTimeZones.append(tz)
+            withAnimation {
+                if let index = self.selectedTimeZones.firstIndex(of: tz) {
+                    self.selectedTimeZones.remove(at: index)
+                } else {
+                    self.selectedTimeZones.append(tz)
+                }
             }
             #if os(iOS)
             selectionFeedbackGenerator.selectionChanged()
