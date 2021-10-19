@@ -38,18 +38,11 @@ struct DateTimeSelection: View, OrientationObserving {
         }
     }
     
-    @ViewBuilder
-    private func formatStyleButton(for formatStyle: DateFormat) -> some View {
-        Label(formatStyle.name, systemImage: formatStyle.icon)
-            .labelStyle(IconOnlyLabelStyle())
-            .foregroundColor(.white)
-            .font(.title)
-            .frame(width: 50, height: 50)
-            .background(
-                RoundedRectangle(cornerRadius: 10, style: .continuous)
-                    .fill(formatStyle == selectedFormatStyle ? Color.accentColor : .secondary)
-            )
-    }
+    #if !os(macOS)
+    private static let buttonFrame: CGFloat = 50
+    #else
+    private static let buttonFrame: CGFloat = 40
+    #endif
     
     private func formatStyleTapped(_ formatStyle: DateFormat) {
         if selectedFormatStyle == formatStyle && appendRelative {
@@ -69,7 +62,9 @@ struct DateTimeSelection: View, OrientationObserving {
     }
     
     private func switchToRelativeFormat() {
+        #if os(iOS)
         mediumImpactFeedbackGenerator.impactOccurred()
+        #endif
         self.selectedFormatStyle = relativeDateFormat
         self.appendRelative = false
     }
@@ -79,6 +74,18 @@ struct DateTimeSelection: View, OrientationObserving {
             self.appendRelative.toggle()
         }
     }
+    
+    #if !os(macOS)
+    private static let formatButtonStyle = DefaultButtonStyle()
+    #else
+    private static let formatButtonStyle = PlainButtonStyle()
+    #endif
+    
+    #if !os(macOS)
+    private static let landscapeLayoutPadding: CGFloat = 20
+    #else
+    private static let landscapeLayoutPadding: CGFloat = 5
+    #endif
     
     var body: some View {
         Group {
@@ -103,16 +110,12 @@ struct DateTimeSelection: View, OrientationObserving {
                         VStack(alignment: .leading) {
                             
                             ForEach(dateFormats, id: \.self) { formatStyle in
-                                Button(action: {
-                                    formatStyleTapped(formatStyle)
-                                }) {
-                                    HStack {
-                                        formatStyleButton(for: formatStyle)
-                                        Text(formatStyle.name)
-                                            .foregroundColor(formatStyle == selectedFormatStyle ? Color.accentColor : .secondary)
-                                    }
-                                    .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                                }
+                                #if !os(macOS)
+                                FormatStyleButton(formatStyle: formatStyle, isSelected: formatStyle == selectedFormatStyle, onTap: formatStyleTapped)
+                                #else
+                                FormatStyleButton(formatStyle: formatStyle, isSelected: formatStyle == selectedFormatStyle, onTap: formatStyleTapped)
+                                    .padding(.bottom, 2)
+                                #endif
                             }
                             
                             Divider()
@@ -123,7 +126,7 @@ struct DateTimeSelection: View, OrientationObserving {
                                         .labelStyle(IconOnlyLabelStyle())
                                         .foregroundColor(appendRelative && selectedFormatStyle != relativeDateFormat ? .secondary : .white)
                                         .font(.title)
-                                        .frame(width: 50, height: 50)
+                                        .frame(width: Self.buttonFrame, height: Self.buttonFrame)
                                         .background(
                                             RoundedRectangle(cornerRadius: 10, style: .continuous)
                                                 .strokeBorder(appendRelative && selectedFormatStyle != relativeDateFormat ? Color.accentColor : Color.clear, lineWidth: 3)
@@ -136,6 +139,7 @@ struct DateTimeSelection: View, OrientationObserving {
                                 .onTapGesture(perform: toggleAppendRelativeFormat)
                                 .onLongPressGesture(perform: switchToRelativeFormat)
                             }
+                            .buttonStyle(Self.formatButtonStyle)
                             
                         }
                         .padding(.horizontal, 30)
@@ -148,7 +152,7 @@ struct DateTimeSelection: View, OrientationObserving {
                     }
                     
                 }
-                .padding(20)
+                .padding(Self.landscapeLayoutPadding)
                 
             } else {
                 
@@ -221,7 +225,11 @@ private extension DateTimeSelection {
 struct DateTimeSelection_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
+            #if !os(macOS)
             DateTimeSelection(selectedFormatStyle: .constant(relativeDateFormat), selectedDate: .constant(Date()), selectedTimeZone: .constant(TimeZone.init(identifier: "Europe/London")!), appendRelative: .constant(false), showLocalTimeInstead: .constant(false)).environmentObject(OrientationObserver.shared)
+            #else
+            DateTimeSelection(selectedFormatStyle: .constant(relativeDateFormat), selectedDate: .constant(Date()), selectedTimeZone: .constant(TimeZone.init(identifier: "Europe/London")!), appendRelative: .constant(false), showLocalTimeInstead: .constant(false))
+            #endif
         }
     }
 }

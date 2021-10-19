@@ -39,12 +39,18 @@ struct DateTimeZonePicker: View {
     let mediumImpactFeedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
 #endif
     
+#if !os(macOS)
+private static let pickerStackSpacing: CGFloat = 20
+#else
+private static let pickerStackSpacing: CGFloat = 5
+#endif
+    
     var body: some View {
         Group {
             
             if showDate {
 #if os(macOS)
-                VStack {
+                HStack {
                     Button {
                         isPresentingDatePopover = true
                     } label: {
@@ -62,9 +68,9 @@ struct DateTimeZonePicker: View {
                         .datePickerStyle(Self.timePickerStyle)
                         .frame(maxWidth: selectTimeZoneButtonMaxWidth)
                         .padding(.horizontal, 8)
-                    Spacer(minLength: 20)
+//                    Spacer(minLength: 20)
                 }
-                .padding(.top)
+                .padding(.vertical)
                 // Need to figure out the "proper" way to remove the datepicker's padding,
                 // 16 is just a fudge value that looks okay by-eye.
                 .frame(maxWidth: maxWidth.map { $0 + 16 })
