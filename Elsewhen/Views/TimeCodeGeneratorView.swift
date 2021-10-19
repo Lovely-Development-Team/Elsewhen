@@ -159,7 +159,7 @@ struct TimeCodeGeneratorView_Previews: PreviewProvider {
     static var previews: some View {
         #if !os(macOS)
         if #available(iOS 15.0, *) {
-            TimeCodeGeneratorView().previewInterfaceOrientation(.landscapeLeft)
+            TimeCodeGeneratorView().environmentObject(OrientationObserver.shared)//.previewInterfaceOrientation(.landscapeLeft)
         } else {
             TimeCodeGeneratorView()
         }
