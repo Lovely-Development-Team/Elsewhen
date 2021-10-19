@@ -14,21 +14,22 @@ struct SelectedTimeZoneCell: View {
     let selectedDate: Date
     
     var body: some View {
+        let abbreviation = tz.fudgedAbbreviation(for: selectedDate)
         HStack {
             VStack(alignment: .leading) {
                 Text(tz.friendlyName)
                     .font(.caption)
                     .foregroundColor(.secondary)
                 Text("\(flag) \(timeInZone)")
-                    .accessibility(hidden: true)
             }
             Spacer()
-            if let abbreviation = tz.fudgedAbbreviation(for: selectedDate) {
+            if let abbreviation = abbreviation {
                 Text(abbreviation)
                     .foregroundColor(.secondary)
             }
         }
-        .accessibilityElement(children: .combine)
+        .accessibilityElement()
+        .accessibilityLabel(Text("\(tz.friendlyName): \(timeInZone), \(abbreviation ?? "")"))
         .contentShape(Rectangle())
         .onDrag {
             let tzItemProvider = tz.itemProvider
