@@ -13,7 +13,7 @@ struct ResultSheet: View {
     let selectedDate: Date
     let selectedTimeZone: TimeZone
     let discordFormat: String
-    let appendRelative: Bool
+    @Binding var appendRelative: Bool
     @Binding var showLocalTimeInstead: Bool
     @Binding var selectedFormatStyle: DateFormat
     
@@ -66,11 +66,31 @@ struct ResultSheet: View {
             }
             .padding(5)
             .contextMenu {
-                ForEach(dateFormats, id: \.self) { formatStyle in
-                    Button(action: {
-                        self.selectedFormatStyle = formatStyle
-                    }) {
-                        Label(formatStyle.name, systemImage: formatStyle.icon)
+                /* Closing of the context menu animates after a format is selected.
+                 We need the bindings and delayed set so that animation has time to finish before the next one starts
+                 */
+                Picker("", selection: Binding(get: {
+                    selectedFormatStyle
+                }, set: { newFormatStyle in
+                    DispatchQueue.main.asyncAfter(deadline: .now().advanced(by: .milliseconds(600))) {
+                        selectedFormatStyle = newFormatStyle
+                    }
+                })) {
+                    ForEach(dateFormats, id: \.self) { formatStyle in
+                        FormatLabel(style: formatStyle)
+                    }
+                    FormatLabel(style: relativeDateFormat)
+                }.pickerStyle(InlinePickerStyle())
+                if selectedFormatStyle != relativeDateFormat {
+                    Divider()
+                    Toggle(isOn: Binding(get: {
+                        appendRelative
+                    }, set: { shouldAppend in
+                        DispatchQueue.main.asyncAfter(deadline: .now().advanced(by: .milliseconds(600))) {
+                            appendRelative = shouldAppend
+                        }
+                    })) {
+                        Label("Append \(relativeDateFormat.name)", systemImage: relativeDateFormat.icon)
                     }
                 }
             }
