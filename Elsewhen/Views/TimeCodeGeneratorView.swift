@@ -103,7 +103,7 @@ struct TimeCodeGeneratorView: View, KeyboardReadable, OrientationObserving {
             }
             
             if !isKeyboardVisible && (isOrientationPortrait || isCompactHorizontalSize) {
-                ResultSheet(selectedDate: selectedDate, selectedTimeZone: selectedTimeZone, discordFormat: discordFormatString, appendRelative: appendRelative, showLocalTimeInstead: $showLocalTimeInstead, selectedFormatStyle: $selectedFormatStyle)
+                ResultSheet(selectedDate: selectedDate, selectedTimeZone: selectedTimeZone, discordFormat: discordFormatString, appendRelative: $appendRelative, showLocalTimeInstead: $showLocalTimeInstead, selectedFormatStyle: $selectedFormatStyle)
                     .opacity(showResultsSheet ? 1 : 0)
                     .background(GeometryReader { geometry in
                         Color.clear.preference(
