@@ -9,6 +9,15 @@ import Foundation
 import Intents
 
 class ConvertTimeIntentHandler: NSObject, ConvertTimeIntentHandling {
+    
+    func resolveAppendRelative(for intent: ConvertTimeIntent, with completion: @escaping (INBooleanResolutionResult) -> Void) {
+        guard let appendRelative = intent.appendRelative?.boolValue else {
+            completion(.success(with: false))
+            return
+        }
+        completion(.success(with: appendRelative))
+    }
+    
     func resolveDate(for intent: ConvertTimeIntent, with completion: @escaping (INDateComponentsResolutionResult) -> Void) {
         guard let date = intent.date else {
             completion(.needsValue())
@@ -47,7 +56,9 @@ class ConvertTimeIntentHandler: NSObject, ConvertTimeIntentHandling {
         let timezoneIdentifier = intent.timezone?.identifier
         let timezone = timezoneIdentifier.flatMap { TimeZone(identifier: $0) } ?? TimeZone.current
         let response = ConvertTimeIntentResponse(code: .success, userActivity: userActivity)
-        response.discordFormat = discordFormat(for: date, in: timezone, with: formatCode, appendRelative: false)
+        
+        response.discordFormat = discordFormat(for: date, in: timezone, with: formatCode, appendRelative: intent.appendRelative == true)
+        
         response.humanFormat = format(date: date, in: timezone, with: formatCode)
         completion(response)
     }
