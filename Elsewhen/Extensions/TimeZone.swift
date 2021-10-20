@@ -49,15 +49,27 @@ extension TimeZone {
     
     func fudgedAbbreviation(for selectedDate: Date) -> String? {
         
+        let isDaylightSavingTime = isDaylightSavingTime(for: selectedDate)
+        
         if identifier.starts(with: "America/") {
-            if let localizedName = localizedName(for: .generic
-                                                                                     , locale: Locale(identifier: "en_US")) {
+            if let localizedName = localizedName(for: .generic, locale: Locale(identifier: "en_US")) {
                 return localizedName.replacingOccurrences(of: " Time", with: "")
             }
         }
         
+        if identifier.starts(with: "Australia/") {
+            let format: NSTimeZone.NameStyle
+            if isDaylightSavingTime {
+                format = .shortDaylightSaving
+            } else {
+                format = .shortGeneric
+            }
+            if let localizedName = localizedName(for: format, locale: Locale(identifier: "en_AU")) {
+                return localizedName
+            }
+        }
+        
         guard let abbreviation = abbreviation(for: selectedDate) else { return nil }
-        let isDaylightSavingTime = isDaylightSavingTime(for: selectedDate)
         if identifier == "Europe/London" && isDaylightSavingTime {
             return "BST"
         }
