@@ -158,6 +158,14 @@ struct DateTimeSelection: View, OrientationObserving {
                     .frame(minWidth: 0, maxWidth: .infinity, alignment: isInPopover ? .center : .leading)
                     .onTapGesture(perform: toggleAppendRelativeFormat)
                     .onLongPressGesture(perform: switchToRelativeFormat)
+                    #if os(macOS)
+                    .contextMenu {
+                        if self.selectedFormatStyle != relativeDateFormat {
+                            Button(appendRelative ? "Remove Relative Time" : "Append Relative Time", action: toggleAppendRelativeFormat)
+                            Button("Switch to Relative Time Format", action: switchToRelativeFormat)
+                        }
+                    }
+                    #endif
                 }
                 .buttonStyle(Self.formatButtonStyle)
                 
