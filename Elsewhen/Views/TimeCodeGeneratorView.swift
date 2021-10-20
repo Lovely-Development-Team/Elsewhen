@@ -37,7 +37,7 @@ struct TimeCodeGeneratorView: View, KeyboardReadable, OrientationObserving {
         ZStack(alignment: .bottom) {
             if isOrientationLandscape && isRegularHorizontalSize {
                 VStack {
-                    DateTimeSelection(selectedFormatStyle: $selectedFormatStyle, selectedDate: $selectedDate, selectedTimeZone: $selectedTimeZone, appendRelative: $appendRelative, showLocalTimeInstead: $showLocalTimeInstead)
+                    DateTimeSelection(selectedFormatStyle: $selectedFormatStyle.animation(), selectedDate: $selectedDate, selectedTimeZone: $selectedTimeZone, appendRelative: $appendRelative.animation(), showLocalTimeInstead: $showLocalTimeInstead)
                         #if !os(macOS)
                         .padding(.top, 30)
                         #endif
@@ -75,7 +75,7 @@ struct TimeCodeGeneratorView: View, KeyboardReadable, OrientationObserving {
                     Rectangle().fill(Color.clear).frame(height: 1)
                     ScrollView {
                         
-                        DateTimeSelection(selectedFormatStyle: $selectedFormatStyle, selectedDate: $selectedDate, selectedTimeZone: $selectedTimeZone, appendRelative: $appendRelative, showLocalTimeInstead: $showLocalTimeInstead)
+                        DateTimeSelection(selectedFormatStyle: $selectedFormatStyle.animation(), selectedDate: $selectedDate, selectedTimeZone: $selectedTimeZone, appendRelative: $appendRelative.animation(), showLocalTimeInstead: $showLocalTimeInstead)
                             .accessibilitySortPriority(2)
                         
                         VStack(spacing: 0) {
@@ -103,7 +103,7 @@ struct TimeCodeGeneratorView: View, KeyboardReadable, OrientationObserving {
             }
             
             if !isKeyboardVisible && (isOrientationPortrait || isCompactHorizontalSize) {
-                ResultSheet(selectedDate: selectedDate, selectedTimeZone: selectedTimeZone, discordFormat: discordFormatString, appendRelative: $appendRelative, showLocalTimeInstead: $showLocalTimeInstead, selectedFormatStyle: $selectedFormatStyle)
+                ResultSheet(selectedDate: selectedDate, selectedTimeZone: selectedTimeZone, discordFormat: discordFormatString, appendRelative: $appendRelative.animation(), showLocalTimeInstead: $showLocalTimeInstead, selectedFormatStyle: $selectedFormatStyle.animation())
                     .opacity(showResultsSheet ? 1 : 0)
                     .background(GeometryReader { geometry in
                         Color.clear.preference(
