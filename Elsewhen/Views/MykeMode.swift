@@ -16,6 +16,8 @@ struct MykeMode: View, OrientationObserving {
     #endif
     @Environment(\.isInPopover) private var isInPopover
     
+    @Binding var showNewAppOverlay: Bool
+    
     @State private var selectedDate = Date()
     @State private var selectedTimeZone: TimeZone = TimeZone.current
     
@@ -183,6 +185,21 @@ struct MykeMode: View, OrientationObserving {
                         .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                         .padding(.horizontal, 8)
                         
+                        Button(action: {
+                            withAnimation {
+                                showNewAppOverlay = true
+                            }
+                        }) {
+                            Text("Update available!")
+                                .foregroundColor(.white)
+                                .fontWeight(.semibold)
+                        }
+                        .padding()
+                        .background(
+                            Rectangle()
+                                .fill(Color.accentColor)
+                        )
+                        .cornerRadius(14)
                     }
                     .padding()
                     
@@ -193,6 +210,22 @@ struct MykeMode: View, OrientationObserving {
                 ZStack(alignment: .top) {
                     
                     VStack {
+                        
+                        Button(action: {
+                            withAnimation {
+                                showNewAppOverlay = true
+                            }
+                        }) {
+                            Text("Update available!")
+                                .foregroundColor(.white)
+                                .fontWeight(.semibold)
+                        }
+                        .padding()
+                        .background(
+                            Rectangle()
+                                .fill(Color.accentColor)
+                        )
+                        .cornerRadius(14)
                         
                         dateTimeZonePicker
                         
@@ -272,12 +305,12 @@ struct MykeMode_Previews: PreviewProvider {
     static var previews: some View {
         #if !os(macOS)
         if #available(iOS 15.0, *) {
-            MykeMode().environmentObject(OrientationObserver.shared)
+            MykeMode(showNewAppOverlay: .constant(false)).environmentObject(OrientationObserver.shared)
         } else {
-            MykeMode()
+            MykeMode(showNewAppOverlay: .constant(false))
         }
         #else
-        MykeMode()
+        MykeMode(showNewAppOverlay: .constant(false))
         #endif
     }
 }

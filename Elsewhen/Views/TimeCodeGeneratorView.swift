@@ -16,6 +16,8 @@ struct TimeCodeGeneratorView: View, KeyboardReadable, OrientationObserving {
     #endif
     @Environment(\.isInPopover) var isInPopover
     
+    @Binding var showNewAppOverlay: Bool
+    
     @State private var selectedDate = Date()
     @State private var selectedTimeZone: TimeZone = TimeZone.current
     @State private var selectedFormatStyle: DateFormat = dateFormats[0]
@@ -37,13 +39,28 @@ struct TimeCodeGeneratorView: View, KeyboardReadable, OrientationObserving {
         ZStack(alignment: .bottom) {
             if isOrientationLandscape && isRegularHorizontalSize {
                 VStack {
+                    
                     DateTimeSelection(selectedFormatStyle: $selectedFormatStyle, selectedDate: $selectedDate, selectedTimeZone: $selectedTimeZone, appendRelative: $appendRelative, showLocalTimeInstead: $showLocalTimeInstead)
                         #if !os(macOS)
                         .padding(.top, 30)
                         #endif
                         .accessibilitySortPriority(2)
                     
-                        Spacer()
+                    Button(action: {
+                        withAnimation {
+                            showNewAppOverlay = true
+                        }
+                    }) {
+                        Text("Update available!")
+                            .foregroundColor(.white)
+                            .fontWeight(.semibold)
+                    }
+                    .padding()
+                    .background(
+                        Rectangle()
+                            .fill(Color.accentColor)
+                    )
+                    .cornerRadius(14)
                     
                     Group {
                         if DeviceType.isMac() && isInPopover {
@@ -74,6 +91,22 @@ struct TimeCodeGeneratorView: View, KeyboardReadable, OrientationObserving {
                 VStack(spacing: 0) {
                     Rectangle().fill(Color.clear).frame(height: 1)
                     ScrollView {
+                        
+                        Button(action: {
+                            withAnimation {
+                                showNewAppOverlay = true
+                            }
+                        }) {
+                            Text("Update available!")
+                                .foregroundColor(.white)
+                                .fontWeight(.semibold)
+                        }
+                        .padding()
+                        .background(
+                            Rectangle()
+                                .fill(Color.accentColor)
+                        )
+                        .cornerRadius(14)
                         
                         DateTimeSelection(selectedFormatStyle: $selectedFormatStyle, selectedDate: $selectedDate, selectedTimeZone: $selectedTimeZone, appendRelative: $appendRelative, showLocalTimeInstead: $showLocalTimeInstead)
                             .accessibilitySortPriority(2)
@@ -161,12 +194,12 @@ struct TimeCodeGeneratorView_Previews: PreviewProvider {
     static var previews: some View {
         #if !os(macOS)
         if #available(iOS 15.0, *) {
-            TimeCodeGeneratorView().environmentObject(OrientationObserver.shared)//.previewInterfaceOrientation(.landscapeLeft)
+            TimeCodeGeneratorView(showNewAppOverlay: .constant(false)).environmentObject(OrientationObserver.shared)//.previewInterfaceOrientation(.landscapeLeft)
         } else {
-            TimeCodeGeneratorView()
+            TimeCodeGeneratorView(showNewAppOverlay: .constant(false))
         }
         #else
-        TimeCodeGeneratorView()
+        TimeCodeGeneratorView(showNewAppOverlay: .constant(false))
         #endif
     }
 }
