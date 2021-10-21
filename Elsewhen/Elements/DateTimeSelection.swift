@@ -98,7 +98,10 @@ struct DateTimeSelection: View, OrientationObserving {
             #endif
             
             Button(action: reset) {
-                Text("Reset").foregroundColor(.primary)
+                Text("Reset")
+                #if os(macOS)
+                    .foregroundColor(.primary)
+                #endif
             }
             
 #if os(macOS)
