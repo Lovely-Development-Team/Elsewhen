@@ -177,6 +177,7 @@ struct MykeMode: View, OrientationObserving {
                                 .padding(.top)
                             Text(generateTimesAndFlagsText())
                                 .padding(.horizontal)
+                                .selectable()
                         }
                         .foregroundColor(.secondary)
                         .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)

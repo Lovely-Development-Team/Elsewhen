@@ -31,7 +31,6 @@
 		5EE70E2A26ED21AA00F3F164 /* DateTimeZonePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE70E2926ED21AA00F3F164 /* DateTimeZonePicker.swift */; };
 		63087E97271B633700D6EEE8 /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63087E96271B633500D6EEE8 /* NotificationName.swift */; };
 		631E3F2226FCE9B60025F080 /* SelectedTimeZoneCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631E3F2126FCE9B60025F080 /* SelectedTimeZoneCell.swift */; };
-		631E3F2326FCEC140025F080 /* SelectedTimeZoneCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631E3F2126FCE9B60025F080 /* SelectedTimeZoneCell.swift */; };
 		631E3F2526FCEF1F0025F080 /* DeleteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631E3F2426FCEF1F0025F080 /* DeleteButton.swift */; };
 		631E3F2626FCEFEC0025F080 /* DeleteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631E3F2426FCEF1F0025F080 /* DeleteButton.swift */; };
 		6346AD6426F3BF1400E406D0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6346AD6326F3BF1400E406D0 /* Preview Assets.xcassets */; };
@@ -131,6 +130,9 @@
 		63B0886227108DEF00CA9980 /* TimeListIntentHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B0886127108DEF00CA9980 /* TimeListIntentHandling.swift */; };
 		63B08863271097AF00CA9980 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9BD45026EEA11900383233 /* UserDefaults.swift */; };
 		63B0886527109E6200CA9980 /* CommonResolution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B0886427109E6200CA9980 /* CommonResolution.swift */; };
+		63B5EF6A2720A49900AA576E /* SelectedTimeZoneCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631E3F2126FCE9B60025F080 /* SelectedTimeZoneCell.swift */; };
+		63B5EF6C2720E5F000AA576E /* Selectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B5EF6B2720E5F000AA576E /* Selectable.swift */; };
+		63B5EF6D2720E62900AA576E /* Selectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B5EF6B2720E5F000AA576E /* Selectable.swift */; };
 		63BB87BB271B6B41000E8820 /* SharingHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BB87BA271B6B41000E8820 /* SharingHelpers.swift */; };
 		63BB87BC271B6B65000E8820 /* SharingHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BB87BA271B6B41000E8820 /* SharingHelpers.swift */; };
 		63BEF68C271EB9A1000CAC95 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BEF68B271EB9A1000CAC95 /* SearchBar.swift */; };
@@ -283,6 +285,7 @@
 		63A915F626FB42CE0027B18D /* StarUnstarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarUnstarButton.swift; sourceTree = "<group>"; };
 		63B0886127108DEF00CA9980 /* TimeListIntentHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeListIntentHandling.swift; sourceTree = "<group>"; };
 		63B0886427109E6200CA9980 /* CommonResolution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonResolution.swift; sourceTree = "<group>"; };
+		63B5EF6B2720E5F000AA576E /* Selectable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Selectable.swift; sourceTree = "<group>"; };
 		63BB87BA271B6B41000E8820 /* SharingHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharingHelpers.swift; sourceTree = "<group>"; };
 		63BEF68B271EB9A1000CAC95 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		63BEF68D271ECDA2000CAC95 /* FormatStyleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatStyleButton.swift; sourceTree = "<group>"; };
@@ -483,6 +486,7 @@
 			children = (
 				6346ADA026F3C5E900E406D0 /* InlineNavigationBarTitle.swift */,
 				635CE6E42703264F006BC7D3 /* RoundedRectangleButton.swift */,
+				63B5EF6B2720E5F000AA576E /* Selectable.swift */,
 			);
 			path = ViewModifiers;
 			sourceTree = "<group>";
@@ -929,6 +933,7 @@
 				5E9BD45126EEA11900383233 /* UserDefaults.swift in Sources */,
 				635C8FA726E66E8300361B08 /* DiscordFormattedDate.swift in Sources */,
 				63A90DF826F60AB700CACCB9 /* CopyButton.swift in Sources */,
+				63B5EF6C2720E5F000AA576E /* Selectable.swift in Sources */,
 				5E9BD45626EF446900383233 /* SearchBar.swift in Sources */,
 				5ECBAA322719D60E00A1BF6C /* ActivityView.swift in Sources */,
 				637839BA26ECB58D0055A10D /* Intents.intentdefinition in Sources */,
@@ -987,6 +992,7 @@
 				6346AD9526F3C22C00E406D0 /* UserDefaults.swift in Sources */,
 				63814C9A271B719D00D900D2 /* NotificationName.swift in Sources */,
 				638A72DD2711D9CB00E0171D /* TimeInterval.swift in Sources */,
+				63B5EF6D2720E62900AA576E /* Selectable.swift in Sources */,
 				63A90DE826F4D49E00CACCB9 /* MenuItemContents.swift in Sources */,
 				63BEF68C271EB9A1000CAC95 /* SearchBar.swift in Sources */,
 				63A90DC326F4255E00CACCB9 /* WindowManager.swift in Sources */,
@@ -997,9 +1003,9 @@
 				63BEF68F271ECE25000CAC95 /* FormatStyleButton.swift in Sources */,
 				63A90DDB26F4AC2100CACCB9 /* PreferencesView.swift in Sources */,
 				63A90DE426F4CAA900CACCB9 /* MenuItem.swift in Sources */,
+				63B5EF6A2720A49900AA576E /* SelectedTimeZoneCell.swift in Sources */,
 				63A90DEF26F5465D00CACCB9 /* ContentTabViewController.swift in Sources */,
 				63A90DEA26F4D67600CACCB9 /* MenuTag.swift in Sources */,
-				631E3F2326FCEC140025F080 /* SelectedTimeZoneCell.swift in Sources */,
 				6346AD8726F3C15C00E406D0 /* ElsewhenApp.swift in Sources */,
 				6346AD9126F3C1EF00E406D0 /* DiscordFormattedDate.swift in Sources */,
 			);

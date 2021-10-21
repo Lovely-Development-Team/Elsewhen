@@ -44,6 +44,7 @@ struct ResultSheet: View {
                         .multilineTextAlignment(.center)
                         .font(.headline)
                         .foregroundColor(.primary)
+                        .selectable()
                     
                 } else {
                     
@@ -51,6 +52,7 @@ struct ResultSheet: View {
                         .multilineTextAlignment(.center)
                         .font(.headline)
                         .foregroundColor(.primary)
+                        .selectable()
                     
                 }
                 
