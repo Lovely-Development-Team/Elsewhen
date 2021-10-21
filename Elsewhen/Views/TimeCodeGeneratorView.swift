@@ -11,6 +11,8 @@ import UniformTypeIdentifiers
 
 struct TimeCodeGeneratorView: View, KeyboardReadable {
     
+    @Binding var showNewAppOverlay: Bool
+    
     @State private var selectedDate = Date()
     @State private var selectedTimeZone: TimeZone = TimeZone.current
     @State private var selectedFormatStyle: DateFormat = dateFormats[0]
@@ -34,6 +36,22 @@ struct TimeCodeGeneratorView: View, KeyboardReadable {
             VStack(spacing: 0) {
                 Rectangle().fill(.clear).frame(height: 1)
                 ScrollView {
+                    
+                    Button(action: {
+                        withAnimation {
+                            showNewAppOverlay = true
+                        }
+                    }) {
+                        Text("Update available!")
+                            .foregroundColor(.white)
+                            .fontWeight(.semibold)
+                    }
+                    .padding()
+                    .background(
+                        Rectangle()
+                            .fill(Color.accentColor)
+                    )
+                    .cornerRadius(14)
                     
                     DateTimeSelection(selectedFormatStyle: $selectedFormatStyle, selectedDate: $selectedDate, selectedTimeZone: $selectedTimeZone)
                     
@@ -128,6 +146,6 @@ private extension TimeCodeGeneratorView {
 
 struct TimeCodeGeneratorView_Previews: PreviewProvider {
     static var previews: some View {
-        TimeCodeGeneratorView()
+        TimeCodeGeneratorView(showNewAppOverlay: .constant(false))
     }
 }

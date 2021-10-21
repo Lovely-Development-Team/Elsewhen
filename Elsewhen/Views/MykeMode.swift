@@ -10,6 +10,8 @@ import UniformTypeIdentifiers
 
 struct MykeMode: View {
     
+    @Binding var showNewAppOverlay: Bool
+    
     @State private var selectedDate = Date()
     @State private var selectedTimeZone: TimeZone = TimeZone.current
     
@@ -57,6 +59,22 @@ struct MykeMode: View {
         ZStack(alignment: .top) {
             
             VStack {
+                
+                Button(action: {
+                    withAnimation {
+                        showNewAppOverlay = true
+                    }
+                }) {
+                    Text("Update available!")
+                        .foregroundColor(.white)
+                        .fontWeight(.semibold)
+                }
+                .padding()
+                .background(
+                    Rectangle()
+                        .fill(Color.accentColor)
+                )
+                .cornerRadius(14)
                 
                 DateTimeZonePicker(selectedDate: $selectedDate, selectedTimeZone: $selectedTimeZone, showDate: false)
                     .labelsHidden()
@@ -211,6 +229,6 @@ private extension MykeMode {
 
 struct MykeMode_Previews: PreviewProvider {
     static var previews: some View {
-        MykeMode()
+        MykeMode(showNewAppOverlay: .constant(false))
     }
 }
