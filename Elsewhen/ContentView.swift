@@ -61,7 +61,7 @@ struct ContentView: View {
                                 Text("Elsewhen")
                                     .font(.largeTitle)
                                     .fontWeight(.semibold)
-                                    .foregroundColor(Color.black.opacity(0.8))
+                                    .foregroundColor(.primary)
                             }
                             .padding(.top, 40)
 
@@ -130,7 +130,7 @@ struct ContentView: View {
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
                 .background(
                     Rectangle()
-                        .fill(.white)
+                        .fill(Color(UIColor.systemBackground))
                         .cornerRadius(25)
                         .opacity(0.9)
                 )
