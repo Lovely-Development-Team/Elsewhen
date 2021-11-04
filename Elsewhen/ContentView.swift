@@ -44,12 +44,21 @@ struct ContentView: View {
 #endif
                 .tabItem { Label("Time List", systemImage: "list.dash") }
                 .tag(1)
+#if !os(macOS)
+            
+            NavigationView {
+                AltIconView()
+            }
+                .overlay(Rectangle().frame(width: nil, height: 1, alignment: .bottom).foregroundColor(Color.secondary.opacity(0.5)), alignment: .bottom)
+                .tabItem { Label("Settings", systemImage: "gear") }
+                .tag(2)
+#endif
             
         }
         .sheet(item: $showShareSheet) { item in
-            #if !os(macOS)
+#if !os(macOS)
             ActivityView(activityItems: item.items)
-            #endif
+#endif
         }
         .onReceive(NotificationCenter.default.publisher(for: .EWShouldOpenShareSheet, object: appDelegate())) { notification in
             guard let activityItems = notification.userInfo?[ActivityItemsKey] as? [Any] else {
@@ -63,14 +72,14 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        #if !os(macOS)
+#if !os(macOS)
         if #available(iOS 15.0, *) {
             ContentView().previewInterfaceOrientation(.landscapeRight).environmentObject(OrientationObserver.shared)
         } else {
             ContentView()
         }
-        #else
+#else
         ContentView()
-        #endif
+#endif
     }
 }
