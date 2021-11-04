@@ -10,24 +10,16 @@ import SwiftUI
 struct Icon: View {
     
     let name: String
+    let selected: Bool
+    let onTap: (_ name: String?) -> ()
     var size: CGFloat = 80
-    
-    var selected: Bool {
-        UIApplication.shared.alternateIconName ?? "AppIcon" == name
-    }
     
     var body: some View {
         
         Button(action: {
-            
-            if selected {
-                return
+            if !selected {
+                onTap(name == "AppIcon" ? nil : name)
             }
-            
-            UIApplication.shared.setAlternateIconName(name) { done in
-                print("Done: \(done)")
-            }
-            
         }) {
         
             VStack(spacing: 5) {
@@ -70,18 +62,34 @@ struct AltIconView: View {
         "aromantic"
     ]
     
+    @State var viewId = 1
+    
     var body: some View {
+        let currentIconName = UIApplication.shared.alternateIconName ?? "AppIcon"
         ScrollView {
             LazyVGrid(columns: [.init(), .init(), .init()]) {
                 ForEach(icons, id: \.self) { iconName in
-                    Icon(name: iconName)
+                    Icon(name: iconName, selected: currentIconName == "Icons/\(iconName)", onTap: setIcon)
                         .padding(.top, 20)
-//                        .padding(.bottom, )
                 }
             }
+            .id(viewId)
         }
         .navigationTitle(Text("App Icon"))
     }
+    
+    private func setIcon(_ name: String?) {
+        let iconPath: String?
+        if let name = name {
+            iconPath = "Icons/\(name)"
+        } else {
+            iconPath = nil
+        }
+        UIApplication.shared.setAlternateIconName(iconPath) { _ in
+            viewId += 1
+        }
+    }
+    
 }
 
 struct AltIconView_Previews: PreviewProvider {
