@@ -49,6 +49,7 @@ struct ContentView: View {
             NavigationView {
                 AltIconView()
             }
+                .navigationViewStyle(StackNavigationViewStyle())
                 .overlay(Rectangle().frame(width: nil, height: 1, alignment: .bottom).foregroundColor(Color.secondary.opacity(0.5)), alignment: .bottom)
                 .tabItem { Label("Settings", systemImage: "gear") }
                 .tag(2)
