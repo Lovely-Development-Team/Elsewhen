@@ -18,7 +18,7 @@ struct Icon: View {
         
         Button(action: {
             if !selected {
-                onTap(name == "AppIcon" ? nil : name)
+                onTap(name == "original" ? nil : name)
             }
         }) {
         
@@ -49,7 +49,7 @@ struct Icon: View {
 struct AltIconView: View {
     
     let icons = [
-        "AppIcon",
+        "original",
         "rainbow",
         "agender",
         "nonbinary",
@@ -65,11 +65,11 @@ struct AltIconView: View {
     @State var viewId = 1
     
     var body: some View {
-        let currentIconName = UIApplication.shared.alternateIconName ?? "AppIcon"
+        let currentIconName = UIApplication.shared.alternateIconName ?? "original"
         ScrollView {
             LazyVGrid(columns: [.init(), .init(), .init()]) {
                 ForEach(icons, id: \.self) { iconName in
-                    Icon(name: iconName, selected: currentIconName == "Icons/\(iconName)", onTap: setIcon)
+                    Icon(name: iconName, selected: currentIconName == iconName, onTap: setIcon)
                         .padding(.top, 20)
                 }
             }
@@ -79,15 +79,8 @@ struct AltIconView: View {
     }
     
     private func setIcon(_ name: String?) {
-        let iconPath: String?
-        if let name = name {
-            iconPath = "Icons/\(name)"
-        } else {
-            iconPath = nil
-        }
-        UIApplication.shared.setAlternateIconName(iconPath) { _ in
-            viewId += 1
-        }
+        UIApplication.shared.setAlternateIconName(name)
+        viewId += 1
     }
     
 }

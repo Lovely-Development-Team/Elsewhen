@@ -6,92 +6,92 @@
 	<dict>
 		<key>CFBundleAlternateIcons</key>
 		<dict>
-            <key>Icons/rainbow</key>
+            <key>rainbow</key>
             <dict>
                 <key>CFBundleIconFiles</key>
                 <array>
-                    <string>Icons/rainbow</string>
+                    <string>rainbow</string>
                 </array>
                 <key>UIPrerenderedIcon</key>
                 <false/>
             </dict>
-            <key>Icons/agender</key>
+            <key>agender</key>
             <dict>
                 <key>CFBundleIconFiles</key>
                 <array>
-                    <string>Icons/agender</string>
+                    <string>agender</string>
                 </array>
                 <key>UIPrerenderedIcon</key>
                 <false/>
             </dict>
-            <key>Icons/nonbinary</key>
+            <key>nonbinary</key>
             <dict>
                 <key>CFBundleIconFiles</key>
                 <array>
-                    <string>Icons/nonbinary</string>
+                    <string>nonbinary</string>
                 </array>
                 <key>UIPrerenderedIcon</key>
                 <false/>
             </dict>
-            <key>Icons/asexual</key>
+            <key>asexual</key>
             <dict>
                 <key>CFBundleIconFiles</key>
                 <array>
-                    <string>Icons/asexual</string>
+                    <string>asexual</string>
                 </array>
                 <key>UIPrerenderedIcon</key>
                 <false/>
             </dict>
-            <key>Icons/lesbian</key>
+            <key>lesbian</key>
             <dict>
                 <key>CFBundleIconFiles</key>
                 <array>
-                    <string>Icons/lesbian</string>
+                    <string>lesbian</string>
                 </array>
                 <key>UIPrerenderedIcon</key>
                 <false/>
             </dict>
-            <key>Icons/pansexual</key>
+            <key>pansexual</key>
             <dict>
                 <key>CFBundleIconFiles</key>
                 <array>
-                    <string>Icons/pansexual</string>
+                    <string>pansexual</string>
                 </array>
                 <key>UIPrerenderedIcon</key>
                 <false/>
             </dict>
-            <key>Icons/genderqueer</key>
+            <key>genderqueer</key>
             <dict>
                 <key>CFBundleIconFiles</key>
                 <array>
-                    <string>Icons/genderqueer</string>
+                    <string>genderqueer</string>
                 </array>
                 <key>UIPrerenderedIcon</key>
                 <false/>
             </dict>
-            <key>Icons/genderfluid</key>
+            <key>genderfluid</key>
             <dict>
                 <key>CFBundleIconFiles</key>
                 <array>
-                    <string>Icons/genderfluid</string>
+                    <string>genderfluid</string>
                 </array>
                 <key>UIPrerenderedIcon</key>
                 <false/>
             </dict>
-            <key>Icons/bisexual</key>
+            <key>bisexual</key>
             <dict>
                 <key>CFBundleIconFiles</key>
                 <array>
-                    <string>Icons/bisexual</string>
+                    <string>bisexual</string>
                 </array>
                 <key>UIPrerenderedIcon</key>
                 <false/>
             </dict>
-            <key>Icons/aromantic</key>
+            <key>aromantic</key>
             <dict>
                 <key>CFBundleIconFiles</key>
                 <array>
-                    <string>Icons/aromantic</string>
+                    <string>aromantic</string>
                 </array>
                 <key>UIPrerenderedIcon</key>
                 <false/>

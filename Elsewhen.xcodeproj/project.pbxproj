@@ -48,6 +48,10 @@
 		5E07E89527347C8C00D9350E /* aromantic@3x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E07E89127347C8C00D9350E /* aromantic@3x~ipad.png */; };
 		5E07E89627347C8C00D9350E /* aromantic@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E07E89227347C8C00D9350E /* aromantic@2x.png */; };
 		5E07E89727347C8C00D9350E /* aromantic@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E07E89327347C8C00D9350E /* aromantic@3x.png */; };
+		5E54BBAF27367EA2005CF7A6 /* original@3x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E54BBAB27367EA2005CF7A6 /* original@3x~ipad.png */; };
+		5E54BBB027367EA2005CF7A6 /* original@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E54BBAC27367EA2005CF7A6 /* original@2x~ipad.png */; };
+		5E54BBB127367EA2005CF7A6 /* original@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E54BBAD27367EA2005CF7A6 /* original@2x.png */; };
+		5E54BBB227367EA2005CF7A6 /* original@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E54BBAE27367EA2005CF7A6 /* original@3x.png */; };
 		5E5F42B827163E510022C7D1 /* Orientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5F42B727163E500022C7D1 /* Orientation.swift */; };
 		5E9BD45126EEA11900383233 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9BD45026EEA11900383233 /* UserDefaults.swift */; };
 		5E9BD45526EF446900383233 /* DateHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9BD45226EF446900383233 /* DateHelpers.swift */; };
@@ -281,6 +285,10 @@
 		5E07E89127347C8C00D9350E /* aromantic@3x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "aromantic@3x~ipad.png"; sourceTree = "<group>"; };
 		5E07E89227347C8C00D9350E /* aromantic@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "aromantic@2x.png"; sourceTree = "<group>"; };
 		5E07E89327347C8C00D9350E /* aromantic@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "aromantic@3x.png"; sourceTree = "<group>"; };
+		5E54BBAB27367EA2005CF7A6 /* original@3x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "original@3x~ipad.png"; sourceTree = "<group>"; };
+		5E54BBAC27367EA2005CF7A6 /* original@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "original@2x~ipad.png"; sourceTree = "<group>"; };
+		5E54BBAD27367EA2005CF7A6 /* original@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "original@2x.png"; sourceTree = "<group>"; };
+		5E54BBAE27367EA2005CF7A6 /* original@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "original@3x.png"; sourceTree = "<group>"; };
 		5E5F42B727163E500022C7D1 /* Orientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Orientation.swift; sourceTree = "<group>"; };
 		5E9BD45026EEA11900383233 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		5E9BD45226EF446900383233 /* DateHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateHelpers.swift; sourceTree = "<group>"; };
@@ -467,6 +475,10 @@
 				5E07E858273479F600D9350E /* nonbinary@2x~ipad.png */,
 				5E07E859273479F600D9350E /* nonbinary@3x.png */,
 				5E07E85B273479F600D9350E /* nonbinary@3x~ipad.png */,
+				5E54BBAD27367EA2005CF7A6 /* original@2x.png */,
+				5E54BBAC27367EA2005CF7A6 /* original@2x~ipad.png */,
+				5E54BBAE27367EA2005CF7A6 /* original@3x.png */,
+				5E54BBAB27367EA2005CF7A6 /* original@3x~ipad.png */,
 				5E07E87327347B9700D9350E /* pansexual@2x.png */,
 				5E07E87027347B9700D9350E /* pansexual@2x~ipad.png */,
 				5E07E87227347B9700D9350E /* pansexual@3x.png */,
@@ -990,7 +1002,9 @@
 				5E07E87727347B9700D9350E /* pansexual@2x.png in Resources */,
 				5E07E87627347B9700D9350E /* pansexual@3x.png in Resources */,
 				5EB23BA426E406B900203153 /* Preview Assets.xcassets in Resources */,
+				5E54BBB127367EA2005CF7A6 /* original@2x.png in Resources */,
 				5E07E89727347C8C00D9350E /* aromantic@3x.png in Resources */,
+				5E54BBB227367EA2005CF7A6 /* original@3x.png in Resources */,
 				5E07E856273479A400D9350E /* agender@2x.png in Resources */,
 				5E07E857273479A400D9350E /* agender@3x~ipad.png in Resources */,
 				5E07E89427347C8C00D9350E /* aromantic@2x~ipad.png in Resources */,
@@ -1000,11 +1014,13 @@
 				5EB23BA126E406B900203153 /* Assets.xcassets in Resources */,
 				5E07E87D27347BF800D9350E /* genderqueer@2x~ipad.png in Resources */,
 				5E07E89527347C8C00D9350E /* aromantic@3x~ipad.png in Resources */,
+				5E54BBAF27367EA2005CF7A6 /* original@3x~ipad.png in Resources */,
 				5E07E84D273475E300D9350E /* rainbow@2x~ipad.png in Resources */,
 				5E07E88E27347C5B00D9350E /* bisexual@2x~ipad.png in Resources */,
 				5E07E88C27347C5B00D9350E /* bisexual@3x~ipad.png in Resources */,
 				5E07E88627347C2500D9350E /* genderfluid@2x.png in Resources */,
 				5E07E87427347B9700D9350E /* pansexual@2x~ipad.png in Resources */,
+				5E54BBB027367EA2005CF7A6 /* original@2x~ipad.png in Resources */,
 				5E07E88D27347C5B00D9350E /* bisexual@3x.png in Resources */,
 				5E07E854273479A400D9350E /* agender@3x.png in Resources */,
 				5E07E86F27347B1A00D9350E /* lesbian@3x.png in Resources */,
