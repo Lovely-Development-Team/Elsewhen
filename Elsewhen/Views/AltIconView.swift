@@ -7,45 +7,6 @@
 
 import SwiftUI
 
-struct Icon: View {
-    
-    let name: String
-    let selected: Bool
-    let onTap: (_ name: String?) -> ()
-    var size: CGFloat = 80
-    
-    var body: some View {
-        
-        Button(action: {
-            if !selected {
-                onTap(name == "original" ? nil : name)
-            }
-        }) {
-        
-            VStack(spacing: 5) {
-                
-                Image(uiImage: UIImage(named: name) ?? UIImage())
-                    .resizable()
-                    .frame(width: size, height: size)
-                    .clipShape(RoundedRectangle(cornerRadius: 10 / 57 * size, style: .continuous))
-                
-                if selected {
-                    Image(systemName: "checkmark.circle.fill")
-                        .foregroundColor(.accentColor)
-                } else {
-                    Image(systemName: "checkmark.circle")
-                        .foregroundColor(.secondary)
-                        .opacity(0.5)
-                }
-                
-            }
-            
-        }
-        
-    }
-    
-}
-
 struct AltIconView: View {
     
     let icons = [
@@ -69,7 +30,7 @@ struct AltIconView: View {
         ScrollView {
             LazyVGrid(columns: [.init(), .init(), .init()]) {
                 ForEach(icons, id: \.self) { iconName in
-                    Icon(name: iconName, selected: currentIconName == iconName, onTap: setIcon)
+                    AltIconOption(name: iconName, selected: currentIconName == iconName, onTap: setIcon)
                         .padding(.top, 20)
                 }
             }
