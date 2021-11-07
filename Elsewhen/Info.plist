@@ -6,6 +6,15 @@
 	<dict>
 		<key>CFBundleAlternateIcons</key>
 		<dict>
+            <key>wiggles</key>
+            <dict>
+                <key>CFBundleIconFiles</key>
+                <array>
+                    <string>wiggles</string>
+                </array>
+                <key>UIPrerenderedIcon</key>
+                <false/>
+            </dict>
             <key>sixcolors</key>
             <dict>
                 <key>CFBundleIconFiles</key>
@@ -110,6 +119,15 @@
                 <key>CFBundleIconFiles</key>
                 <array>
                     <string>transgender</string>
+                </array>
+                <key>UIPrerenderedIcon</key>
+                <false/>
+            </dict>
+            <key>gay</key>
+            <dict>
+                <key>CFBundleIconFiles</key>
+                <array>
+                    <string>gay</string>
                 </array>
                 <key>UIPrerenderedIcon</key>
                 <false/>
@@ -120,6 +138,15 @@
 	<dict>
 		<key>CFBundleAlternateIcons</key>
 		<dict>
+            <key>wiggles</key>
+            <dict>
+                <key>CFBundleIconFiles</key>
+                <array>
+                    <string>wiggles</string>
+                </array>
+                <key>UIPrerenderedIcon</key>
+                <false/>
+            </dict>
             <key>sixcolors</key>
             <dict>
                 <key>CFBundleIconFiles</key>
@@ -224,6 +251,15 @@
                 <key>CFBundleIconFiles</key>
                 <array>
                     <string>transgender</string>
+                </array>
+                <key>UIPrerenderedIcon</key>
+                <false/>
+            </dict>
+            <key>gay</key>
+            <dict>
+                <key>CFBundleIconFiles</key>
+                <array>
+                    <string>gay</string>
                 </array>
                 <key>UIPrerenderedIcon</key>
                 <false/>
