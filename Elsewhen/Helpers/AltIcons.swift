@@ -20,8 +20,8 @@ struct AlternativeIcon {
 
 let alternativeElsewhenIcons: [AlternativeIcon] = [
     AlternativeIcon(fileName: nil, name: "Original"),
-    AlternativeIcon(fileName: "sixcolors", name: "Six Colours"),
     AlternativeIcon(fileName: "wiggles", name: "Wiggles"),
+    AlternativeIcon(fileName: "sixcolors", name: "Six Colours"),
     AlternativeIcon(fileName: "rainbow", name: "Pride Flag"),
     AlternativeIcon(fileName: "agender", name: "Agender Flag"),
     AlternativeIcon(fileName: "asexual", name: "Asexual Flag"),
