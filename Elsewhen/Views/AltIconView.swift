@@ -11,6 +11,7 @@ struct AltIconView: View {
     
     let icons = [
         "original",
+        "sixcolors",
         "rainbow",
         "agender",
         "nonbinary",

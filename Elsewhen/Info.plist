@@ -6,6 +6,15 @@
 	<dict>
 		<key>CFBundleAlternateIcons</key>
 		<dict>
+            <key>sixcolors</key>
+            <dict>
+                <key>CFBundleIconFiles</key>
+                <array>
+                    <string>sixcolors</string>
+                </array>
+                <key>UIPrerenderedIcon</key>
+                <false/>
+            </dict>
             <key>rainbow</key>
             <dict>
                 <key>CFBundleIconFiles</key>
@@ -102,6 +111,15 @@
 	<dict>
 		<key>CFBundleAlternateIcons</key>
 		<dict>
+            <key>sixcolors</key>
+            <dict>
+                <key>CFBundleIconFiles</key>
+                <array>
+                    <string>sixcolors</string>
+                </array>
+                <key>UIPrerenderedIcon</key>
+                <false/>
+            </dict>
             <key>rainbow</key>
             <dict>
                 <key>CFBundleIconFiles</key>
