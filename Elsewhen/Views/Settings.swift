@@ -16,7 +16,6 @@ struct Settings: View {
                         Text("App Icon")
                     }
                 }
-                
                 Section {
                     HStack {
                         Text("App Version")
@@ -25,7 +24,6 @@ struct Settings: View {
                             .foregroundColor(.secondary)
                     }
                 }
-                
             }
             .navigationTitle(Text("Settings"))
         }

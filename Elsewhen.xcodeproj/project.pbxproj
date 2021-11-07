@@ -60,6 +60,7 @@
 		5E54BBC02737C6D2005CF7A6 /* sixcolors@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E54BBBC2737C6D2005CF7A6 /* sixcolors@2x~ipad.png */; };
 		5E54BBC12737C6D2005CF7A6 /* sixcolors@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E54BBBD2737C6D2005CF7A6 /* sixcolors@2x.png */; };
 		5E54BBC22737C6D2005CF7A6 /* sixcolors@3x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E54BBBE2737C6D2005CF7A6 /* sixcolors@3x~ipad.png */; };
+		5E54BBC427383F36005CF7A6 /* AltIcons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E54BBC327383F36005CF7A6 /* AltIcons.swift */; };
 		5E5F42B827163E510022C7D1 /* Orientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5F42B727163E500022C7D1 /* Orientation.swift */; };
 		5E9BD45126EEA11900383233 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9BD45026EEA11900383233 /* UserDefaults.swift */; };
 		5E9BD45526EF446900383233 /* DateHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9BD45226EF446900383233 /* DateHelpers.swift */; };
@@ -305,6 +306,7 @@
 		5E54BBBC2737C6D2005CF7A6 /* sixcolors@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sixcolors@2x~ipad.png"; sourceTree = "<group>"; };
 		5E54BBBD2737C6D2005CF7A6 /* sixcolors@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sixcolors@2x.png"; sourceTree = "<group>"; };
 		5E54BBBE2737C6D2005CF7A6 /* sixcolors@3x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sixcolors@3x~ipad.png"; sourceTree = "<group>"; };
+		5E54BBC327383F36005CF7A6 /* AltIcons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AltIcons.swift; sourceTree = "<group>"; };
 		5E5F42B727163E500022C7D1 /* Orientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Orientation.swift; sourceTree = "<group>"; };
 		5E9BD45026EEA11900383233 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		5E9BD45226EF446900383233 /* DateHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateHelpers.swift; sourceTree = "<group>"; };
@@ -593,6 +595,7 @@
 				5E5F42B727163E500022C7D1 /* Orientation.swift */,
 				63BB87BA271B6B41000E8820 /* SharingHelpers.swift */,
 				5E54BBB52737C290005CF7A6 /* AboutElsewhen.swift */,
+				5E54BBC327383F36005CF7A6 /* AltIcons.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1121,6 +1124,7 @@
 				6346ADA526F3D4E600E406D0 /* SelectTimeZoneButton.swift in Sources */,
 				638A72DC2711D9A600E0171D /* TimeInterval.swift in Sources */,
 				5EE70E2A26ED21AA00F3F164 /* DateTimeZonePicker.swift in Sources */,
+				5E54BBC427383F36005CF7A6 /* AltIcons.swift in Sources */,
 				63A915F726FB42CE0027B18D /* StarUnstarButton.swift in Sources */,
 				635CE6E52703264F006BC7D3 /* RoundedRectangleButton.swift in Sources */,
 				5EB23B9F26E406B600203153 /* ContentView.swift in Sources */,

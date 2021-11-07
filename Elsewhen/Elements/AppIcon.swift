@@ -9,11 +9,11 @@ import SwiftUI
 
 struct AppIcon: View {
     
-    let name: String?
+    let icon: AlternativeIcon
     let size: CGFloat
     
     var body: some View {
-        Image(uiImage: UIImage(named: name ?? "original") ?? UIImage())
+        Image(uiImage: icon.image)
             .resizable()
             .frame(width: size, height: size)
             .clipShape(RoundedRectangle(cornerRadius: 10 / 57 * size, style: .continuous))
@@ -22,6 +22,6 @@ struct AppIcon: View {
 
 struct AppIcon_Previews: PreviewProvider {
     static var previews: some View {
-        AppIcon(name: "rainbow", size: 200)
+        AppIcon(icon: alternativeElsewhenIcons[0], size: 200)
     }
 }
