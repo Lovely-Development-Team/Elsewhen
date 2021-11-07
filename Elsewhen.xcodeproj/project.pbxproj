@@ -61,6 +61,10 @@
 		5E54BBC12737C6D2005CF7A6 /* sixcolors@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E54BBBD2737C6D2005CF7A6 /* sixcolors@2x.png */; };
 		5E54BBC22737C6D2005CF7A6 /* sixcolors@3x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E54BBBE2737C6D2005CF7A6 /* sixcolors@3x~ipad.png */; };
 		5E54BBC427383F36005CF7A6 /* AltIcons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E54BBC327383F36005CF7A6 /* AltIcons.swift */; };
+		5E54BBC927384590005CF7A6 /* transgender@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E54BBC52738458F005CF7A6 /* transgender@2x.png */; };
+		5E54BBCA27384590005CF7A6 /* transgender@3x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E54BBC62738458F005CF7A6 /* transgender@3x~ipad.png */; };
+		5E54BBCB27384590005CF7A6 /* transgender@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E54BBC72738458F005CF7A6 /* transgender@2x~ipad.png */; };
+		5E54BBCC27384590005CF7A6 /* transgender@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E54BBC82738458F005CF7A6 /* transgender@3x.png */; };
 		5E5F42B827163E510022C7D1 /* Orientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5F42B727163E500022C7D1 /* Orientation.swift */; };
 		5E9BD45126EEA11900383233 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9BD45026EEA11900383233 /* UserDefaults.swift */; };
 		5E9BD45526EF446900383233 /* DateHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9BD45226EF446900383233 /* DateHelpers.swift */; };
@@ -307,6 +311,10 @@
 		5E54BBBD2737C6D2005CF7A6 /* sixcolors@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sixcolors@2x.png"; sourceTree = "<group>"; };
 		5E54BBBE2737C6D2005CF7A6 /* sixcolors@3x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sixcolors@3x~ipad.png"; sourceTree = "<group>"; };
 		5E54BBC327383F36005CF7A6 /* AltIcons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AltIcons.swift; sourceTree = "<group>"; };
+		5E54BBC52738458F005CF7A6 /* transgender@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "transgender@2x.png"; sourceTree = "<group>"; };
+		5E54BBC62738458F005CF7A6 /* transgender@3x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "transgender@3x~ipad.png"; sourceTree = "<group>"; };
+		5E54BBC72738458F005CF7A6 /* transgender@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "transgender@2x~ipad.png"; sourceTree = "<group>"; };
+		5E54BBC82738458F005CF7A6 /* transgender@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "transgender@3x.png"; sourceTree = "<group>"; };
 		5E5F42B727163E500022C7D1 /* Orientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Orientation.swift; sourceTree = "<group>"; };
 		5E9BD45026EEA11900383233 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		5E9BD45226EF446900383233 /* DateHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateHelpers.swift; sourceTree = "<group>"; };
@@ -509,6 +517,10 @@
 				5E54BBBC2737C6D2005CF7A6 /* sixcolors@2x~ipad.png */,
 				5E54BBBB2737C6D2005CF7A6 /* sixcolors@3x.png */,
 				5E54BBBE2737C6D2005CF7A6 /* sixcolors@3x~ipad.png */,
+				5E54BBC52738458F005CF7A6 /* transgender@2x.png */,
+				5E54BBC72738458F005CF7A6 /* transgender@2x~ipad.png */,
+				5E54BBC82738458F005CF7A6 /* transgender@3x.png */,
+				5E54BBC62738458F005CF7A6 /* transgender@3x~ipad.png */,
 			);
 			path = Icons;
 			sourceTree = "<group>";
@@ -1025,6 +1037,7 @@
 				5E07E86627347ACF00D9350E /* asexual@2x~ipad.png in Resources */,
 				5E07E855273479A400D9350E /* agender@2x~ipad.png in Resources */,
 				5E07E89627347C8C00D9350E /* aromantic@2x.png in Resources */,
+				5E54BBCA27384590005CF7A6 /* transgender@3x~ipad.png in Resources */,
 				5E07E86C27347B1A00D9350E /* lesbian@3x~ipad.png in Resources */,
 				5E07E87727347B9700D9350E /* pansexual@2x.png in Resources */,
 				5E07E87627347B9700D9350E /* pansexual@3x.png in Resources */,
@@ -1034,6 +1047,7 @@
 				5E54BBB227367EA2005CF7A6 /* original@3x.png in Resources */,
 				5E07E856273479A400D9350E /* agender@2x.png in Resources */,
 				5E07E857273479A400D9350E /* agender@3x~ipad.png in Resources */,
+				5E54BBC927384590005CF7A6 /* transgender@2x.png in Resources */,
 				5E07E89427347C8C00D9350E /* aromantic@2x~ipad.png in Resources */,
 				5E54BBC12737C6D2005CF7A6 /* sixcolors@2x.png in Resources */,
 				5E07E88527347C2500D9350E /* genderfluid@3x.png in Resources */,
@@ -1048,6 +1062,8 @@
 				5E07E88E27347C5B00D9350E /* bisexual@2x~ipad.png in Resources */,
 				5E54BBC02737C6D2005CF7A6 /* sixcolors@2x~ipad.png in Resources */,
 				5E07E88C27347C5B00D9350E /* bisexual@3x~ipad.png in Resources */,
+				5E54BBCC27384590005CF7A6 /* transgender@3x.png in Resources */,
+				5E54BBCB27384590005CF7A6 /* transgender@2x~ipad.png in Resources */,
 				5E07E88627347C2500D9350E /* genderfluid@2x.png in Resources */,
 				5E07E87427347B9700D9350E /* pansexual@2x~ipad.png in Resources */,
 				5E54BBB027367EA2005CF7A6 /* original@2x~ipad.png in Resources */,

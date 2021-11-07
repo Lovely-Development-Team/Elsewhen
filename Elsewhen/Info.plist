@@ -105,6 +105,15 @@
                 <key>UIPrerenderedIcon</key>
                 <false/>
             </dict>
+            <key>transgender</key>
+            <dict>
+                <key>CFBundleIconFiles</key>
+                <array>
+                    <string>transgender</string>
+                </array>
+                <key>UIPrerenderedIcon</key>
+                <false/>
+            </dict>
 		</dict>
 	</dict>
 	<key>CFBundleIcons~ipad</key>
@@ -206,6 +215,15 @@
                 <key>CFBundleIconFiles</key>
                 <array>
                     <string>aromantic</string>
+                </array>
+                <key>UIPrerenderedIcon</key>
+                <false/>
+            </dict>
+            <key>transgender</key>
+            <dict>
+                <key>CFBundleIconFiles</key>
+                <array>
+                    <string>transgender</string>
                 </array>
                 <key>UIPrerenderedIcon</key>
                 <false/>
