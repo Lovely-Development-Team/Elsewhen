@@ -9,23 +9,22 @@ import SwiftUI
 
 struct AltIconOption: View {
     
-    let name: String
+    let icon: AlternativeIcon
     let selected: Bool
-    let onTap: (_ name: String?) -> ()
+    let onTap: (_ icon: AlternativeIcon) -> ()
     var size: CGFloat = 80
     
     var body: some View {
-        
         Button(action: {
             if !selected {
-                onTap(name == "original" ? nil : name)
+                onTap(icon)
             }
         }) {
-        
             VStack(spacing: 5) {
-                
-                AppIcon(name: name, size: size)
-                
+                AppIcon(icon: icon, size: size)
+                Text(icon.name)
+                    .font(.caption)
+                    .foregroundColor(selected ? .primary : .secondary)
                 if selected {
                     Image(systemName: "checkmark.circle.fill")
                         .foregroundColor(.accentColor)
@@ -34,17 +33,14 @@ struct AltIconOption: View {
                         .foregroundColor(.secondary)
                         .opacity(0.5)
                 }
-                
             }
-            
         }
-        
     }
     
 }
 
 struct AltIconOption_Previews: PreviewProvider {
     static var previews: some View {
-        AltIconOption(name: "rainbow", selected: true, onTap: {name in })
+        AltIconOption(icon: alternativeElsewhenIcons[0], selected: true, onTap: {icon in })
     }
 }

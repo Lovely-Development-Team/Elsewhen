@@ -9,39 +9,25 @@ import SwiftUI
 
 struct AltIconView: View {
     
-    let icons = [
-        "original",
-        "sixcolors",
-        "rainbow",
-        "agender",
-        "nonbinary",
-        "asexual",
-        "lesbian",
-        "pansexual",
-        "genderqueer",
-        "genderfluid",
-        "bisexual",
-        "aromantic"
-    ]
-    
     @State var viewId = 1
     
     var body: some View {
-        let currentIconName = UIApplication.shared.alternateIconName ?? "original"
+        let currentIconName = UIApplication.shared.alternateIconName
         ScrollView {
             LazyVGrid(columns: [.init(), .init(), .init()]) {
-                ForEach(icons, id: \.self) { iconName in
-                    AltIconOption(name: iconName, selected: currentIconName == iconName, onTap: setIcon)
+                ForEach(alternativeElsewhenIcons, id: \.name) { icon in
+                    AltIconOption(icon: icon, selected: currentIconName == icon.fileName, onTap: setIcon)
                         .padding(.top, 20)
                 }
             }
             .id(viewId)
+            .padding(.bottom)
         }
         .navigationTitle(Text("App Icon"))
     }
     
-    private func setIcon(_ name: String?) {
-        UIApplication.shared.setAlternateIconName(name)
+    private func setIcon(_ icon: AlternativeIcon) {
+        UIApplication.shared.setAlternateIconName(icon.fileName)
         viewId += 1
     }
     
