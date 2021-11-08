@@ -13,6 +13,7 @@ struct AltIconOption: View {
     let selected: Bool
     let onTap: (_ icon: AlternativeIcon) -> ()
     var size: CGFloat = 80
+    var borderWidth: CGFloat = 5
     
     var body: some View {
         Button(action: {
@@ -21,7 +22,13 @@ struct AltIconOption: View {
             }
         }) {
             VStack(spacing: 5) {
-                AppIcon(icon: icon, size: size)
+                ZStack {
+                    RoundedRectangle(cornerRadius: 10 / 57 * size, style: .continuous)
+                        .fill(selected ? Color.accentColor : Color.secondary)
+                        .frame(width: size + borderWidth, height: size + borderWidth)
+                        .opacity(0.5)
+                    AppIcon(icon: icon, size: size)
+                }
                 Text(icon.name)
                     .font(.caption)
                     .foregroundColor(selected ? .primary : .secondary)
