@@ -14,7 +14,7 @@ struct AltIconView: View {
     var body: some View {
         let currentIconName = UIApplication.shared.alternateIconName
         ScrollView {
-            LazyVGrid(columns: [.init(), .init(), .init()]) {
+            LazyVGrid(columns: Array(repeating: .init(alignment: .top), count: 3)) {
                 ForEach(alternativeElsewhenIcons, id: \.name) { icon in
                     AltIconOption(icon: icon, selected: currentIconName == icon.fileName, onTap: setIcon)
                         .padding(.top, 20)
