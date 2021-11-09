@@ -17,7 +17,7 @@ struct TimeCodeGeneratorView: View, KeyboardReadable, OrientationObserving {
     @Environment(\.isInPopover) var isInPopover
     
     @State private var selectedDate = Date()
-    @State private var selectedTimeZone: TimeZone? = TimeZone.current
+    @State private var selectedTimeZone: TimeZone? = nil
     @State private var selectedFormatStyle: DateFormat = dateFormats[0]
     @State private var showLocalTimeInstead: Bool = false
     @State private var appendRelative: Bool = false
