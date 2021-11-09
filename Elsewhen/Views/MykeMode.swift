@@ -17,7 +17,7 @@ struct MykeMode: View, OrientationObserving {
     @Environment(\.isInPopover) private var isInPopover
     
     @State private var selectedDate = Date()
-    @State private var selectedTimeZone: TimeZone? = TimeZone.current
+    @State private var selectedTimeZone: TimeZone? = nil
     
     @State private var selectedFormatStyle: DateFormat = dateFormats[0]
     

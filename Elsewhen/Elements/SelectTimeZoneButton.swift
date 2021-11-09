@@ -13,12 +13,12 @@ struct SelectTimeZoneButton: View {
     
     #if os(macOS)
     var text: some View {
-        Text(selectedTimeZone.identifier.replacingOccurrences(of: "_", with: " ") ?? "Current")
+        Text(selectedTimeZone?.friendlyName ?? TimeZone.current.friendlyName)
             .foregroundColor(.primary)
     }
     #else
     var text: some View {
-        Text(selectedTimeZone?.identifier.replacingOccurrences(of: "_", with: " ") ?? "Current")
+        Text(selectedTimeZone?.friendlyName ?? TimeZone.current.friendlyName)
             .foregroundColor(.primary)
             .padding(.vertical, 8)
             .padding(.horizontal, 10)

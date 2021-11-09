@@ -59,7 +59,7 @@ struct TimezoneChoiceView: View {
         if selectMultiple {
             return selectedTimeZones.contains(tz)
         } else {
-            return selectedTimeZone == tz
+            return selectedTimeZone == tz || (selectedTimeZone == nil && tz == TimeZone.current && !showDeviceLocalOption)
         }
     }
     
@@ -83,17 +83,20 @@ struct TimezoneChoiceView: View {
             #else
             SearchBar(text: $searchTerm, placeholder: "Search...")
             #endif
-            Button(action: {
-                selectedTimeZone = nil
-            }) {
-                HStack {
-                    Text("Device")
-                    Spacer()
-                    Text("(\(TimeZone.current.friendlyName))")
-                        .foregroundColor(.secondary)
-                    if selectedTimeZone == nil {
-                        Image(systemName: "checkmark")
+            if showDeviceLocalOption {
+                Button(action: {
+                    selectedTimeZone = nil
+                }) {
+                    HStack {
+                        Text("Device")
+                        Spacer()
+                        Text("(\(TimeZone.current.friendlyName))")
+                            .foregroundColor(.secondary)
+                        if selectedTimeZone == nil {
+                            Image(systemName: "checkmark")
+                        }
                     }
+                    .foregroundColor(selectedTimeZone == nil ? .accentColor : .primary)
                 }
             }
             ForEach(sortedFilteredTimeZones, id: \.self) { tz in
