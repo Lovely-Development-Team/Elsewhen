@@ -8,17 +8,17 @@
 import SwiftUI
 
 struct SelectTimeZoneButton: View {
-    @Binding var selectedTimeZone: TimeZone
+    @Binding var selectedTimeZone: TimeZone?
     let onPress: () -> ()
     
     #if os(macOS)
     var text: some View {
-        Text(selectedTimeZone.identifier.replacingOccurrences(of: "_", with: " "))
+        Text(selectedTimeZone.identifier.replacingOccurrences(of: "_", with: " ") ?? "Current")
             .foregroundColor(.primary)
     }
     #else
     var text: some View {
-        Text(selectedTimeZone.identifier.replacingOccurrences(of: "_", with: " "))
+        Text(selectedTimeZone?.identifier.replacingOccurrences(of: "_", with: " ") ?? "Current")
             .foregroundColor(.primary)
             .padding(.vertical, 8)
             .padding(.horizontal, 10)

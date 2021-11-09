@@ -9,10 +9,11 @@ import SwiftUI
 
 struct TimezoneChoiceView: View {
     
-    @Binding var selectedTimeZone: TimeZone
+    @Binding var selectedTimeZone: TimeZone?
     @Binding var selectedTimeZones: [TimeZone]
     @Binding var selectedDate: Date
     var selectMultiple: Bool
+    var showDeviceLocalOption: Bool = false
     var done: (() -> ())?
     
     @State private var searchTerm: String = ""
@@ -82,6 +83,19 @@ struct TimezoneChoiceView: View {
             #else
             SearchBar(text: $searchTerm, placeholder: "Search...")
             #endif
+            Button(action: {
+                selectedTimeZone = nil
+            }) {
+                HStack {
+                    Text("Device")
+                    Spacer()
+                    Text("(\(TimeZone.current.friendlyName))")
+                        .foregroundColor(.secondary)
+                    if selectedTimeZone == nil {
+                        Image(systemName: "checkmark")
+                    }
+                }
+            }
             ForEach(sortedFilteredTimeZones, id: \.self) { tz in
                 let isFavourite = isFavouriteBinding(for: tz)
                 TimeZoneChoiceCell(tz: tz, isSelected: timeZoneIsSelected(tz), abbreviation: tz.fudgedAbbreviation(for: selectedDate), isFavourite: isFavourite, onSelect: onSelect(tz:))

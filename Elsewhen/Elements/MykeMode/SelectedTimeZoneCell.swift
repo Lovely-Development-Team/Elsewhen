@@ -22,6 +22,10 @@ struct SelectedTimeZoneCell: View {
                     Text(tz.friendlyName)
                         .font(.caption)
                         .foregroundColor(.secondary)
+                    Text("\(flag) \(timeInZone)")
+                        .onDrag {
+                            return NSItemProvider(object: timeInZone as NSString)
+                        }
                 }
                 Spacer()
                 if let abbreviation = abbreviation {
@@ -35,10 +39,6 @@ struct SelectedTimeZoneCell: View {
                 itemProvider.suggestedName = tzItemProvider.resolvedName
                 return itemProvider
             }
-            Text("\(flag) \(timeInZone)")
-                .onDrag {
-                    return NSItemProvider(object: timeInZone as NSString)
-                }
         }
         .accessibilityElement()
         .accessibilityLabel(Text("\(tz.friendlyName): \(timeInZone), \(abbreviation ?? "")"))
