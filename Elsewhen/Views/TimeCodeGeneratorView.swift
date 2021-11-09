@@ -17,7 +17,7 @@ struct TimeCodeGeneratorView: View, KeyboardReadable, OrientationObserving {
     @Environment(\.isInPopover) var isInPopover
     
     @State private var selectedDate = Date()
-    @State private var selectedTimeZone: TimeZone = TimeZone.current
+    @State private var selectedTimeZone: TimeZone? = TimeZone.current
     @State private var selectedFormatStyle: DateFormat = dateFormats[0]
     @State private var showLocalTimeInstead: Bool = false
     @State private var appendRelative: Bool = false
@@ -30,7 +30,7 @@ struct TimeCodeGeneratorView: View, KeyboardReadable, OrientationObserving {
     @State private var showEasterEggSheet = false
     
     private var discordFormatString: String {
-        return discordFormat(for: selectedDate, in: selectedTimeZone, with: selectedFormatStyle.code, appendRelative: appendRelative)
+        return discordFormat(for: selectedDate, in: selectedTimeZone ?? TimeZone.current, with: selectedFormatStyle.code, appendRelative: appendRelative)
     }
     
     var body: some View {
@@ -103,7 +103,7 @@ struct TimeCodeGeneratorView: View, KeyboardReadable, OrientationObserving {
             }
             
             if !isKeyboardVisible && (isOrientationPortrait || isCompactHorizontalSize) {
-                ResultSheet(selectedDate: selectedDate, selectedTimeZone: selectedTimeZone, discordFormat: discordFormatString, appendRelative: $appendRelative.animation(), showLocalTimeInstead: $showLocalTimeInstead, selectedFormatStyle: $selectedFormatStyle.animation())
+                ResultSheet(selectedDate: selectedDate, selectedTimeZone: selectedTimeZone ?? TimeZone.current, discordFormat: discordFormatString, appendRelative: $appendRelative.animation(), showLocalTimeInstead: $showLocalTimeInstead, selectedFormatStyle: $selectedFormatStyle.animation())
                     .opacity(showResultsSheet ? 1 : 0)
                     .background(GeometryReader { geometry in
                         Color.clear.preference(
@@ -130,6 +130,7 @@ struct TimeCodeGeneratorView: View, KeyboardReadable, OrientationObserving {
             }
         }
         .onAppear {
+            selectedTimeZone = UserDefaults.shared.resetButtonTimeZone
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 withAnimation {
                     self.showResultsSheet = true

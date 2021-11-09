@@ -12,7 +12,7 @@ struct DateTimeZonePicker: View {
     @Environment(\.isInPopover) private var isInPopover
     // MARK: Parameters
     @Binding var selectedDate: Date
-    @Binding var selectedTimeZone: TimeZone
+    @Binding var selectedTimeZone: TimeZone?
     var showDate: Bool = true
     let maxWidth: CGFloat?
     

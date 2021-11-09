@@ -17,7 +17,7 @@ struct MykeMode: View, OrientationObserving {
     @Environment(\.isInPopover) private var isInPopover
     
     @State private var selectedDate = Date()
-    @State private var selectedTimeZone: TimeZone = TimeZone.current
+    @State private var selectedTimeZone: TimeZone? = TimeZone.current
     
     @State private var selectedFormatStyle: DateFormat = dateFormats[0]
     
@@ -36,7 +36,7 @@ struct MykeMode: View, OrientationObserving {
     @State private var selectionViewMaxHeight: CGFloat?
     
     func generateTimesAndFlagsText() -> String {
-        stringForTimesAndFlags(of: selectedDate, in: selectedTimeZone, for: selectedTimeZones, timeZonesUsingEUFlag: timeZonesUsingEUFlag)
+        stringForTimesAndFlags(of: selectedDate, in: selectedTimeZone ?? TimeZone.current, for: selectedTimeZones, timeZonesUsingEUFlag: timeZonesUsingEUFlag)
     }
     
     func flagForTimeZone(_ tz: TimeZone) -> String {
@@ -47,7 +47,7 @@ struct MykeMode: View, OrientationObserving {
     }
     
     func stringForSelectedTime(in zone: TimeZone) -> String {
-        stringFor(time: selectedDate, in: zone, sourceZone: selectedTimeZone)
+        stringFor(time: selectedDate, in: zone, sourceZone: selectedTimeZone ?? TimeZone.current)
     }
     
     #if os(iOS)
@@ -236,6 +236,7 @@ struct MykeMode: View, OrientationObserving {
         }
         .navigationViewStyle(Self.navigationViewStyle)
         .onAppear {
+            selectedTimeZone = UserDefaults.shared.resetButtonTimeZone
             selectedTimeZones = UserDefaults.shared.mykeModeTimeZones
             timeZonesUsingEUFlag = UserDefaults.shared.mykeModeTimeZonesUsingEUFlag
         }

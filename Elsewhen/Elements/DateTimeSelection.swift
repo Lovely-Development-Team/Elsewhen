@@ -17,7 +17,7 @@ struct DateTimeSelection: View, OrientationObserving {
     
     @Binding var selectedFormatStyle: DateFormat
     @Binding var selectedDate: Date
-    @Binding var selectedTimeZone: TimeZone
+    @Binding var selectedTimeZone: TimeZone?
     @Binding var appendRelative: Bool
     @Binding var showLocalTimeInstead: Bool
     
@@ -58,7 +58,7 @@ struct DateTimeSelection: View, OrientationObserving {
         mediumImpactFeedbackGenerator.impactOccurred()
 #endif
         self.selectedDate = Date()
-        self.selectedTimeZone = TimeZone.current
+        self.selectedTimeZone = UserDefaults.shared.resetButtonTimeZone
         
     }
     
@@ -174,10 +174,10 @@ struct DateTimeSelection: View, OrientationObserving {
             
             #if !os(macOS)
             if !isInPopover {
-                ResultSheet(selectedDate: selectedDate, selectedTimeZone: selectedTimeZone, discordFormat: discordFormat(for: selectedDate, in: selectedTimeZone, with: selectedFormatStyle.code, appendRelative: appendRelative), appendRelative: $appendRelative, showLocalTimeInstead: $showLocalTimeInstead, selectedFormatStyle: $selectedFormatStyle)
+                ResultSheet(selectedDate: selectedDate, selectedTimeZone: selectedTimeZone ?? TimeZone.current, discordFormat: discordFormat(for: selectedDate, in: selectedTimeZone ?? TimeZone.current, with: selectedFormatStyle.code, appendRelative: appendRelative), appendRelative: $appendRelative, showLocalTimeInstead: $showLocalTimeInstead, selectedFormatStyle: $selectedFormatStyle)
                     .padding(.top, 10)
                 
-                DiscordFormattedDate(text: discordFormat(for: selectedDate, in: selectedTimeZone, with: selectedFormatStyle.code, appendRelative: appendRelative))
+                DiscordFormattedDate(text: discordFormat(for: selectedDate, in: selectedTimeZone ?? TimeZone.current, with: selectedFormatStyle.code, appendRelative: appendRelative))
             }
             #endif
         }
@@ -201,9 +201,9 @@ struct DateTimeSelection: View, OrientationObserving {
                 #endif
                 
                 if isInPopover {
-                    ResultSheet(selectedDate: selectedDate, selectedTimeZone: selectedTimeZone, discordFormat: discordFormat(for: selectedDate, in: selectedTimeZone, with: selectedFormatStyle.code, appendRelative: appendRelative), appendRelative: $appendRelative, showLocalTimeInstead: $showLocalTimeInstead, selectedFormatStyle: $selectedFormatStyle)
+                    ResultSheet(selectedDate: selectedDate, selectedTimeZone: selectedTimeZone ?? TimeZone.current, discordFormat: discordFormat(for: selectedDate, in: selectedTimeZone ?? TimeZone.current, with: selectedFormatStyle.code, appendRelative: appendRelative), appendRelative: $appendRelative, showLocalTimeInstead: $showLocalTimeInstead, selectedFormatStyle: $selectedFormatStyle)
                     
-                    DiscordFormattedDate(text: discordFormat(for: selectedDate, in: selectedTimeZone, with: selectedFormatStyle.code, appendRelative: appendRelative))
+                    DiscordFormattedDate(text: discordFormat(for: selectedDate, in: selectedTimeZone ?? TimeZone.current, with: selectedFormatStyle.code, appendRelative: appendRelative))
                 }
                 
             } else {
