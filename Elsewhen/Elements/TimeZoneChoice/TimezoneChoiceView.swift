@@ -12,9 +12,9 @@ struct TimezoneChoiceView: View {
     @Binding var selectedTimeZone: TimeZone?
     @Binding var selectedTimeZones: [TimeZone]
     @Binding var selectedDate: Date
-    var selectMultiple: Bool
-    var showDeviceLocalOption: Bool = false
-    var done: (() -> ())?
+    let selectMultiple: Bool
+    let showDeviceLocalOption: Bool = false
+    let done: (() -> ())?
     
     @State private var searchTerm: String = ""
     @State private var favouriteTimeZones: Set<TimeZone> = []
