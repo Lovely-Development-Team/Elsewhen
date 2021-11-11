@@ -15,6 +15,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationWillFinishLaunching(_ notification: Notification) {
         self.windowManager = WindowManager.shared
         self.statusItemController = StatusItemController.shared
+    }
+    
+    func applicationDidFinishLaunching(_ notification: Notification) {
+        setupMenu()
+        let window = NSApp.orderedWindows.first { window in
+            window.level == .normal
+        }
+        windowManager.initialWindowController = window?.windowController
+    }
+    
+    func setupMenu() {
         let mainMenu = NSApp.mainMenu
         let appMenuItem = mainMenu?.item(at: 0)
         let appMenu = appMenuItem?.submenu
@@ -26,13 +37,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         aboutItem?.tag = MenuTag.about.rawValue
         let servicesItem = appMenu?.item(withTitle: "Services")
         servicesItem?.tag = MenuTag.services.rawValue
-    }
-    
-    func applicationDidFinishLaunching(_ notification: Notification) {
-        let window = NSApp.orderedWindows.first { window in
-            window.level == .normal
-        }
-        windowManager.initialWindowController = window?.windowController
     }
     
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
