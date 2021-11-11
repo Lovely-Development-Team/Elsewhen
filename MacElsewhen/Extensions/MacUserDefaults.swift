@@ -8,24 +8,36 @@
 import Foundation
 
 extension UserDefaults {
-    static let showMenuBarWidgetKey = "showMenuBarWidget"
-    static let shouldTerminateAfterLastWindowClosedKey = "shouldTerminateAfterLastWindowClosed"
+    enum Keys {
+        static let showMenuBarWidgetKey = "showMenuBarWidget"
+        static let shouldTerminateAfterLastWindowClosedKey = "shouldTerminateAfterLastWindowClosed"
+    }
     
-    @objc var showMenuBarWidget: Bool {
+    @objc private var showMenuBarWidget: Bool {
         get {
-            bool(forKey: Self.showMenuBarWidgetKey)
+            bool(forKey: Self.Keys.showMenuBarWidgetKey)
         }
         set {
-            set(newValue, forKey: Self.showMenuBarWidgetKey)
+            set(newValue, forKey: Self.Keys.showMenuBarWidgetKey)
         }
     }
     
-    var shouldTerminateAfterLastWindowClosed: Bool {
+    @objc static var showMenuBarWidget: Bool {
         get {
-            bool(forKey: Self.shouldTerminateAfterLastWindowClosedKey)
+            Self.standard.bool(forKey: Self.Keys.showMenuBarWidgetKey)
         }
         set {
-            set(newValue, forKey: Self.shouldTerminateAfterLastWindowClosedKey)
+            Self.standard.set(newValue, forKey: Self.Keys.showMenuBarWidgetKey)
+        }
+    }
+    static let showMenuBarWidgetPublisher = UserDefaults.standard.publisher(for: \.showMenuBarWidget)
+    
+    static var shouldTerminateAfterLastWindowClosed: Bool {
+        get {
+            Self.standard.bool(forKey: Self.Keys.shouldTerminateAfterLastWindowClosedKey)
+        }
+        set {
+            Self.standard.set(newValue, forKey: Self.Keys.shouldTerminateAfterLastWindowClosedKey)
         }
     }
 }

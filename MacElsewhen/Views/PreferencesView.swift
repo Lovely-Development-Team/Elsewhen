@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct PreferencesView: View {
-    @AppStorage(UserDefaults.showMenuBarWidgetKey) private var showWidget: Bool = false
-    @AppStorage(UserDefaults.shouldTerminateAfterLastWindowClosedKey) private var shouldTerminateAfterLastWindowClosed: Bool = false
+    @AppStorage(UserDefaults.Keys.showMenuBarWidgetKey) private var showWidget: Bool = false
+    @AppStorage(UserDefaults.Keys.shouldTerminateAfterLastWindowClosedKey) private var shouldTerminateAfterLastWindowClosed: Bool = false
     
     var body: some View {
         Toggle("Show widget in menu bar", isOn: $showWidget)

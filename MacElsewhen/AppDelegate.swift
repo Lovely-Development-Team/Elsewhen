@@ -16,7 +16,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         self.windowManager = WindowManager.shared
         self.statusItemController = StatusItemController.shared
         UserDefaults.standard.register(defaults: [
-            UserDefaults.showMenuBarWidgetKey: true
+            UserDefaults.Keys.showMenuBarWidgetKey: true
         ])
     }
     
@@ -43,6 +43,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
-        return UserDefaults.standard.shouldTerminateAfterLastWindowClosed
+        return UserDefaults.shouldTerminateAfterLastWindowClosed
     }
 }

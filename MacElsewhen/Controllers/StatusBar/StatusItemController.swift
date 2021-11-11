@@ -27,7 +27,7 @@ class StatusItemController: NSObject {
     }
     
     private func observePreference() {
-        preferenceCancellable = UserDefaults.standard.publisher(for: \.showMenuBarWidget)
+        preferenceCancellable = UserDefaults.showMenuBarWidgetPublisher
             .sink { [unowned self] shouldShow in
                 if shouldShow && statusItem == nil {
                     addItem()
