@@ -15,6 +15,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationWillFinishLaunching(_ notification: Notification) {
         self.windowManager = WindowManager.shared
         self.statusItemController = StatusItemController.shared
+        UserDefaults.standard.register(defaults: [
+            UserDefaults.showMenuBarWidgetKey: true
+        ])
     }
     
     func applicationDidFinishLaunching(_ notification: Notification) {
