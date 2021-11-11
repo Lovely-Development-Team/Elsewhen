@@ -14,12 +14,12 @@ class SelectTimeZoneWindowController: NSWindowController {
     static let defaultWidth: CGFloat = 200
     static let defaultHeight: CGFloat = 200
     
-    @Binding var selectedTimeZone: TimeZone
+    @Binding var selectedTimeZone: TimeZone?
     @Binding var selectedDate: Date
     @Binding var selectedTimeZones: [TimeZone]
     var height: CGFloat?
     
-    init(selectedTimeZone: Binding<TimeZone>, selectedDate: Binding<Date>, selectedTimeZones: Binding<[TimeZone]>?, height: CGFloat? = SelectTimeZoneWindowController.defaultHeight) {
+    init(selectedTimeZone: Binding<TimeZone?>, selectedDate: Binding<Date>, selectedTimeZones: Binding<[TimeZone]>?, height: CGFloat? = SelectTimeZoneWindowController.defaultHeight) {
         self._selectedTimeZone = selectedTimeZone
         self._selectedDate = selectedDate
         let selectedTimeZonesInput = selectedTimeZones ?? Binding.constant([])
@@ -39,11 +39,11 @@ class SelectTimeZoneWindowController: NSWindowController {
         self.windowFrameAutosaveName = "SelectTimeZoneWindow"
     }
     
-    private static func createChoiceView(selectedTimeZone: Binding<TimeZone>, selectedDate: Binding<Date>, selectedTimeZones: Binding<[TimeZone]>, selectMultiple: Bool, height: CGFloat?) -> some View {
+    private static func createChoiceView(selectedTimeZone: Binding<TimeZone?>, selectedDate: Binding<Date>, selectedTimeZones: Binding<[TimeZone]>, selectMultiple: Bool, height: CGFloat?) -> some View {
         return (TimezoneChoiceView(selectedTimeZone: selectedTimeZone, selectedTimeZones: selectedTimeZones, selectedDate: selectedDate, selectMultiple: selectMultiple) {}).frame(minWidth: self.defaultWidth, idealWidth: self.defaultWidth, maxWidth: nil, minHeight: self.defaultHeight, idealHeight: height)
     }
     
-    func updateBindings(selectedTimeZone: Binding<TimeZone>, selectedDate: Binding<Date>, selectedTimeZones: Binding<[TimeZone]>?) {
+    func updateBindings(selectedTimeZone: Binding<TimeZone?>, selectedDate: Binding<Date>, selectedTimeZones: Binding<[TimeZone]>?) {
         self._selectedTimeZone = selectedTimeZone
         self._selectedDate = selectedDate
         let selectedTimeZonesInput = selectedTimeZones ?? Binding.constant([])

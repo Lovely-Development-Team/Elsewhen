@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "6346AD5926F3BF1300E406D0"
-               BuildableName = "MacElsewhen.app"
+               BuildableName = "Elsewhen.app"
                BlueprintName = "MacElsewhen"
                ReferencedContainer = "container:Elsewhen.xcodeproj">
             </BuildableReference>
@@ -65,7 +65,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6346AD5926F3BF1300E406D0"
-            BuildableName = "MacElsewhen.app"
+            BuildableName = "Elsewhen.app"
             BlueprintName = "MacElsewhen"
             ReferencedContainer = "container:Elsewhen.xcodeproj">
          </BuildableReference>
@@ -82,7 +82,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6346AD5926F3BF1300E406D0"
-            BuildableName = "MacElsewhen.app"
+            BuildableName = "Elsewhen.app"
             BlueprintName = "MacElsewhen"
             ReferencedContainer = "container:Elsewhen.xcodeproj">
          </BuildableReference>
