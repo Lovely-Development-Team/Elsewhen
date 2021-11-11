@@ -106,10 +106,10 @@ struct DateTimeSelection: View, OrientationObserving {
             
 #if os(macOS)
             if !isInPopover {
-                ResultSheet(selectedDate: selectedDate, selectedTimeZone: selectedTimeZone, discordFormat: discordFormat(for: selectedDate, in: selectedTimeZone, with: selectedFormatStyle.code, appendRelative: appendRelative), appendRelative: $appendRelative, showLocalTimeInstead: $showLocalTimeInstead, selectedFormatStyle: $selectedFormatStyle)
+                ResultSheet(selectedDate: selectedDate, selectedTimeZone: selectedTimeZone ?? TimeZone.current, discordFormat: discordFormat(for: selectedDate, in: selectedTimeZone ?? TimeZone.current, with: selectedFormatStyle.code, appendRelative: appendRelative), appendRelative: $appendRelative, showLocalTimeInstead: $showLocalTimeInstead, selectedFormatStyle: $selectedFormatStyle)
                     .padding(.top, 10)
                 
-                DiscordFormattedDate(text: discordFormat(for: selectedDate, in: selectedTimeZone, with: selectedFormatStyle.code, appendRelative: appendRelative))
+                DiscordFormattedDate(text: discordFormat(for: selectedDate, in: selectedTimeZone ?? TimeZone.current, with: selectedFormatStyle.code, appendRelative: appendRelative))
             }
             if isInPopover {
                 Spacer()

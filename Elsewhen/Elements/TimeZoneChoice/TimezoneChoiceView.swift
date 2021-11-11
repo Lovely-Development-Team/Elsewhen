@@ -13,8 +13,17 @@ struct TimezoneChoiceView: View {
     @Binding var selectedTimeZones: [TimeZone]
     @Binding var selectedDate: Date
     let selectMultiple: Bool
-    let showDeviceLocalOption: Bool = false
+    let showDeviceLocalOption: Bool
     let done: (() -> ())?
+    
+    init(selectedTimeZone: Binding<TimeZone?>, selectedTimeZones: Binding<[TimeZone]>, selectedDate: Binding<Date>, selectMultiple: Bool, showDeviceLocalOption: Bool = false, done: (() -> ())? = nil) {
+        self._selectedTimeZone = selectedTimeZone
+        self._selectedTimeZones = selectedTimeZones
+        self._selectedDate = selectedDate
+        self.selectMultiple = selectMultiple
+        self.showDeviceLocalOption = showDeviceLocalOption
+        self.done = done
+    }
     
     @State private var searchTerm: String = ""
     @State private var favouriteTimeZones: Set<TimeZone> = []

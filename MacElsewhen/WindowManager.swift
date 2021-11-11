@@ -107,7 +107,7 @@ class WindowManager: NSObject, NSWindowRestoration, NSWindowDelegate {
         return window
     }
     
-    private func createTimeZonesWindow(selectedTimeZone: Binding<TimeZone>, selectedDate: Binding<Date>, selectedTimeZones: Binding<[TimeZone]>?) -> NSWindow? {
+    private func createTimeZonesWindow(selectedTimeZone: Binding<TimeZone?>, selectedDate: Binding<Date>, selectedTimeZones: Binding<[TimeZone]>?) -> NSWindow? {
         let window = createRetainedWindow(assignTo: \.selectTimeZoneWindowController) {
             let primaryWindow = findPrimaryWindow()
             let primaryWindowHeight = primaryWindow?.frame.height
@@ -158,7 +158,7 @@ class WindowManager: NSObject, NSWindowRestoration, NSWindowDelegate {
         window?.makeKeyAndOrderFront(self)
     }
     
-    func openSelectTimeZones(selectedTimeZone: Binding<TimeZone>, selectedDate: Binding<Date>, selectedTimeZones: Binding<[TimeZone]>? = nil) {
+    func openSelectTimeZones(selectedTimeZone: Binding<TimeZone?>, selectedDate: Binding<Date>, selectedTimeZones: Binding<[TimeZone]>? = nil) {
         let newWindow = createTimeZonesWindow(selectedTimeZone: selectedTimeZone, selectedDate: selectedDate, selectedTimeZones: selectedTimeZones)
         assert(newWindow != nil, "Window should have been created")
         guard let newWindow = newWindow else {
