@@ -355,7 +355,7 @@
 		63087E96271B633500D6EEE8 /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
 		631E3F2126FCE9B60025F080 /* SelectedTimeZoneCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedTimeZoneCell.swift; sourceTree = "<group>"; };
 		631E3F2426FCEF1F0025F080 /* DeleteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteButton.swift; sourceTree = "<group>"; };
-		6346AD5A26F3BF1300E406D0 /* MacElsewhen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacElsewhen.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6346AD5A26F3BF1300E406D0 /* .app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = .app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6346AD6326F3BF1400E406D0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		6346AD6926F3BF1400E406D0 /* MacElsewhenTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MacElsewhenTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6346AD6D26F3BF1400E406D0 /* MacElsewhenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacElsewhenTests.swift; sourceTree = "<group>"; };
@@ -570,7 +570,7 @@
 				5EB23B9926E406B600203153 /* Elsewhen.app */,
 				6378398C26EBF4750055A10D /* Discord Helper Intents.appex */,
 				6378399826EBF4750055A10D /* Discord Helper IntentsUI.appex */,
-				6346AD5A26F3BF1300E406D0 /* MacElsewhen.app */,
+				6346AD5A26F3BF1300E406D0 /* .app */,
 				6346AD6926F3BF1400E406D0 /* MacElsewhenTests.xctest */,
 				6346AD7326F3BF1400E406D0 /* MacElsewhenUITests.xctest */,
 			);
@@ -916,7 +916,7 @@
 			);
 			name = MacElsewhen;
 			productName = MacElsewhen;
-			productReference = 6346AD5A26F3BF1300E406D0 /* MacElsewhen.app */;
+			productReference = 6346AD5A26F3BF1300E406D0 /* .app */;
 			productType = "com.apple.product-type.application";
 		};
 		6346AD6826F3BF1400E406D0 /* MacElsewhenTests */ = {
@@ -1437,6 +1437,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = Elsewhen;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1491,6 +1492,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = Elsewhen;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -1594,7 +1596,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 11.3;
 				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.bencardy.Elsewhen;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "$(PRODUCT_NAME)";
 				SDKROOT = macosx;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1629,7 +1631,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 11.3;
 				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.bencardy.Elsewhen;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "$(PRODUCT_NAME)";
 				SDKROOT = macosx;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
