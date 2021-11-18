@@ -7,6 +7,35 @@
 
 import Foundation
 
+enum TimeFormat: String {
+    case twelve
+    case twentyFour
+    case systemLocale
+    
+    var description: String {
+        switch self {
+        case .twelve:
+            return "12-Hour"
+        case .twentyFour:
+            return "24-Hour"
+        case .systemLocale:
+            return "System Locale"
+        }
+    }
+    
+    static var systemLocaleTimeFormat: Self {
+        let df = DateFormatter()
+        df.dateStyle = .none
+        df.timeStyle = .short
+        let result = df.string(from: Date()).lowercased()
+        if result.contains("a") || result.contains("p") {
+            return .twelve
+        }
+        return .twentyFour
+    }
+    
+}
+
 enum FormatCode: String {
     case f
     case F
@@ -75,15 +104,18 @@ func discordFormat(for date: Date, in timezone: TimeZone, with formatCode: Forma
     return formattedString
 }
 
-func stringFor(time date: Date, in zone: TimeZone, sourceZone: TimeZone) -> String {
+func stringFor(time date: Date, in zone: TimeZone, sourceZone: TimeZone, locale: Locale? = nil) -> String {
     let df = DateFormatter()
     df.dateStyle = .none
     df.timeStyle = .short
     df.timeZone = zone
+    if let locale = locale {
+        df.locale = locale
+    }
     return df.string(from: convert(date: date, from: sourceZone, to: TimeZone.current))
 }
 
-func stringForTimesAndFlags<TZSequence>(of date: Date, in sourceZone: TimeZone, for timezones: TZSequence, timeZonesUsingEUFlag: Set<TimeZone>) -> String where TZSequence: Collection, TZSequence.Element == TimeZone {
+func stringForTimesAndFlags<TZSequence>(of date: Date, in sourceZone: TimeZone, for timezones: TZSequence, separator: MykeModeSeparator, timeZonesUsingEUFlag: Set<TimeZone>) -> String where TZSequence: Collection, TZSequence.Element == TimeZone {
     var text = "\n"
     for tz in timezones {
         let abbr = tz.fudgedAbbreviation(for: date) ?? ""
@@ -93,7 +125,7 @@ func stringForTimesAndFlags<TZSequence>(of date: Date, in sourceZone: TimeZone, 
         } else {
             flag = flagForTimeZone(tz)
         }
-        text += "\(flag) - \(stringFor(time: date, in: tz, sourceZone: sourceZone)) \(abbr)\n"
+        text += "\(flag)\(separator.rawValue)\(stringFor(time: date, in: tz, sourceZone: sourceZone, locale: tz.mykeModeLocale)) \(abbr)\n"
     }
     return text
 }

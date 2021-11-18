@@ -84,4 +84,21 @@ extension TimeZone {
         
     }
     
+    var mykeModeLocale: Locale? {
+        if UserDefaults.shared.mykeModeTimeZoneIdentifiersUsing24HourTime.contains(self) {
+            return Locale(identifier: "en_GB")
+        }
+        if UserDefaults.shared.mykeModeTimeZoneIdentifiersUsing12HourTime.contains(self) {
+            return Locale(identifier: "en_US")
+        }
+        switch UserDefaults.shared.mykeModeDefaultTimeFormat {
+        case .twelve:
+            return Locale(identifier: "en_US")
+        case .twentyFour:
+            return Locale(identifier: "en_GB")
+        default:
+            return nil
+        }
+    }
+    
 }
