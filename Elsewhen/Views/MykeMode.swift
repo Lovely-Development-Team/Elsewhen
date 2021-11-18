@@ -23,6 +23,11 @@ struct MykeMode: View, OrientationObserving {
     
     @State private var selectedTimeZones: [TimeZone] = []
     @State private var timeZonesUsingEUFlag: Set<TimeZone> = []
+    @State private var timeZonesUsing24HourTime: Set<TimeZone> = []
+    @State private var timeZonesUsing12HourTime: Set<TimeZone> = []
+    
+    @AppStorage(UserDefaults.mykeModeDefaultTimeFormatKey, store: UserDefaults.shared) private var defaultTimeFormat: TimeFormat = .systemLocale
+    @AppStorage(UserDefaults.mykeModeSeparatorKey, store: UserDefaults.shared) private var mykeModeSeparator: MykeModeSeparator = .hyphen
     
     @State private var showCopied: Bool = false
     
@@ -36,7 +41,7 @@ struct MykeMode: View, OrientationObserving {
     @State private var selectionViewMaxHeight: CGFloat?
     
     func generateTimesAndFlagsText() -> String {
-        stringForTimesAndFlags(of: selectedDate, in: selectedTimeZone ?? TimeZone.current, for: selectedTimeZones, timeZonesUsingEUFlag: timeZonesUsingEUFlag)
+        stringForTimesAndFlags(of: selectedDate, in: selectedTimeZone ?? TimeZone.current, for: selectedTimeZones, separator: mykeModeSeparator, timeZonesUsingEUFlag: timeZonesUsingEUFlag)
     }
     
     func flagForTimeZone(_ tz: TimeZone) -> String {
@@ -46,8 +51,25 @@ struct MykeMode: View, OrientationObserving {
         return tz.flag
     }
     
+    func localeForTimeZone(_ tz: TimeZone) -> Locale? {
+        if timeZonesUsing24HourTime.contains(tz) {
+            return Locale(identifier: "en_GB")
+        }
+        if timeZonesUsing12HourTime.contains(tz) {
+            return Locale(identifier: "en_US")
+        }
+        switch defaultTimeFormat {
+        case .twelve:
+            return Locale(identifier: "en_US")
+        case .twentyFour:
+            return Locale(identifier: "en_GB")
+        default:
+            return nil
+        }
+    }
+    
     func stringForSelectedTime(in zone: TimeZone) -> String {
-        stringFor(time: selectedDate, in: zone, sourceZone: selectedTimeZone ?? TimeZone.current)
+        stringFor(time: selectedDate, in: zone, sourceZone: selectedTimeZone ?? TimeZone.current, locale: localeForTimeZone(zone))
     }
     
     #if os(iOS)
@@ -75,6 +97,47 @@ struct MykeMode: View, OrientationObserving {
                         }
                     }
                     .contextMenu {
+                        if tz.isMemberOfEuropeanUnion {
+                            Button(action: {
+                                #if os(iOS)
+                                mediumImpactFeedbackGenerator.impactOccurred()
+                                #endif
+                                if timeZonesUsingEUFlag.contains(tz) {
+                                    timeZonesUsingEUFlag.remove(tz)
+                                } else {
+                                    timeZonesUsingEUFlag.insert(tz)
+                                }
+                            }) {
+                                Text("Toggle EU Flag")
+                            }
+                        }
+                        Button(action: {
+                            #if os(iOS)
+                            mediumImpactFeedbackGenerator.impactOccurred()
+                            #endif
+                            self.timeZonesUsing24HourTime.remove(tz)
+                            self.timeZonesUsing12HourTime.insert(tz)
+                        }) {
+                            Text("12-Hour Time Format")
+                        }
+                        Button(action: {
+                            #if os(iOS)
+                            mediumImpactFeedbackGenerator.impactOccurred()
+                            #endif
+                            self.timeZonesUsing12HourTime.remove(tz)
+                            self.timeZonesUsing24HourTime.insert(tz)
+                        }) {
+                            Text("24-Hour Time Format")
+                        }
+                        Button(action: {
+                            #if os(iOS)
+                            mediumImpactFeedbackGenerator.impactOccurred()
+                            #endif
+                            self.timeZonesUsing12HourTime.remove(tz)
+                            self.timeZonesUsing24HourTime.remove(tz)
+                        }) {
+                            Text("Default Time Format")
+                        }
                         DeleteButton {
                             #if os(iOS)
                             notificationFeedbackGenerator.prepare()
@@ -101,7 +164,6 @@ struct MykeMode: View, OrientationObserving {
     var mykeModeButtons: some View {
         Button(action: {
             #if os(macOS)
-//                        WindowManager.shared.openSelectTimeZones(selectedTimeZone: .constant(TimeZone.current), selectedDate: $selectedDate, selectedTimeZones: $selectedTimeZones)
             self.showTimeZonePopover = true
             #else
             self.showTimeZoneSheet = true
@@ -239,12 +301,20 @@ struct MykeMode: View, OrientationObserving {
             selectedTimeZone = UserDefaults.shared.resetButtonTimeZone
             selectedTimeZones = UserDefaults.shared.mykeModeTimeZones
             timeZonesUsingEUFlag = UserDefaults.shared.mykeModeTimeZonesUsingEUFlag
+            timeZonesUsing12HourTime = UserDefaults.shared.mykeModeTimeZoneIdentifiersUsing12HourTime
+            timeZonesUsing24HourTime = UserDefaults.shared.mykeModeTimeZoneIdentifiersUsing24HourTime
         }
         .onChange(of: selectedTimeZones) { newValue in
             UserDefaults.shared.mykeModeTimeZones = newValue
         }
         .onChange(of: timeZonesUsingEUFlag) { newValue in
             UserDefaults.shared.mykeModeTimeZonesUsingEUFlag = newValue
+        }
+        .onChange(of: timeZonesUsing12HourTime) { newValue in
+            UserDefaults.shared.mykeModeTimeZoneIdentifiersUsing12HourTime = newValue
+        }
+        .onChange(of: timeZonesUsing24HourTime) { newValue in
+            UserDefaults.shared.mykeModeTimeZoneIdentifiersUsing24HourTime = newValue
         }
         
     }

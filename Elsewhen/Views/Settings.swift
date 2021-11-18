@@ -11,15 +11,29 @@ struct Settings: View {
     
     @State private var defaultTimeZone: TimeZone? = nil
     @State private var defaultDate: Date = Date.distantPast
+    @State private var defaultTimeFormat: TimeFormat = .systemLocale
+    @AppStorage(UserDefaults.mykeModeSeparatorKey, store: UserDefaults.shared) private var mykeModeSeparator: MykeModeSeparator = .hyphen
     
     private var defaultTimeZoneName: String {
         defaultTimeZone?.friendlyName ?? "Device"
     }
     
+    var footer: some View {
+        VStack(spacing: 2) {
+            Link(destination: URL(string: "https://tildy.dev")!) {
+                Text("©2021 The Lovely Developers")
+            }
+            .buttonStyle(PlainButtonStyle())
+        }
+        .padding(.top, 5)
+        .frame(maxWidth: .infinity, alignment: .center)
+        .foregroundColor(.secondary)
+    }
+    
     var body: some View {
         NavigationView {
             Form {
-                Section {
+                Section(header: Text("General Settings")) {
                     NavigationLink(destination: AltIconView()) {
                         Text("App Icon")
                     }
@@ -32,7 +46,19 @@ struct Settings: View {
                         }
                     }
                 }
-                Section {
+                Section(header: Text("Time List Settings")) {
+                    Picker("Default Time Format", selection: $defaultTimeFormat) {
+                        Text("System Locale").tag(TimeFormat.systemLocale)
+                        Text("12-Hour").tag(TimeFormat.twelve)
+                        Text("24-Hour").tag(TimeFormat.twentyFour)
+                    }
+                    Picker("Separator", selection: $mykeModeSeparator) {
+                        ForEach(MykeModeSeparator.allCases, id: \.self) { sep in
+                            Text(sep.description).tag(sep)
+                        }
+                    }
+                }
+                Section(footer: footer) {
                     HStack {
                         Text("App Version")
                         Spacer()
@@ -43,9 +69,13 @@ struct Settings: View {
             }
             .onAppear {
                 defaultTimeZone = UserDefaults.shared.resetButtonTimeZone
+                defaultTimeFormat = UserDefaults.shared.mykeModeDefaultTimeFormat
             }
             .onChange(of: defaultTimeZone) { newTz in
                 UserDefaults.shared.resetButtonTimeZone = newTz
+            }
+            .onChange(of: defaultTimeFormat) { newFormat in
+                UserDefaults.shared.mykeModeDefaultTimeFormat = newFormat
             }
             .navigationTitle(Text("Settings"))
         }
