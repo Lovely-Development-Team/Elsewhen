@@ -33,6 +33,7 @@ let alternativeElsewhenIcons: [AlternativeIcon] = [
     AlternativeIcon(fileName: "lesbian", name: "Lesbian Flag"),
     AlternativeIcon(fileName: "nonbinary", name: "Nonbinary Flag"),
     AlternativeIcon(fileName: "pansexual", name: "Pansexual Flag"),
+    AlternativeIcon(fileName: "progressive", name: "Progressive Pride Flag"),
     AlternativeIcon(fileName: "transgender", name: "Transgender Flag")
 ]
 

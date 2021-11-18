@@ -13,7 +13,7 @@ struct AltIconOption: View {
     let selected: Bool
     let onTap: (_ icon: AlternativeIcon) -> ()
     var size: CGFloat = 80
-    var borderWidth: CGFloat = 5
+    var borderWidth: CGFloat = 2
     
     var body: some View {
         Button(action: {

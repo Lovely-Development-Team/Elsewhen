@@ -15,6 +15,15 @@
                 <key>UIPrerenderedIcon</key>
                 <false/>
             </dict>
+            <key>progressive</key>
+            <dict>
+                <key>CFBundleIconFiles</key>
+                <array>
+                    <string>progressive</string>
+                </array>
+                <key>UIPrerenderedIcon</key>
+                <false/>
+            </dict>
             <key>sixcolors</key>
             <dict>
                 <key>CFBundleIconFiles</key>
@@ -138,6 +147,15 @@
 	<dict>
 		<key>CFBundleAlternateIcons</key>
 		<dict>
+            <key>progressive</key>
+            <dict>
+                <key>CFBundleIconFiles</key>
+                <array>
+                    <string>progressive</string>
+                </array>
+                <key>UIPrerenderedIcon</key>
+                <false/>
+            </dict>
             <key>wiggles</key>
             <dict>
                 <key>CFBundleIconFiles</key>
