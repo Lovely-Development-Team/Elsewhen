@@ -136,6 +136,9 @@ struct TimezoneChoiceView: View {
             #endif
         } else {
             self.selectedTimeZone = tz
+            #if os(iOS)
+            selectionFeedbackGenerator.selectionChanged()
+            #endif
             done?()
         }
     }
