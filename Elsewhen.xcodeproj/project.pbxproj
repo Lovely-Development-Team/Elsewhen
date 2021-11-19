@@ -204,6 +204,8 @@
 		63A90DF926F60BF600CACCB9 /* CopyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A90DF726F60AB700CACCB9 /* CopyButton.swift */; };
 		63A915F726FB42CE0027B18D /* StarUnstarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A915F626FB42CE0027B18D /* StarUnstarButton.swift */; };
 		63A915F826FB42D60027B18D /* StarUnstarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A915F626FB42CE0027B18D /* StarUnstarButton.swift */; };
+		63AC5A072747F3BE008D10C6 /* TimeListSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AC5A062747F3BE008D10C6 /* TimeListSettings.swift */; };
+		63AC5A082747F487008D10C6 /* TimeListSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AC5A062747F3BE008D10C6 /* TimeListSettings.swift */; };
 		63B0886227108DEF00CA9980 /* TimeListIntentHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B0886127108DEF00CA9980 /* TimeListIntentHandling.swift */; };
 		63B08863271097AF00CA9980 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9BD45026EEA11900383233 /* UserDefaults.swift */; };
 		63B0886527109E6200CA9980 /* CommonResolution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B0886427109E6200CA9980 /* CommonResolution.swift */; };
@@ -433,6 +435,7 @@
 		63A90DF326F5F3A000CACCB9 /* MacContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacContentView.swift; sourceTree = "<group>"; };
 		63A90DF726F60AB700CACCB9 /* CopyButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyButton.swift; sourceTree = "<group>"; };
 		63A915F626FB42CE0027B18D /* StarUnstarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarUnstarButton.swift; sourceTree = "<group>"; };
+		63AC5A062747F3BE008D10C6 /* TimeListSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeListSettings.swift; sourceTree = "<group>"; };
 		63B0886127108DEF00CA9980 /* TimeListIntentHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeListIntentHandling.swift; sourceTree = "<group>"; };
 		63B0886427109E6200CA9980 /* CommonResolution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonResolution.swift; sourceTree = "<group>"; };
 		63B5EF6727208E5000AA576E /* FormatLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatLabel.swift; sourceTree = "<group>"; };
@@ -630,6 +633,7 @@
 		5EE70E2526ECCBF400F3F164 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				63AC5A052747F3B0008D10C6 /* SettingsComponents */,
 				5EE70E2626ECCC0700F3F164 /* TimeCodeGeneratorView.swift */,
 				5E9BD45826EF44B700383233 /* MykeMode.swift */,
 				5EE2D2CC26F2717E00D61875 /* EasterEggView.swift */,
@@ -888,6 +892,14 @@
 				63B5EF6727208E5000AA576E /* FormatLabel.swift */,
 			);
 			path = Buttons;
+			sourceTree = "<group>";
+		};
+		63AC5A052747F3B0008D10C6 /* SettingsComponents */ = {
+			isa = PBXGroup;
+			children = (
+				63AC5A062747F3BE008D10C6 /* TimeListSettings.swift */,
+			);
+			path = SettingsComponents;
 			sourceTree = "<group>";
 		};
 		63C51BA926FA33FB00145662 /* TimeZoneChoice */ = {
@@ -1210,6 +1222,7 @@
 				5E6C8C3A27467487003244DF /* MykeModeSeparator.swift in Sources */,
 				63BB87BB271B6B41000E8820 /* SharingHelpers.swift in Sources */,
 				6378397E26EA5FD60055A10D /* UIApplication+clearLaunchScreenCache.swift in Sources */,
+				63AC5A072747F3BE008D10C6 /* TimeListSettings.swift in Sources */,
 				5E9BD45926EF44B700383233 /* MykeMode.swift in Sources */,
 				5E54BBB82737C339005CF7A6 /* AltIconOption.swift in Sources */,
 				63C51BAB26FA343600145662 /* TimeZoneChoiceCell.swift in Sources */,
@@ -1279,6 +1292,7 @@
 				63C51BA526F9C9C900145662 /* SelectTimeZoneWindowController.swift in Sources */,
 				63A915F826FB42D60027B18D /* StarUnstarButton.swift in Sources */,
 				63A90DD826F42F2F00CACCB9 /* PreferencesWindowController.swift in Sources */,
+				63AC5A082747F487008D10C6 /* TimeListSettings.swift in Sources */,
 				638B47BE26FC99DF00B26B26 /* EasterEggButton.swift in Sources */,
 				639FFFAC271B75E7008897E8 /* OrientationObserving.swift in Sources */,
 				6346AD9726F3C23E00E406D0 /* DeviceType.swift in Sources */,
