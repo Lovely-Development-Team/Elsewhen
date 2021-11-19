@@ -93,19 +93,14 @@ struct TimezoneChoiceView: View {
             SearchBar(text: $searchTerm, placeholder: "Search...")
             #endif
             if showDeviceLocalOption {
-                Button(action: {
+                LocalDeviceButton(isSelected: selectedTimeZone == nil, foregroundColour: selectedTimeZone == nil ? .accentColor : .primary) {
                     selectedTimeZone = nil
-                }) {
-                    HStack {
-                        Text("Device")
-                        Spacer()
-                        Text("(\(TimeZone.current.friendlyName))")
-                            .foregroundColor(.secondary)
-                        if selectedTimeZone == nil {
-                            Image(systemName: "checkmark")
-                        }
+                    #if os(iOS)
+                    selectionFeedbackGenerator.selectionChanged()
+                    #endif
+                    if !self.selectMultiple {
+                        done?()
                     }
-                    .foregroundColor(selectedTimeZone == nil ? .accentColor : .primary)
                 }
             }
             ForEach(sortedFilteredTimeZones, id: \.self) { tz in
@@ -149,5 +144,46 @@ struct TimezoneChoiceView: View {
 struct TimezoneChoiceView_Previews: PreviewProvider {
     static var previews: some View {
         TimezoneChoiceView(selectedTimeZone: .constant(TimeZone(identifier: "Africa/Accra")!), selectedTimeZones: .constant([TimeZone(identifier: "Africa/Algiers")!, TimeZone(identifier: "Africa/Bissau")!]), selectedDate: .constant(Date()), selectMultiple: true)
+    }
+}
+
+struct LocalDeviceButton: View {
+    let isSelected: Bool
+    let foregroundColour: Color
+    let onTap: () -> ()
+    
+    var body: some View {
+        #if !os(macOS)
+        Button(action: onTap) {
+            LocalDeviceButtonContents(isSelected: isSelected)
+            .foregroundColor(foregroundColour)
+        }
+        #else
+        VStack {
+            LocalDeviceButtonContents(isSelected: isSelected)
+            Divider()
+        }
+        .foregroundColor(foregroundColour)
+        .contentShape(Rectangle())
+        .onTapGesture {
+            onTap()
+        }
+        #endif
+    }
+}
+
+struct LocalDeviceButtonContents: View {
+    let isSelected: Bool
+    
+    var body: some View {
+        HStack {
+            Text("Device")
+            Spacer()
+            Text("(\(TimeZone.current.friendlyName))")
+                .foregroundColor(.secondary)
+            if isSelected {
+                Image(systemName: "checkmark")
+            }
+        }
     }
 }

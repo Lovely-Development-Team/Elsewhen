@@ -46,18 +46,7 @@ struct Settings: View {
                         }
                     }
                 }
-                Section(header: Text("Time List Settings")) {
-                    Picker("Default Time Format", selection: $defaultTimeFormat) {
-                        Text("System Locale").tag(TimeFormat.systemLocale)
-                        Text("12-Hour").tag(TimeFormat.twelve)
-                        Text("24-Hour").tag(TimeFormat.twentyFour)
-                    }
-                    Picker("Separator", selection: $mykeModeSeparator) {
-                        ForEach(MykeModeSeparator.allCases, id: \.self) { sep in
-                            Text(sep.description).tag(sep)
-                        }
-                    }
-                }
+                TimeListSettings(defaultTimeFormat: $defaultTimeFormat, mykeModeSeparator: $mykeModeSeparator)
                 Section(footer: footer) {
                     HStack {
                         Text("App Version")
