@@ -10,6 +10,8 @@ import SwiftUI
 struct EasterEggView: View {
     
     @Environment(\.openURL) var openURL
+    @Environment(\.presentationMode) private var presentationMode
+
     
     @State private var animate = false
     @State private var animationType: Animation? = .none
@@ -39,6 +41,21 @@ struct EasterEggView: View {
     }
     
     var body: some View {
+        #if os(macOS)
+        HStack {
+            Spacer()
+            Button(action: {
+                    self.presentationMode.wrappedValue.dismiss()
+                  }) {
+                    Text("Dismiss")
+                          .fontWeight(.semibold)
+                          .foregroundColor(.accentColor)
+                  }
+                  .buttonStyle(PlainButtonStyle())
+                  .padding(.horizontal, 15)
+                  .padding(.vertical, 10)
+        }
+        #endif
         VStack {
             Text("Hi there!")
                 .font(.largeTitle)
