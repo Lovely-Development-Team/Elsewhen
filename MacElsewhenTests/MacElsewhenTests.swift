@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import MacElsewhen
+@testable import Elsewhen
 
 class MacElsewhenTests: XCTestCase {
 

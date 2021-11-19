@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import MacElsewhen
+@testable import Elsewhen
 
 let timezoneUtc = TimeZone(secondsFromGMT: 0)!
 

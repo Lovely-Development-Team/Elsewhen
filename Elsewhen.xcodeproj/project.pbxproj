@@ -1706,7 +1706,7 @@
 				SDKROOT = macosx;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MacElsewhen.app/Contents/MacOS/MacElsewhen";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Elsewhen.app/Contents/MacOS/Elsewhen";
 			};
 			name = Debug;
 		};
@@ -1732,7 +1732,7 @@
 				SDKROOT = macosx;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MacElsewhen.app/Contents/MacOS/MacElsewhen";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Elsewhen.app/Contents/MacOS/Elsewhen";
 			};
 			name = Release;
 		};
