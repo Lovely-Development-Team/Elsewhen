@@ -68,13 +68,23 @@ extension UserDefaults {
         }
     }
     
+    @objc
+    var resetButtonTimeZoneString: String? {
+        get {
+            string(forKey: Self.resetButtonTimeZoneIdentifierKey)
+        }
+        set {
+            set(newValue, forKey: Self.resetButtonTimeZoneIdentifierKey)
+        }
+    }
+    
     var resetButtonTimeZone: TimeZone? {
         get {
-            guard let identifier = string(forKey: Self.resetButtonTimeZoneIdentifierKey) else { return nil }
+            guard let identifier = resetButtonTimeZoneString else { return nil }
             return TimeZone(identifier: identifier) ?? nil
         }
         set {
-            set(newValue?.identifier, forKey: Self.resetButtonTimeZoneIdentifierKey)
+            resetButtonTimeZoneString = newValue?.identifier
         }
     }
     
