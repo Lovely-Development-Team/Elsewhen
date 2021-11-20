@@ -158,6 +158,7 @@
                 <constraint firstItem="YF9-z4-KG2" firstAttribute="leading" secondItem="zeW-C9-z08" secondAttribute="leading" id="4fK-Ag-mgO"/>
                 <constraint firstItem="aK6-G7-ifs" firstAttribute="top" secondItem="HZP-9Y-ZZO" secondAttribute="bottom" constant="6" symbolic="YES" id="5YD-30-hEN"/>
                 <constraint firstItem="HZP-9Y-ZZO" firstAttribute="top" secondItem="dTE-io-ilE" secondAttribute="bottom" constant="20" id="6Ce-zT-bfW" userLabel="Hyphen Top"/>
+                <constraint firstItem="R95-eR-w7W" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" id="6md-Y8-6Z8"/>
                 <constraint firstItem="iNj-5l-JSV" firstAttribute="leading" secondItem="aK6-G7-ifs" secondAttribute="leading" id="703-1z-yKD"/>
                 <constraint firstItem="SQK-3A-AhL" firstAttribute="leading" secondItem="YF9-z4-KG2" secondAttribute="leading" id="8d5-zR-8Uo"/>
                 <constraint firstItem="aK6-G7-ifs" firstAttribute="leading" secondItem="HZP-9Y-ZZO" secondAttribute="leading" id="9Mj-gp-DjU"/>
@@ -177,8 +178,9 @@
                 <constraint firstItem="FiK-4B-0CN" firstAttribute="centerY" secondItem="HZP-9Y-ZZO" secondAttribute="centerY" id="fKl-m8-FQM"/>
                 <constraint firstItem="cVj-Tf-yVS" firstAttribute="leading" secondItem="SQK-3A-AhL" secondAttribute="trailing" constant="8" symbolic="YES" id="gHa-PD-ScT"/>
                 <constraint firstItem="HZP-9Y-ZZO" firstAttribute="leading" secondItem="FiK-4B-0CN" secondAttribute="trailing" constant="6" symbolic="YES" id="gxJ-Aj-Sfm"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="cVj-Tf-yVS" secondAttribute="trailing" constant="20" id="h51-3l-laE"/>
                 <constraint firstItem="zeW-C9-z08" firstAttribute="leading" secondItem="CXt-HY-2mw" secondAttribute="leading" id="hdQ-nY-Sel"/>
-                <constraint firstAttribute="bottom" secondItem="iNj-5l-JSV" secondAttribute="bottom" constant="20" id="hl0-F2-l81"/>
+                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="iNj-5l-JSV" secondAttribute="bottom" constant="20" id="hl0-F2-l81"/>
                 <constraint firstItem="CXt-HY-2mw" firstAttribute="top" secondItem="Lht-nk-oY5" secondAttribute="bottom" constant="6" symbolic="YES" id="mbV-g6-rd3"/>
                 <constraint firstItem="HZP-9Y-ZZO" firstAttribute="leading" secondItem="dTE-io-ilE" secondAttribute="leading" id="ofR-3C-bvM"/>
                 <constraint firstItem="SQK-3A-AhL" firstAttribute="centerY" secondItem="cVj-Tf-yVS" secondAttribute="centerY" id="ox3-3G-eM0"/>
