@@ -12,12 +12,9 @@ import SwiftUI
 class PreferencesWindowController: NSWindowController, NSWindowDelegate {
     static let windowIdentifier = NSUserInterfaceItemIdentifier("PreferencesWindow")
     
-    static let width: CGFloat = 400
-    static let height: CGFloat = 200
-    
+
     init() {
-        let content = NSHostingController(rootView: PreferencesView().frame(minWidth: Self.width, maxWidth: .infinity, minHeight: Self.height, maxHeight: .infinity))
-        let window = NSWindow(contentViewController: content)
+        let window = NSWindow(contentViewController: PreferencesViewController())
         window.identifier = Self.windowIdentifier
         window.title = "Preferences"
         super.init(window: window)
