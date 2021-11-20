@@ -47,7 +47,7 @@
                     </connections>
                 </button>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cVj-Tf-yVS">
-                    <rect key="frame" x="223" y="206" width="146" height="32"/>
+                    <rect key="frame" x="201" y="206" width="146" height="32"/>
                     <buttonCell key="cell" type="push" title="Default Time Zone" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="4Eu-DP-HrB">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -161,7 +161,7 @@
                 <constraint firstAttribute="trailing" secondItem="hMB-rw-E9w" secondAttribute="trailing" id="SXY-nP-B27"/>
                 <constraint firstItem="hMB-rw-E9w" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="Slo-bc-vux"/>
                 <constraint firstItem="iNj-5l-JSV" firstAttribute="top" secondItem="aK6-G7-ifs" secondAttribute="bottom" constant="6" symbolic="YES" id="Ubb-iN-PTM"/>
-                <constraint firstItem="cVj-Tf-yVS" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="W9m-xL-fPD"/>
+                <constraint firstItem="cVj-Tf-yVS" firstAttribute="leading" secondItem="YF9-z4-KG2" secondAttribute="leading" id="W9m-xL-fPD"/>
                 <constraint firstAttribute="trailing" secondItem="aK6-G7-ifs" secondAttribute="trailing" constant="236" id="XGh-pT-mOb"/>
                 <constraint firstItem="cVj-Tf-yVS" firstAttribute="top" secondItem="CXt-HY-2mw" secondAttribute="bottom" constant="20" symbolic="YES" id="c7h-Jo-hY5"/>
                 <constraint firstItem="zeW-C9-z08" firstAttribute="top" secondItem="YF9-z4-KG2" secondAttribute="bottom" constant="8" symbolic="YES" id="d7s-dF-8ao"/>
