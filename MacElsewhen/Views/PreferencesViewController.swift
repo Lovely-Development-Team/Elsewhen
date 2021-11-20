@@ -17,6 +17,7 @@ class PreferencesViewController: NSViewController {
     @IBOutlet weak var twelveHourRadioButton: NSButton!
     @IBOutlet weak var twentyFourHourRadioButton: NSButton!
     
+    @IBOutlet weak var mykeModeSeperatorLabel: NSTextField!
     @IBOutlet weak var hyphenRadioButton: NSButton!
     @IBOutlet weak var colonRadioButton: NSButton!
     @IBOutlet weak var noneRadioButton: NSButton!
@@ -49,14 +50,25 @@ class PreferencesViewController: NSViewController {
         case .twentyFour:
             twentyFourHourRadioButton.state = .on
         }
-        switch UserDefaults.shared.mykeModeSeparator {
-        case .hyphen:
-            hyphenRadioButton.state = .on
-        case .colon:
-            colonRadioButton.state = .on
-        case .noSeparator:
-            noneRadioButton.state = .on
+        
+        var buttons: [NSButton] = []
+        for idx in MykeModeSeparator.allCases.indices {
+            let separator = MykeModeSeparator.allCases[idx]
+            let radioButton = NSButton(radioButtonWithTitle: separator.description, target: self, action: #selector(mykeModeSeparator(_:)))
+            radioButton.translatesAutoresizingMaskIntoConstraints = false
+            radioButton.tag = idx
+            buttons.append(radioButton)
+            self.view.addSubview(radioButton)
+            radioButton.leadingAnchor.constraint(equalTo: twentyFourHourRadioButton.leadingAnchor).isActive = true
+            if idx != MykeModeSeparator.allCases.startIndex {
+                radioButton.topAnchor.constraint(equalToSystemSpacingBelow: buttons[buttons.index(before:idx)].bottomAnchor, multiplier: 1).isActive = true
+            }
+            if separator == UserDefaults.shared.mykeModeSeparator {
+                radioButton.state = .on
+            }
         }
+        buttons.first!.centerYAnchor.constraint(equalTo: mykeModeSeperatorLabel.centerYAnchor).isActive = true
+        self.view.bottomAnchor.constraint(greaterThanOrEqualToSystemSpacingBelow: buttons.last!.bottomAnchor, multiplier: 1).isActive = true
     }
     
     @IBAction func showInMenuBar(_ sender: NSButton) {
@@ -85,16 +97,7 @@ class PreferencesViewController: NSViewController {
     }
     
     @IBAction func mykeModeSeparator(_ sender: NSButton) {
-        switch sender.tag {
-        case 1:
-            UserDefaults.shared.mykeModeSeparator = .hyphen
-        case 2:
-            UserDefaults.shared.mykeModeSeparator = .colon
-        case 3:
-            UserDefaults.shared.mykeModeSeparator = .noSeparator
-        default:
-            break
-        }
+        UserDefaults.shared.mykeModeSeparator = MykeModeSeparator.allCases[sender.tag]
     }
     
 }
