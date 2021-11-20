@@ -25,16 +25,20 @@ class PreferencesViewController: NSViewController {
     
     private var resetButtonTimeZoneStringObservation: NSKeyValueObservation?
     
+    static var defaultTimeZoneName: String {
+        "Device (\(TimeZone.current.friendlyName))"
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
         shouldShowWidgetCheckbox.state = UserDefaults.showMenuBarWidget ? .on : .off
         shouldTerminateAfterLastWindowCheckbox.state = UserDefaults.shouldTerminateAfterLastWindowClosed ? .on : .off
         
-        defaultTimeZoneButton.title = UserDefaults.shared.resetButtonTimeZone?.friendlyName ?? "Device"
+        defaultTimeZoneButton.title = UserDefaults.shared.resetButtonTimeZone?.friendlyName ?? Self.defaultTimeZoneName
         
         resetButtonTimeZoneStringObservation = UserDefaults.shared.observe(\.resetButtonTimeZoneString) { [weak self] defaults, _ in
-            self?.defaultTimeZoneButton.title = defaults.resetButtonTimeZone?.friendlyName ?? "Device"
+            self?.defaultTimeZoneButton.title = defaults.resetButtonTimeZone?.friendlyName ?? Self.defaultTimeZoneName
         }
         
         switch UserDefaults.shared.mykeModeDefaultTimeFormat {
