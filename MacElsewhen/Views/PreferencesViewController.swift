@@ -18,9 +18,6 @@ class PreferencesViewController: NSViewController {
     @IBOutlet weak var twentyFourHourRadioButton: NSButton!
     
     @IBOutlet weak var mykeModeSeperatorLabel: NSTextField!
-    @IBOutlet weak var hyphenRadioButton: NSButton!
-    @IBOutlet weak var colonRadioButton: NSButton!
-    @IBOutlet weak var noneRadioButton: NSButton!
     
     let defaultTzPopoverController = DefaultTimeZonePopoverController()
     
