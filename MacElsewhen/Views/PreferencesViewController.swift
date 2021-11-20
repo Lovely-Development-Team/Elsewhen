@@ -23,11 +23,20 @@ class PreferencesViewController: NSViewController {
     
     let defaultTzPopoverController = DefaultTimeZonePopoverController()
     
+    private var resetButtonTimeZoneStringObservation: NSKeyValueObservation?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
         shouldShowWidgetCheckbox.state = UserDefaults.showMenuBarWidget ? .on : .off
         shouldTerminateAfterLastWindowCheckbox.state = UserDefaults.shouldTerminateAfterLastWindowClosed ? .on : .off
+        
+        defaultTimeZoneButton.title = UserDefaults.shared.resetButtonTimeZone?.friendlyName ?? "Device"
+        
+        resetButtonTimeZoneStringObservation = UserDefaults.shared.observe(\.resetButtonTimeZoneString) { [weak self] defaults, _ in
+            self?.defaultTimeZoneButton.title = defaults.resetButtonTimeZone?.friendlyName ?? "Device"
+        }
+        
         switch UserDefaults.shared.mykeModeDefaultTimeFormat {
         case .systemLocale:
             systemLocaleRadioButton.state = .on
