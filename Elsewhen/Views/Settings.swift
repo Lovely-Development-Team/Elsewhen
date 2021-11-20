@@ -37,16 +37,16 @@ struct Settings: View {
                     NavigationLink(destination: AltIconView()) {
                         Text("App Icon")
                     }
-                    NavigationLink(destination: TimezoneChoiceView(selectedTimeZone: $defaultTimeZone, selectedTimeZones: .constant([]), selectedDate: $defaultDate, selectMultiple: false, showDeviceLocalOption: true)) {
-                        HStack {
-                            Text("Default Time Zone")
-                            Spacer()
-                            Text(defaultTimeZoneName)
-                                .foregroundColor(.secondary)
-                        }
-                    }
+//                    NavigationLink(destination: TimezoneChoiceView(selectedTimeZone: $defaultTimeZone, selectedTimeZones: .constant([]), selectedDate: $defaultDate, selectMultiple: false, showDeviceLocalOption: true)) {
+//                        HStack {
+//                            Text("Default Time Zone")
+//                            Spacer()
+//                            Text(defaultTimeZoneName)
+//                                .foregroundColor(.secondary)
+//                        }
+//                    }
                 }
-                TimeListSettings(defaultTimeFormat: $defaultTimeFormat, mykeModeSeparator: $mykeModeSeparator)
+//                TimeListSettings(defaultTimeFormat: $defaultTimeFormat, mykeModeSeparator: $mykeModeSeparator)
                 Section(footer: footer) {
                     HStack {
                         Text("App Version")
