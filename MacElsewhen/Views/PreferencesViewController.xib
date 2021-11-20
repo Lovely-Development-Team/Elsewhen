@@ -46,8 +46,8 @@
                         <action selector="terminateAfterLastWindowClosed:" target="-2" id="aY9-r1-Kiu"/>
                     </connections>
                 </button>
-                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cVj-Tf-yVS">
-                    <rect key="frame" x="325" y="206" width="146" height="32"/>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cVj-Tf-yVS" userLabel="Default Time Zone Button">
+                    <rect key="frame" x="203" y="206" width="146" height="32"/>
                     <buttonCell key="cell" type="push" title="Default Time Zone" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="4Eu-DP-HrB">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -144,7 +144,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SQK-3A-AhL">
-                    <rect key="frame" x="206" y="215" width="120" height="16"/>
+                    <rect key="frame" x="84" y="215" width="120" height="16"/>
                     <textFieldCell key="cell" lineBreakMode="clipping" title="Default Time Zone:" id="LfJ-Yq-rcT">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -160,7 +160,7 @@
                 <constraint firstItem="HZP-9Y-ZZO" firstAttribute="top" secondItem="dTE-io-ilE" secondAttribute="bottom" constant="20" id="6Ce-zT-bfW" userLabel="Hyphen Top"/>
                 <constraint firstItem="R95-eR-w7W" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" id="6md-Y8-6Z8"/>
                 <constraint firstItem="iNj-5l-JSV" firstAttribute="leading" secondItem="aK6-G7-ifs" secondAttribute="leading" id="703-1z-yKD"/>
-                <constraint firstItem="SQK-3A-AhL" firstAttribute="leading" secondItem="YF9-z4-KG2" secondAttribute="leading" id="8d5-zR-8Uo"/>
+                <constraint firstItem="SQK-3A-AhL" firstAttribute="trailing" secondItem="R95-eR-w7W" secondAttribute="trailing" id="8d5-zR-8Uo"/>
                 <constraint firstItem="aK6-G7-ifs" firstAttribute="leading" secondItem="HZP-9Y-ZZO" secondAttribute="leading" id="9Mj-gp-DjU"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="z55-3M-vxH" secondAttribute="trailing" constant="222" id="CBP-ce-SkK"/>
                 <constraint firstItem="R95-eR-w7W" firstAttribute="centerY" secondItem="zeW-C9-z08" secondAttribute="centerY" id="CmG-BQ-bi1"/>
