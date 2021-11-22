@@ -55,9 +55,18 @@ class WindowManager: NSObject, NSWindowRestoration, NSWindowDelegate {
         // Menus, the status bar item, etc all count as windows closing but shouldn't trigger the mode swift
             .filter { $0.level == .normal }
             .sink { closingWindow in
-                // The window that's currently closing shouldn't be included in our count
-                let normalWindows = NSApp.windows.filter { $0 != closingWindow }
-                if normalWindows.count == 1 && normalWindows[0].identifier == StatusItemController.windowIdentifier {
+                // Filter out windows that shouldn't be included in our count
+                let normalWindows = NSApp.windows.filter {
+                    // The window that's currently closing
+                    $0 != closingWindow
+                    // Windows that are closed (i.e. not visible) but retained
+                    && $0.isVisible
+                    // Isn't our status item
+                    && $0.identifier != StatusItemController.windowIdentifier
+                    // "Regular" windows can generally do one of those, the status bar item cannot
+                    && ($0.isMiniaturizable || $0.isMiniaturized || $0.canBecomeKey || $0.canBecomeMain || $0.canBecomeVisibleWithoutLogin)
+                }
+                if normalWindows.isEmpty {
                     // There's only one window and it's the status bar, we should remove our dock icon.
                     NSApp.setActivationPolicy(.accessory)
                 } else if (NSApp.activationPolicy() != .regular) {
