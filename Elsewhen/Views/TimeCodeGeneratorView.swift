@@ -78,20 +78,7 @@ struct TimeCodeGeneratorView: View, KeyboardReadable, OrientationObserving {
                         DateTimeSelection(selectedFormatStyle: $selectedFormatStyle.animation(), selectedDate: $selectedDate, selectedTimeZone: $selectedTimeZone, appendRelative: $appendRelative.animation(), showLocalTimeInstead: $showLocalTimeInstead)
                             .accessibilitySortPriority(2)
                         
-                        VStack(spacing: 0) {
-                            
-                            DiscordFormattedDate(text: discordFormatString)
-                                .padding(.bottom, 8)
-                            
-                            NotRepresentativeWarning()
-                                .padding(.bottom, 20)
-                            
-                            EasterEggButton {
-                                showEasterEggSheet = true
-                            }
-                            .padding(.vertical, 5)
-                            
-                        }
+                        FormattedDateAndWarning(display: discordFormatString, showEasterEggSheet: $showEasterEggSheet)
                         .padding(.horizontal)
                         .padding(.bottom, (resultSheetMaxHeight ?? 0))
                         .accessibilitySortPriority(0)
