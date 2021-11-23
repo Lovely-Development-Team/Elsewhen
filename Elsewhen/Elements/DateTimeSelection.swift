@@ -120,9 +120,7 @@ struct DateTimeSelection: View, OrientationObserving {
         
         VStack {
 #if os(macOS)
-            if !isInPopover {
-                Spacer(minLength: 20)
-            }
+            Spacer(minLength: 20)
 #endif
             
             VStack(alignment: .leading) {

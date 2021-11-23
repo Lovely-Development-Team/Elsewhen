@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="19455" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19455"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="TimeCodesPopoverViewController" customModule="Elsewhen" customModuleProvider="target">
+            <connections>
+                <outlet property="dateTimeSelectionContainer" destination="wRi-WE-nF8" id="H5B-OF-opo"/>
+                <outlet property="resultSheetContainer" destination="jT6-m0-4Rf" id="rCo-Ll-hgw"/>
+                <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="Hz6-mo-xeY">
+            <rect key="frame" x="0.0" y="0.0" width="430" height="690"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <customView translatesAutoresizingMaskIntoConstraints="NO" id="wRi-WE-nF8" userLabel="DateTimeSelectionContainer">
+                    <rect key="frame" x="0.0" y="120" width="430" height="550"/>
+                </customView>
+                <customView translatesAutoresizingMaskIntoConstraints="NO" id="jT6-m0-4Rf" userLabel="TextContainer">
+                    <rect key="frame" x="0.0" y="20" width="430" height="90"/>
+                </customView>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="jT6-m0-4Rf" secondAttribute="bottom" constant="20" id="0K4-T4-h5A"/>
+                <constraint firstItem="wRi-WE-nF8" firstAttribute="centerX" secondItem="jT6-m0-4Rf" secondAttribute="centerX" id="1cT-e7-y7v"/>
+                <constraint firstItem="jT6-m0-4Rf" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="9Od-D9-wIQ"/>
+                <constraint firstItem="jT6-m0-4Rf" firstAttribute="top" secondItem="wRi-WE-nF8" secondAttribute="bottom" constant="10" id="EMg-mf-IJn"/>
+                <constraint firstAttribute="bottom" secondItem="wRi-WE-nF8" secondAttribute="bottom" constant="120" id="EUN-UB-kTW"/>
+                <constraint firstItem="wRi-WE-nF8" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="20" id="OrH-rN-ZLA"/>
+                <constraint firstItem="wRi-WE-nF8" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="Xhk-JO-gO1"/>
+                <constraint firstAttribute="trailing" secondItem="jT6-m0-4Rf" secondAttribute="trailing" id="wrW-2I-ooT"/>
+            </constraints>
+            <point key="canvasLocation" x="111" y="260"/>
+        </customView>
+    </objects>
+</document>
