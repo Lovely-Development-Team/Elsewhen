@@ -610,7 +610,7 @@
 				5EB23B9926E406B600203153 /* Elsewhen.app */,
 				6378398C26EBF4750055A10D /* Discord Helper Intents.appex */,
 				6378399826EBF4750055A10D /* Discord Helper IntentsUI.appex */,
-				6346AD5A26F3BF1300E406D0 /* .app */,
+				6346AD5A26F3BF1300E406D0 /* Elsewhen.app */,
 				6346AD6926F3BF1400E406D0 /* MacElsewhenTests.xctest */,
 				6346AD7326F3BF1400E406D0 /* MacElsewhenUITests.xctest */,
 			);
@@ -974,7 +974,7 @@
 			);
 			name = MacElsewhen;
 			productName = MacElsewhen;
-			productReference = 6346AD5A26F3BF1300E406D0 /* .app */;
+			productReference = 6346AD5A26F3BF1300E406D0 /* Elsewhen.app */;
 			productType = "com.apple.product-type.application";
 		};
 		6346AD6826F3BF1400E406D0 /* MacElsewhenTests */ = {
@@ -1668,6 +1668,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MacElsewhen/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Elsewhen;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1703,6 +1704,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MacElsewhen/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Elsewhen;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
