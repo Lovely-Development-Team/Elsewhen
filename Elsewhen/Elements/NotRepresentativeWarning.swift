@@ -9,7 +9,7 @@ import SwiftUI
 
 struct NotRepresentativeWarning: View {
     var body: some View {
-        Text("Date and time representative of components only; may not match exact Discord formatting.")
+        Text("NotRepresentativeWarning")
             .multilineTextAlignment(.center)
             .font(.caption2)
             .foregroundColor(.secondary)

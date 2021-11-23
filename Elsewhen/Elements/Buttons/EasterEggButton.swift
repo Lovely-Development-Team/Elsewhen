@@ -15,7 +15,7 @@ struct EasterEggButton: View {
             onPress()
         }, label: {
             HStack {
-                Text("From the Lovely Developers")
+                Text("FromTLD")
                     .font(.caption)
                     .foregroundColor(.secondary)
                 Image("l2culogosvg")

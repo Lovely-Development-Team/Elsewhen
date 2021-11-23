@@ -120,6 +120,8 @@
 		632F38E7274B954400F0C064 /* FormattedDateAndWarning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632F38E5274B951900F0C064 /* FormattedDateAndWarning.swift */; };
 		632F38EA274BB50800F0C064 /* TimeListPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632F38E8274BB50800F0C064 /* TimeListPopoverViewController.swift */; };
 		632F38EB274BB50800F0C064 /* TimeListPopoverViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 632F38E9274BB50800F0C064 /* TimeListPopoverViewController.xib */; };
+		632F38ED274D7F4D00F0C064 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 632F38EC274D7F4C00F0C064 /* Localizable.strings */; };
+		632F38EE274D811600F0C064 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 632F38EC274D7F4C00F0C064 /* Localizable.strings */; };
 		6346AD6426F3BF1400E406D0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6346AD6326F3BF1400E406D0 /* Preview Assets.xcassets */; };
 		6346AD6E26F3BF1400E406D0 /* MacElsewhenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6346AD6D26F3BF1400E406D0 /* MacElsewhenTests.swift */; };
 		6346AD7826F3BF1400E406D0 /* MacElsewhenUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6346AD7726F3BF1400E406D0 /* MacElsewhenUITests.swift */; };
@@ -391,6 +393,7 @@
 		632F38E5274B951900F0C064 /* FormattedDateAndWarning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormattedDateAndWarning.swift; sourceTree = "<group>"; };
 		632F38E8274BB50800F0C064 /* TimeListPopoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeListPopoverViewController.swift; sourceTree = "<group>"; };
 		632F38E9274BB50800F0C064 /* TimeListPopoverViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TimeListPopoverViewController.xib; sourceTree = "<group>"; };
+		632F38EC274D7F4C00F0C064 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		6346AD5A26F3BF1300E406D0 /* .app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = .app; path = Elsewhen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6346AD6326F3BF1400E406D0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		6346AD6926F3BF1400E406D0 /* MacElsewhenTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MacElsewhenTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -593,6 +596,7 @@
 			isa = PBXGroup;
 			children = (
 				6395C6FB271B5B2300BA4A2D /* exportOptions.plist */,
+				632F38EC274D7F4C00F0C064 /* Localizable.strings */,
 				5EB23B9B26E406B600203153 /* Elsewhen */,
 				6378399026EBF4750055A10D /* Discord Helper Intents */,
 				6378399B26EBF4750055A10D /* Discord Helper IntentsUI */,
@@ -610,7 +614,7 @@
 				5EB23B9926E406B600203153 /* Elsewhen.app */,
 				6378398C26EBF4750055A10D /* Discord Helper Intents.appex */,
 				6378399826EBF4750055A10D /* Discord Helper IntentsUI.appex */,
-				6346AD5A26F3BF1300E406D0 /* Elsewhen.app */,
+				6346AD5A26F3BF1300E406D0 /* .app */,
 				6346AD6926F3BF1400E406D0 /* MacElsewhenTests.xctest */,
 				6346AD7326F3BF1400E406D0 /* MacElsewhenUITests.xctest */,
 			);
@@ -974,7 +978,7 @@
 			);
 			name = MacElsewhen;
 			productName = MacElsewhen;
-			productReference = 6346AD5A26F3BF1300E406D0 /* Elsewhen.app */;
+			productReference = 6346AD5A26F3BF1300E406D0 /* .app */;
 			productType = "com.apple.product-type.application";
 		};
 		6346AD6826F3BF1400E406D0 /* MacElsewhenTests */ = {
@@ -1142,6 +1146,7 @@
 				5E6C8C4127468950003244DF /* progressive@3x~ipad.png in Resources */,
 				5E54BBBF2737C6D2005CF7A6 /* sixcolors@3x.png in Resources */,
 				5E54BBD2273863B5005CF7A6 /* wiggles@2x~ipad.png in Resources */,
+				632F38ED274D7F4D00F0C064 /* Localizable.strings in Resources */,
 				5E07E86727347ACF00D9350E /* asexual@3x.png in Resources */,
 				5E07E85D273479F600D9350E /* nonbinary@3x.png in Resources */,
 				5EB23BA126E406B900203153 /* Assets.xcassets in Resources */,
@@ -1184,6 +1189,7 @@
 			files = (
 				5E6C8C4627468950003244DF /* progressive@2x.png in Resources */,
 				632F38E4274B88DB00F0C064 /* TimeCodesPopoverViewController.xib in Resources */,
+				632F38EE274D811600F0C064 /* Localizable.strings in Resources */,
 				5E6C8C4427468950003244DF /* progressive@2x~ipad.png in Resources */,
 				632F38EB274BB50800F0C064 /* TimeListPopoverViewController.xib in Resources */,
 				6346AD8426F3C14900E406D0 /* Assets.xcassets in Resources */,
