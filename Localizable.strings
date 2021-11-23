@@ -1,0 +1,10 @@
+/* 
+ Localizable.strings
+  Elsewhen
+
+  Created by David Stephens on 23/11/2021.
+  
+*/
+
+"NotRepresentativeWarning" = "Date and time representative of components only; may not match exact Discord formatting.";
+"FromTLD" = "From the Lovely Developers";
