@@ -11,6 +11,7 @@ struct EasterEggView: View {
     
     @Environment(\.openURL) var openURL
     @Environment(\.presentationMode) private var presentationMode
+    @Environment(\.isInPopover) private var isInPopover
 
     
     @State private var animate = false
@@ -75,7 +76,7 @@ struct EasterEggView: View {
                 Image("l2cu")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(maxWidth:500, maxHeight: 400)
+                    .frame(maxWidth: isInPopover ? 250 : 500, maxHeight: isInPopover ? 200 : 400)
                     .padding(.bottom, 20)
                     .padding(.horizontal, 30)
                     .scaledToFit()
