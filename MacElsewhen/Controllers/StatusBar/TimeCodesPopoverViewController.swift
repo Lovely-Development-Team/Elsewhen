@@ -36,16 +36,20 @@ struct DateTimeSelectionContainerView: View {
 
 struct FormattedDateAndWarningContainerView: View {
     @ObservedObject var data: TimeZonePopoverData
+    @State private var showEasterEggSheet: Bool = false
     
     private var discordFormatString: String {
         return discordFormat(for: data.selectedDate, in: data.selectedTimeZone ?? TimeZone.current, with: data.selectedFormatStyle.code, appendRelative: data.appendRelative)
     }
     
     var body: some View {
-        FormattedDateAndWarning(display: discordFormatString, showEasterEggSheet: .constant(false))
+        FormattedDateAndWarning(display: discordFormatString, showEasterEggSheet: $showEasterEggSheet)
             .frame(maxWidth: 430)
             .fixedSize(horizontal: false, vertical: true)
             .environment(\.isInPopover, true)
+            .sheet(isPresented: $showEasterEggSheet) {
+                EasterEggView().environment(\.isInPopover, true)
+            }
     }
 }
 
