@@ -396,7 +396,7 @@
 		632F38E9274BB50800F0C064 /* TimeListPopoverViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TimeListPopoverViewController.xib; sourceTree = "<group>"; };
 		632F38EC274D7F4C00F0C064 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		632F38EF274E37FA00F0C064 /* Credits.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
-		6346AD5A26F3BF1300E406D0 /* .app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = .app; path = Elsewhen.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6346AD5A26F3BF1300E406D0 /* Elsewhen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Elsewhen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6346AD6326F3BF1400E406D0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		6346AD6926F3BF1400E406D0 /* MacElsewhenTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MacElsewhenTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6346AD6D26F3BF1400E406D0 /* MacElsewhenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacElsewhenTests.swift; sourceTree = "<group>"; };
@@ -616,7 +616,7 @@
 				5EB23B9926E406B600203153 /* Elsewhen.app */,
 				6378398C26EBF4750055A10D /* Discord Helper Intents.appex */,
 				6378399826EBF4750055A10D /* Discord Helper IntentsUI.appex */,
-				6346AD5A26F3BF1300E406D0 /* .app */,
+				6346AD5A26F3BF1300E406D0 /* Elsewhen.app */,
 				6346AD6926F3BF1400E406D0 /* MacElsewhenTests.xctest */,
 				6346AD7326F3BF1400E406D0 /* MacElsewhenUITests.xctest */,
 			);
@@ -981,7 +981,7 @@
 			);
 			name = MacElsewhen;
 			productName = MacElsewhen;
-			productReference = 6346AD5A26F3BF1300E406D0 /* .app */;
+			productReference = 6346AD5A26F3BF1300E406D0 /* Elsewhen.app */;
 			productType = "com.apple.product-type.application";
 		};
 		6346AD6826F3BF1400E406D0 /* MacElsewhenTests */ = {
@@ -1668,7 +1668,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 34;
+				CURRENT_PROJECT_VERSION = 35;
 				DEVELOPMENT_ASSET_PATHS = "\"MacElsewhen/Preview Content\"";
 				DEVELOPMENT_TEAM = B5RJS337LA;
 				ENABLE_APP_SANDBOX = YES;
@@ -1704,7 +1704,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 34;
+				CURRENT_PROJECT_VERSION = 35;
 				DEVELOPMENT_ASSET_PATHS = "\"MacElsewhen/Preview Content\"";
 				DEVELOPMENT_TEAM = B5RJS337LA;
 				ENABLE_APP_SANDBOX = YES;
