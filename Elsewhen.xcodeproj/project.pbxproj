@@ -122,6 +122,7 @@
 		632F38EB274BB50800F0C064 /* TimeListPopoverViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 632F38E9274BB50800F0C064 /* TimeListPopoverViewController.xib */; };
 		632F38ED274D7F4D00F0C064 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 632F38EC274D7F4C00F0C064 /* Localizable.strings */; };
 		632F38EE274D811600F0C064 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 632F38EC274D7F4C00F0C064 /* Localizable.strings */; };
+		632F38F0274E37FA00F0C064 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 632F38EF274E37FA00F0C064 /* Credits.rtf */; };
 		6346AD6426F3BF1400E406D0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6346AD6326F3BF1400E406D0 /* Preview Assets.xcassets */; };
 		6346AD6E26F3BF1400E406D0 /* MacElsewhenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6346AD6D26F3BF1400E406D0 /* MacElsewhenTests.swift */; };
 		6346AD7826F3BF1400E406D0 /* MacElsewhenUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6346AD7726F3BF1400E406D0 /* MacElsewhenUITests.swift */; };
@@ -394,6 +395,7 @@
 		632F38E8274BB50800F0C064 /* TimeListPopoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeListPopoverViewController.swift; sourceTree = "<group>"; };
 		632F38E9274BB50800F0C064 /* TimeListPopoverViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TimeListPopoverViewController.xib; sourceTree = "<group>"; };
 		632F38EC274D7F4C00F0C064 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		632F38EF274E37FA00F0C064 /* Credits.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
 		6346AD5A26F3BF1300E406D0 /* .app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = .app; path = Elsewhen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6346AD6326F3BF1400E406D0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		6346AD6926F3BF1400E406D0 /* MacElsewhenTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MacElsewhenTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -704,6 +706,7 @@
 				63A90DC926F4278600CACCB9 /* AppDelegate.swift */,
 				63A90DF326F5F3A000CACCB9 /* MacContentView.swift */,
 				63A90DD226F42B7200CACCB9 /* Mac.strings */,
+				632F38EF274E37FA00F0C064 /* Credits.rtf */,
 			);
 			path = MacElsewhen;
 			sourceTree = "<group>";
@@ -1194,6 +1197,7 @@
 				632F38EB274BB50800F0C064 /* TimeListPopoverViewController.xib in Resources */,
 				6346AD8426F3C14900E406D0 /* Assets.xcassets in Resources */,
 				63A90DD326F42B7200CACCB9 /* Mac.strings in Resources */,
+				632F38F0274E37FA00F0C064 /* Credits.rtf in Resources */,
 				5E6C8C4227468950003244DF /* progressive@3x~ipad.png in Resources */,
 				6346AD6426F3BF1400E406D0 /* Preview Assets.xcassets in Resources */,
 				5E6C8C4827468950003244DF /* progressive@3x.png in Resources */,
