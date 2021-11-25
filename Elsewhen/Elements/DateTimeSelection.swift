@@ -184,7 +184,7 @@ struct DateTimeSelection: View, OrientationObserving {
     var body: some View {
         Group {
             
-            if isOrientationLandscape && isRegularHorizontalSize {
+            if isOrientationLandscape && isRegularHorizontalSize && !isInPopover {
                 
                 #if !os(macOS)
                 HStack(alignment: .top, spacing: 20) {
@@ -210,34 +210,32 @@ struct DateTimeSelection: View, OrientationObserving {
                 
                 HStack(spacing: 5) {
                     ForEach(dateFormats, id: \.self) { formatStyle in
-                        Button(action: {
-                            formatStyleTapped(formatStyle)
-                        }) {
-                            Label(formatStyle.name, systemImage: formatStyle.icon)
-                                .labelStyle(IconOnlyLabelStyle())
-                                .foregroundColor(.white)
-                                .font(.title)
-                                .frame(width: 50, height: 50)
-                                .background(
-                                    RoundedRectangle(cornerRadius: 10, style: .continuous)
-                                        .fill(formatStyle == selectedFormatStyle ? Color.accentColor : .secondary)
-                                )
-                        }.buttonStyle(PlainButtonStyle())
+                        FormatStyleButton(formatStyle: formatStyle, isSelected: formatStyle == selectedFormatStyle, onTap: formatStyleTapped)
                     }
                     Button(action: {}) {
                         Label(relativeDateFormat.name, systemImage: relativeDateFormat.icon)
                             .labelStyle(IconOnlyLabelStyle())
                             .foregroundColor(appendRelative && selectedFormatStyle != relativeDateFormat ? .secondary : .white)
                             .font(.title)
-                            .frame(width: 50, height: 50)
+                            .frame(width: Self.buttonFrame, height: Self.buttonFrame)
                             .background(
                                 RoundedRectangle(cornerRadius: 10, style: .continuous)
                                     .strokeBorder(appendRelative && selectedFormatStyle != relativeDateFormat ? Color.accentColor : Color.clear, lineWidth: 3)
                                     .background(RoundedRectangle(cornerRadius: 10, style: .continuous).fill(relativeDateButtonBackground))
                             )
+                            .help(Text(relativeDateFormat.name))
                             .onTapGesture(perform: toggleAppendRelativeFormat)
                             .onLongPressGesture(perform: switchToRelativeFormat)
                     }
+                    #if os(macOS)
+                    .buttonStyle(Self.formatButtonStyle)
+                    .contextMenu {
+                        if self.selectedFormatStyle != relativeDateFormat {
+                            Button(appendRelative ? "Remove Relative Time" : "Append Relative Time", action: toggleAppendRelativeFormat)
+                            Button("Switch to Relative Time Format", action: switchToRelativeFormat)
+                        }
+                    }
+                    #endif
                 }
                 .padding(.bottom, 10)
                 .background(GeometryReader { geometry in
@@ -253,8 +251,13 @@ struct DateTimeSelection: View, OrientationObserving {
                 Button(action: reset) {
                     Text("Reset")
                 }
-                .padding(.bottom, 20)
+                .padding(.bottom, isInPopover ? 0 : 20)
                 
+                #if os(macOS)
+                if isInPopover {
+                    ResultSheet(selectedDate: selectedDate, selectedTimeZone: selectedTimeZone ?? TimeZone.current, discordFormat: discordFormat(for: selectedDate, in: selectedTimeZone ?? TimeZone.current, with: selectedFormatStyle.code, appendRelative: appendRelative), appendRelative: $appendRelative, showLocalTimeInstead: $showLocalTimeInstead, selectedFormatStyle: $selectedFormatStyle)
+                }
+                #endif
             }
             
         }

@@ -29,7 +29,7 @@ struct DateTimeSelectionContainerView: View {
     
     var body: some View {
         DateTimeSelection(selectedFormatStyle: $data.selectedFormatStyle.animation(), selectedDate: $data.selectedDate, selectedTimeZone: $data.selectedTimeZone, appendRelative: $data.appendRelative.animation(), showLocalTimeInstead: $data.showLocalTimeInstead)
-            .frame(maxWidth: 430)
+            .frame(maxWidth: 400)
             .environment(\.isInPopover, true)
     }
 }

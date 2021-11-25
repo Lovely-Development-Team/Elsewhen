@@ -53,7 +53,7 @@ struct FormatStyleButton: View {
                         .foregroundColor(isSelected ? Color.accentColor : .secondary)
                 }
             }
-            .frame(minWidth: 0, maxWidth: .infinity, alignment: isInPopover ? .center : .leading)
+            .frame(minWidth: isInPopover ? nil : 0, maxWidth: isInPopover ? nil : .infinity, alignment: isInPopover ? .center : .leading)
         }
         .buttonStyle(Self.formatButtonStyle)
     }
