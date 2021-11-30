@@ -58,7 +58,6 @@ private static let pickerStackSpacing: CGFloat = 5
                     } label: {
                         Text("\(selectedDate, style: .date)").foregroundColor(.white)
                     }
-                    .roundedRectangle()
                     .popover(isPresented: $isPresentingDatePopover, arrowEdge: .top) {
                         Group {
                             MacDatePicker(selectedDate: $selectedDate)
@@ -74,12 +73,9 @@ private static let pickerStackSpacing: CGFloat = 5
                         .datePickerStyle(Self.timePickerStyle)
                         .frame(maxWidth: selectTimeZoneButtonMaxWidth)
                         .padding(.horizontal, 8)
-//                    Spacer(minLength: 20)
                 }
                 .padding(isInPopover ? [] : .vertical)
-                // Need to figure out the "proper" way to remove the datepicker's padding,
-                // 16 is just a fudge value that looks okay by-eye.
-                .frame(maxWidth: maxWidth.map { $0 + 16 })
+                .frame(maxWidth: maxWidth.map { $0 })
                 #else
                 DatePicker("Date", selection: $selectedDate)
                     .datePickerStyle(.graphical)
