@@ -13,6 +13,10 @@ extension TimeZone {
         identifier.replacingOccurrences(of: "_", with: " ")
     }
     
+    var country: String? {
+        timeZoneCountries[identifier]
+    }
+    
     var flag: String {
         flagForTimeZone(self)
     }
@@ -41,6 +45,12 @@ extension TimeZone {
         }
         if identifier.starts(with: "America/") {
             if let localizedName = localizedName(for: .generic, locale: Locale(identifier: "en_US")), localizedName.lowercased().contains(st) {
+                return true
+            }
+        }
+        if let country = country {
+            let countryLower = country.lowercased()
+            if countryLower.contains(st) || countryLower.contains(st.replacingOccurrences(of: "_", with: " ")) {
                 return true
             }
         }
