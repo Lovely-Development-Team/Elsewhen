@@ -12,7 +12,7 @@ func flagForTimeZone(_ zone: TimeZone) -> String {
 }
 
 func flagForTimeZone(_ zone: String) -> String {
-    return timeZoneFlags[zone] ?? "🏳️"
+    return timeZoneFlags[zone] ?? "⏰"
 }
 
 let timeZoneFlags: [String: String] = [
@@ -268,7 +268,6 @@ let timeZoneFlags: [String: String] = [
     "Asia/Irkutsk": "🇷🇺",
     "Asia/Jakarta": "🇮🇩",
     "Asia/Jayapura": "🇮🇩",
-    "Asia/Jerusalem": "🇮🇱",
     "Asia/Kabul": "🇦🇫",
     "Asia/Kamchatka": "🇷🇺",
     "Asia/Karachi": "🇵🇰",
