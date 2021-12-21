@@ -54,6 +54,7 @@ struct FormatStyleButton: View {
                 }
             }
             .frame(minWidth: isInPopover ? nil : 0, maxWidth: isInPopover ? nil : .infinity, alignment: isInPopover ? .center : .leading)
+            .frame(height: Self.buttonFrame)
         }
         .buttonStyle(Self.formatButtonStyle)
     }
