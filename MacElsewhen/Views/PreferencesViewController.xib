@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="19455" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="19529" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19455"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19529"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="PreferencesViewController" customModule="Elsewhen" customModuleProvider="target">
             <connections>
                 <outlet property="defaultTimeZoneButton" destination="cVj-Tf-yVS" id="U4r-3C-RcS"/>
+                <outlet property="mykeModeIncludeCityNamesCheckbox" destination="VC3-1s-7k7" id="czD-RT-eBc"/>
                 <outlet property="mykeModeSeperatorLabel" destination="FiK-4B-0CN" id="Rhg-f0-XGF"/>
                 <outlet property="shouldShowWidgetCheckbox" destination="Lht-nk-oY5" id="fAv-L1-8KS"/>
                 <outlet property="shouldTerminateAfterLastWindowCheckbox" destination="CXt-HY-2mw" id="hr5-Jm-A3m"/>
@@ -21,7 +22,7 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="Hz6-mo-xeY">
-            <rect key="frame" x="0.0" y="0.0" width="592" height="311"/>
+            <rect key="frame" x="0.0" y="0.0" width="593" height="311"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Lht-nk-oY5">
@@ -93,7 +94,7 @@
                     </connections>
                 </button>
                 <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="hMB-rw-E9w">
-                    <rect key="frame" x="0.0" y="190" width="592" height="5"/>
+                    <rect key="frame" x="0.0" y="190" width="593" height="5"/>
                 </box>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="R95-eR-w7W">
                     <rect key="frame" x="76" y="144" width="128" height="16"/>
@@ -119,6 +120,16 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
+                <button verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VC3-1s-7k7">
+                    <rect key="frame" x="206" y="33" width="144" height="18"/>
+                    <buttonCell key="cell" type="check" title="Include City Names" bezelStyle="regularSquare" imagePosition="left" inset="2" id="30n-VB-Pll">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="mykeModeIncludeCityNames:" target="-2" id="Cqa-86-VZ3"/>
+                    </connections>
+                </button>
             </subviews>
             <constraints>
                 <constraint firstItem="zeW-C9-z08" firstAttribute="leading" secondItem="R95-eR-w7W" secondAttribute="trailing" constant="6" symbolic="YES" id="1fc-Vx-weW"/>
@@ -143,6 +154,7 @@
                 <constraint firstItem="zeW-C9-z08" firstAttribute="leading" secondItem="CXt-HY-2mw" secondAttribute="leading" id="hdQ-nY-Sel"/>
                 <constraint firstItem="CXt-HY-2mw" firstAttribute="top" secondItem="Lht-nk-oY5" secondAttribute="bottom" constant="6" symbolic="YES" id="mbV-g6-rd3"/>
                 <constraint firstItem="SQK-3A-AhL" firstAttribute="centerY" secondItem="cVj-Tf-yVS" secondAttribute="centerY" id="ox3-3G-eM0"/>
+                <constraint firstItem="VC3-1s-7k7" firstAttribute="leading" secondItem="Lht-nk-oY5" secondAttribute="leading" id="q7C-MD-NLS"/>
                 <constraint firstItem="hMB-rw-E9w" firstAttribute="top" secondItem="cVj-Tf-yVS" secondAttribute="bottom" constant="20" symbolic="YES" id="qQg-FM-zmK"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="dTE-io-ilE" secondAttribute="trailing" constant="220" id="qWd-Rh-xtv"/>
                 <constraint firstItem="dTE-io-ilE" firstAttribute="leading" secondItem="z55-3M-vxH" secondAttribute="leading" id="qa5-Py-izh"/>

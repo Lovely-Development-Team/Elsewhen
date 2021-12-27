@@ -107,6 +107,16 @@ extension UserDefaults {
         }
     }
     
+    @objc
+    var mykeModeShowCities: Bool {
+        get {
+            bool(forKey: Self.mykeModeShowCitiesKey)
+        }
+        set {
+            set(newValue, forKey: Self.mykeModeShowCitiesKey)
+        }
+    }
+    
     // Type-safe access to UserDefaults shared with the extension
     static let shared = UserDefaults(suiteName: "group.uk.co.bencardy.Elsewhen")!
 }
