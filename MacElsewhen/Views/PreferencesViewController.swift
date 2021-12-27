@@ -18,6 +18,7 @@ class PreferencesViewController: NSViewController {
     @IBOutlet weak var twentyFourHourRadioButton: NSButton!
     
     @IBOutlet weak var mykeModeSeperatorLabel: NSTextField!
+    @IBOutlet weak var mykeModeIncludeCityNamesCheckbox: NSButton!
     
     let defaultTzPopoverController = DefaultTimeZonePopoverController()
     
@@ -48,6 +49,8 @@ class PreferencesViewController: NSViewController {
             twentyFourHourRadioButton.state = .on
         }
         
+        mykeModeIncludeCityNamesCheckbox.state = UserDefaults.shared.mykeModeShowCities ? .on : .off
+        
         var buttons: [NSButton] = []
         for idx in MykeModeSeparator.allCases.indices {
             let separator = MykeModeSeparator.allCases[idx]
@@ -65,7 +68,8 @@ class PreferencesViewController: NSViewController {
             }
         }
         buttons.first!.centerYAnchor.constraint(equalTo: mykeModeSeperatorLabel.centerYAnchor).isActive = true
-        self.view.bottomAnchor.constraint(greaterThanOrEqualToSystemSpacingBelow: buttons.last!.bottomAnchor, multiplier: 1).isActive = true
+        mykeModeIncludeCityNamesCheckbox.topAnchor.constraint(equalToSystemSpacingBelow: buttons.last!.bottomAnchor, multiplier: 2).isActive = true
+        self.view.bottomAnchor.constraint(greaterThanOrEqualToSystemSpacingBelow: mykeModeIncludeCityNamesCheckbox.bottomAnchor, multiplier: 1).isActive = true
     }
     
     @IBAction func showInMenuBar(_ sender: NSButton) {
@@ -78,6 +82,10 @@ class PreferencesViewController: NSViewController {
     
     @IBAction func selectDefaultTimeZone(_ sender: NSButton) {
         defaultTzPopoverController.show(relativeTo: sender.visibleRect, of: sender, preferredEdge: .maxX)
+    }
+    
+    @IBAction func mykeModeIncludeCityNames(_ sender: NSButton) {
+        UserDefaults.shared.mykeModeShowCities = sender.state == .on
     }
     
     @IBAction func defaultTimeFormat(_ sender: NSButton) {
