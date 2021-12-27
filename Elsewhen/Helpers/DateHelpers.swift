@@ -115,7 +115,7 @@ func stringFor(time date: Date, in zone: TimeZone, sourceZone: TimeZone, locale:
     return df.string(from: convert(date: date, from: sourceZone, to: TimeZone.current))
 }
 
-func stringForTimesAndFlags<TZSequence>(of date: Date, in sourceZone: TimeZone, for timezones: TZSequence, separator: MykeModeSeparator, timeZonesUsingEUFlag: Set<TimeZone>) -> String where TZSequence: Collection, TZSequence.Element == TimeZone {
+func stringForTimesAndFlags<TZSequence>(of date: Date, in sourceZone: TimeZone, for timezones: TZSequence, separator: MykeModeSeparator, timeZonesUsingEUFlag: Set<TimeZone>, showCities: Bool = false) -> String where TZSequence: Collection, TZSequence.Element == TimeZone {
     var text = "\n"
     for tz in timezones {
         let abbr = tz.fudgedAbbreviation(for: date) ?? ""
@@ -125,7 +125,13 @@ func stringForTimesAndFlags<TZSequence>(of date: Date, in sourceZone: TimeZone, 
         } else {
             flag = flagForTimeZone(tz)
         }
-        text += "\(flag)\(separator.rawValue)\(stringFor(time: date, in: tz, sourceZone: sourceZone, locale: tz.mykeModeLocale)) \(abbr)\n"
+        text += "\(flag)\(separator.rawValue)\(stringFor(time: date, in: tz, sourceZone: sourceZone, locale: tz.mykeModeLocale))"
+        if showCities {
+            text += " \(tz.city) (\(abbr))"
+        } else {
+            text += " \(abbr)"
+        }
+        text += "\n"
     }
     return text
 }

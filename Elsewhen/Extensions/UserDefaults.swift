@@ -17,6 +17,7 @@ extension UserDefaults {
     static let resetButtonTimeZoneIdentifierKey = "resetButtonTimeZoneIdentifier"
     static let mykeModeDefaultTimeFormatKey = "mykeModeDefaultTimeFormat"
     static let mykeModeSeparatorKey = "mykeModeSeparator"
+    static let mykeModeShowCitiesKey = "mykeModeShowCities"
     
     var mykeModeTimeZones: [TimeZone] {
         get {
