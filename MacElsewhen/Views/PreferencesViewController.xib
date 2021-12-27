@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="19455" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="19529" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19455"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19529"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -64,8 +64,8 @@
                     </textFieldCell>
                 </textField>
                 <button verticalHuggingPriority="750" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="zeW-C9-z08">
-                    <rect key="frame" x="206" y="143" width="114" height="18"/>
-                    <buttonCell key="cell" type="radio" title="System Locale" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="IIh-Zc-Ksm">
+                    <rect key="frame" x="206" y="143" width="111" height="18"/>
+                    <buttonCell key="cell" type="radio" title="System locale" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="IIh-Zc-Ksm">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -74,8 +74,8 @@
                     </connections>
                 </button>
                 <button verticalHuggingPriority="750" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="z55-3M-vxH">
-                    <rect key="frame" x="206" y="121" width="76" height="18"/>
-                    <buttonCell key="cell" type="radio" title="12-Hour" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="Em2-dT-Vwx">
+                    <rect key="frame" x="206" y="121" width="74" height="18"/>
+                    <buttonCell key="cell" type="radio" title="12-hour" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="Em2-dT-Vwx">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -84,8 +84,8 @@
                     </connections>
                 </button>
                 <button verticalHuggingPriority="750" tag="3" translatesAutoresizingMaskIntoConstraints="NO" id="dTE-io-ilE">
-                    <rect key="frame" x="206" y="99" width="78" height="18"/>
-                    <buttonCell key="cell" type="radio" title="24-Hour" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="3Ix-Zh-LKO">
+                    <rect key="frame" x="206" y="99" width="76" height="18"/>
+                    <buttonCell key="cell" type="radio" title="24-hour" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="3Ix-Zh-LKO">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -97,8 +97,8 @@
                     <rect key="frame" x="0.0" y="190" width="593" height="5"/>
                 </box>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="R95-eR-w7W">
-                    <rect key="frame" x="76" y="144" width="128" height="16"/>
-                    <textFieldCell key="cell" lineBreakMode="clipping" title="Default Time Format" id="xh9-DS-Z1h">
+                    <rect key="frame" x="82" y="144" width="122" height="16"/>
+                    <textFieldCell key="cell" lineBreakMode="clipping" title="Default time format" id="xh9-DS-Z1h">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -113,16 +113,16 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SQK-3A-AhL">
-                    <rect key="frame" x="84" y="215" width="120" height="16"/>
-                    <textFieldCell key="cell" lineBreakMode="clipping" title="Default Time Zone:" id="LfJ-Yq-rcT">
+                    <rect key="frame" x="89" y="215" width="115" height="16"/>
+                    <textFieldCell key="cell" lineBreakMode="clipping" title="Default time zone:" id="LfJ-Yq-rcT">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VC3-1s-7k7">
-                    <rect key="frame" x="206" y="39" width="144" height="18"/>
-                    <buttonCell key="cell" type="check" title="Include City Names" bezelStyle="regularSquare" imagePosition="left" inset="2" id="30n-VB-Pll">
+                    <rect key="frame" x="206" y="39" width="140" height="18"/>
+                    <buttonCell key="cell" type="check" title="Include city names" bezelStyle="regularSquare" imagePosition="left" inset="2" id="30n-VB-Pll">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
