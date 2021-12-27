@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="19529" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="19455" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19455"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -120,8 +120,8 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <button verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VC3-1s-7k7">
-                    <rect key="frame" x="206" y="33" width="144" height="18"/>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VC3-1s-7k7">
+                    <rect key="frame" x="206" y="39" width="144" height="18"/>
                     <buttonCell key="cell" type="check" title="Include City Names" bezelStyle="regularSquare" imagePosition="left" inset="2" id="30n-VB-Pll">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
@@ -135,6 +135,7 @@
                 <constraint firstItem="zeW-C9-z08" firstAttribute="leading" secondItem="R95-eR-w7W" secondAttribute="trailing" constant="6" symbolic="YES" id="1fc-Vx-weW"/>
                 <constraint firstItem="CXt-HY-2mw" firstAttribute="leading" secondItem="Lht-nk-oY5" secondAttribute="leading" id="1qz-qo-WdU"/>
                 <constraint firstItem="YF9-z4-KG2" firstAttribute="leading" secondItem="zeW-C9-z08" secondAttribute="leading" id="4fK-Ag-mgO"/>
+                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="VC3-1s-7k7" secondAttribute="bottom" placeholder="YES" id="5Tr-o5-5Zk"/>
                 <constraint firstItem="R95-eR-w7W" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" id="6md-Y8-6Z8"/>
                 <constraint firstItem="SQK-3A-AhL" firstAttribute="trailing" secondItem="R95-eR-w7W" secondAttribute="trailing" id="8d5-zR-8Uo"/>
                 <constraint firstItem="FiK-4B-0CN" firstAttribute="top" secondItem="dTE-io-ilE" secondAttribute="bottom" constant="20" id="Bpi-QI-RTN"/>
@@ -142,6 +143,7 @@
                 <constraint firstItem="R95-eR-w7W" firstAttribute="centerY" secondItem="zeW-C9-z08" secondAttribute="centerY" id="CmG-BQ-bi1"/>
                 <constraint firstItem="YF9-z4-KG2" firstAttribute="top" secondItem="hMB-rw-E9w" secondAttribute="bottom" constant="8" symbolic="YES" id="GZu-1q-TsR"/>
                 <constraint firstItem="z55-3M-vxH" firstAttribute="top" secondItem="zeW-C9-z08" secondAttribute="bottom" constant="6" symbolic="YES" id="JsF-sT-JU8"/>
+                <constraint firstItem="VC3-1s-7k7" firstAttribute="top" secondItem="FiK-4B-0CN" secondAttribute="bottom" constant="8" symbolic="YES" placeholder="YES" id="LX1-bc-dYW"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="zeW-C9-z08" secondAttribute="trailing" constant="184" id="M0G-50-e0b"/>
                 <constraint firstAttribute="trailing" secondItem="hMB-rw-E9w" secondAttribute="trailing" id="SXY-nP-B27"/>
                 <constraint firstItem="hMB-rw-E9w" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="Slo-bc-vux"/>
