@@ -13,6 +13,7 @@ struct Settings: View {
     @State private var defaultDate: Date = Date.distantPast
     @State private var defaultTimeFormat: TimeFormat = .systemLocale
     @AppStorage(UserDefaults.mykeModeSeparatorKey, store: UserDefaults.shared) private var mykeModeSeparator: MykeModeSeparator = .hyphen
+    @AppStorage(UserDefaults.mykeModeShowCitiesKey, store: UserDefaults.shared) private var mykeModeShowCities: Bool = false
     
     private var defaultTimeZoneName: String {
         defaultTimeZone?.friendlyName ?? "Device"
@@ -46,7 +47,7 @@ struct Settings: View {
                         }
                     }
                 }
-                TimeListSettings(defaultTimeFormat: $defaultTimeFormat, mykeModeSeparator: $mykeModeSeparator)
+                TimeListSettings(defaultTimeFormat: $defaultTimeFormat, mykeModeSeparator: $mykeModeSeparator, showCities: $mykeModeShowCities)
                 Section(footer: footer) {
                     HStack {
                         Text("App Version")

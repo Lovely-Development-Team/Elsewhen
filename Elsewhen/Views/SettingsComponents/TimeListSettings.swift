@@ -10,6 +10,7 @@ import SwiftUI
 struct TimeListSettings: View {
     @Binding var defaultTimeFormat: TimeFormat
     @Binding var mykeModeSeparator: MykeModeSeparator
+    @Binding var showCities: Bool
     
     var body: some View {
         Section(header: Text("Time List Settings")) {
@@ -27,6 +28,7 @@ struct TimeListSettings: View {
             // Hackily make the radio buttons line up
             .offset(CGSize(width: 12, height: 0))
 #endif
+            Toggle("Include City Names", isOn: $showCities)
         }
 #if os(macOS)
         .pickerStyle(.radioGroup)
@@ -36,6 +38,8 @@ struct TimeListSettings: View {
 
 struct TimeListSettings_Previews: PreviewProvider {
     static var previews: some View {
-        TimeListSettings(defaultTimeFormat: .constant(.systemLocale), mykeModeSeparator: .constant(.hyphen))
+        Form {
+        TimeListSettings(defaultTimeFormat: .constant(.systemLocale), mykeModeSeparator: .constant(.hyphen), showCities: .constant(true))
+        }
     }
 }

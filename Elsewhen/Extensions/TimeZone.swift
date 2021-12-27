@@ -17,6 +17,10 @@ extension TimeZone {
         timeZoneCountries[identifier]
     }
     
+    var city: String {
+        friendlyName.components(separatedBy: "/").last ?? friendlyName
+    }
+    
     var flag: String {
         flagForTimeZone(self)
     }

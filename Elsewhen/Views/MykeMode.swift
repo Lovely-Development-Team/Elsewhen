@@ -28,6 +28,7 @@ struct MykeMode: View, OrientationObserving {
     
     @AppStorage(UserDefaults.mykeModeDefaultTimeFormatKey, store: UserDefaults.shared) private var defaultTimeFormat: TimeFormat = .systemLocale
     @AppStorage(UserDefaults.mykeModeSeparatorKey, store: UserDefaults.shared) private var mykeModeSeparator: MykeModeSeparator = .hyphen
+    @AppStorage(UserDefaults.mykeModeShowCitiesKey, store: UserDefaults.shared) private var mykeModeShowCities: Bool = false
     
     @State private var showCopied: Bool = false
     
@@ -41,7 +42,7 @@ struct MykeMode: View, OrientationObserving {
     @State private var selectionViewMaxHeight: CGFloat?
     
     func generateTimesAndFlagsText() -> String {
-        stringForTimesAndFlags(of: selectedDate, in: selectedTimeZone ?? TimeZone.current, for: selectedTimeZones, separator: mykeModeSeparator, timeZonesUsingEUFlag: timeZonesUsingEUFlag)
+        stringForTimesAndFlags(of: selectedDate, in: selectedTimeZone ?? TimeZone.current, for: selectedTimeZones, separator: mykeModeSeparator, timeZonesUsingEUFlag: timeZonesUsingEUFlag, showCities: mykeModeShowCities)
     }
     
     func flagForTimeZone(_ tz: TimeZone) -> String {
