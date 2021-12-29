@@ -108,7 +108,7 @@ struct MykeMode: View, OrientationObserving {
                                 #endif
                                 timeZonesUsingNoFlag.insert(tz)
                             }) {
-                                Text("\(NoFlagTimeZoneEmoji) Show Clock Emoji")
+                                Text("\(NoFlagTimeZoneEmoji) Use Clock Emoji")
                             }
                             Button(action: {
                                 #if os(iOS)
@@ -117,7 +117,7 @@ struct MykeMode: View, OrientationObserving {
                                 timeZonesUsingNoFlag.remove(tz)
                                 timeZonesUsingEUFlag.remove(tz)
                             }) {
-                                Text("\(flagForTimeZone(tz)) Show Country Flag")
+                                Text("\(flagForTimeZone(tz)) Use Country Flag")
                             }
                             if tz.isMemberOfEuropeanUnion {
                                 Button(action: {
@@ -127,7 +127,7 @@ struct MykeMode: View, OrientationObserving {
                                     timeZonesUsingNoFlag.remove(tz)
                                     timeZonesUsingEUFlag.insert(tz)
                                 }) {
-                                    Text("🇪🇺 Show EU Flag")
+                                    Text("🇪🇺 Use EU Flag")
                                 }
                             }
                             Divider()
