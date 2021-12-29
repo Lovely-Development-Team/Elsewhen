@@ -48,6 +48,8 @@
 		5E07E89527347C8C00D9350E /* aromantic@3x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E07E89127347C8C00D9350E /* aromantic@3x~ipad.png */; };
 		5E07E89627347C8C00D9350E /* aromantic@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E07E89227347C8C00D9350E /* aromantic@2x.png */; };
 		5E07E89727347C8C00D9350E /* aromantic@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E07E89327347C8C00D9350E /* aromantic@3x.png */; };
+		5E2D6B1E277C48470065781E /* DefaultTimeFormatPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2D6B1D277C48470065781E /* DefaultTimeFormatPicker.swift */; };
+		5E2D6B20277C4CC00065781E /* SeparatorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2D6B1F277C4CBF0065781E /* SeparatorPicker.swift */; };
 		5E54BBAF27367EA2005CF7A6 /* original@3x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E54BBAB27367EA2005CF7A6 /* original@3x~ipad.png */; };
 		5E54BBB027367EA2005CF7A6 /* original@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E54BBAC27367EA2005CF7A6 /* original@2x~ipad.png */; };
 		5E54BBB127367EA2005CF7A6 /* original@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E54BBAD27367EA2005CF7A6 /* original@2x.png */; };
@@ -331,6 +333,8 @@
 		5E07E89127347C8C00D9350E /* aromantic@3x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "aromantic@3x~ipad.png"; sourceTree = "<group>"; };
 		5E07E89227347C8C00D9350E /* aromantic@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "aromantic@2x.png"; sourceTree = "<group>"; };
 		5E07E89327347C8C00D9350E /* aromantic@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "aromantic@3x.png"; sourceTree = "<group>"; };
+		5E2D6B1D277C48470065781E /* DefaultTimeFormatPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTimeFormatPicker.swift; sourceTree = "<group>"; };
+		5E2D6B1F277C4CBF0065781E /* SeparatorPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeparatorPicker.swift; sourceTree = "<group>"; };
 		5E54BBAB27367EA2005CF7A6 /* original@3x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "original@3x~ipad.png"; sourceTree = "<group>"; };
 		5E54BBAC27367EA2005CF7A6 /* original@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "original@2x~ipad.png"; sourceTree = "<group>"; };
 		5E54BBAD27367EA2005CF7A6 /* original@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "original@2x.png"; sourceTree = "<group>"; };
@@ -929,6 +933,8 @@
 			isa = PBXGroup;
 			children = (
 				63AC5A062747F3BE008D10C6 /* TimeListSettings.swift */,
+				5E2D6B1D277C48470065781E /* DefaultTimeFormatPicker.swift */,
+				5E2D6B1F277C4CBF0065781E /* SeparatorPicker.swift */,
 			);
 			path = SettingsComponents;
 			sourceTree = "<group>";
@@ -1246,6 +1252,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				639FFFAB271B75E7008897E8 /* OrientationObserving.swift in Sources */,
+				5E2D6B20277C4CC00065781E /* SeparatorPicker.swift in Sources */,
 				63087E97271B633700D6EEE8 /* NotificationName.swift in Sources */,
 				63BEF68E271ECDA2000CAC95 /* FormatStyleButton.swift in Sources */,
 				6346ADA526F3D4E600E406D0 /* SelectTimeZoneButton.swift in Sources */,
@@ -1255,6 +1262,7 @@
 				63A915F726FB42CE0027B18D /* StarUnstarButton.swift in Sources */,
 				635CE6E52703264F006BC7D3 /* RoundedRectangleButton.swift in Sources */,
 				5EB23B9F26E406B600203153 /* ContentView.swift in Sources */,
+				5E2D6B1E277C48470065781E /* DefaultTimeFormatPicker.swift in Sources */,
 				6346AD9D26F3C4EE00E406D0 /* Color.swift in Sources */,
 				6346AD9A26F3C33D00E406D0 /* PasteboardHelpers.swift in Sources */,
 				5E6C8C3A27467487003244DF /* MykeModeSeparator.swift in Sources */,
