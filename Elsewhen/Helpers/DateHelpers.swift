@@ -7,10 +7,10 @@
 
 import Foundation
 
-enum TimeFormat: String {
+enum TimeFormat: String, CaseIterable {
+    case systemLocale
     case twelve
     case twentyFour
-    case systemLocale
     
     var description: String {
         switch self {

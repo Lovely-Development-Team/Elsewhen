@@ -14,32 +14,33 @@ struct TimeListSettings: View {
     
     var body: some View {
         Section(header: Text("Time List Settings")) {
-            Picker("Default Time Format", selection: $defaultTimeFormat) {
-                Text("System Locale").tag(TimeFormat.systemLocale)
-                Text("12-Hour").tag(TimeFormat.twelve)
-                Text("24-Hour").tag(TimeFormat.twentyFour)
-            }
-            Picker("Separator", selection: $mykeModeSeparator) {
-                ForEach(MykeModeSeparator.allCases, id: \.self) { sep in
-                    Text(sep.description).tag(sep)
+            NavigationLink(destination: DefaultTimeFormatPicker(defaultTimeFormat: $defaultTimeFormat)) {
+                HStack {
+                    Text("Default Time Format")
+                    Spacer()
+                    Text(defaultTimeFormat.description)
+                        .foregroundColor(.secondary)
                 }
             }
-#if os(macOS)
-            // Hackily make the radio buttons line up
-            .offset(CGSize(width: 12, height: 0))
-#endif
+            NavigationLink(destination: SeparatorPicker(mykeModeSeparator: $mykeModeSeparator)) {
+                HStack {
+                    Text("Separator")
+                    Spacer()
+                    Text(mykeModeSeparator.description)
+                        .foregroundColor(.secondary)
+                }
+            }
             Toggle("Include City Names", isOn: $showCities)
         }
-#if os(macOS)
-        .pickerStyle(.radioGroup)
-#endif
     }
 }
 
 struct TimeListSettings_Previews: PreviewProvider {
     static var previews: some View {
-        Form {
-        TimeListSettings(defaultTimeFormat: .constant(.systemLocale), mykeModeSeparator: .constant(.hyphen), showCities: .constant(true))
+        NavigationView {
+            Form {
+                TimeListSettings(defaultTimeFormat: .constant(.systemLocale), mykeModeSeparator: .constant(.hyphen), showCities: .constant(true))
+            }
         }
     }
 }
