@@ -115,23 +115,32 @@ func stringFor(time date: Date, in zone: TimeZone, sourceZone: TimeZone, locale:
     return df.string(from: convert(date: date, from: sourceZone, to: TimeZone.current))
 }
 
-func stringForTimesAndFlags<TZSequence>(of date: Date, in sourceZone: TimeZone, for timezones: TZSequence, separator: MykeModeSeparator, timeZonesUsingEUFlag: Set<TimeZone>, showCities: Bool = false) -> String where TZSequence: Collection, TZSequence.Element == TimeZone {
-    var text = "\n"
-    for tz in timezones {
-        let abbr = tz.fudgedAbbreviation(for: date) ?? ""
-        let flag: String
+func stringForTimeAndFlag(in tz: TimeZone, date: Date, sourceZone: TimeZone, separator: MykeModeSeparator, timeZonesUsingEUFlag: Set<TimeZone>, timeZonesUsingNoFlag: Set<TimeZone>, showCities: Bool) -> String {
+    var text = ""
+    let abbr = tz.fudgedAbbreviation(for: date) ?? ""
+    let flag: String
+    if timeZonesUsingNoFlag.contains(tz) {
+        flag = NoFlagTimeZoneEmoji
+    } else {
         if timeZonesUsingEUFlag.contains(tz) {
             flag = "🇪🇺"
         } else {
             flag = flagForTimeZone(tz)
         }
-        text += "\(flag)\(separator.rawValue)\(stringFor(time: date, in: tz, sourceZone: sourceZone, locale: tz.mykeModeLocale))"
-        if showCities {
-            text += " \(tz.city) (\(abbr))"
-        } else {
-            text += " \(abbr)"
-        }
-        text += "\n"
+    }
+    text += "\(flag)\(separator.rawValue)\(stringFor(time: date, in: tz, sourceZone: sourceZone, locale: tz.mykeModeLocale))"
+    if showCities {
+        text += " \(tz.city) (\(abbr))"
+    } else {
+        text += " \(abbr)"
+    }
+    return text
+}
+
+func stringForTimesAndFlags<TZSequence>(of date: Date, in sourceZone: TimeZone, for timezones: TZSequence, separator: MykeModeSeparator, timeZonesUsingEUFlag: Set<TimeZone>, timeZonesUsingNoFlag: Set<TimeZone>, showCities: Bool) -> String where TZSequence: Collection, TZSequence.Element == TimeZone {
+    var text = "\n"
+    for tz in timezones {
+        text = "\(text)\(stringForTimeAndFlag(in: tz, date: date, sourceZone: sourceZone, separator: separator, timeZonesUsingEUFlag: timeZonesUsingEUFlag, timeZonesUsingNoFlag: timeZonesUsingNoFlag, showCities: showCities))\n"
     }
     return text
 }

@@ -12,8 +12,16 @@ struct TimeListSettings: View {
     @Binding var mykeModeSeparator: MykeModeSeparator
     @Binding var showCities: Bool
     
+    @State private var viewId: Int = 1
+    
+    var exampleOutput: String {
+        let tz = TimeZone(identifier: "Europe/London")!
+        let formatString = stringForTimeAndFlag(in: tz, date: Date(), sourceZone: tz, separator: mykeModeSeparator, timeZonesUsingEUFlag: [], timeZonesUsingNoFlag: [], showCities: showCities)
+        return "Example:\n  \(formatString)"
+    }
+    
     var body: some View {
-        Section(header: Text("Time List Settings")) {
+        Section(header: Text("Time List Settings"), footer: Text(exampleOutput)) {
             NavigationLink(destination: DefaultTimeFormatPicker(defaultTimeFormat: $defaultTimeFormat)) {
                 HStack {
                     Text("Default Time Format")
@@ -31,6 +39,10 @@ struct TimeListSettings: View {
                 }
             }
             Toggle("Include City Names", isOn: $showCities)
+        }
+        .id(viewId)
+        .onChange(of: defaultTimeFormat) { newValue in
+            viewId += 1
         }
     }
 }
