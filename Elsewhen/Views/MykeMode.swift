@@ -23,6 +23,7 @@ struct MykeMode: View, OrientationObserving {
     
     @State private var selectedTimeZones: [TimeZone] = []
     @State private var timeZonesUsingEUFlag: Set<TimeZone> = []
+    @State private var timeZonesUsingNoFlag: Set<TimeZone> = []
     @State private var timeZonesUsing24HourTime: Set<TimeZone> = []
     @State private var timeZonesUsing12HourTime: Set<TimeZone> = []
     
@@ -41,8 +42,10 @@ struct MykeMode: View, OrientationObserving {
     @State private var showTimeZonePopover: Bool = false
     @State private var selectionViewMaxHeight: CGFloat?
     
+    @State private var viewId: Int = 1
+    
     func generateTimesAndFlagsText() -> String {
-        stringForTimesAndFlags(of: selectedDate, in: selectedTimeZone ?? TimeZone.current, for: selectedTimeZones, separator: mykeModeSeparator, timeZonesUsingEUFlag: timeZonesUsingEUFlag, showCities: mykeModeShowCities)
+        stringForTimesAndFlags(of: selectedDate, in: selectedTimeZone ?? TimeZone.current, for: selectedTimeZones, separator: mykeModeSeparator, timeZonesUsingEUFlag: timeZonesUsingEUFlag, timeZonesUsingNoFlag: timeZonesUsingNoFlag, showCities: mykeModeShowCities)
     }
     
     func flagForTimeZone(_ tz: TimeZone) -> String {
@@ -84,7 +87,7 @@ struct MykeMode: View, OrientationObserving {
         
         List {
             ForEach(selectedTimeZones, id: \.identifier) { tz in
-                SelectedTimeZoneCell(tz: tz, flag: flagForTimeZone(tz), timeInZone: stringForSelectedTime(in: tz), selectedDate: selectedDate)
+                SelectedTimeZoneCell(tz: tz, formattedString: stringForTimeAndFlag(in: tz, date: selectedDate, sourceZone: selectedTimeZone ?? TimeZone.current, separator: mykeModeSeparator, timeZonesUsingEUFlag: timeZonesUsingEUFlag, timeZonesUsingNoFlag: timeZonesUsingNoFlag, showCities: mykeModeShowCities))
                     .onTapGesture {
                         if tz.isMemberOfEuropeanUnion {
                             #if os(iOS)
@@ -98,19 +101,36 @@ struct MykeMode: View, OrientationObserving {
                         }
                     }
                     .contextMenu {
-                        if tz.isMemberOfEuropeanUnion {
+                        if flagForTimeZone(tz) != NoFlagTimeZoneEmoji {
                             Button(action: {
                                 #if os(iOS)
                                 mediumImpactFeedbackGenerator.impactOccurred()
                                 #endif
-                                if timeZonesUsingEUFlag.contains(tz) {
-                                    timeZonesUsingEUFlag.remove(tz)
-                                } else {
-                                    timeZonesUsingEUFlag.insert(tz)
-                                }
+                                timeZonesUsingNoFlag.insert(tz)
                             }) {
-                                Text("Toggle EU Flag")
+                                Text("\(NoFlagTimeZoneEmoji) Show Clock Emoji")
                             }
+                            Button(action: {
+                                #if os(iOS)
+                                mediumImpactFeedbackGenerator.impactOccurred()
+                                #endif
+                                timeZonesUsingNoFlag.remove(tz)
+                                timeZonesUsingEUFlag.remove(tz)
+                            }) {
+                                Text("\(flagForTimeZone(tz)) Show Country Flag")
+                            }
+                            if tz.isMemberOfEuropeanUnion {
+                                Button(action: {
+                                    #if os(iOS)
+                                    mediumImpactFeedbackGenerator.impactOccurred()
+                                    #endif
+                                    timeZonesUsingNoFlag.remove(tz)
+                                    timeZonesUsingEUFlag.insert(tz)
+                                }) {
+                                    Text("🇪🇺 Show EU Flag")
+                                }
+                            }
+                            Divider()
                         }
                         Button(action: {
                             #if os(iOS)
@@ -118,6 +138,9 @@ struct MykeMode: View, OrientationObserving {
                             #endif
                             self.timeZonesUsing24HourTime.remove(tz)
                             self.timeZonesUsing12HourTime.insert(tz)
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                                self.viewId += 1
+                            }
                         }) {
                             Text("12-Hour Time Format")
                         }
@@ -127,6 +150,9 @@ struct MykeMode: View, OrientationObserving {
                             #endif
                             self.timeZonesUsing12HourTime.remove(tz)
                             self.timeZonesUsing24HourTime.insert(tz)
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                                self.viewId += 1
+                            }
                         }) {
                             Text("24-Hour Time Format")
                         }
@@ -136,9 +162,13 @@ struct MykeMode: View, OrientationObserving {
                             #endif
                             self.timeZonesUsing12HourTime.remove(tz)
                             self.timeZonesUsing24HourTime.remove(tz)
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                                self.viewId += 1
+                            }
                         }) {
                             Text("Default Time Format")
                         }
+                        Divider()
                         DeleteButton {
                             #if os(iOS)
                             notificationFeedbackGenerator.prepare()
@@ -158,6 +188,7 @@ struct MykeMode: View, OrientationObserving {
             .onDelete(perform: delete)
         }
         .listStyle(PlainListStyle())
+        .id(viewId)
         
     }
     
@@ -302,6 +333,7 @@ struct MykeMode: View, OrientationObserving {
             selectedTimeZone = UserDefaults.shared.resetButtonTimeZone
             selectedTimeZones = UserDefaults.shared.mykeModeTimeZones
             timeZonesUsingEUFlag = UserDefaults.shared.mykeModeTimeZonesUsingEUFlag
+            timeZonesUsingNoFlag = UserDefaults.shared.mykeModeTimeZonesUsingNoFlag
             timeZonesUsing12HourTime = UserDefaults.shared.mykeModeTimeZoneIdentifiersUsing12HourTime
             timeZonesUsing24HourTime = UserDefaults.shared.mykeModeTimeZoneIdentifiersUsing24HourTime
         }
@@ -310,6 +342,9 @@ struct MykeMode: View, OrientationObserving {
         }
         .onChange(of: timeZonesUsingEUFlag) { newValue in
             UserDefaults.shared.mykeModeTimeZonesUsingEUFlag = newValue
+        }
+        .onChange(of: timeZonesUsingNoFlag) { newValue in
+            UserDefaults.shared.mykeModeTimeZonesUsingNoFlag = newValue
         }
         .onChange(of: timeZonesUsing12HourTime) { newValue in
             UserDefaults.shared.mykeModeTimeZoneIdentifiersUsing12HourTime = newValue
