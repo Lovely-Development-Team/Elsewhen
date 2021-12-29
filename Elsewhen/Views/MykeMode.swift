@@ -48,8 +48,8 @@ struct MykeMode: View, OrientationObserving {
         stringForTimesAndFlags(of: selectedDate, in: selectedTimeZone ?? TimeZone.current, for: selectedTimeZones, separator: mykeModeSeparator, timeZonesUsingEUFlag: timeZonesUsingEUFlag, timeZonesUsingNoFlag: timeZonesUsingNoFlag, showCities: mykeModeShowCities)
     }
     
-    func flagForTimeZone(_ tz: TimeZone) -> String {
-        if timeZonesUsingEUFlag.contains(tz) {
+    func flagForTimeZone(_ tz: TimeZone, ignoringEUFlags: Bool = false) -> String {
+        if !ignoringEUFlags && timeZonesUsingEUFlag.contains(tz) {
             return "🇪🇺"
         }
         return tz.flag
@@ -117,7 +117,7 @@ struct MykeMode: View, OrientationObserving {
                                 timeZonesUsingNoFlag.remove(tz)
                                 timeZonesUsingEUFlag.remove(tz)
                             }) {
-                                Text("\(flagForTimeZone(tz)) Use Country Flag")
+                                Text("\(flagForTimeZone(tz, ignoringEUFlags: true)) Use Country Flag")
                             }
                             if tz.isMemberOfEuropeanUnion {
                                 Button(action: {
