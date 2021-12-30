@@ -9,6 +9,8 @@ import SwiftUI
 
 struct TimezoneChoiceView: View {
     
+    @Environment(\.presentationMode) var presentationMode
+    
     @Binding var selectedTimeZone: TimeZone?
     @Binding var selectedTimeZones: [TimeZone]
     @Binding var selectedDate: Date
@@ -99,7 +101,7 @@ struct TimezoneChoiceView: View {
                     selectionFeedbackGenerator.selectionChanged()
                     #endif
                     if !self.selectMultiple {
-                        done?()
+                        callDone()
                     }
                 }
             }
@@ -139,9 +141,20 @@ struct TimezoneChoiceView: View {
             #if os(iOS)
             selectionFeedbackGenerator.selectionChanged()
             #endif
-            done?()
+            callDone()
         }
     }
+    
+    func callDone() {
+        if let done = done {
+            done()
+        } else {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                presentationMode.wrappedValue.dismiss()
+            }
+        }
+    }
+    
 }
 
 struct TimezoneChoiceView_Previews: PreviewProvider {

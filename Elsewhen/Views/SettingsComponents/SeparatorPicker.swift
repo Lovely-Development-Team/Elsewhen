@@ -33,7 +33,9 @@ struct SeparatorPicker: View {
             }
         }
         .navigationTitle("Separator")
+        #if !os(macOS)
         .navigationBarTitleDisplayMode(.inline)
+        #endif
     }
 }
 

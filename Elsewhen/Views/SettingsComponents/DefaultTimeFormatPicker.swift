@@ -33,7 +33,9 @@ struct DefaultTimeFormatPicker: View {
             }
         }
         .navigationTitle("Default Time Format")
+        #if !os(macOS)
         .navigationBarTitleDisplayMode(.inline)
+        #endif
     }
 }
 

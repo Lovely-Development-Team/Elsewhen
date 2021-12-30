@@ -15,6 +15,8 @@ struct Settings: View {
     @AppStorage(UserDefaults.mykeModeSeparatorKey, store: UserDefaults.shared) private var mykeModeSeparator: MykeModeSeparator = .hyphen
     @AppStorage(UserDefaults.mykeModeShowCitiesKey, store: UserDefaults.shared) private var mykeModeShowCities: Bool = false
     
+    @State private var viewId: Int = 1
+    
     private var defaultTimeZoneName: String {
         defaultTimeZone?.friendlyName ?? "Device"
     }
@@ -48,6 +50,7 @@ struct Settings: View {
                     }
                 }
                 TimeListSettings(defaultTimeFormat: $defaultTimeFormat, mykeModeSeparator: $mykeModeSeparator, showCities: $mykeModeShowCities)
+                    .id(viewId)
                 Section(footer: footer) {
                     HStack {
                         Text("App Version")
@@ -63,6 +66,7 @@ struct Settings: View {
             }
             .onChange(of: defaultTimeZone) { newTz in
                 UserDefaults.shared.resetButtonTimeZone = newTz
+                viewId += 1
             }
             .onChange(of: defaultTimeFormat) { newFormat in
                 UserDefaults.shared.mykeModeDefaultTimeFormat = newFormat
