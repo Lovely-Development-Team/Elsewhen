@@ -20,6 +20,8 @@ class PreferencesViewController: NSViewController {
     @IBOutlet weak var mykeModeSeperatorLabel: NSTextField!
     @IBOutlet weak var mykeModeIncludeCityNamesCheckbox: NSButton!
     
+    @IBOutlet weak var mykeModeExampleLabel: NSTextField!
+    
     let defaultTzPopoverController = DefaultTimeZonePopoverController()
     
     private var resetButtonTimeZoneStringObservation: NSKeyValueObservation?
@@ -38,6 +40,9 @@ class PreferencesViewController: NSViewController {
         
         resetButtonTimeZoneStringObservation = UserDefaults.shared.observe(\.resetButtonTimeZoneString) { [weak self] defaults, _ in
             self?.defaultTimeZoneButton.title = defaults.resetButtonTimeZone?.friendlyName ?? Self.defaultTimeZoneName
+            DispatchQueue.main.async {
+                self?.updateMykeModeExampleLabel()
+            }
         }
         
         switch UserDefaults.shared.mykeModeDefaultTimeFormat {
@@ -70,6 +75,15 @@ class PreferencesViewController: NSViewController {
         buttons.first!.centerYAnchor.constraint(equalTo: mykeModeSeperatorLabel.centerYAnchor).isActive = true
         mykeModeIncludeCityNamesCheckbox.topAnchor.constraint(equalToSystemSpacingBelow: buttons.last!.bottomAnchor, multiplier: 2).isActive = true
         self.view.bottomAnchor.constraint(greaterThanOrEqualToSystemSpacingBelow: mykeModeIncludeCityNamesCheckbox.bottomAnchor, multiplier: 1).isActive = true
+        
+        updateMykeModeExampleLabel()
+        
+    }
+    
+    private func updateMykeModeExampleLabel() {
+        let tz = UserDefaults.shared.resetButtonTimeZone ?? TimeZone.current
+        let formatString = stringForTimeAndFlag(in: tz, date: Date(), sourceZone: tz, separator: UserDefaults.shared.mykeModeSeparator, timeZonesUsingEUFlag: [], timeZonesUsingNoFlag: [], showCities: UserDefaults.shared.mykeModeShowCities)
+        mykeModeExampleLabel.stringValue = formatString
     }
     
     @IBAction func showInMenuBar(_ sender: NSButton) {
@@ -86,6 +100,7 @@ class PreferencesViewController: NSViewController {
     
     @IBAction func mykeModeIncludeCityNames(_ sender: NSButton) {
         UserDefaults.shared.mykeModeShowCities = sender.state == .on
+        updateMykeModeExampleLabel()
     }
     
     @IBAction func defaultTimeFormat(_ sender: NSButton) {
@@ -99,10 +114,12 @@ class PreferencesViewController: NSViewController {
         default:
             break
         }
+        updateMykeModeExampleLabel()
     }
     
     @IBAction func mykeModeSeparator(_ sender: NSButton) {
         UserDefaults.shared.mykeModeSeparator = MykeModeSeparator.allCases[sender.tag]
+        updateMykeModeExampleLabel()
     }
     
 }
