@@ -88,15 +88,31 @@ struct MykeMode: View, OrientationObserving {
         List {
             ForEach(selectedTimeZones, id: \.identifier) { tz in
                 SelectedTimeZoneCell(tz: tz, timeInZone: stringForSelectedTime(in: tz), selectedDate: selectedDate, formattedString: stringForTimeAndFlag(in: tz, date: selectedDate, sourceZone: selectedTimeZone ?? TimeZone.current, separator: mykeModeSeparator, timeZonesUsingEUFlag: timeZonesUsingEUFlag, timeZonesUsingNoFlag: timeZonesUsingNoFlag, showCities: mykeModeShowCities))
+                    .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                    .contentShape(Rectangle())
                     .onTapGesture {
-                        if tz.isMemberOfEuropeanUnion {
+                        if flagForTimeZone(tz) != NoFlagTimeZoneEmoji {
                             #if os(iOS)
                             mediumImpactFeedbackGenerator.impactOccurred()
                             #endif
-                            if timeZonesUsingEUFlag.contains(tz) {
-                                timeZonesUsingEUFlag.remove(tz)
+                            if tz.isMemberOfEuropeanUnion {
+                                if timeZonesUsingNoFlag.contains(tz) {
+                                    timeZonesUsingNoFlag.remove(tz)
+                                    timeZonesUsingEUFlag.remove(tz)
+                                } else {
+                                    if timeZonesUsingEUFlag.contains(tz) {
+                                        timeZonesUsingEUFlag.remove(tz)
+                                        timeZonesUsingNoFlag.insert(tz)
+                                    } else {
+                                        timeZonesUsingEUFlag.insert(tz)
+                                    }
+                                }
                             } else {
-                                timeZonesUsingEUFlag.insert(tz)
+                                if timeZonesUsingNoFlag.contains(tz) {
+                                    timeZonesUsingNoFlag.remove(tz)
+                                } else {
+                                    timeZonesUsingNoFlag.insert(tz)
+                                }
                             }
                         }
                     }
