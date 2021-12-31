@@ -109,3 +109,12 @@ extension TimeZone {
     }
     
 }
+
+
+extension Calendar {
+    var currentYearAsString: String {
+        let nf = NumberFormatter()
+        nf.groupingSeparator = nil
+        return nf.string(from: NSNumber(value: component(.year, from: Date()))) ?? "0000"
+    }
+}
