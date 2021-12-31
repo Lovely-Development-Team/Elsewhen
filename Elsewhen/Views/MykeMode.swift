@@ -55,23 +55,6 @@ struct MykeMode: View, OrientationObserving {
         return tz.flag
     }
     
-    func localeForTimeZone(_ tz: TimeZone) -> Locale? {
-        if timeZonesUsing24HourTime.contains(tz) {
-            return Locale(identifier: "en_GB")
-        }
-        if timeZonesUsing12HourTime.contains(tz) {
-            return Locale(identifier: "en_US")
-        }
-        switch defaultTimeFormat {
-        case .twelve:
-            return Locale(identifier: "en_US")
-        case .twentyFour:
-            return Locale(identifier: "en_GB")
-        default:
-            return nil
-        }
-    }
-    
     func stringForSelectedTime(in zone: TimeZone) -> String {
         stringFor(time: selectedDate, in: zone, sourceZone: selectedTimeZone ?? TimeZone.current)
     }

@@ -110,9 +110,9 @@ func stringFor(time date: Date, in zone: TimeZone, sourceZone: TimeZone) -> Stri
     df.locale = Locale.current
     switch zone.mykeModeTimeFormat {
     case .twelve:
-        df.dateFormat = "h:m a"
+        df.dateFormat = "h:mm a"
     case .twentyFour:
-        df.dateFormat = "H:m"
+        df.dateFormat = "H:mm"
     default:
         df.dateStyle = .none
         df.timeStyle = .short
