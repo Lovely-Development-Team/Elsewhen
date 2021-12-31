@@ -351,6 +351,10 @@ struct MykeMode: View, OrientationObserving {
         .onChange(of: timeZonesUsing24HourTime) { newValue in
             UserDefaults.shared.mykeModeTimeZoneIdentifiersUsing24HourTime = newValue
         }
+        .onChange(of: defaultTimeFormat) { newValue in
+            /// This is purely here to update the view state when the user changes the default time format in settings
+            return
+        }
         
     }
     
