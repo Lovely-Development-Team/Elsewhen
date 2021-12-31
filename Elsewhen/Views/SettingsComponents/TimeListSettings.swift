@@ -16,7 +16,7 @@ struct TimeListSettings: View {
     
     var exampleOutput: String {
         let tz = UserDefaults.shared.resetButtonTimeZone ?? TimeZone.current
-        let formatString = stringForTimeAndFlag(in: tz, date: Date(), sourceZone: tz, separator: mykeModeSeparator, timeZonesUsingEUFlag: [], timeZonesUsingNoFlag: [], showCities: showCities)
+        let formatString = stringForTimeAndFlag(in: tz, date: Date(), sourceZone: tz, separator: mykeModeSeparator, timeZonesUsingEUFlag: [], timeZonesUsingNoFlag: [], showCities: showCities, ignoringTimeFormatOverride: true)
         return "Example:\n  \(formatString)"
     }
     
