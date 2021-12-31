@@ -98,23 +98,6 @@ extension TimeZone {
         
     }
     
-    var mykeModeLocale: Locale? {
-        if UserDefaults.shared.mykeModeTimeZoneIdentifiersUsing24HourTime.contains(self) {
-            return Locale(identifier: "en_GB")
-        }
-        if UserDefaults.shared.mykeModeTimeZoneIdentifiersUsing12HourTime.contains(self) {
-            return Locale(identifier: "en_US")
-        }
-        switch UserDefaults.shared.mykeModeDefaultTimeFormat {
-        case .twelve:
-            return Locale(identifier: "en_US")
-        case .twentyFour:
-            return Locale(identifier: "en_GB")
-        default:
-            return nil
-        }
-    }
-    
     var mykeModeTimeFormat: TimeFormat {
         if UserDefaults.shared.mykeModeTimeZoneIdentifiersUsing24HourTime.contains(self) {
             return .twentyFour
@@ -122,7 +105,7 @@ extension TimeZone {
         if UserDefaults.shared.mykeModeTimeZoneIdentifiersUsing12HourTime.contains(self) {
             return .twelve
         }
-        return .systemLocale
+        return UserDefaults.shared.mykeModeDefaultTimeFormat
     }
     
 }
