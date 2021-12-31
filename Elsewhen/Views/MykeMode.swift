@@ -73,7 +73,7 @@ struct MykeMode: View, OrientationObserving {
     }
     
     func stringForSelectedTime(in zone: TimeZone) -> String {
-        stringFor(time: selectedDate, in: zone, sourceZone: selectedTimeZone ?? TimeZone.current, locale: localeForTimeZone(zone))
+        stringFor(time: selectedDate, in: zone, sourceZone: selectedTimeZone ?? TimeZone.current)
     }
     
     #if os(iOS)

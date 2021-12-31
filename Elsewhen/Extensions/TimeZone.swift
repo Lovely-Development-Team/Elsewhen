@@ -115,4 +115,14 @@ extension TimeZone {
         }
     }
     
+    var mykeModeTimeFormat: TimeFormat {
+        if UserDefaults.shared.mykeModeTimeZoneIdentifiersUsing24HourTime.contains(self) {
+            return .twentyFour
+        }
+        if UserDefaults.shared.mykeModeTimeZoneIdentifiersUsing12HourTime.contains(self) {
+            return .twelve
+        }
+        return .systemLocale
+    }
+    
 }

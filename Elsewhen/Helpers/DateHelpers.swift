@@ -104,13 +104,18 @@ func discordFormat(for date: Date, in timezone: TimeZone, with formatCode: Forma
     return formattedString
 }
 
-func stringFor(time date: Date, in zone: TimeZone, sourceZone: TimeZone, locale: Locale? = nil) -> String {
+func stringFor(time date: Date, in zone: TimeZone, sourceZone: TimeZone) -> String {
     let df = DateFormatter()
-    df.dateStyle = .none
-    df.timeStyle = .short
     df.timeZone = zone
-    if let locale = locale {
-        df.locale = locale
+    df.locale = Locale.current
+    switch zone.mykeModeTimeFormat {
+    case .twelve:
+        df.dateFormat = "h:m a"
+    case .twentyFour:
+        df.dateFormat = "H:m"
+    default:
+        df.dateStyle = .none
+        df.timeStyle = .short
     }
     return df.string(from: convert(date: date, from: sourceZone, to: TimeZone.current))
 }
@@ -128,7 +133,7 @@ func stringForTimeAndFlag(in tz: TimeZone, date: Date, sourceZone: TimeZone, sep
             flag = flagForTimeZone(tz)
         }
     }
-    text += "\(flag)\(separator.rawValue)\(stringFor(time: date, in: tz, sourceZone: sourceZone, locale: tz.mykeModeLocale))"
+    text += "\(flag)\(separator.rawValue)\(stringFor(time: date, in: tz, sourceZone: sourceZone))"
     if showCities {
         text += " \(tz.city) (\(abbr))"
     } else {
