@@ -112,8 +112,10 @@ func stringFor(time date: Date, in zone: TimeZone, sourceZone: TimeZone) -> Stri
     case .twelve:
         df.dateFormat = "h:mm a"
     case .twentyFour:
-        df.dateFormat = "H:mm"
-    default:
+        df.locale = Locale(identifier: "en_GB")
+        df.dateStyle = .none
+        df.timeStyle = .short
+    case .systemLocale:
         df.dateStyle = .none
         df.timeStyle = .short
     }
