@@ -37,3 +37,4 @@ let alternativeElsewhenIcons: [AlternativeIcon] = [
     AlternativeIcon(fileName: "transgender", name: "Transgender Flag")
 ]
 
+let alternativeIconNameByPath: [String?: String] = Dictionary(uniqueKeysWithValues: alternativeElsewhenIcons.map { ($0.fileName, $0.name) })

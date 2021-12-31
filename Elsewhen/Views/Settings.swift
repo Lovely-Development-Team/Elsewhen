@@ -37,8 +37,13 @@ struct Settings: View {
         NavigationView {
             Form {
                 Section(header: Text("General Settings")) {
-                    NavigationLink(destination: AltIconView()) {
-                        Text("App Icon")
+                    NavigationLink(destination: AltIconView() { viewId += 1 }) {
+                        HStack {
+                            Text("App Icon")
+                            Spacer()
+                            Text(alternativeIconNameByPath[UIApplication.shared.alternateIconName] ?? "Original")
+                                .foregroundColor(.secondary)
+                        }
                     }
                     NavigationLink(destination: TimezoneChoiceView(selectedTimeZone: $defaultTimeZone, selectedTimeZones: .constant([]), selectedDate: $defaultDate, selectMultiple: false, showDeviceLocalOption: true)) {
                         HStack {
