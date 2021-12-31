@@ -104,11 +104,12 @@ func discordFormat(for date: Date, in timezone: TimeZone, with formatCode: Forma
     return formattedString
 }
 
-func stringFor(time date: Date, in zone: TimeZone, sourceZone: TimeZone) -> String {
+func stringFor(time date: Date, in zone: TimeZone, sourceZone: TimeZone, ignoringTimeFormatOverride: Bool = false) -> String {
     let df = DateFormatter()
     df.timeZone = zone
     df.locale = Locale.current
-    switch zone.mykeModeTimeFormat {
+    let timeFormat = ignoringTimeFormatOverride ? UserDefaults.shared.mykeModeDefaultTimeFormat : zone.mykeModeTimeFormat
+    switch timeFormat {
     case .twelve:
         df.dateFormat = "h:mm a"
     case .twentyFour:
@@ -122,7 +123,7 @@ func stringFor(time date: Date, in zone: TimeZone, sourceZone: TimeZone) -> Stri
     return df.string(from: convert(date: date, from: sourceZone, to: TimeZone.current))
 }
 
-func stringForTimeAndFlag(in tz: TimeZone, date: Date, sourceZone: TimeZone, separator: MykeModeSeparator, timeZonesUsingEUFlag: Set<TimeZone>, timeZonesUsingNoFlag: Set<TimeZone>, showCities: Bool) -> String {
+func stringForTimeAndFlag(in tz: TimeZone, date: Date, sourceZone: TimeZone, separator: MykeModeSeparator, timeZonesUsingEUFlag: Set<TimeZone>, timeZonesUsingNoFlag: Set<TimeZone>, showCities: Bool, ignoringTimeFormatOverride: Bool = false) -> String {
     var text = ""
     let abbr = tz.fudgedAbbreviation(for: date) ?? ""
     let flag: String
@@ -135,7 +136,7 @@ func stringForTimeAndFlag(in tz: TimeZone, date: Date, sourceZone: TimeZone, sep
             flag = flagForTimeZone(tz)
         }
     }
-    text += "\(flag)\(separator.rawValue)\(stringFor(time: date, in: tz, sourceZone: sourceZone))"
+    text += "\(flag)\(separator.rawValue)\(stringFor(time: date, in: tz, sourceZone: sourceZone, ignoringTimeFormatOverride: ignoringTimeFormatOverride))"
     if showCities {
         text += " \(tz.city) (\(abbr))"
     } else {
