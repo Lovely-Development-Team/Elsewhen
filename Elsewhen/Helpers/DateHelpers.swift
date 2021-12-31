@@ -109,18 +109,23 @@ func stringFor(time date: Date, in zone: TimeZone, sourceZone: TimeZone, ignorin
     df.timeZone = zone
     df.locale = Locale.current
     let timeFormat = ignoringTimeFormatOverride ? UserDefaults.shared.mykeModeDefaultTimeFormat : zone.mykeModeTimeFormat
+    let pmSymbol = df.pmSymbol ?? "pm"
+    let amSymbol = df.amSymbol ?? "am"
     switch timeFormat {
     case .twelve:
-        df.dateFormat = "h:mm a"
+        df.locale = Locale(identifier: "en_US")
     case .twentyFour:
         df.locale = Locale(identifier: "en_GB")
-        df.dateStyle = .none
-        df.timeStyle = .short
     case .systemLocale:
-        df.dateStyle = .none
-        df.timeStyle = .short
+        break
     }
-    return df.string(from: convert(date: date, from: sourceZone, to: TimeZone.current))
+    df.dateStyle = .none
+    df.timeStyle = .short
+    var result = df.string(from: convert(date: date, from: sourceZone, to: TimeZone.current))
+    if timeFormat == .twelve {
+        result = result.lowercased().replacingOccurrences(of: "pm", with: pmSymbol).replacingOccurrences(of: "am", with: amSymbol)
+    }
+    return result
 }
 
 func stringForTimeAndFlag(in tz: TimeZone, date: Date, sourceZone: TimeZone, separator: MykeModeSeparator, timeZonesUsingEUFlag: Set<TimeZone>, timeZonesUsingNoFlag: Set<TimeZone>, showCities: Bool, ignoringTimeFormatOverride: Bool = false) -> String {
