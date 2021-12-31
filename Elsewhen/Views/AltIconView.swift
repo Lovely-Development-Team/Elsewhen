@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct AltIconView: View {
-    
     @State var viewId = 1
+    var done: () -> ()
     
     var body: some View {
         let currentIconName = UIApplication.shared.alternateIconName
@@ -28,6 +28,7 @@ struct AltIconView: View {
     
     private func setIcon(_ icon: AlternativeIcon) {
         UIApplication.shared.setAlternateIconName(icon.fileName)
+        done()
         viewId += 1
     }
     
@@ -36,7 +37,7 @@ struct AltIconView: View {
 struct AltIconView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            AltIconView()
+            AltIconView() { }
         }
     }
 }
