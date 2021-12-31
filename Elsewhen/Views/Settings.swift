@@ -24,7 +24,7 @@ struct Settings: View {
     var footer: some View {
         VStack(spacing: 2) {
             Link(destination: URL(string: "https://tildy.dev")!) {
-                Text("©2021 The Lovely Developers")
+                Text("©\(Calendar.current.currentYearAsString) The Lovely Developers")
             }
             .buttonStyle(PlainButtonStyle())
         }
