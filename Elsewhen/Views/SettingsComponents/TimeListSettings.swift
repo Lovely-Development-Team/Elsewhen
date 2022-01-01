@@ -19,8 +19,8 @@ struct TimeListSettings: View {
     @Binding var selectedView: SettingsViews?
     @State private var viewId: Int = 1
     
-    var isiPadInPortrait: Bool {
-        orientationObserver.currentOrientation == .portrait && DeviceType.isPad() && horizontalSizeClass == .regular
+    var isPadAndNotSlideOver: Bool {
+        DeviceType.isPad() && horizontalSizeClass != .compact
     }
     
     var exampleOutput: String {
@@ -40,7 +40,8 @@ struct TimeListSettings: View {
                 .layoutPriority(2)
             Spacer()
             Text(defaultTimeFormat.description)
-                .foregroundColor(.secondary)
+                .foregroundColor(selectedView == .mykeModeDefaultTimeFormat ? .white : .secondary)
+                .opacity(selectedView == .mykeModeDefaultTimeFormat ? 0.8 : 1)
                 .lineLimit(1)
         }
     }
@@ -54,19 +55,22 @@ struct TimeListSettings: View {
             Text("Separator")
             Spacer()
             Text(mykeModeSeparator.description)
-                .foregroundColor(.secondary)
+                .foregroundColor(selectedView == .mykeModeSeparator ? .white : .secondary)
+                .opacity(selectedView == .mykeModeSeparator ? 0.8 : 1)
         }
     }
     
     var body: some View {
         Section(header: Text("Time List Settings"), footer: Text(exampleOutput)) {
-            if isiPadInPortrait {
+            if isPadAndNotSlideOver {
                 Button(action: { selectedView = .mykeModeDefaultTimeFormat }) {
                     defaultTimeFormatPickerLink
-                }.foregroundColor(.primary)
+                }.listRowBackground(selectedView == .mykeModeDefaultTimeFormat ? Color.accentColor : Color(UIColor.systemBackground))
+                    .foregroundColor(selectedView == .mykeModeDefaultTimeFormat ? .white : .primary)
                 Button(action: { selectedView = .mykeModeSeparator }) {
                     separatorPickerLink
-                }.foregroundColor(.primary)
+                }.listRowBackground(selectedView == .mykeModeSeparator ? Color.accentColor : Color(UIColor.systemBackground))
+                    .foregroundColor(selectedView == .mykeModeSeparator ? .white : .primary)
             } else {
                 NavigationLink(destination: defaultTimeFormatPicker, tag: SettingsViews.mykeModeDefaultTimeFormat, selection: $selectedView) {
                     defaultTimeFormatPickerLink

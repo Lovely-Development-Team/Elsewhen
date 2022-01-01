@@ -17,14 +17,14 @@ struct AltIconView: View {
     @State var viewId = 1
     var done: () -> ()
     
-    var isiPadInPortrait: Bool {
-        orientationObserver.currentOrientation == .portrait && DeviceType.isPad() && horizontalSizeClass == .regular
+    var isPadAndNotSlideOver: Bool {
+        DeviceType.isPad() && horizontalSizeClass != .compact
     }
     
     var iconGrid: some View {
         let currentIconName = UIApplication.shared.alternateIconName
         return ScrollView {
-            LazyVGrid(columns: Array(repeating: .init(alignment: .top), count: horizontalSizeClass == .compact ? 3 : 4)) {
+            LazyVGrid(columns: Array(repeating: .init(alignment: .top), count: horizontalSizeClass == .compact || (DeviceType.isPad() && orientationObserver.currentOrientation == .portrait) ? 3 : 4)) {
                 ForEach(alternativeElsewhenIcons, id: \.name) { icon in
                     AltIconOption(icon: icon, selected: currentIconName == icon.fileName, onTap: setIcon)
                         .padding(.top, 20)
@@ -38,7 +38,7 @@ struct AltIconView: View {
     
     var body: some View {
         Group {
-            if isiPadInPortrait {
+            if isPadAndNotSlideOver {
                 NavigationView {
                     iconGrid
                         .navigationBarTitleDisplayMode(.inline)

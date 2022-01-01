@@ -39,8 +39,8 @@ struct TimezoneChoiceView: View {
     let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
     #endif
     
-    var isiPadInPortrait: Bool {
-        orientationObserver.currentOrientation == .portrait && DeviceType.isPad() && horizontalSizeClass == .regular
+    var isPadAndNotSlideOver: Bool {
+        DeviceType.isPad() && horizontalSizeClass != .compact
     }
     
     private var sortedFilteredTimeZones: [TimeZone] {
@@ -131,7 +131,7 @@ struct TimezoneChoiceView: View {
     }
     
     var body: some View {
-        if isiPadInPortrait {
+        if isPadAndNotSlideOver {
             NavigationView {
                 content
                     .navigationTitle("Default Time Zone")
