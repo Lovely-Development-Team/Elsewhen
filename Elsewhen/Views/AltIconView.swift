@@ -8,13 +8,23 @@
 import SwiftUI
 
 struct AltIconView: View {
+    
+    #if !os(macOS)
+    @EnvironmentObject internal var orientationObserver: OrientationObserver
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    #endif
+    
     @State var viewId = 1
     var done: () -> ()
     
-    var body: some View {
+    var isiPadInPortrait: Bool {
+        orientationObserver.currentOrientation == .portrait && DeviceType.isPad() && horizontalSizeClass == .regular
+    }
+    
+    var iconGrid: some View {
         let currentIconName = UIApplication.shared.alternateIconName
-        ScrollView {
-            LazyVGrid(columns: Array(repeating: .init(alignment: .top), count: 3)) {
+        return ScrollView {
+            LazyVGrid(columns: Array(repeating: .init(alignment: .top), count: horizontalSizeClass == .compact ? 3 : 4)) {
                 ForEach(alternativeElsewhenIcons, id: \.name) { icon in
                     AltIconOption(icon: icon, selected: currentIconName == icon.fileName, onTap: setIcon)
                         .padding(.top, 20)
@@ -24,6 +34,20 @@ struct AltIconView: View {
             .padding(.bottom)
         }
         .navigationTitle(Text("App Icon"))
+    }
+    
+    var body: some View {
+        Group {
+            if isiPadInPortrait {
+                NavigationView {
+                    iconGrid
+                        .navigationBarTitleDisplayMode(.inline)
+                }
+                .navigationViewStyle(StackNavigationViewStyle())
+            } else {
+                iconGrid
+            }
+        }
     }
     
     private func setIcon(_ icon: AlternativeIcon) {
@@ -38,6 +62,6 @@ struct AltIconView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             AltIconView() { }
-        }
+        }.environmentObject(OrientationObserver())
     }
 }

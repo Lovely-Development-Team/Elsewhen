@@ -8,9 +8,20 @@
 import SwiftUI
 
 struct DefaultTimeFormatPicker: View {
+    
+    #if !os(macOS)
+    @EnvironmentObject internal var orientationObserver: OrientationObserver
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    #endif
     @Environment(\.presentationMode) var presentationMode
+    
     @Binding var defaultTimeFormat: TimeFormat
-    var body: some View {
+    
+    var isiPadInPortrait: Bool {
+        orientationObserver.currentOrientation == .portrait && DeviceType.isPad() && horizontalSizeClass == .regular
+    }
+    
+    var content: some View {
         Form {
             ForEach(TimeFormat.allCases, id: \.self) { format in
                 Button(action: {
@@ -37,12 +48,24 @@ struct DefaultTimeFormatPicker: View {
         .navigationBarTitleDisplayMode(.inline)
         #endif
     }
+    
+    var body: some View {
+        if isiPadInPortrait {
+            NavigationView {
+                content
+            }
+            .navigationViewStyle(StackNavigationViewStyle())
+        } else {
+            content
+        }
+    }
 }
 
 struct DefaultTimeFormatPicker_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             DefaultTimeFormatPicker(defaultTimeFormat: .constant(.systemLocale))
+                .environmentObject(OrientationObserver())
         }
     }
 }

@@ -9,6 +9,11 @@ import SwiftUI
 
 struct TimezoneChoiceView: View {
     
+    #if !os(macOS)
+    @EnvironmentObject internal var orientationObserver: OrientationObserver
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    #endif
+    
     @Environment(\.presentationMode) var presentationMode
     
     @Binding var selectedTimeZone: TimeZone?
@@ -33,6 +38,10 @@ struct TimezoneChoiceView: View {
     #if os(iOS)
     let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
     #endif
+    
+    var isiPadInPortrait: Bool {
+        orientationObserver.currentOrientation == .portrait && DeviceType.isPad() && horizontalSizeClass == .regular
+    }
     
     private var sortedFilteredTimeZones: [TimeZone] {
         let selectedTimeZonesSet = Set(selectedTimeZones)
@@ -86,7 +95,7 @@ struct TimezoneChoiceView: View {
         }
     }
     
-    var body: some View {
+    var content: some View {
         List {
             #if os(iOS)
             SearchBar(text: $searchTerm, placeholder: "Search...")
@@ -111,13 +120,26 @@ struct TimezoneChoiceView: View {
             }
         }
         .listStyle(PlainListStyle())
-        .navigationTitle("Time Zones")
+        .navigationTitle(showDeviceLocalOption ? "Default Time Zone" : "Time Zones")
         .inlineNavigationBarTitle()
         .onAppear {
             favouriteTimeZones = UserDefaults.shared.favouriteTimeZones
         }
         .onChange(of: favouriteTimeZones) { newValue in
             UserDefaults.shared.favouriteTimeZones = newValue
+        }
+    }
+    
+    var body: some View {
+        if isiPadInPortrait {
+            NavigationView {
+                content
+                    .navigationTitle("Default Time Zone")
+                    .navigationBarTitleDisplayMode(.inline)
+            }
+            .navigationViewStyle(StackNavigationViewStyle())
+        } else {
+            content
         }
     }
     
@@ -160,6 +182,7 @@ struct TimezoneChoiceView: View {
 struct TimezoneChoiceView_Previews: PreviewProvider {
     static var previews: some View {
         TimezoneChoiceView(selectedTimeZone: .constant(TimeZone(identifier: "Africa/Accra")!), selectedTimeZones: .constant([TimeZone(identifier: "Africa/Algiers")!, TimeZone(identifier: "Africa/Bissau")!]), selectedDate: .constant(Date()), selectMultiple: true)
+            .environmentObject(OrientationObserver())
     }
 }
 

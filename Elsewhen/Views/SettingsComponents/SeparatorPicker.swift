@@ -8,9 +8,20 @@
 import SwiftUI
 
 struct SeparatorPicker: View {
+    
+    #if !os(macOS)
+    @EnvironmentObject internal var orientationObserver: OrientationObserver
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    #endif
+    
     @Environment(\.presentationMode) var presentationMode
     @Binding var mykeModeSeparator: MykeModeSeparator
-    var body: some View {
+    
+    var isiPadInPortrait: Bool {
+        orientationObserver.currentOrientation == .portrait && DeviceType.isPad() && horizontalSizeClass == .regular
+    }
+    
+    var content: some View {
         Form {
             ForEach(MykeModeSeparator.allCases, id: \.self) { sep in
                 Button(action: {
@@ -37,6 +48,17 @@ struct SeparatorPicker: View {
         .navigationBarTitleDisplayMode(.inline)
         #endif
     }
+    
+    var body: some View {
+        if isiPadInPortrait {
+            NavigationView {
+                content
+            }
+            .navigationViewStyle(StackNavigationViewStyle())
+        } else {
+            content
+        }
+    }
 }
 
 struct SeparatorPicker_Previews: PreviewProvider {
@@ -44,5 +66,6 @@ struct SeparatorPicker_Previews: PreviewProvider {
         NavigationView {
             SeparatorPicker(mykeModeSeparator: .constant(.noSeparator))
         }
+        .environmentObject(OrientationObserver())
     }
 }
