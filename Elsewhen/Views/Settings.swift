@@ -46,8 +46,8 @@ struct Settings: View {
         .foregroundColor(.secondary)
     }
     
-    var isiPadInPortrait: Bool {
-        orientationObserver.currentOrientation == .portrait && DeviceType.isPad() && horizontalSizeClass == .regular
+    var isPadAndNotSlideOver: Bool {
+        DeviceType.isPad() && horizontalSizeClass != .compact
     }
     
     var appIconView: AltIconView {
@@ -59,7 +59,8 @@ struct Settings: View {
             Text("App Icon")
             Spacer()
             Text(alternativeIconNameByPath[UIApplication.shared.alternateIconName] ?? "Original")
-                .foregroundColor(.secondary)
+                .foregroundColor(selectedView == .altIcon ? .white : .secondary)
+                .opacity(selectedView == .altIcon ? 0.8 : 1)
         }
     }
     
@@ -72,32 +73,35 @@ struct Settings: View {
             Text("Default Time Zone")
             Spacer()
             Text(defaultTimeZoneName)
-                .foregroundColor(.secondary)
+                .foregroundColor(selectedView == .defaultTimeZone ? .white : .secondary)
+                .opacity(selectedView == .altIcon ? 0.8 : 1)
         }
     }
     
     @ViewBuilder
     var settings: some View {
         Group {
-            if isiPadInPortrait {
+            if isPadAndNotSlideOver {
                 Section(footer: Text("Settings").font(.largeTitle).fontWeight(.bold).foregroundColor(.primary).padding(.leading, -10)) {
                     EmptyView()
                 }
             }
             Section(header: Text("General Settings")) {
-                if isiPadInPortrait {
+                if isPadAndNotSlideOver {
                     Button(action: {
                         self.selectedView = .altIcon
                     }) {
                         appIconLink
                     }
-                    .foregroundColor(.primary)
+                    .listRowBackground(selectedView == .altIcon ? Color.accentColor : Color(UIColor.systemBackground))
+                    .foregroundColor(selectedView == .altIcon ? .white : .primary)
                     Button(action: {
                         self.selectedView = .defaultTimeZone
                     }) {
                         defaultTimeZoneLink
                     }
-                    .foregroundColor(.primary)
+                    .listRowBackground(selectedView == .defaultTimeZone ? Color.accentColor : Color(UIColor.systemBackground))
+                    .foregroundColor(selectedView == .defaultTimeZone ? .white : .primary)
                 } else {
                     NavigationLink(destination: appIconView, tag: SettingsViews.altIcon, selection: $selectedView) {
                         appIconLink
@@ -137,7 +141,7 @@ struct Settings: View {
     }
     
     var body: some View {
-        if isiPadInPortrait {
+        if isPadAndNotSlideOver {
             HStack(spacing: 0) {
                 Form {
                     settings

@@ -17,8 +17,8 @@ struct DefaultTimeFormatPicker: View {
     
     @Binding var defaultTimeFormat: TimeFormat
     
-    var isiPadInPortrait: Bool {
-        orientationObserver.currentOrientation == .portrait && DeviceType.isPad() && horizontalSizeClass == .regular
+    var isPadAndNotSlideOver: Bool {
+        DeviceType.isPad() && horizontalSizeClass != .compact
     }
     
     var content: some View {
@@ -50,7 +50,7 @@ struct DefaultTimeFormatPicker: View {
     }
     
     var body: some View {
-        if isiPadInPortrait {
+        if isPadAndNotSlideOver {
             NavigationView {
                 content
             }
