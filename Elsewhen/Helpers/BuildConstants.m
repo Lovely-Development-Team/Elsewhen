@@ -7,7 +7,7 @@
 
 #import "BuildConstants.h"
 
-@implementation CABuildConstants
+@implementation EWBuildConstants
 
 /**
  Gets the __DATE__ predef as a string ObjC can work with
@@ -33,7 +33,7 @@
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         // This happens the odd format that the compiler uses for the __DATE__ predef
         [dateFormatter setDateFormat:@"MM-dd-yyyy"];
-        buildDate = [dateFormatter dateFromString:CABuildConstants.buildDateString];
+        buildDate = [dateFormatter dateFromString:EWBuildConstants.buildDateString];
     });
     return buildDate;
 }
@@ -45,7 +45,7 @@
     static NSInteger buildYear;
     static dispatch_once_t dispatchOnce;
     dispatch_once(&dispatchOnce, ^{
-        buildYear = [[NSCalendar currentCalendar] component:NSCalendarUnitYear fromDate:CABuildConstants.buildDate];
+        buildYear = [[NSCalendar currentCalendar] component:NSCalendarUnitYear fromDate:EWBuildConstants.buildDate];
     });
     return buildYear;
 }
@@ -59,7 +59,7 @@
     dispatch_once(&dispatchOnce, ^{
         NSNumberFormatter *numberFormatter = [NSNumberFormatter new];
         numberFormatter.usesGroupingSeparator = NO;
-        NSNumber *buildYear = [NSNumber numberWithInteger:CABuildConstants.buildYear];
+        NSNumber *buildYear = [NSNumber numberWithInteger:EWBuildConstants.buildYear];
         buildYearString = [numberFormatter stringFromNumber:buildYear];
     });
     return buildYearString;

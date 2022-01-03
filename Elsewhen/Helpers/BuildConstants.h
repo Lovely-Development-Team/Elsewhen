@@ -13,7 +13,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 NS_SWIFT_NAME(BuildConstants)
-@interface CABuildConstants : NSObject
+@interface EWBuildConstants : NSObject
 @property (class, nonatomic, readonly) NSDate *buildDate;
 @property (class, nonatomic, readonly) NSInteger buildYear;
 @property (class, nonatomic, readonly) NSString *buildYearString;
