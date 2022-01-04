@@ -9,17 +9,8 @@ import SwiftUI
 
 struct SeparatorPicker: View {
     
-    #if !os(macOS)
-    @EnvironmentObject internal var orientationObserver: OrientationObserver
-    @Environment(\.horizontalSizeClass) var horizontalSizeClass
-    #endif
-    
     @Environment(\.presentationMode) var presentationMode
     @Binding var mykeModeSeparator: MykeModeSeparator
-    
-    var isPadAndNotSlideOver: Bool {
-        DeviceType.isPad() && horizontalSizeClass != .compact
-    }
     
     var content: some View {
         Form {
@@ -50,7 +41,7 @@ struct SeparatorPicker: View {
     }
     
     var body: some View {
-        if isPadAndNotSlideOver {
+        if DeviceType.isPadAndNotCompact {
             NavigationView {
                 content
             }
@@ -66,6 +57,5 @@ struct SeparatorPicker_Previews: PreviewProvider {
         NavigationView {
             SeparatorPicker(mykeModeSeparator: .constant(.noSeparator))
         }
-        .environmentObject(OrientationObserver())
     }
 }

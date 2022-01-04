@@ -8,20 +8,12 @@
 import SwiftUI
 
 struct TimeListSettings: View {
-    #if !os(macOS)
-    @EnvironmentObject internal var orientationObserver: OrientationObserver
-    @Environment(\.horizontalSizeClass) var horizontalSizeClass
-    #endif
     @Binding var defaultTimeFormat: TimeFormat
     @Binding var mykeModeSeparator: MykeModeSeparator
     @Binding var showCities: Bool
     
     @Binding var selectedView: SettingsViews?
     @State private var viewId: Int = 1
-    
-    var isPadAndNotSlideOver: Bool {
-        DeviceType.isPad() && horizontalSizeClass != .compact
-    }
     
     var exampleOutput: String {
         let tz = UserDefaults.shared.resetButtonTimeZone ?? TimeZone.current
@@ -62,7 +54,7 @@ struct TimeListSettings: View {
     
     var body: some View {
         Section(header: Text("Time List Settings"), footer: Text(exampleOutput)) {
-            if isPadAndNotSlideOver {
+            if DeviceType.isPadAndNotCompact {
                 Button(action: { selectedView = .mykeModeDefaultTimeFormat }) {
                     defaultTimeFormatPickerLink
                 }.listRowBackground(selectedView == .mykeModeDefaultTimeFormat ? Color.accentColor : Color(UIColor.systemBackground))

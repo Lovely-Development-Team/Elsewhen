@@ -17,10 +17,6 @@ struct AltIconView: View {
     @State var viewId = 1
     var done: () -> ()
     
-    var isPadAndNotSlideOver: Bool {
-        DeviceType.isPad() && horizontalSizeClass != .compact
-    }
-    
     var iconGrid: some View {
         let currentIconName = UIApplication.shared.alternateIconName
         return ScrollView {
@@ -38,7 +34,7 @@ struct AltIconView: View {
     
     var body: some View {
         Group {
-            if isPadAndNotSlideOver {
+            if DeviceType.isPadAndNotCompact {
                 NavigationView {
                     iconGrid
                         .navigationBarTitleDisplayMode(.inline)
