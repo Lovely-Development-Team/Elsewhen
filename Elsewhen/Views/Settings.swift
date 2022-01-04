@@ -46,10 +46,6 @@ struct Settings: View {
         .foregroundColor(.secondary)
     }
     
-    var isPadAndNotSlideOver: Bool {
-        DeviceType.isPad() && horizontalSizeClass != .compact
-    }
-    
     var appIconView: AltIconView {
         AltIconView() { viewId += 1 }
     }
@@ -81,13 +77,13 @@ struct Settings: View {
     @ViewBuilder
     var settings: some View {
         Group {
-            if isPadAndNotSlideOver {
+            if DeviceType.isPadAndNotCompact {
                 Section(footer: Text("Settings").font(.largeTitle).fontWeight(.bold).foregroundColor(.primary).padding(.leading, -10)) {
                     EmptyView()
                 }
             }
             Section(header: Text("General Settings")) {
-                if isPadAndNotSlideOver {
+                if DeviceType.isPadAndNotCompact {
                     Button(action: {
                         self.selectedView = .altIcon
                     }) {
@@ -125,7 +121,7 @@ struct Settings: View {
         .onAppear {
             defaultTimeZone = UserDefaults.shared.resetButtonTimeZone
             defaultTimeFormat = UserDefaults.shared.mykeModeDefaultTimeFormat
-            if DeviceType.isPad() && horizontalSizeClass != .compact {
+            if DeviceType.isPadAndNotCompact {
                 if selectedView == nil {
                     selectedView = .altIcon
                 }
@@ -141,7 +137,7 @@ struct Settings: View {
     }
     
     var body: some View {
-        if isPadAndNotSlideOver {
+        if DeviceType.isPadAndNotCompact {
             HStack(spacing: 0) {
                 Form {
                     settings

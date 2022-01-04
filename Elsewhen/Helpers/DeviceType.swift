@@ -38,4 +38,9 @@ enum DeviceType {
         return false
         #endif
     }
+    
+    static var isPadAndNotCompact: Bool {
+        return isPad() && UIScreen.main.traitCollection.horizontalSizeClass != .compact
+    }
+    
 }

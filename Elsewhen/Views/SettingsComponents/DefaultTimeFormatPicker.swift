@@ -8,18 +8,9 @@
 import SwiftUI
 
 struct DefaultTimeFormatPicker: View {
-    
-    #if !os(macOS)
-    @EnvironmentObject internal var orientationObserver: OrientationObserver
-    @Environment(\.horizontalSizeClass) var horizontalSizeClass
-    #endif
     @Environment(\.presentationMode) var presentationMode
     
     @Binding var defaultTimeFormat: TimeFormat
-    
-    var isPadAndNotSlideOver: Bool {
-        DeviceType.isPad() && horizontalSizeClass != .compact
-    }
     
     var content: some View {
         Form {
@@ -50,7 +41,7 @@ struct DefaultTimeFormatPicker: View {
     }
     
     var body: some View {
-        if isPadAndNotSlideOver {
+        if DeviceType.isPadAndNotCompact {
             NavigationView {
                 content
             }
@@ -65,7 +56,6 @@ struct DefaultTimeFormatPicker_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             DefaultTimeFormatPicker(defaultTimeFormat: .constant(.systemLocale))
-                .environmentObject(OrientationObserver())
         }
     }
 }

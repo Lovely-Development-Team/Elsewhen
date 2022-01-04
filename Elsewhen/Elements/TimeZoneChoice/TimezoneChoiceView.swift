@@ -9,11 +9,6 @@ import SwiftUI
 
 struct TimezoneChoiceView: View {
     
-    #if !os(macOS)
-    @EnvironmentObject internal var orientationObserver: OrientationObserver
-    @Environment(\.horizontalSizeClass) var horizontalSizeClass
-    #endif
-    
     @Environment(\.presentationMode) var presentationMode
     
     @Binding var selectedTimeZone: TimeZone?
@@ -38,10 +33,6 @@ struct TimezoneChoiceView: View {
     #if os(iOS)
     let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
     #endif
-    
-    var isPadAndNotSlideOver: Bool {
-        DeviceType.isPad() && horizontalSizeClass != .compact
-    }
     
     private var sortedFilteredTimeZones: [TimeZone] {
         let selectedTimeZonesSet = Set(selectedTimeZones)
@@ -131,7 +122,7 @@ struct TimezoneChoiceView: View {
     }
     
     var body: some View {
-        if isPadAndNotSlideOver {
+        if DeviceType.isPadAndNotCompact {
             NavigationView {
                 content
                     .navigationTitle("Default Time Zone")
