@@ -13,6 +13,7 @@ struct TimeZoneChoiceCell: View {
     let abbreviation: String?
     @Binding var isFavourite: Bool
     let onSelect: (TimeZone) -> ()
+    var isFromLocationSearch: Bool = false
     
     @ViewBuilder
     var content: some View {
@@ -29,7 +30,14 @@ struct TimeZoneChoiceCell: View {
         Button(action: {
             onSelect(tz)
         }) {
-            TimeZoneChoiceItem(tz: tz, isSelected: isSelected, abbreviation: abbreviation, isFavourite: $isFavourite)
+            HStack {
+                TimeZoneChoiceItem(tz: tz, isSelected: isSelected, abbreviation: abbreviation, isFavourite: $isFavourite)
+                if isFromLocationSearch {
+                    Spacer()
+                    Image(systemName: "mappin.and.ellipse")
+                        .foregroundColor(.secondary)
+                }
+            }
         }
         #endif
     }

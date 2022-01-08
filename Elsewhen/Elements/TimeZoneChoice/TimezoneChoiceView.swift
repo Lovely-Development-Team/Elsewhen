@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreLocation
 
 struct TimezoneChoiceView: View {
     
@@ -30,40 +31,55 @@ struct TimezoneChoiceView: View {
     @State private var searchTerm: String = ""
     @State private var favouriteTimeZones: Set<TimeZone> = []
     
+    private let geocoder = CLGeocoder()
+    @State private var foundTimeZones: Set<TimeZone> = []
+    
     #if os(iOS)
     let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
     #endif
     
-    private var sortedFilteredTimeZones: [TimeZone] {
-        let selectedTimeZonesSet = Set(selectedTimeZones)
-        return TimeZone.filtered(by: searchTerm).sorted {
-            let t0IsFavourite = favouriteTimeZones.contains($0)
-            let t1IsFavourite = favouriteTimeZones.contains($1)
-            let t0IsSelected = selectedTimeZonesSet.contains($0)
-            let t1IsSelected = selectedTimeZonesSet.contains($1)
-            
-            if t0IsFavourite && t1IsFavourite {
-                return $0.identifier < $1.identifier
-            }
-            if t0IsFavourite {
-                return true
-            }
-            if t1IsFavourite {
-                return false
-            }
-            
-            if t0IsSelected && t1IsSelected {
-                return $0.identifier < $1.identifier
-            }
-            if t0IsSelected {
-                return true
-            }
-            if t1IsSelected {
-                return false
-            }
-            
-            return $0.identifier < $1.identifier
+    private func timeZoneSortFunction(_ t0: TimeZone, _ t1: TimeZone) -> Bool {
+        let t0IsFavourite = favouriteTimeZones.contains(t0)
+        let t1IsFavourite = favouriteTimeZones.contains(t1)
+        let t0IsSelected = selectedTimeZones.contains(t0)
+        let t1IsSelected = selectedTimeZones.contains(t1)
+        
+        if t0IsFavourite && t1IsFavourite {
+            return t0.identifier < t1.identifier
         }
+        if t0IsFavourite {
+            return true
+        }
+        if t1IsFavourite {
+            return false
+        }
+        
+        if t0IsSelected && t1IsSelected {
+            return t0.identifier < t1.identifier
+        }
+        if t0IsSelected {
+            return true
+        }
+        if t1IsSelected {
+            return false
+        }
+        
+        return t0.identifier < t1.identifier
+    }
+    
+    private var sortedFoundTimeZones: [TimeZone] {
+        let otherTimeZones = Set(filteredTimeZones)
+        return foundTimeZones.filter {
+            !otherTimeZones.contains($0)
+        }.sorted(by: timeZoneSortFunction)
+    }
+    
+    private var filteredTimeZones: [TimeZone] {
+        TimeZone.filtered(by: searchTerm)
+    }
+    
+    private var sortedFilteredTimeZones: [TimeZone] {
+        filteredTimeZones.sorted(by: timeZoneSortFunction)
     }
     
     private func timeZoneIsSelected(_ tz: TimeZone) -> Bool {
@@ -109,6 +125,12 @@ struct TimezoneChoiceView: View {
                 let isFavourite = isFavouriteBinding(for: tz)
                 TimeZoneChoiceCell(tz: tz, isSelected: timeZoneIsSelected(tz), abbreviation: tz.fudgedAbbreviation(for: selectedDate), isFavourite: isFavourite, onSelect: onSelect(tz:))
             }
+            if !foundTimeZones.isEmpty {
+                ForEach(sortedFoundTimeZones, id: \.self) { tz in
+                    let isFavourite = isFavouriteBinding(for: tz)
+                    TimeZoneChoiceCell(tz: tz, isSelected: timeZoneIsSelected(tz), abbreviation: tz.fudgedAbbreviation(for: selectedDate), isFavourite: isFavourite, onSelect: onSelect(tz:), isFromLocationSearch: true)
+                }
+            }
         }
         .listStyle(PlainListStyle())
         .navigationTitle("Time Zones")
@@ -118,6 +140,24 @@ struct TimezoneChoiceView: View {
         }
         .onChange(of: favouriteTimeZones) { newValue in
             UserDefaults.shared.favouriteTimeZones = newValue
+        }
+        .onChange(of: searchTerm) { newTerm in
+            if newTerm != "" {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    geocoder.geocodeAddressString(newTerm) { results, error in
+                        foundTimeZones = []
+                        if let results = results {
+                            for result in results {
+                                if let tz = result.timeZone {
+                                    foundTimeZones.insert(tz)
+                                }
+                            }
+                        }
+                    }
+                }
+            } else {
+                foundTimeZones = []
+            }
         }
     }
     
