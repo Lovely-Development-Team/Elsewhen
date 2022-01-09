@@ -31,8 +31,7 @@ struct TimezoneChoiceView: View {
     @State private var searchTerm: String = ""
     @State private var favouriteTimeZones: Set<TimeZone> = []
     
-    private let geocoder = CLGeocoder()
-    @State private var foundTimeZones: Set<TimeZone> = []
+    @StateObject private var searchController = TimeZoneSearchController()
     
     #if os(iOS)
     let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
@@ -69,7 +68,7 @@ struct TimezoneChoiceView: View {
     
     private var sortedFoundTimeZones: [TimeZone] {
         let otherTimeZones = Set(filteredTimeZones)
-        return foundTimeZones.filter {
+        return searchController.results.filter {
             !otherTimeZones.contains($0)
         }.sorted(by: timeZoneSortFunction)
     }
@@ -125,7 +124,7 @@ struct TimezoneChoiceView: View {
                 let isFavourite = isFavouriteBinding(for: tz)
                 TimeZoneChoiceCell(tz: tz, isSelected: timeZoneIsSelected(tz), abbreviation: tz.fudgedAbbreviation(for: selectedDate), isFavourite: isFavourite, onSelect: onSelect(tz:))
             }
-            if !foundTimeZones.isEmpty {
+            if !searchController.results.isEmpty {
                 ForEach(sortedFoundTimeZones, id: \.self) { tz in
                     let isFavourite = isFavouriteBinding(for: tz)
                     TimeZoneChoiceCell(tz: tz, isSelected: timeZoneIsSelected(tz), abbreviation: tz.fudgedAbbreviation(for: selectedDate), isFavourite: isFavourite, onSelect: onSelect(tz:), isFromLocationSearch: true)
@@ -142,21 +141,9 @@ struct TimezoneChoiceView: View {
             UserDefaults.shared.favouriteTimeZones = newValue
         }
         .onChange(of: searchTerm) { newTerm in
+            searchController.cancelPending()
             if newTerm != "" {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                    geocoder.geocodeAddressString(newTerm) { results, error in
-                        foundTimeZones = []
-                        if let results = results {
-                            for result in results {
-                                if let tz = result.timeZone {
-                                    foundTimeZones.insert(tz)
-                                }
-                            }
-                        }
-                    }
-                }
-            } else {
-                foundTimeZones = []
+                searchController.search(for: newTerm)
             }
         }
     }
