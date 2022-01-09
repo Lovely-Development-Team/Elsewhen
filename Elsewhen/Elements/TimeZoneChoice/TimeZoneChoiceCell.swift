@@ -18,7 +18,7 @@ struct TimeZoneChoiceCell: View {
     @ViewBuilder
     var content: some View {
         #if os(macOS)
-        TimeZoneChoiceItem(tz: tz, isSelected: isSelected, abbreviation: abbreviation, isFavourite: $isFavourite)
+        TimeZoneChoiceItem(tz: tz, isSelected: isSelected, abbreviation: abbreviation, isFavourite: $isFavourite, isFromLocationSearch: isFromLocationSearch)
             .contentShape(Rectangle())
             .onTapGesture {
                 onSelect(tz)
@@ -30,14 +30,7 @@ struct TimeZoneChoiceCell: View {
         Button(action: {
             onSelect(tz)
         }) {
-            HStack {
-                TimeZoneChoiceItem(tz: tz, isSelected: isSelected, abbreviation: abbreviation, isFavourite: $isFavourite)
-                if isFromLocationSearch {
-                    Spacer()
-                    Image(systemName: "mappin.and.ellipse")
-                        .foregroundColor(.secondary)
-                }
-            }
+            TimeZoneChoiceItem(tz: tz, isSelected: isSelected, abbreviation: abbreviation, isFavourite: $isFavourite, isFromLocationSearch: isFromLocationSearch)
         }
         #endif
     }

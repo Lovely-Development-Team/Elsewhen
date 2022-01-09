@@ -13,6 +13,7 @@ struct TimeZoneChoiceItem: View {
     var isSelected: Bool
     var abbreviation: String?
     @Binding var isFavourite: Bool
+    var isFromLocationSearch: Bool = false
     
     @State var viewId: Int = 0
     
@@ -23,6 +24,10 @@ struct TimeZoneChoiceItem: View {
             Spacer()
             if let abbreviation = abbreviation {
                 Text(abbreviation)
+                    .foregroundColor(.secondary)
+            }
+            if isFromLocationSearch {
+                Image(systemName: "mappin.and.ellipse")
                     .foregroundColor(.secondary)
             }
             if isSelected {
