@@ -21,6 +21,10 @@ extension TimeZone {
         friendlyName.components(separatedBy: "/").last ?? friendlyName
     }
     
+    var alternativeSearchTerms: [String] {
+        alternativeTimeZoneSearchTerms[identifier] ?? []
+    }
+    
     var flag: String {
         flagForTimeZone(self)
     }
@@ -38,9 +42,8 @@ extension TimeZone {
     
     func matches(searchTerm: String) -> Bool {
         let st = searchTerm.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
-        if st == "" {
-            return true
-        }
+        guard st != "" else { return true }
+        let alternativeSearchTerm = st.replacingOccurrences(of: "_", with: " ")
         if identifier.lowercased().contains(st) || friendlyName.lowercased().contains(st) {
             return true
         }
@@ -54,9 +57,15 @@ extension TimeZone {
         }
         if let country = country {
             let countryLower = country.lowercased()
-            if countryLower.contains(st) || countryLower.contains(st.replacingOccurrences(of: "_", with: " ")) {
+            if countryLower.contains(st) || countryLower.contains(alternativeSearchTerm) {
                 return true
             }
+        }
+        if !alternativeSearchTerms.filter({ term in
+            let termLower = term.lowercased()
+            return termLower.contains(st) || termLower.contains(alternativeSearchTerm)
+        }).isEmpty {
+            return true
         }
         return false
     }
