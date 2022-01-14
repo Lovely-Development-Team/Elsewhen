@@ -45,7 +45,9 @@ struct SeparatorPicker: View {
             NavigationView {
                 content
             }
+            #if os(iOS)
             .navigationViewStyle(StackNavigationViewStyle())
+            #endif
         } else {
             content
         }

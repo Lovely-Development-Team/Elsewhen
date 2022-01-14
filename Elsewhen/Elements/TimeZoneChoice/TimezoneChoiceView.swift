@@ -153,9 +153,13 @@ struct TimezoneChoiceView: View {
             NavigationView {
                 content
                     .navigationTitle("Default Time Zone")
+                    #if os(iOS)
                     .navigationBarTitleDisplayMode(.inline)
+                    #endif
             }
+            #if os(iOS)
             .navigationViewStyle(StackNavigationViewStyle())
+            #endif
         } else {
             content
         }
@@ -200,7 +204,9 @@ struct TimezoneChoiceView: View {
 struct TimezoneChoiceView_Previews: PreviewProvider {
     static var previews: some View {
         TimezoneChoiceView(selectedTimeZone: .constant(TimeZone(identifier: "Africa/Accra")!), selectedTimeZones: .constant([TimeZone(identifier: "Africa/Algiers")!, TimeZone(identifier: "Africa/Bissau")!]), selectedDate: .constant(Date()), selectMultiple: true)
+            #if os(iOS)
             .environmentObject(OrientationObserver())
+            #endif
     }
 }
 
