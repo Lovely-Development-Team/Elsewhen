@@ -12,6 +12,7 @@ enum SettingsViews: Int {
     case defaultTimeZone
     case mykeModeDefaultTimeFormat
     case mykeModeSeparator
+    case defaultTabPicker
 }
 
 struct Settings: View {
@@ -26,6 +27,7 @@ struct Settings: View {
     @State private var defaultTimeFormat: TimeFormat = .systemLocale
     @AppStorage(UserDefaults.mykeModeSeparatorKey, store: UserDefaults.shared) private var mykeModeSeparator: MykeModeSeparator = .hyphen
     @AppStorage(UserDefaults.mykeModeShowCitiesKey, store: UserDefaults.shared) private var mykeModeShowCities: Bool = false
+    @AppStorage(UserDefaults.defaultTabKey, store: UserDefaults.shared) private var defaultTabIndex: Int = 0
     
     @State private var selectedView: SettingsViews? = nil
     @State private var viewId: Int = 1
@@ -70,7 +72,30 @@ struct Settings: View {
             Spacer()
             Text(defaultTimeZoneName)
                 .foregroundColor(selectedView == .defaultTimeZone ? .white : .secondary)
-                .opacity(selectedView == .altIcon ? 0.8 : 1)
+                .opacity(selectedView == .defaultTimeZone ? 0.8 : 1)
+        }
+    }
+    
+    var defaultTabView: DefaultTabPicker {
+        DefaultTabPicker(defaultTabIndex: $defaultTabIndex)
+    }
+    
+    var defaultTabName: String {
+        switch defaultTabIndex {
+        case 1:
+            return "Time List"
+        default:
+            return "Time Codes"
+        }
+    }
+    
+    var defaultTabLink: some View {
+        HStack {
+            Text("Default Tab")
+            Spacer()
+            Text(defaultTabName)
+                .foregroundColor(selectedView == .defaultTabPicker ? .white : .secondary)
+                .opacity(selectedView == .defaultTabPicker ? 0.8 : 1)
         }
     }
     
@@ -98,12 +123,22 @@ struct Settings: View {
                     }
                     .listRowBackground(selectedView == .defaultTimeZone ? Color.accentColor : Color(UIColor.systemBackground))
                     .foregroundColor(selectedView == .defaultTimeZone ? .white : .primary)
+                    Button(action: {
+                        self.selectedView = .defaultTabPicker
+                    }) {
+                        defaultTabLink
+                    }
+                    .listRowBackground(selectedView == .defaultTabPicker ? Color.accentColor : Color(UIColor.systemBackground))
+                    .foregroundColor(selectedView == .defaultTabPicker ? .white : .primary)
                 } else {
                     NavigationLink(destination: appIconView, tag: SettingsViews.altIcon, selection: $selectedView) {
                         appIconLink
                     }
                     NavigationLink(destination: defaultTimeZoneView, tag: SettingsViews.defaultTimeZone, selection: $selectedView) {
                         defaultTimeZoneLink
+                    }
+                    NavigationLink(destination: defaultTabView, tag: SettingsViews.defaultTabPicker, selection: $selectedView) {
+                        defaultTabLink
                     }
                 }
             }
@@ -154,6 +189,8 @@ struct Settings: View {
                         SeparatorPicker(mykeModeSeparator: $mykeModeSeparator)
                     case .mykeModeDefaultTimeFormat:
                         DefaultTimeFormatPicker(defaultTimeFormat: $defaultTimeFormat)
+                    case .defaultTabPicker:
+                        defaultTabView
                     case nil:
                         Rectangle()
                             .fill(Color(UIColor.systemBackground))
