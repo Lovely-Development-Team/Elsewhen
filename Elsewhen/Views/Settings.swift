@@ -27,7 +27,7 @@ struct Settings: View {
     @State private var defaultTimeFormat: TimeFormat = .systemLocale
     @AppStorage(UserDefaults.mykeModeSeparatorKey, store: UserDefaults.shared) private var mykeModeSeparator: MykeModeSeparator = .hyphen
     @AppStorage(UserDefaults.mykeModeShowCitiesKey, store: UserDefaults.shared) private var mykeModeShowCities: Bool = false
-    @AppStorage(UserDefaults.defaultTabKey, store: UserDefaults.shared) private var defaultTabIndex: Int = 0
+    @AppStorage(UserDefaults.defaultTabKey) private var defaultTabIndex: Int = 0
     
     @State private var selectedView: SettingsViews? = nil
     @State private var viewId: Int = 1
