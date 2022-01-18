@@ -19,6 +19,7 @@ extension UserDefaults {
     static let mykeModeDefaultTimeFormatKey = "mykeModeDefaultTimeFormat"
     static let mykeModeSeparatorKey = "mykeModeSeparator"
     static let mykeModeShowCitiesKey = "mykeModeShowCities"
+    static let defaultTabKey = "defaultTab"
     
     var mykeModeTimeZones: [TimeZone] {
         get {
@@ -126,6 +127,12 @@ extension UserDefaults {
         set {
             set(newValue, forKey: Self.mykeModeShowCitiesKey)
         }
+    }
+    
+    @objc
+    var defaultTab: Int {
+        get { integer(forKey: Self.defaultTabKey) }
+        set { set(newValue, forKey: Self.defaultTabKey) }
     }
     
     // Type-safe access to UserDefaults shared with the extension

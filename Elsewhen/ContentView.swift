@@ -64,6 +64,9 @@ struct ContentView: View {
             }
             showShareSheet = .init(items: activityItems)
         }
+        .onAppear {
+            selectedTab = UserDefaults.shared.defaultTab
+        }
     }
     
 }
