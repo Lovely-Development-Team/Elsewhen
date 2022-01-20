@@ -27,24 +27,24 @@ struct DefaultTabPicker: View {
     var content: some View {
         Form {
             Button(action: {
-                setDefaultTab(0)
+                setDefaultTab(Tab.timeCodes.rawValue)
             }) {
                 HStack {
                     Text("Time Codes")
                     Spacer()
-                    if defaultTabIndex == 0 {
+                    if defaultTabIndex == Tab.timeCodes.rawValue {
                         Image(systemName: "checkmark")
                             .foregroundColor(.accentColor)
                     }
                 }
             }
             Button(action: {
-                setDefaultTab(1)
+                setDefaultTab(Tab.mykeMode.rawValue)
             }) {
                 HStack {
                     Text("Time List")
                     Spacer()
-                    if defaultTabIndex == 1 {
+                    if defaultTabIndex == Tab.mykeMode.rawValue {
                         Image(systemName: "checkmark")
                             .foregroundColor(.accentColor)
                     }
