@@ -28,6 +28,7 @@ struct Settings: View {
     @AppStorage(UserDefaults.mykeModeSeparatorKey, store: UserDefaults.shared) private var mykeModeSeparator: MykeModeSeparator = .hyphen
     @AppStorage(UserDefaults.mykeModeShowCitiesKey, store: UserDefaults.shared) private var mykeModeShowCities: Bool = false
     @AppStorage(UserDefaults.defaultTabKey) private var defaultTabIndex: Int = 0
+    @AppStorage(UserDefaults.lastSeenVersionForSettingsKey) private var lastSeenVersionForSettings: String = ""
     
     @State private var selectedView: SettingsViews? = nil
     @State private var viewId: Int = 1
@@ -144,6 +145,18 @@ struct Settings: View {
             }
             TimeListSettings(defaultTimeFormat: $defaultTimeFormat, mykeModeSeparator: $mykeModeSeparator, showCities: $mykeModeShowCities, selectedView: $selectedView)
                 .id(viewId)
+            
+#if DEBUG
+            Section {
+                Button(action: {
+                    UserDefaults.shared.reset()
+                    UserDefaults.standard.reset()
+                }) {
+                    Text("Reset all settings")
+                }
+            }
+#endif
+            
             Section(footer: footer) {
                 HStack {
                     Text("App Version")
@@ -207,6 +220,7 @@ struct Settings: View {
             }
         }
     }
+    
 }
 
 struct Settings_Previews: PreviewProvider {

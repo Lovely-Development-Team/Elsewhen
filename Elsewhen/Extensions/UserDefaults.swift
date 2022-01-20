@@ -9,6 +9,8 @@ import Foundation
 
 extension UserDefaults {
     
+    static let lastSeenVersionForSettingsKey = "lastSeenVersionForSettings"
+    
     static let mykeModeTimeZoneIdentifiersKey = "mykeModeTimeZoneIdentifiers"
     static let mykeModeTimeZoneIdentifiersUsingEUFlagKey = "mykeModeTimeZoneIdentifiersUsingEUFlag"
     static let mykeModeTimeZoneIdentifiersUsingNoFlagKey = "mykeModeTimeZoneIdentifiersUsingNoFlag"
@@ -20,6 +22,29 @@ extension UserDefaults {
     static let mykeModeSeparatorKey = "mykeModeSeparator"
     static let mykeModeShowCitiesKey = "mykeModeShowCities"
     static let defaultTabKey = "defaultTab"
+    
+    static let defaultMykeModeTimeZoneIdentifiers: [String] = [
+        "America/Los_Angeles",
+        "America/Chicago",
+        "America/New_York",
+        "Europe/London",
+        "Europe/Rome",
+    ]
+    
+    func reset() {
+        lastSeenVersionForSettings = ""
+        mykeModeTimeZones = UserDefaults.defaultMykeModeTimeZoneIdentifiers.compactMap { TimeZone(identifier: $0) }
+        mykeModeTimeZonesUsingEUFlag = Set(Array(europeanUnionTimeZones).compactMap { TimeZone(identifier: $0) })
+        mykeModeTimeZonesUsingNoFlag = []
+        mykeModeTimeZoneIdentifiersUsing12HourTime = []
+        mykeModeTimeZoneIdentifiersUsing24HourTime = []
+        favouriteTimeZones = []
+        resetButtonTimeZone = nil
+        mykeModeDefaultTimeFormat = .systemLocale
+        mykeModeSeparator = .hyphen
+        mykeModeShowCities = false
+        defaultTab = Tab.timeCodes.rawValue
+    }
     
     var mykeModeTimeZones: [TimeZone] {
         get {
@@ -133,6 +158,12 @@ extension UserDefaults {
     var defaultTab: Int {
         get { integer(forKey: Self.defaultTabKey) }
         set { set(newValue, forKey: Self.defaultTabKey) }
+    }
+    
+    @objc
+    var lastSeenVersionForSettings: String {
+        get { string(forKey: Self.lastSeenVersionForSettingsKey) ?? "" }
+        set { set(newValue, forKey: Self.lastSeenVersionForSettingsKey) }
     }
     
     // Type-safe access to UserDefaults shared with the extension
