@@ -15,14 +15,9 @@ struct ElsewhenApp: App {
     
     init() {
         UserDefaults.shared.register(defaults: [
-            UserDefaults.mykeModeTimeZoneIdentifiersKey: [
-                "America/Los_Angeles",
-                "America/Chicago",
-                "America/New_York",
-                "Europe/London",
-                "Europe/Rome",
-            ],
+            UserDefaults.mykeModeTimeZoneIdentifiersKey: UserDefaults.defaultMykeModeTimeZoneIdentifiers,
             UserDefaults.mykeModeTimeZoneIdentifiersUsingEUFlagKey: Array(europeanUnionTimeZones),
+            UserDefaults.lastSeenVersionForSettingsKey: AboutElsewhen.buildNumber,
         ])
     }
     

@@ -16,6 +16,7 @@ struct ContentView: View {
     
     @State private var selectedTab: Int = 0
     @State private var showShareSheet: ShareSheetItem? = nil
+    @AppStorage(UserDefaults.lastSeenVersionForSettingsKey) private var lastSeenVersionForSettings: String = ""
     
     init() {
 #if canImport(UIKit)
@@ -37,19 +38,20 @@ struct ContentView: View {
                 .overlay(Rectangle().frame(width: nil, height: 1, alignment: .bottom).foregroundColor(Color.secondary.opacity(0.5)), alignment: .bottom)
 #endif
                 .tabItem { Label("Time Codes", systemImage: "clock") }
-                .tag(0)
+                .tag(Tab.timeCodes.rawValue)
             MykeMode()
 #if !os(macOS)
                 .overlay(Rectangle().frame(width: nil, height: 1, alignment: .bottom).foregroundColor(Color.secondary.opacity(0.5)), alignment: .bottom)
 #endif
                 .tabItem { Label("Time List", systemImage: "list.dash") }
-                .tag(1)
+                .tag(Tab.mykeMode.rawValue)
 #if !os(macOS)
             
             Settings()
                 .overlay(Rectangle().frame(width: nil, height: 1, alignment: .bottom).foregroundColor(Color.secondary.opacity(0.5)), alignment: .bottom)
                 .tabItem { Label("Settings", systemImage: "gear") }
-                .tag(2)
+                .iconBadge(isPresented: lastSeenVersionForSettings != AboutElsewhen.buildNumber)
+                .tag(Tab.settings.rawValue)
 #endif
             
         }
@@ -66,6 +68,11 @@ struct ContentView: View {
         }
         .onAppear {
             selectedTab = UserDefaults.standard.defaultTab
+        }
+        .onChange(of: selectedTab) { [selectedTab] newTab in
+            if selectedTab == Tab.settings.rawValue {
+                lastSeenVersionForSettings = AboutElsewhen.buildNumber
+            }
         }
     }
     
