@@ -15,4 +15,6 @@ public enum AboutElsewhen {
     public static var buildNumber: String {
         return Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "Unknown"
     }
+    
+    public static let appId: String = "1588708173"
 }

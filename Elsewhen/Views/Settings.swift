@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import StoreKit
 
 enum SettingsViews: Int {
     case altIcon
@@ -156,6 +157,16 @@ struct Settings: View {
                 }
             }
 #endif
+            Section(header: Text("Feedback")) {
+                Link(destination: URL(string: "mailto:hello@tildy.dev")!) {
+                    Text("Send Feedback")
+                        .foregroundColor(.primary)
+                }
+                Link(destination: URL(string: "https://itunes.apple.com/app/id\(AboutElsewhen.appId)?action=write-review")!) {
+                    Text("Rate Elsewhen")
+                        .foregroundColor(.primary)
+                }
+            }
             
             Section(footer: footer) {
                 HStack {
