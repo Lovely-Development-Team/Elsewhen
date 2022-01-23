@@ -18,6 +18,7 @@ struct ElsewhenApp: App {
             UserDefaults.mykeModeTimeZoneIdentifiersKey: UserDefaults.defaultMykeModeTimeZoneIdentifiers,
             UserDefaults.mykeModeTimeZoneIdentifiersUsingEUFlagKey: Array(europeanUnionTimeZones),
             UserDefaults.lastSeenVersionForSettingsKey: AboutElsewhen.buildNumber,
+            UserDefaults.useMapKitSearchKey: true,
         ])
     }
     

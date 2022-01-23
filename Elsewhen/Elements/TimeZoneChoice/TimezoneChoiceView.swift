@@ -19,6 +19,8 @@ struct TimezoneChoiceView: View {
     let showDeviceLocalOption: Bool
     let done: (() -> ())?
     
+    @AppStorage(UserDefaults.useMapKitSearchKey) private var useMapKitSearch: Bool = true
+    
     init(selectedTimeZone: Binding<TimeZone?>, selectedTimeZones: Binding<[TimeZone]>, selectedDate: Binding<Date>, selectMultiple: Bool, showDeviceLocalOption: Bool = false, done: (() -> ())? = nil) {
         self._selectedTimeZone = selectedTimeZone
         self._selectedTimeZones = selectedTimeZones
@@ -141,6 +143,7 @@ struct TimezoneChoiceView: View {
             UserDefaults.shared.favouriteTimeZones = newValue
         }
         .onChange(of: searchTerm) { newTerm in
+            guard useMapKitSearch else { return }
             searchController.cancelPending()
             if newTerm != "" {
                 searchController.search(for: newTerm)
