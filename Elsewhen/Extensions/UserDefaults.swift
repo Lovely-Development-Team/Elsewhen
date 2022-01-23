@@ -22,6 +22,7 @@ extension UserDefaults {
     static let mykeModeSeparatorKey = "mykeModeSeparator"
     static let mykeModeShowCitiesKey = "mykeModeShowCities"
     static let defaultTabKey = "defaultTab"
+    static let useMapKitSearchKey = "useMapKitSearch"
     
     static let defaultMykeModeTimeZoneIdentifiers: [String] = [
         "America/Los_Angeles",
@@ -146,12 +147,8 @@ extension UserDefaults {
     
     @objc
     var mykeModeShowCities: Bool {
-        get {
-            bool(forKey: Self.mykeModeShowCitiesKey)
-        }
-        set {
-            set(newValue, forKey: Self.mykeModeShowCitiesKey)
-        }
+        get { bool(forKey: Self.mykeModeShowCitiesKey) }
+        set { set(newValue, forKey: Self.mykeModeShowCitiesKey) }
     }
     
     @objc
@@ -164,6 +161,12 @@ extension UserDefaults {
     var lastSeenVersionForSettings: String {
         get { string(forKey: Self.lastSeenVersionForSettingsKey) ?? "" }
         set { set(newValue, forKey: Self.lastSeenVersionForSettingsKey) }
+    }
+    
+    @objc
+    var useMapKitSearch: Bool {
+        get { bool(forKey: Self.useMapKitSearchKey) }
+        set { set(newValue, forKey: Self.useMapKitSearchKey) }
     }
     
     // Type-safe access to UserDefaults shared with the extension

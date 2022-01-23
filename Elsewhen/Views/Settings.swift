@@ -28,6 +28,7 @@ struct Settings: View {
     @AppStorage(UserDefaults.mykeModeSeparatorKey, store: UserDefaults.shared) private var mykeModeSeparator: MykeModeSeparator = .hyphen
     @AppStorage(UserDefaults.mykeModeShowCitiesKey, store: UserDefaults.shared) private var mykeModeShowCities: Bool = false
     @AppStorage(UserDefaults.defaultTabKey) private var defaultTabIndex: Int = 0
+    @AppStorage(UserDefaults.useMapKitSearchKey) private var useMapKitSearch: Bool = true
     @AppStorage(UserDefaults.lastSeenVersionForSettingsKey) private var lastSeenVersionForSettings: String = ""
     
     @State private var selectedView: SettingsViews? = nil
@@ -92,6 +93,9 @@ struct Settings: View {
     
     var defaultTabLink: some View {
         HStack {
+            if AboutElsewhen.buildNumber != lastSeenVersionForSettings {
+                Circle().fill(.red).frame(width: 10, height: 10)
+            }
             Text("Default Tab")
             Spacer()
             Text(defaultTabName)
@@ -108,7 +112,8 @@ struct Settings: View {
                     EmptyView()
                 }
             }
-            Section(header: Text("General Settings")) {
+            
+            Section(header: Text("General Settings"), footer: Text("Smart Time Zone Search will attempt to find the geographically closest time zone for your search result, not just based on the time zone name.")) {
                 if DeviceType.isPadAndNotCompact {
                     Button(action: {
                         self.selectedView = .altIcon
@@ -118,30 +123,38 @@ struct Settings: View {
                     .listRowBackground(selectedView == .altIcon ? Color.accentColor : Color(UIColor.systemBackground))
                     .foregroundColor(selectedView == .altIcon ? .white : .primary)
                     Button(action: {
+                        self.selectedView = .defaultTabPicker
+                    }) {
+                        defaultTabLink
+                    }
+                    .listRowBackground(selectedView == .defaultTabPicker ? Color.accentColor : Color(UIColor.systemBackground))
+                    .foregroundColor(selectedView == .defaultTabPicker ? .white : .primary)
+                    Button(action: {
                         self.selectedView = .defaultTimeZone
                     }) {
                         defaultTimeZoneLink
                     }
                     .listRowBackground(selectedView == .defaultTimeZone ? Color.accentColor : Color(UIColor.systemBackground))
                     .foregroundColor(selectedView == .defaultTimeZone ? .white : .primary)
-//                    Button(action: {
-//                        self.selectedView = .defaultTabPicker
-//                    }) {
-//                        defaultTabLink
-//                    }
-//                    .listRowBackground(selectedView == .defaultTabPicker ? Color.accentColor : Color(UIColor.systemBackground))
-//                    .foregroundColor(selectedView == .defaultTabPicker ? .white : .primary)
                 } else {
                     NavigationLink(destination: appIconView, tag: SettingsViews.altIcon, selection: $selectedView) {
                         appIconLink
                     }
+                    NavigationLink(destination: defaultTabView, tag: SettingsViews.defaultTabPicker, selection: $selectedView) {
+                        defaultTabLink
+                    }
                     NavigationLink(destination: defaultTimeZoneView, tag: SettingsViews.defaultTimeZone, selection: $selectedView) {
                         defaultTimeZoneLink
                     }
-//                    NavigationLink(destination: defaultTabView, tag: SettingsViews.defaultTabPicker, selection: $selectedView) {
-//                        defaultTabLink
-//                    }
                 }
+                
+                HStack {
+                    if AboutElsewhen.buildNumber != lastSeenVersionForSettings {
+                        Circle().fill(.red).frame(width: 10, height: 10)
+                    }
+                    Toggle("Smart Time Zone Search", isOn: $useMapKitSearch)
+                }
+                
             }
             TimeListSettings(defaultTimeFormat: $defaultTimeFormat, mykeModeSeparator: $mykeModeSeparator, showCities: $mykeModeShowCities, selectedView: $selectedView)
                 .id(viewId)
