@@ -124,13 +124,13 @@ struct Settings: View {
                     }
                     .listRowBackground(selectedView == .defaultTimeZone ? Color.accentColor : Color(UIColor.systemBackground))
                     .foregroundColor(selectedView == .defaultTimeZone ? .white : .primary)
-                    Button(action: {
-                        self.selectedView = .defaultTabPicker
-                    }) {
-                        defaultTabLink
-                    }
-                    .listRowBackground(selectedView == .defaultTabPicker ? Color.accentColor : Color(UIColor.systemBackground))
-                    .foregroundColor(selectedView == .defaultTabPicker ? .white : .primary)
+//                    Button(action: {
+//                        self.selectedView = .defaultTabPicker
+//                    }) {
+//                        defaultTabLink
+//                    }
+//                    .listRowBackground(selectedView == .defaultTabPicker ? Color.accentColor : Color(UIColor.systemBackground))
+//                    .foregroundColor(selectedView == .defaultTabPicker ? .white : .primary)
                 } else {
                     NavigationLink(destination: appIconView, tag: SettingsViews.altIcon, selection: $selectedView) {
                         appIconLink
@@ -138,9 +138,9 @@ struct Settings: View {
                     NavigationLink(destination: defaultTimeZoneView, tag: SettingsViews.defaultTimeZone, selection: $selectedView) {
                         defaultTimeZoneLink
                     }
-                    NavigationLink(destination: defaultTabView, tag: SettingsViews.defaultTabPicker, selection: $selectedView) {
-                        defaultTabLink
-                    }
+//                    NavigationLink(destination: defaultTabView, tag: SettingsViews.defaultTabPicker, selection: $selectedView) {
+//                        defaultTabLink
+//                    }
                 }
             }
             TimeListSettings(defaultTimeFormat: $defaultTimeFormat, mykeModeSeparator: $mykeModeSeparator, showCities: $mykeModeShowCities, selectedView: $selectedView)
