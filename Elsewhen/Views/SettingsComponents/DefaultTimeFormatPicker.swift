@@ -35,9 +35,7 @@ struct DefaultTimeFormatPicker: View {
             }
         }
         .navigationTitle("Default Time Format")
-        #if !os(macOS)
         .navigationBarTitleDisplayMode(.inline)
-        #endif
     }
     
     var body: some View {
@@ -45,9 +43,7 @@ struct DefaultTimeFormatPicker: View {
             NavigationView {
                 content
             }
-            #if os(iOS)
             .navigationViewStyle(StackNavigationViewStyle())
-            #endif
         } else {
             content
         }

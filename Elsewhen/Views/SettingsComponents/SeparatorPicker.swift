@@ -35,9 +35,7 @@ struct SeparatorPicker: View {
             }
         }
         .navigationTitle("Separator")
-        #if !os(macOS)
         .navigationBarTitleDisplayMode(.inline)
-        #endif
     }
     
     var body: some View {
@@ -45,9 +43,7 @@ struct SeparatorPicker: View {
             NavigationView {
                 content
             }
-            #if os(iOS)
             .navigationViewStyle(StackNavigationViewStyle())
-            #endif
         } else {
             content
         }

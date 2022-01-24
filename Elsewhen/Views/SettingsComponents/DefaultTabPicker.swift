@@ -53,9 +53,7 @@ struct DefaultTabPicker: View {
         }
         .foregroundColor(.primary)
         .navigationTitle("Default Tab")
-        #if !os(macOS)
         .navigationBarTitleDisplayMode(.inline)
-        #endif
     }
     
     var body: some View {

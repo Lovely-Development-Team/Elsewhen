@@ -52,6 +52,9 @@
 		5E0A416A278AD8CF00FAB5F8 /* TimeZoneSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0A4168278AD8CF00FAB5F8 /* TimeZoneSearchController.swift */; };
 		5E2D6B1E277C48470065781E /* DefaultTimeFormatPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2D6B1D277C48470065781E /* DefaultTimeFormatPicker.swift */; };
 		5E2D6B20277C4CC00065781E /* SeparatorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2D6B1F277C4CBF0065781E /* SeparatorPicker.swift */; };
+		5E37FC13279F0587003658EC /* TipJar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E37FC12279F0587003658EC /* TipJar.swift */; };
+		5E37FC15279F0E81003658EC /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E37FC14279F0E81003658EC /* StoreKit.framework */; };
+		5E37FC18279F0EAE003658EC /* StoreKitController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E37FC17279F0EAE003658EC /* StoreKitController.swift */; };
 		5E54BBAF27367EA2005CF7A6 /* original@3x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E54BBAB27367EA2005CF7A6 /* original@3x~ipad.png */; };
 		5E54BBB027367EA2005CF7A6 /* original@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E54BBAC27367EA2005CF7A6 /* original@2x~ipad.png */; };
 		5E54BBB127367EA2005CF7A6 /* original@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E54BBAD27367EA2005CF7A6 /* original@2x.png */; };
@@ -110,8 +113,6 @@
 		5EB23B9F26E406B600203153 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB23B9E26E406B600203153 /* ContentView.swift */; };
 		5EB23BA126E406B900203153 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5EB23BA026E406B900203153 /* Assets.xcassets */; };
 		5EB23BA426E406B900203153 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5EB23BA326E406B900203153 /* Preview Assets.xcassets */; };
-		5EC79972277DA14A000C565F /* DefaultTimeFormatPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2D6B1D277C48470065781E /* DefaultTimeFormatPicker.swift */; };
-		5EC79973277DA177000C565F /* SeparatorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2D6B1F277C4CBF0065781E /* SeparatorPicker.swift */; };
 		5ECBAA322719D60E00A1BF6C /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECBAA312719D60E00A1BF6C /* ActivityView.swift */; };
 		5ECBAA342719D62800A1BF6C /* ShareButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECBAA332719D62800A1BF6C /* ShareButton.swift */; };
 		5EE2D2CA26F2506A00D61875 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5EB23BA026E406B900203153 /* Assets.xcassets */; };
@@ -347,6 +348,9 @@
 		5E0A4168278AD8CF00FAB5F8 /* TimeZoneSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeZoneSearchController.swift; sourceTree = "<group>"; };
 		5E2D6B1D277C48470065781E /* DefaultTimeFormatPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTimeFormatPicker.swift; sourceTree = "<group>"; };
 		5E2D6B1F277C4CBF0065781E /* SeparatorPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeparatorPicker.swift; sourceTree = "<group>"; };
+		5E37FC12279F0587003658EC /* TipJar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipJar.swift; sourceTree = "<group>"; };
+		5E37FC14279F0E81003658EC /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		5E37FC17279F0EAE003658EC /* StoreKitController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreKitController.swift; sourceTree = "<group>"; };
 		5E54BBAB27367EA2005CF7A6 /* original@3x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "original@3x~ipad.png"; sourceTree = "<group>"; };
 		5E54BBAC27367EA2005CF7A6 /* original@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "original@2x~ipad.png"; sourceTree = "<group>"; };
 		5E54BBAD27367EA2005CF7A6 /* original@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "original@2x.png"; sourceTree = "<group>"; };
@@ -503,6 +507,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E37FC15279F0E81003658EC /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -617,6 +622,14 @@
 			path = Icons;
 			sourceTree = "<group>";
 		};
+		5E37FC16279F0E9B003658EC /* StoreKit */ = {
+			isa = PBXGroup;
+			children = (
+				5E37FC17279F0EAE003658EC /* StoreKitController.swift */,
+			);
+			path = StoreKit;
+			sourceTree = "<group>";
+		};
 		5EB23B9026E406B600203153 = {
 			isa = PBXGroup;
 			children = (
@@ -649,6 +662,7 @@
 		5EB23B9B26E406B600203153 /* Elsewhen */ = {
 			isa = PBXGroup;
 			children = (
+				5E37FC16279F0E9B003658EC /* StoreKit */,
 				5E07E8452734740300D9350E /* Icons */,
 				639FFFA9271B75D1008897E8 /* Protocols */,
 				637839BB26ECB64E0055A10D /* Info.plist */,
@@ -816,6 +830,7 @@
 		6378398D26EBF4750055A10D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5E37FC14279F0E81003658EC /* StoreKit.framework */,
 				6378398E26EBF4750055A10D /* Intents.framework */,
 				6378399926EBF4750055A10D /* IntentsUI.framework */,
 			);
@@ -962,6 +977,7 @@
 				5E2D6B1D277C48470065781E /* DefaultTimeFormatPicker.swift */,
 				5E2D6B1F277C4CBF0065781E /* SeparatorPicker.swift */,
 				5E835B4D2796C57D002B91FF /* DefaultTabPicker.swift */,
+				5E37FC12279F0587003658EC /* TipJar.swift */,
 			);
 			path = SettingsComponents;
 			sourceTree = "<group>";
@@ -1329,6 +1345,8 @@
 				63BEF696271EE275000CAC95 /* NotRepresentativeWarning.swift in Sources */,
 				63C51BA726FA32D400145662 /* FavouriteIndicator.swift in Sources */,
 				5E9BD45126EEA11900383233 /* UserDefaults.swift in Sources */,
+				5E37FC18279F0EAE003658EC /* StoreKitController.swift in Sources */,
+				5E37FC13279F0587003658EC /* TipJar.swift in Sources */,
 				635C8FA726E66E8300361B08 /* DiscordFormattedDate.swift in Sources */,
 				63A90DF826F60AB700CACCB9 /* CopyButton.swift in Sources */,
 				63B5EF6C2720E5F000AA576E /* Selectable.swift in Sources */,
@@ -1414,14 +1432,12 @@
 				631E3F2626FCEFEC0025F080 /* DeleteButton.swift in Sources */,
 				6346AD8F26F3C1E400E406D0 /* ResultSheet.swift in Sources */,
 				63BEF68F271ECE25000CAC95 /* FormatStyleButton.swift in Sources */,
-				5EC79973277DA177000C565F /* SeparatorPicker.swift in Sources */,
 				63A90DE426F4CAA900CACCB9 /* MenuItem.swift in Sources */,
 				63B5EF6A2720A49900AA576E /* SelectedTimeZoneCell.swift in Sources */,
 				63A90DEF26F5465D00CACCB9 /* ContentTabViewController.swift in Sources */,
 				63A90DEA26F4D67600CACCB9 /* MenuTag.swift in Sources */,
 				6346AD8726F3C15C00E406D0 /* ElsewhenApp.swift in Sources */,
 				6346AD9126F3C1EF00E406D0 /* DiscordFormattedDate.swift in Sources */,
-				5EC79972277DA14A000C565F /* DefaultTimeFormatPicker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -14,6 +14,7 @@ enum SettingsViews: Int {
     case mykeModeDefaultTimeFormat
     case mykeModeSeparator
     case defaultTabPicker
+    case tipJar
 }
 
 struct Settings: View {
@@ -88,6 +89,10 @@ struct Settings: View {
                 .foregroundColor(selectedView == .defaultTimeZone ? .white : .secondary)
                 .opacity(selectedView == .defaultTimeZone ? 0.8 : 1)
         }
+    }
+    
+    var tipJarLink: some View {
+        Text("Tip Jar")
     }
     
     var defaultTabView: DefaultTabPicker {
@@ -181,6 +186,23 @@ struct Settings: View {
                 }
             }
 #endif
+            
+            Section {
+                if DeviceType.isPadAndNotCompact {
+                    Button(action: {
+                        self.selectedView = .tipJar
+                    }) {
+                        tipJarLink
+                    }
+                    .listRowBackground(selectedView == .tipJar ? Color.accentColor : Color(UIColor.systemBackground))
+                    .foregroundColor(selectedView == .tipJar ? .white : .primary)
+                } else {
+                    NavigationLink(destination: TipJar(), tag: SettingsViews.tipJar, selection: $selectedView) {
+                        tipJarLink
+                    }
+                }
+            }
+            
             Section(header: Text("Feedback")) {
                 Link(destination: URL(string: "mailto:elsewhen@tildy.dev")!) {
                     Text("Send Feedback")
@@ -200,6 +222,7 @@ struct Settings: View {
                         .foregroundColor(.secondary)
                 }
             }
+            
         }
         .onAppear {
             defaultTimeZone = UserDefaults.shared.resetButtonTimeZone
@@ -239,6 +262,8 @@ struct Settings: View {
                         DefaultTimeFormatPicker(defaultTimeFormat: $defaultTimeFormat)
                     case .defaultTabPicker:
                         defaultTabView
+                    case .tipJar:
+                        TipJar()
                     case nil:
                         Rectangle()
                             .fill(Color(UIColor.systemBackground))
