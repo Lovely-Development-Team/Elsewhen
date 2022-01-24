@@ -193,6 +193,7 @@ struct TimezoneChoiceView: View {
     }
     
     func callDone() {
+        searchController.cancelPending()
         if let done = done {
             done()
         } else {
