@@ -7,25 +7,22 @@
 
 import SwiftUI
 
-@available(iOS 15, *)
 struct Badge: ViewModifier {
     let text: String?
     func body(content: Content) -> some View {
-        content
-            .badge(Text(text ?? ""))
+        if #available(iOS 15, *) {
+            content
+                .badge(Text(text ?? ""))
+        } else {
+            content
+        }
     }
 }
 
 extension View {
     @ViewBuilder
     func iconBadge(_ text: String? = nil) -> some View {
-        if #available(iOS 15, *) {
-            self
-                .modifier(Badge(text: text))
-        }
-        else {
-            self
-        }
+        self.modifier(Badge(text: text))
     }
     @ViewBuilder
     func iconBadge(isPresented: Bool, text: String? = nil) -> some View {

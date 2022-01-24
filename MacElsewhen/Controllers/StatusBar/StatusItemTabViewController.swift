@@ -20,6 +20,10 @@ class StatusItemTabViewController: NSTabViewController {
         // Do view setup here.
     }
     
+    override func viewWillAppear() {
+        selectedTabViewItemIndex = Tab(rawValue: UserDefaults.standard.defaultTab)?.rawValue ?? 0
+    }
+    
     /**
      Configures the `NSTabViewItem` for this `NSViewController`
      

@@ -93,7 +93,6 @@
 		5E7D36B127830DEE00E39333 /* BuildConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E7D36AE27830DEE00E39333 /* BuildConstants.m */; };
 		5E835B4E2796C57D002B91FF /* DefaultTabPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E835B4D2796C57D002B91FF /* DefaultTabPicker.swift */; };
 		5E835B50279981BA002B91FF /* Badge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E835B4F279981B9002B91FF /* Badge.swift */; };
-		5E835B51279981C0002B91FF /* Badge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E835B4F279981B9002B91FF /* Badge.swift */; };
 		5E835B5327999F5F002B91FF /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E835B5227999F5E002B91FF /* Tab.swift */; };
 		5E835B5427999F5F002B91FF /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E835B5227999F5E002B91FF /* Tab.swift */; };
 		5E835B5527999F5F002B91FF /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E835B5227999F5E002B91FF /* Tab.swift */; };
@@ -114,6 +113,7 @@
 		5EC79973277DA177000C565F /* SeparatorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2D6B1F277C4CBF0065781E /* SeparatorPicker.swift */; };
 		5ECBAA322719D60E00A1BF6C /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECBAA312719D60E00A1BF6C /* ActivityView.swift */; };
 		5ECBAA342719D62800A1BF6C /* ShareButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECBAA332719D62800A1BF6C /* ShareButton.swift */; };
+		5ECE1FBB279EE50F00EBFDEA /* AboutElsewhen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E54BBB52737C290005CF7A6 /* AboutElsewhen.swift */; };
 		5EE2D2CA26F2506A00D61875 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5EB23BA026E406B900203153 /* Assets.xcassets */; };
 		5EE2D2CB26F2506B00D61875 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5EB23BA026E406B900203153 /* Assets.xcassets */; };
 		5EE2D2CD26F2717E00D61875 /* EasterEggView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE2D2CC26F2717E00D61875 /* EasterEggView.swift */; };
@@ -225,7 +225,6 @@
 		63A90DEA26F4D67600CACCB9 /* MenuTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A90DE926F4D67600CACCB9 /* MenuTag.swift */; };
 		63A90DEF26F5465D00CACCB9 /* ContentTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A90DEE26F5465D00CACCB9 /* ContentTabViewController.swift */; };
 		63A90DF426F5F3A000CACCB9 /* MacContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A90DF326F5F3A000CACCB9 /* MacContentView.swift */; };
-		63A90DF526F5F6A000CACCB9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB23B9E26E406B600203153 /* ContentView.swift */; };
 		63A90DF826F60AB700CACCB9 /* CopyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A90DF726F60AB700CACCB9 /* CopyButton.swift */; };
 		63A90DF926F60BF600CACCB9 /* CopyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A90DF726F60AB700CACCB9 /* CopyButton.swift */; };
 		63A915F726FB42CE0027B18D /* StarUnstarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A915F626FB42CE0027B18D /* StarUnstarButton.swift */; };
@@ -1350,7 +1349,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5E835B51279981C0002B91FF /* Badge.swift in Sources */,
 				6346ADA626F3D55300E406D0 /* SelectTimeZoneButton.swift in Sources */,
 				5E0A416A278AD8CF00FAB5F8 /* TimeZoneSearchController.swift in Sources */,
 				6346AD8926F3C16700E406D0 /* Loggers.swift in Sources */,
@@ -1387,6 +1385,7 @@
 				6346AD8D26F3C1B600E406D0 /* KeyboardHelpers.swift in Sources */,
 				63A90DCA26F4278600CACCB9 /* AppDelegate.swift in Sources */,
 				63A90DE126F4C3BE00CACCB9 /* MainMenuController.swift in Sources */,
+				5ECE1FBB279EE50F00EBFDEA /* AboutElsewhen.swift in Sources */,
 				6346AD8E26F3C1DD00E406D0 /* DateHelpers.swift in Sources */,
 				63B5EF6927209AB500AA576E /* FormatLabel.swift in Sources */,
 				63A90DCC26F4280200CACCB9 /* StatusBarMenuController.swift in Sources */,
@@ -1398,7 +1397,6 @@
 				638A72D82711B77300E0171D /* TimeZone.swift in Sources */,
 				6346AD8A26F3C19E00E406D0 /* TimeCodeGeneratorView.swift in Sources */,
 				63A90DF426F5F3A000CACCB9 /* MacContentView.swift in Sources */,
-				63A90DF526F5F6A000CACCB9 /* ContentView.swift in Sources */,
 				6346AD9526F3C22C00E406D0 /* UserDefaults.swift in Sources */,
 				63814C9A271B719D00D900D2 /* NotificationName.swift in Sources */,
 				5E835B5527999F5F002B91FF /* Tab.swift in Sources */,

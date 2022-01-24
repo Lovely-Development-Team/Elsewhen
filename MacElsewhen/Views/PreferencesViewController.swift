@@ -11,7 +11,12 @@ class PreferencesViewController: NSViewController {
     @IBOutlet weak var shouldShowWidgetCheckbox: NSButton!
     @IBOutlet weak var shouldTerminateAfterLastWindowCheckbox: NSButton!
     
+    @IBOutlet weak var timeCodesRadioButton: NSButton!
+    @IBOutlet weak var timeListRadioButton: NSButton!
+    
     @IBOutlet weak var defaultTimeZoneButton: NSButton!
+    @IBOutlet weak var enableSmartTimeZoneSearch: NSButton!
+    @IBOutlet weak var enableSmartTimeZoneSearchQuestion: NSButton!
     
     @IBOutlet weak var systemLocaleRadioButton: NSButton!
     @IBOutlet weak var twelveHourRadioButton: NSButton!
@@ -53,6 +58,16 @@ class PreferencesViewController: NSViewController {
         case .twentyFour:
             twentyFourHourRadioButton.state = .on
         }
+        
+        switch UserDefaults.standard.defaultTab {
+        case 1:
+            timeListRadioButton.state = .on
+        default:
+            timeCodesRadioButton.state = .on
+        }
+        
+        enableSmartTimeZoneSearch.state = UserDefaults.standard.useMapKitSearch ? .on : .off
+        enableSmartTimeZoneSearchQuestion.toolTip = "Smart Time Zone Search will attempt to find the geographically closest time zone for your search result, not just based on the time zone name."
         
         mykeModeIncludeCityNamesCheckbox.state = UserDefaults.shared.mykeModeShowCities ? .on : .off
         
@@ -101,6 +116,14 @@ class PreferencesViewController: NSViewController {
     @IBAction func mykeModeIncludeCityNames(_ sender: NSButton) {
         UserDefaults.shared.mykeModeShowCities = sender.state == .on
         updateMykeModeExampleLabel()
+    }
+    
+    @IBAction func enableSmartTimeZoneSearchTapped(_ sender: NSButton) {
+        UserDefaults.standard.useMapKitSearch = sender.state == .on
+    }
+    
+    @IBAction func selectDefaultTab(_ sender: NSButton) {
+        UserDefaults.standard.defaultTab = sender.tag
     }
     
     @IBAction func defaultTimeFormat(_ sender: NSButton) {

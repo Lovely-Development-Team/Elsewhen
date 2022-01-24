@@ -18,6 +18,11 @@ class ContentTabViewController: NSTabViewController {
         addSwiftUITab(containing: MykeMode().padding(.top), label: "TimeListLabel", image: NSImage(systemSymbolName: "list.dash", accessibilityDescription: nil))
         
         tabStyle = .toolbar
+        
+    }
+    
+    override func viewWillAppear() {
+        selectedTabViewItemIndex = Tab(rawValue: UserDefaults.standard.defaultTab)?.rawValue ?? 0
     }
     
     /**
