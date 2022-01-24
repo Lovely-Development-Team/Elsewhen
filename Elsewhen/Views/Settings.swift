@@ -182,7 +182,7 @@ struct Settings: View {
             }
 #endif
             Section(header: Text("Feedback")) {
-                Link(destination: URL(string: "mailto:hello@tildy.dev")!) {
+                Link(destination: URL(string: "mailto:elsewhen@tildy.dev")!) {
                     Text("Send Feedback")
                         .foregroundColor(.primary)
                 }
