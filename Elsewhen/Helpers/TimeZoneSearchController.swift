@@ -15,13 +15,26 @@ class TimeZoneSearchController: ObservableObject {
     
     @Published var results: Set<TimeZone> = []
     private var pendingTimeZoneSearchWorkItem: DispatchWorkItem? = nil
+    @Published var lowPowerMode: Bool = false
+    
+    init() {
+        NotificationCenter.default.addObserver(self, selector: #selector(powerStateChanged), name: Notification.Name.NSProcessInfoPowerStateDidChange, object: nil)
+        self.lowPowerMode = ProcessInfo.processInfo.isLowPowerModeEnabled
+    }
     
     deinit {
         cancelPending()
     }
+    
+    @objc
+    func powerStateChanged(_ notification: Notification) {
+        DispatchQueue.main.async {
+            self.lowPowerMode = ProcessInfo.processInfo.isLowPowerModeEnabled
+        }
+    }
 
     private var delay: Double {
-        if ProcessInfo.processInfo.isLowPowerModeEnabled {
+        if lowPowerMode {
             return 1.0
         } else {
             return 0.2

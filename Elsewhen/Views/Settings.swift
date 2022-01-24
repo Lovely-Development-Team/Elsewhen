@@ -33,6 +33,7 @@ struct Settings: View {
     
     @State private var selectedView: SettingsViews? = nil
     @State private var viewId: Int = 1
+    @StateObject private var timeZoneSearchController = TimeZoneSearchController()
     
     private var defaultTimeZoneName: String {
         defaultTimeZone?.friendlyName ?? "Device"
@@ -48,6 +49,16 @@ struct Settings: View {
         .padding(.top, 5)
         .frame(maxWidth: .infinity, alignment: .center)
         .foregroundColor(.secondary)
+    }
+    
+    var smartTimeZoneSearchExplanation: some View {
+        VStack(spacing: 5) {
+            Text("Smart Time Zone Search will attempt to find the geographically closest time zone for your search result, not just based on the time zone name.")
+            if timeZoneSearchController.lowPowerMode && useMapKitSearch {
+                Text("Smart search results will be slower while on Low Power Mode.")
+                    .foregroundColor(.red)
+            }
+        }
     }
     
     var appIconView: AltIconView {
@@ -113,7 +124,7 @@ struct Settings: View {
                 }
             }
             
-            Section(header: Text("General Settings"), footer: Text("Smart Time Zone Search will attempt to find the geographically closest time zone for your search result, not just based on the time zone name.")) {
+            Section(header: Text("General Settings"), footer: smartTimeZoneSearchExplanation) {
                 if DeviceType.isPadAndNotCompact {
                     Button(action: {
                         self.selectedView = .altIcon
