@@ -18,8 +18,10 @@ class TimeZoneSearchController: ObservableObject {
     @Published var lowPowerMode: Bool = false
     
     init() {
-        NotificationCenter.default.addObserver(self, selector: #selector(powerStateChanged), name: Notification.Name.NSProcessInfoPowerStateDidChange, object: nil)
-        self.lowPowerMode = ProcessInfo.processInfo.isLowPowerModeEnabled
+        if #available(macOS 12, *) {
+            NotificationCenter.default.addObserver(self, selector: #selector(powerStateChanged), name: Notification.Name.NSProcessInfoPowerStateDidChange, object: nil)
+            self.lowPowerMode = ProcessInfo.processInfo.isLowPowerModeEnabled
+        }
     }
     
     deinit {
@@ -27,6 +29,7 @@ class TimeZoneSearchController: ObservableObject {
     }
     
     @objc
+    @available(macOS 12, *)
     func powerStateChanged(_ notification: Notification) {
         DispatchQueue.main.async {
             self.lowPowerMode = ProcessInfo.processInfo.isLowPowerModeEnabled

@@ -9,12 +9,16 @@
         <customObject id="-2" userLabel="File's Owner" customClass="PreferencesViewController" customModule="Elsewhen" customModuleProvider="target">
             <connections>
                 <outlet property="defaultTimeZoneButton" destination="cVj-Tf-yVS" id="U4r-3C-RcS"/>
+                <outlet property="enableSmartTimeZoneSearch" destination="lv7-uH-dKo" id="6TN-o5-0h4"/>
+                <outlet property="enableSmartTimeZoneSearchQuestion" destination="nSv-Js-SWy" id="kz9-KK-nTy"/>
                 <outlet property="mykeModeExampleLabel" destination="M5D-3v-KPW" id="4Dl-1X-3ei"/>
                 <outlet property="mykeModeIncludeCityNamesCheckbox" destination="VC3-1s-7k7" id="czD-RT-eBc"/>
                 <outlet property="mykeModeSeperatorLabel" destination="FiK-4B-0CN" id="Rhg-f0-XGF"/>
                 <outlet property="shouldShowWidgetCheckbox" destination="Lht-nk-oY5" id="fAv-L1-8KS"/>
                 <outlet property="shouldTerminateAfterLastWindowCheckbox" destination="CXt-HY-2mw" id="hr5-Jm-A3m"/>
                 <outlet property="systemLocaleRadioButton" destination="zeW-C9-z08" id="pnx-cx-Mad"/>
+                <outlet property="timeCodesRadioButton" destination="gx9-RN-B0j" id="afn-w9-bX3"/>
+                <outlet property="timeListRadioButton" destination="7hu-fD-KVT" id="2cX-R9-1DQ"/>
                 <outlet property="twelveHourRadioButton" destination="z55-3M-vxH" id="sEt-e1-JC5"/>
                 <outlet property="twentyFourHourRadioButton" destination="dTE-io-ilE" id="Wi7-8C-WHg"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
@@ -23,11 +27,11 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="Hz6-mo-xeY">
-            <rect key="frame" x="0.0" y="0.0" width="593" height="327"/>
+            <rect key="frame" x="0.0" y="0.0" width="593" height="409"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Lht-nk-oY5">
-                    <rect key="frame" x="206" y="290" width="179" height="18"/>
+                    <rect key="frame" x="206" y="372" width="179" height="18"/>
                     <buttonCell key="cell" type="check" title="Show widget in menu bar" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="qey-sw-NVN">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
@@ -37,7 +41,7 @@
                     </connections>
                 </button>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="CXt-HY-2mw">
-                    <rect key="frame" x="206" y="268" width="250" height="18"/>
+                    <rect key="frame" x="206" y="350" width="250" height="18"/>
                     <buttonCell key="cell" type="check" title="Terminate after last window is closed" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Ec1-v3-2be">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
@@ -47,7 +51,7 @@
                     </connections>
                 </button>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cVj-Tf-yVS" userLabel="Default Time Zone Button">
-                    <rect key="frame" x="203" y="222" width="146" height="32"/>
+                    <rect key="frame" x="203" y="246" width="146" height="32"/>
                     <buttonCell key="cell" type="push" title="Default Time Zone" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="4Eu-DP-HrB">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -122,7 +126,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SQK-3A-AhL">
-                    <rect key="frame" x="93" y="231" width="111" height="16"/>
+                    <rect key="frame" x="93" y="255" width="111" height="16"/>
                     <textFieldCell key="cell" lineBreakMode="clipping" title="Default time zone" id="LfJ-Yq-rcT">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -147,45 +151,99 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kpg-VX-7lQ">
+                    <rect key="frame" x="82" y="315" width="122" height="16"/>
+                    <textFieldCell key="cell" lineBreakMode="clipping" title="Open application to" id="3uI-m6-eMB">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gx9-RN-B0j">
+                    <rect key="frame" x="206" y="314" width="99" height="18"/>
+                    <buttonCell key="cell" type="radio" title="Time Codes" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="jhR-aN-hxG">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="selectDefaultTab:" target="-2" id="Yet-Xe-wbe"/>
+                    </connections>
+                </button>
+                <button verticalHuggingPriority="750" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="7hu-fD-KVT">
+                    <rect key="frame" x="206" y="292" width="82" height="18"/>
+                    <buttonCell key="cell" type="radio" title="Time List" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="L6G-Ed-8RE">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="selectDefaultTab:" target="-2" id="Utr-E4-TWE"/>
+                    </connections>
+                </button>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lv7-uH-dKo">
+                    <rect key="frame" x="206" y="216" width="213" height="18"/>
+                    <buttonCell key="cell" type="check" title="Enable smart time zone search" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="9Eu-Cr-Ays">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="enableSmartTimeZoneSearchTapped:" target="-2" id="VRa-YR-zhK"/>
+                    </connections>
+                </button>
+                <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nSv-Js-SWy">
+                    <rect key="frame" x="418" y="215" width="18" height="19"/>
+                    <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="lmz-MF-1Qy">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="smallSystem"/>
+                    </buttonCell>
+                </button>
             </subviews>
             <constraints>
                 <constraint firstItem="zeW-C9-z08" firstAttribute="leading" secondItem="R95-eR-w7W" secondAttribute="trailing" constant="6" symbolic="YES" id="1fc-Vx-weW"/>
                 <constraint firstItem="CXt-HY-2mw" firstAttribute="leading" secondItem="Lht-nk-oY5" secondAttribute="leading" id="1qz-qo-WdU"/>
                 <constraint firstItem="YF9-z4-KG2" firstAttribute="leading" secondItem="zeW-C9-z08" secondAttribute="leading" id="4fK-Ag-mgO"/>
-                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="VC3-1s-7k7" secondAttribute="bottom" constant="20" placeholder="YES" id="5Tr-o5-5Zk"/>
                 <constraint firstItem="R95-eR-w7W" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" id="6md-Y8-6Z8"/>
                 <constraint firstItem="SQK-3A-AhL" firstAttribute="trailing" secondItem="R95-eR-w7W" secondAttribute="trailing" id="8d5-zR-8Uo"/>
+                <constraint firstItem="nSv-Js-SWy" firstAttribute="centerY" secondItem="lv7-uH-dKo" secondAttribute="centerY" id="99g-6u-WTq"/>
+                <constraint firstItem="gx9-RN-B0j" firstAttribute="leading" secondItem="CXt-HY-2mw" secondAttribute="leading" id="9ah-xb-wcZ"/>
+                <constraint firstItem="nSv-Js-SWy" firstAttribute="leading" secondItem="lv7-uH-dKo" secondAttribute="trailing" id="9k1-dU-JkH"/>
                 <constraint firstItem="FiK-4B-0CN" firstAttribute="top" secondItem="dTE-io-ilE" secondAttribute="bottom" constant="20" id="Bpi-QI-RTN"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="z55-3M-vxH" secondAttribute="trailing" constant="222" id="CBP-ce-SkK"/>
                 <constraint firstItem="R95-eR-w7W" firstAttribute="centerY" secondItem="zeW-C9-z08" secondAttribute="centerY" id="CmG-BQ-bi1"/>
+                <constraint firstItem="7hu-fD-KVT" firstAttribute="top" secondItem="gx9-RN-B0j" secondAttribute="bottom" constant="6" symbolic="YES" id="FQG-8U-WB3"/>
                 <constraint firstItem="YF9-z4-KG2" firstAttribute="top" secondItem="hMB-rw-E9w" secondAttribute="bottom" constant="8" symbolic="YES" id="GZu-1q-TsR"/>
                 <constraint firstItem="z55-3M-vxH" firstAttribute="top" secondItem="zeW-C9-z08" secondAttribute="bottom" constant="6" symbolic="YES" id="JsF-sT-JU8"/>
                 <constraint firstItem="VC3-1s-7k7" firstAttribute="top" secondItem="FiK-4B-0CN" secondAttribute="bottom" constant="8" symbolic="YES" placeholder="YES" id="LX1-bc-dYW"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="zeW-C9-z08" secondAttribute="trailing" constant="184" id="M0G-50-e0b"/>
                 <constraint firstItem="JVX-3y-LEB" firstAttribute="top" secondItem="M5D-3v-KPW" secondAttribute="top" id="MTm-Vf-nrz"/>
+                <constraint firstItem="hMB-rw-E9w" firstAttribute="top" secondItem="lv7-uH-dKo" secondAttribute="bottom" constant="8" symbolic="YES" id="PWM-w2-egL"/>
                 <constraint firstItem="M5D-3v-KPW" firstAttribute="leading" secondItem="zeW-C9-z08" secondAttribute="leading" id="QEz-Ij-6BZ"/>
                 <constraint firstAttribute="trailing" secondItem="hMB-rw-E9w" secondAttribute="trailing" id="SXY-nP-B27"/>
                 <constraint firstItem="hMB-rw-E9w" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="Slo-bc-vux"/>
                 <constraint firstAttribute="bottom" secondItem="M5D-3v-KPW" secondAttribute="bottom" constant="20" symbolic="YES" id="SyI-pQ-9mj"/>
                 <constraint firstItem="JVX-3y-LEB" firstAttribute="trailing" secondItem="SQK-3A-AhL" secondAttribute="trailing" id="Tyn-fd-Ng4"/>
-                <constraint firstItem="cVj-Tf-yVS" firstAttribute="top" secondItem="CXt-HY-2mw" secondAttribute="bottom" constant="20" symbolic="YES" id="c7h-Jo-hY5"/>
+                <constraint firstItem="cVj-Tf-yVS" firstAttribute="top" secondItem="7hu-fD-KVT" secondAttribute="bottom" constant="20" symbolic="YES" id="c7h-Jo-hY5"/>
+                <constraint firstItem="M5D-3v-KPW" firstAttribute="top" secondItem="VC3-1s-7k7" secondAttribute="bottom" constant="20" id="clN-Dz-YHi"/>
                 <constraint firstItem="zeW-C9-z08" firstAttribute="top" secondItem="YF9-z4-KG2" secondAttribute="bottom" constant="8" symbolic="YES" id="d7s-dF-8ao"/>
                 <constraint firstItem="z55-3M-vxH" firstAttribute="leading" secondItem="zeW-C9-z08" secondAttribute="leading" id="dic-AT-1NX"/>
+                <constraint firstItem="lv7-uH-dKo" firstAttribute="top" secondItem="cVj-Tf-yVS" secondAttribute="bottom" constant="20" symbolic="YES" id="e61-2L-2JO"/>
+                <constraint firstItem="gx9-RN-B0j" firstAttribute="top" secondItem="CXt-HY-2mw" secondAttribute="bottom" constant="20" id="fFz-cr-Ayc"/>
+                <constraint firstItem="lv7-uH-dKo" firstAttribute="leading" secondItem="CXt-HY-2mw" secondAttribute="leading" id="fYW-Za-IVG"/>
+                <constraint firstItem="Kpg-VX-7lQ" firstAttribute="centerY" secondItem="gx9-RN-B0j" secondAttribute="centerY" id="fZ9-1A-Jse"/>
                 <constraint firstItem="cVj-Tf-yVS" firstAttribute="leading" secondItem="SQK-3A-AhL" secondAttribute="trailing" constant="8" symbolic="YES" id="gHa-PD-ScT"/>
                 <constraint firstItem="R95-eR-w7W" firstAttribute="trailing" secondItem="FiK-4B-0CN" secondAttribute="trailing" id="gxJ-Aj-Sfm"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="cVj-Tf-yVS" secondAttribute="trailing" constant="20" id="h51-3l-laE"/>
                 <constraint firstItem="zeW-C9-z08" firstAttribute="leading" secondItem="CXt-HY-2mw" secondAttribute="leading" id="hdQ-nY-Sel"/>
                 <constraint firstItem="CXt-HY-2mw" firstAttribute="top" secondItem="Lht-nk-oY5" secondAttribute="bottom" constant="6" symbolic="YES" id="mbV-g6-rd3"/>
                 <constraint firstItem="SQK-3A-AhL" firstAttribute="centerY" secondItem="cVj-Tf-yVS" secondAttribute="centerY" id="ox3-3G-eM0"/>
+                <constraint firstItem="7hu-fD-KVT" firstAttribute="leading" secondItem="gx9-RN-B0j" secondAttribute="leading" id="ptG-nq-Zun"/>
                 <constraint firstItem="VC3-1s-7k7" firstAttribute="leading" secondItem="Lht-nk-oY5" secondAttribute="leading" id="q7C-MD-NLS"/>
-                <constraint firstItem="hMB-rw-E9w" firstAttribute="top" secondItem="cVj-Tf-yVS" secondAttribute="bottom" constant="20" symbolic="YES" id="qQg-FM-zmK"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="dTE-io-ilE" secondAttribute="trailing" constant="220" id="qWd-Rh-xtv"/>
                 <constraint firstItem="dTE-io-ilE" firstAttribute="leading" secondItem="z55-3M-vxH" secondAttribute="leading" id="qa5-Py-izh"/>
                 <constraint firstItem="Lht-nk-oY5" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="20" symbolic="YES" id="rrd-Jg-spd"/>
                 <constraint firstItem="dTE-io-ilE" firstAttribute="top" secondItem="z55-3M-vxH" secondAttribute="bottom" constant="6" symbolic="YES" id="rvU-bM-Ha8"/>
                 <constraint firstItem="Lht-nk-oY5" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="tNn-yc-bVV"/>
             </constraints>
-            <point key="canvasLocation" x="156.5" y="294"/>
+            <point key="canvasLocation" x="156.5" y="353"/>
         </customView>
     </objects>
 </document>
