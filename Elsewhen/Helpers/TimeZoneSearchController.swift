@@ -15,7 +15,19 @@ class TimeZoneSearchController: ObservableObject {
     
     @Published var results: Set<TimeZone> = []
     private var pendingTimeZoneSearchWorkItem: DispatchWorkItem? = nil
+    
+    deinit {
+        cancelPending()
+    }
 
+    private var delay: Double {
+        if ProcessInfo.processInfo.isLowPowerModeEnabled {
+            return 1.0
+        } else {
+            return 0.2
+        }
+    }
+    
     func cancelPending() {
         pendingTimeZoneSearchWorkItem?.cancel()
         results = []
@@ -35,7 +47,7 @@ class TimeZoneSearchController: ObservableObject {
             }
         }
         pendingTimeZoneSearchWorkItem = searchRequestWorkItem
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: searchRequestWorkItem)
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay, execute: searchRequestWorkItem)
     }
     
 }
