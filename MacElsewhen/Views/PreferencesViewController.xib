@@ -51,7 +51,7 @@
                     </connections>
                 </button>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cVj-Tf-yVS" userLabel="Default Time Zone Button">
-                    <rect key="frame" x="203" y="246" width="146" height="32"/>
+                    <rect key="frame" x="201" y="246" width="146" height="32"/>
                     <buttonCell key="cell" type="push" title="Default Time Zone" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="4Eu-DP-HrB">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -200,6 +200,7 @@
             <constraints>
                 <constraint firstItem="zeW-C9-z08" firstAttribute="leading" secondItem="R95-eR-w7W" secondAttribute="trailing" constant="6" symbolic="YES" id="1fc-Vx-weW"/>
                 <constraint firstItem="CXt-HY-2mw" firstAttribute="leading" secondItem="Lht-nk-oY5" secondAttribute="leading" id="1qz-qo-WdU"/>
+                <constraint firstItem="cVj-Tf-yVS" firstAttribute="leading" secondItem="CXt-HY-2mw" secondAttribute="leading" id="2SL-q9-0dR"/>
                 <constraint firstItem="YF9-z4-KG2" firstAttribute="leading" secondItem="zeW-C9-z08" secondAttribute="leading" id="4fK-Ag-mgO"/>
                 <constraint firstItem="R95-eR-w7W" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" id="6md-Y8-6Z8"/>
                 <constraint firstItem="SQK-3A-AhL" firstAttribute="trailing" secondItem="R95-eR-w7W" secondAttribute="trailing" id="8d5-zR-8Uo"/>
@@ -226,13 +227,14 @@
                 <constraint firstItem="zeW-C9-z08" firstAttribute="top" secondItem="YF9-z4-KG2" secondAttribute="bottom" constant="8" symbolic="YES" id="d7s-dF-8ao"/>
                 <constraint firstItem="z55-3M-vxH" firstAttribute="leading" secondItem="zeW-C9-z08" secondAttribute="leading" id="dic-AT-1NX"/>
                 <constraint firstItem="lv7-uH-dKo" firstAttribute="top" secondItem="cVj-Tf-yVS" secondAttribute="bottom" constant="20" symbolic="YES" id="e61-2L-2JO"/>
+                <constraint firstItem="cVj-Tf-yVS" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="SQK-3A-AhL" secondAttribute="trailing" id="eAW-Lj-JAG"/>
                 <constraint firstItem="gx9-RN-B0j" firstAttribute="top" secondItem="CXt-HY-2mw" secondAttribute="bottom" constant="20" id="fFz-cr-Ayc"/>
                 <constraint firstItem="lv7-uH-dKo" firstAttribute="leading" secondItem="CXt-HY-2mw" secondAttribute="leading" id="fYW-Za-IVG"/>
                 <constraint firstItem="Kpg-VX-7lQ" firstAttribute="centerY" secondItem="gx9-RN-B0j" secondAttribute="centerY" id="fZ9-1A-Jse"/>
-                <constraint firstItem="cVj-Tf-yVS" firstAttribute="leading" secondItem="SQK-3A-AhL" secondAttribute="trailing" constant="8" symbolic="YES" id="gHa-PD-ScT"/>
                 <constraint firstItem="R95-eR-w7W" firstAttribute="trailing" secondItem="FiK-4B-0CN" secondAttribute="trailing" id="gxJ-Aj-Sfm"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="cVj-Tf-yVS" secondAttribute="trailing" constant="20" id="h51-3l-laE"/>
                 <constraint firstItem="zeW-C9-z08" firstAttribute="leading" secondItem="CXt-HY-2mw" secondAttribute="leading" id="hdQ-nY-Sel"/>
+                <constraint firstItem="R95-eR-w7W" firstAttribute="trailing" secondItem="Kpg-VX-7lQ" secondAttribute="trailing" id="iMl-Aq-HNU"/>
                 <constraint firstItem="CXt-HY-2mw" firstAttribute="top" secondItem="Lht-nk-oY5" secondAttribute="bottom" constant="6" symbolic="YES" id="mbV-g6-rd3"/>
                 <constraint firstItem="SQK-3A-AhL" firstAttribute="centerY" secondItem="cVj-Tf-yVS" secondAttribute="centerY" id="ox3-3G-eM0"/>
                 <constraint firstItem="gx9-RN-B0j" firstAttribute="leading" secondItem="Kpg-VX-7lQ" secondAttribute="trailing" constant="6" symbolic="YES" id="ple-xN-Emy"/>
