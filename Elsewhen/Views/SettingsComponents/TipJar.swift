@@ -20,43 +20,46 @@ struct TipJar: View {
     }
     
     var content: some View {
-//        ScrollView {
+        VStack(spacing: 10) {
             VStack(spacing: 10) {
-                VStack(spacing: 10) {
-                    Text("Elsewhen is and always will be free.")
-                        .font(.headline)
-                        .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                    Text("However, if you find the app useful, consider leaving us a tip! It won't unlock any features, other than the warm glow in your heart that is our gratitude.")
-                        .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                    Text("Thank you for using Elsewhen!")
+                Text("Elsewhen is and always will be free.")
+                    .font(.headline)
                     .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                }
-                .padding()
-                if storeKitController.iaps.isEmpty {
-                    Spacer()
-                    ProgressView()
-                    Spacer()
-                } else {
-                    List(storeKitController.iaps, id: \.self) { iap in
-                        Button(action: {
-                            
-                        }) {
-                            HStack {
-                                Text(iap.localizedTitle)
-                                Spacer()
+                Text("However, if you find the app useful, consider leaving us a tip! It won't unlock any features, other than the warm glow in your heart that is our gratitude.")
+                    .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                Text("Thank you for using Elsewhen!")
+                .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+            }
+            .padding()
+            if storeKitController.iaps.isEmpty {
+                Spacer()
+                ProgressView()
+                Spacer()
+            } else {
+                List(storeKitController.iaps, id: \.self) { iap in
+                    Button(action: {
+                        storeKitController.purchaseProduct(product: iap)
+                    }) {
+                        HStack {
+                            Text(iap.localizedTitle)
+                            Spacer()
+                            if storeKitController.pendingPurchases.contains(iap.productIdentifier) {
+                                ProgressView()
+                            } else {
                                 Text(formatCurrency(for: iap))
                             }
                         }
                     }
-                    .listStyle(PlainListStyle())
                 }
+                .listStyle(PlainListStyle())
             }
-//        }
+        }
         .navigationTitle("Tip Jar")
         .onAppear {
             storeKitController.getProducts(productIDs: [
                 "uk.co.bencardy.Elsewhen.IAP.Test"
             ])
+            SKPaymentQueue.default().add(storeKitController)
         }
     }
     
