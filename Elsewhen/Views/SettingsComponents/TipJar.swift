@@ -8,16 +8,46 @@
 import SwiftUI
 import StoreKit
 
+struct Tip: View {
+    
+    let iap: SKProduct
+    @ObservedObject var storeKitController: StoreKitController
+    @State private var showThankYouAlert = false
+    private let currencyFormatter = NumberFormatter()
+    
+    var formatCurrency: String {
+        currencyFormatter.locale = iap.priceLocale
+        currencyFormatter.numberStyle = .currency
+        return currencyFormatter.string(from: iap.price) ?? ""
+    }
+    
+    var body: some View {
+        Button(action: {
+            storeKitController.purchaseProduct(product: iap)
+        }) {
+            HStack {
+                Text(iap.localizedTitle)
+                Spacer()
+                if storeKitController.pendingPurchases.contains(iap.productIdentifier) {
+                    ProgressView()
+                } else {
+                    Text(formatCurrency)
+                }
+            }
+        }
+        .onReceive(NotificationCenter.default.publisher(for: .init(rawValue: "TransactionPaymentPurchased"), object: nil), perform: { (notification) in
+            showThankYouAlert = true
+        })
+        .alert(isPresented: $showThankYouAlert) {
+            Alert(title: Text("Thank you!"), message: Text("Your tip is much appreciated, thank you for your support!"), dismissButton: .default(Text("Seriously, thank you"), action: {}))
+        }
+    }
+    
+}
+
 struct TipJar: View {
     
     @StateObject private var storeKitController = StoreKitController()
-    private let currencyFormatter = NumberFormatter()
-    
-    private func formatCurrency(for product: SKProduct) -> String {
-        currencyFormatter.locale = product.priceLocale
-        currencyFormatter.numberStyle = .currency
-        return currencyFormatter.string(from: product.price) ?? ""
-    }
     
     var content: some View {
         VStack(spacing: 10) {
@@ -37,19 +67,7 @@ struct TipJar: View {
                 Spacer()
             } else {
                 List(storeKitController.iaps, id: \.self) { iap in
-                    Button(action: {
-                        storeKitController.purchaseProduct(product: iap)
-                    }) {
-                        HStack {
-                            Text(iap.localizedTitle)
-                            Spacer()
-                            if storeKitController.pendingPurchases.contains(iap.productIdentifier) {
-                                ProgressView()
-                            } else {
-                                Text(formatCurrency(for: iap))
-                            }
-                        }
-                    }
+                    Tip(iap: iap, storeKitController: storeKitController)
                 }
                 .listStyle(PlainListStyle())
             }

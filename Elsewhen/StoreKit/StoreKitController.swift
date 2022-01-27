@@ -46,6 +46,7 @@ class StoreKitController: NSObject, ObservableObject, SKProductsRequestDelegate,
             switch transaction.transactionState {
             case .purchased:
                 queue.finishTransaction(transaction)
+                NotificationCenter.default.post(name: .init("TransactionPaymentPurchased"), object: transaction.payment.productIdentifier)
                 pendingPurchases.remove(transaction.payment.productIdentifier)
             case .failed:
                 queue.finishTransaction(transaction)
