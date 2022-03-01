@@ -5,6 +5,7 @@
 //  Created by Ben Cardy on 11/09/2021.
 //
 
+import UIKit
 import SwiftUI
 import UniformTypeIdentifiers
 
@@ -174,7 +175,7 @@ struct MykeMode: View, OrientationObserving {
                             Text("Default Time Format")
                         }
                         Divider()
-                        DeleteButton {
+                        DeleteButton(text: "Remove from List") {
                             #if os(iOS)
                             notificationFeedbackGenerator.prepare()
                             #endif
@@ -232,18 +233,57 @@ struct MykeMode: View, OrientationObserving {
         
         Group {
             
-            DateTimeZonePicker(selectedDate: $selectedDate, selectedTimeZone: $selectedTimeZone, showFullCalendar: false, maxWidth: nil)
-                .padding(.top, 5)
-                .padding(.horizontal, 8)
-            
             Group {
-                HStack {
-                    mykeModeButtons
+            
+                DateTimeZonePicker(selectedDate: $selectedDate, selectedTimeZone: $selectedTimeZone, showFullCalendar: false, maxWidth: nil)
+                    .padding(.top, 5)
+                    .padding(.horizontal, 8)
+                
+                Group {
+                    HStack {
+                        mykeModeButtons
+                    }
                 }
+                .padding(.horizontal, 8)
+                
             }
             .padding(.horizontal, 8)
+            
+            timeZoneGroupChoices
+            
         }
         
+    }
+    
+    @ViewBuilder
+    var timeZoneGroupChoices: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack {
+                ForEach(TIME_ZONE_GROUPS, id: \.id) { tzGroup in
+                    Button(action: {
+                        withAnimation {
+                            selectedTimeZones = tzGroup.identifiers.compactMap { TimeZone(identifier: $0.identifier) }
+                        }
+                    }) {
+                        Text(tzGroup.name)
+                            .font(.caption)
+                            .foregroundColor(.primary)
+                    }
+                    .roundedRectangle(colour: .secondarySystemBackground, horizontalPadding: 14)
+                    .contentShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
+                    .contextMenu {
+                        Button(action: {}) {
+                            Text("Edit Group")
+                        }
+                        DeleteButton(text: "Remove Group") {
+                            
+                        }
+                    }
+                }
+            }
+            .padding(.bottom, 2)
+            .padding(.horizontal, 8)
+        }
     }
     
     var body: some View {
@@ -292,7 +332,6 @@ struct MykeMode: View, OrientationObserving {
                         dateTimeZonePicker
                         
                     }
-                    .padding(.horizontal, 8)
                     .padding(.bottom, 10)
                     .frame(minWidth: 0, maxWidth: 390)
                     .background(GeometryReader { geometry in
@@ -317,8 +356,14 @@ struct MykeMode: View, OrientationObserving {
             NavigationView {
                 #if os(iOS)
                 TimezoneChoiceView(selectedTimeZone: .constant(TimeZone.current), selectedTimeZones: $selectedTimeZones, selectedDate: $selectedDate, selectMultiple: true)
-                    .navigationBarItems(trailing:
-                                            Button(action: {
+                    .navigationBarItems(leading: Button(action: {
+                        self.alertMessage(title: "Save as a group?", message: "Provide a name for the Time Zone group below.") { action in
+                            print("\(action)")
+                            self.showTimeZoneSheet = false
+                        }
+                    }) {
+                        Text("Save...")
+                    }, trailing: Button(action: {
                         self.showTimeZoneSheet = false
                     }) {
                         Text("Done")
@@ -368,6 +413,37 @@ struct MykeMode: View, OrientationObserving {
         selectedTimeZones.remove(atOffsets: offsets)
     }
     
+    func alertMessage(title: String, message: String, okButtonTitle: String = "OK", completion: @escaping (UIAlertAction) -> ()) {
+        let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertVC.addTextField()
+        let okAction = UIAlertAction(title: okButtonTitle, style: .default, handler: completion)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        alertVC.addAction(okAction)
+        alertVC.addAction(cancelAction)
+        let viewController = UIApplication.shared.windows.first!.visibleViewController!
+        viewController.present(alertVC, animated: true, completion: nil)
+    }
+    
+}
+
+public extension UIWindow {
+    var visibleViewController: UIViewController? {
+        return UIWindow.getVisibleViewControllerFrom(self.rootViewController)
+    }
+
+    static func getVisibleViewControllerFrom(_ vc: UIViewController?) -> UIViewController? {
+        if let nc = vc as? UINavigationController {
+            return UIWindow.getVisibleViewControllerFrom(nc.visibleViewController)
+        } else if let tc = vc as? UITabBarController {
+            return UIWindow.getVisibleViewControllerFrom(tc.selectedViewController)
+        } else {
+            if let pvc = vc?.presentedViewController {
+                return UIWindow.getVisibleViewControllerFrom(pvc)
+            } else {
+                return vc
+            }
+        }
+    }
 }
 
 private extension MykeMode {
