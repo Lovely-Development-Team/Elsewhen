@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct DeleteButton: View {
+    let text: String
     let onPress: () -> ()
 
     var body: some View {
@@ -15,20 +16,20 @@ struct DeleteButton: View {
         Button {
             onPress()
         } label: {
-            Label("Remove from List", systemImage: "trash")
+            Label(text, systemImage: "trash")
         }
         #else
         if #available(iOS 15.0, *) {
             Button(role: .destructive) {
                 onPress()
             } label: {
-                Label("Remove from List", systemImage: "trash")
+                Label(text, systemImage: "trash")
             }
         } else {
             Button {
                 onPress()
             } label: {
-                Label("Remove from List", systemImage: "trash")
+                Label(text, systemImage: "trash")
             }
         }
         #endif
@@ -37,6 +38,6 @@ struct DeleteButton: View {
 
 struct DeleteButton_Previews: PreviewProvider {
     static var previews: some View {
-        DeleteButton { }
+        DeleteButton(text: "Remove from List") { }
     }
 }
