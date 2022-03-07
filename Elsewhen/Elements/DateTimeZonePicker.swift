@@ -13,7 +13,7 @@ struct DateTimeZonePicker: View {
     // MARK: Parameters
     @Binding var selectedDate: Date
     @Binding var selectedTimeZone: TimeZone?
-    var showDate: Bool = true
+    var showFullCalendar: Bool = true
     let maxWidth: CGFloat?
     
     // MARK: State
@@ -50,7 +50,7 @@ private static let pickerStackSpacing: CGFloat = 5
     var body: some View {
         Group {
             
-            if showDate {
+            if showFullCalendar {
                 #if os(macOS)
                 HStack {
                     Button {
@@ -91,8 +91,8 @@ private static let pickerStackSpacing: CGFloat = 5
                         .datePickerStyle(Self.timePickerStyle)
                         .frame(maxWidth: selectTimeZoneButtonMaxWidth)
 #else
-                    DatePicker("Time", selection: $selectedDate, displayedComponents: [.hourAndMinute])
-                        .datePickerStyle(Self.timePickerStyle)
+                    DatePicker("Time", selection: $selectedDate, displayedComponents: [.date, .hourAndMinute])
+                        .datePickerStyle(.compact)
                         .labelsHidden()
                     Button(action: {
 #if os(iOS)
@@ -135,7 +135,7 @@ private static let pickerStackSpacing: CGFloat = 5
                 }
             }
             .padding(.bottom, 10)
-            .padding(.horizontal, showDate ? 8 : 0)
+            .padding(.horizontal, showFullCalendar ? 8 : 0)
             .frame(minWidth: 0, maxWidth: DeviceType.isPad() || DeviceType.isMac() ? maxWidth.map { $0 + 16 } : .infinity)
             .sheet(isPresented: $showTimeZoneChoiceSheet) {
                 NavigationView {
@@ -162,7 +162,7 @@ private extension DateTimeZonePicker {
 struct DateTimeZonePicker_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            DateTimeZonePicker(selectedDate: .constant(Date()), selectedTimeZone: .constant(TimeZone(identifier: "Europe/London")!), showDate: false, maxWidth: nil)
+            DateTimeZonePicker(selectedDate: .constant(Date()), selectedTimeZone: .constant(TimeZone(identifier: "Europe/London")!), showFullCalendar: false, maxWidth: nil)
         }
     }
 }
