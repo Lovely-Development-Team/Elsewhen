@@ -105,9 +105,9 @@ struct Settings: View {
     
     var defaultTabLink: some View {
         HStack {
-            if AboutElsewhen.buildNumber != lastSeenVersionForSettings {
-                Circle().fill(.red).frame(width: 10, height: 10)
-            }
+//            if AboutElsewhen.buildNumber != lastSeenVersionForSettings {
+//                Circle().fill(.red).frame(width: 10, height: 10)
+//            }
             Text("Default Tab")
             Spacer()
             Text(defaultTabName)
@@ -161,9 +161,9 @@ struct Settings: View {
                 }
                 
                 HStack {
-                    if AboutElsewhen.buildNumber != lastSeenVersionForSettings {
-                        Circle().fill(.red).frame(width: 10, height: 10)
-                    }
+//                    if AboutElsewhen.buildNumber != lastSeenVersionForSettings {
+//                        Circle().fill(.red).frame(width: 10, height: 10)
+//                    }
                     Toggle("Smart Time Zone Search", isOn: $useMapKitSearch)
                 }
                 
