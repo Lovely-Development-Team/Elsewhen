@@ -87,7 +87,7 @@ private static let pickerStackSpacing: CGFloat = 5
                         .fontWeight(.semibold)
                     Spacer()
 #if os(macOS)
-                    DatePicker("", selection: $selectedDate, displayedComponents: [.hourAndMinute])
+                    DatePicker("", selection: $selectedDate, displayedComponents: [.date, .hourAndMinute])
                         .datePickerStyle(Self.timePickerStyle)
                         .frame(maxWidth: selectTimeZoneButtonMaxWidth)
 #else
