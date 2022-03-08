@@ -65,40 +65,46 @@ struct MykeMode: View, OrientationObserving {
     static let navigationViewStyle = DefaultNavigationViewStyle()
     #endif
     
+    func tzTapped(_ tz: TimeZone) {
+        if flagForTimeZone(tz) != NoFlagTimeZoneEmoji {
+#if os(iOS)
+            mediumImpactFeedbackGenerator.impactOccurred()
+#endif
+            if tz.isMemberOfEuropeanUnion {
+                if timeZonesUsingNoFlag.contains(tz) {
+                    timeZonesUsingNoFlag.remove(tz)
+                    timeZonesUsingEUFlag.remove(tz)
+                } else {
+                    if timeZonesUsingEUFlag.contains(tz) {
+                        timeZonesUsingEUFlag.remove(tz)
+                        timeZonesUsingNoFlag.insert(tz)
+                    } else {
+                        timeZonesUsingEUFlag.insert(tz)
+                    }
+                }
+            } else {
+                if timeZonesUsingNoFlag.contains(tz) {
+                    timeZonesUsingNoFlag.remove(tz)
+                } else {
+                    timeZonesUsingNoFlag.insert(tz)
+                }
+            }
+        }
+    }
+    
     @ViewBuilder
     var timeZoneList: some View {
         
         List {
             ForEach(selectedTimeZones, id: \.identifier) { tz in
-                SelectedTimeZoneCell(tz: tz, timeInZone: stringForSelectedTime(in: tz), selectedDate: selectedDate, formattedString: stringForTimeAndFlag(in: tz, date: selectedDate, sourceZone: selectedTimeZone ?? TimeZone.current, separator: mykeModeSeparator, timeZonesUsingEUFlag: timeZonesUsingEUFlag, timeZonesUsingNoFlag: timeZonesUsingNoFlag, showCities: mykeModeShowCities))
+                SelectedTimeZoneCell(tz: tz, timeInZone: stringForSelectedTime(in: tz), selectedDate: selectedDate, formattedString: stringForTimeAndFlag(in: tz, date: selectedDate, sourceZone: selectedTimeZone ?? TimeZone.current, separator: mykeModeSeparator, timeZonesUsingEUFlag: timeZonesUsingEUFlag, timeZonesUsingNoFlag: timeZonesUsingNoFlag, showCities: mykeModeShowCities), onTap: tzTapped)
                     .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                     .contentShape(Rectangle())
+#if os(iOS)
                     .onTapGesture {
-                        if flagForTimeZone(tz) != NoFlagTimeZoneEmoji {
-                            #if os(iOS)
-                            mediumImpactFeedbackGenerator.impactOccurred()
-                            #endif
-                            if tz.isMemberOfEuropeanUnion {
-                                if timeZonesUsingNoFlag.contains(tz) {
-                                    timeZonesUsingNoFlag.remove(tz)
-                                    timeZonesUsingEUFlag.remove(tz)
-                                } else {
-                                    if timeZonesUsingEUFlag.contains(tz) {
-                                        timeZonesUsingEUFlag.remove(tz)
-                                        timeZonesUsingNoFlag.insert(tz)
-                                    } else {
-                                        timeZonesUsingEUFlag.insert(tz)
-                                    }
-                                }
-                            } else {
-                                if timeZonesUsingNoFlag.contains(tz) {
-                                    timeZonesUsingNoFlag.remove(tz)
-                                } else {
-                                    timeZonesUsingNoFlag.insert(tz)
-                                }
-                            }
-                        }
+                        tzTapped(tz)
                     }
+#endif
                     .contextMenu {
                         if flagForTimeZone(tz) != NoFlagTimeZoneEmoji {
                             Button(action: {
