@@ -26,6 +26,10 @@ struct ContentView: View {
         UITabBar.appearance().backgroundImage = UIImage()
     }
     
+    var showSettingsIcon: Bool {
+        return lastSeenVersionForSettings != AboutElsewhen.buildNumber
+    }
+    
     var body: some View {
         TabView(selection: $selectedTab) {
             
@@ -41,7 +45,7 @@ struct ContentView: View {
             Settings()
                 .overlay(Rectangle().frame(width: nil, height: 1, alignment: .bottom).foregroundColor(Color.secondary.opacity(0.5)), alignment: .bottom)
                 .tabItem { Label("Settings", systemImage: "gear") }
-                .iconBadge(isPresented: lastSeenVersionForSettings != AboutElsewhen.buildNumber)
+                .iconBadge(isPresented: false)
                 .tag(Tab.settings.rawValue)
             
         }
