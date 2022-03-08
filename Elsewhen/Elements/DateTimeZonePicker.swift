@@ -56,7 +56,7 @@ private static let pickerStackSpacing: CGFloat = 5
                     Button {
                         isPresentingDatePopover = true
                     } label: {
-                        Text("\(selectedDate, style: .date)").foregroundColor(.white)
+                        Text("\(selectedDate, style: .date)").foregroundColor(.primary)
                     }
                     .popover(isPresented: $isPresentingDatePopover, arrowEdge: .top) {
                         Group {
