@@ -90,6 +90,7 @@ private static let pickerStackSpacing: CGFloat = 5
                     DatePicker("", selection: $selectedDate, displayedComponents: [.date, .hourAndMinute])
                         .datePickerStyle(Self.timePickerStyle)
                         .frame(maxWidth: selectTimeZoneButtonMaxWidth)
+                        .padding(.trailing)
 #else
                     DatePicker("Time", selection: $selectedDate, displayedComponents: [.date, .hourAndMinute])
                         .datePickerStyle(.compact)
