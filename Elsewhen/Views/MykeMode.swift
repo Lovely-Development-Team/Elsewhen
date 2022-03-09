@@ -231,14 +231,8 @@ struct MykeMode: View, OrientationObserving {
                 .padding(.horizontal, 8)
             
             Group {
-                if isInPopover {
-                    VStack {
-                        mykeModeButtons
-                    }
-                } else {
-                    HStack {
-                        mykeModeButtons
-                    }
+                HStack {
+                    mykeModeButtons
                 }
             }
             .padding(.horizontal, 8)
@@ -250,15 +244,17 @@ struct MykeMode: View, OrientationObserving {
         
         Group {
             
-            if isOrientationLandscape && isRegularHorizontalSize {
+            if isOrientationLandscape && isRegularHorizontalSize && !isInPopover {
                 
                 HStack(alignment: .top) {
                 
                     VStack {
+#if !os(macOS)
                         Text("Time Zone List")
                             .font(.title)
                             .padding()
                             .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+#endif
                         timeZoneList
                     }
                     
