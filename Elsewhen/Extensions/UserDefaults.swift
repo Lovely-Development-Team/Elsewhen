@@ -12,6 +12,7 @@ extension UserDefaults {
     static let lastSeenVersionForSettingsKey = "lastSeenVersionForSettings"
     
     static let mykeModeTimeZoneIdentifiersKey = "mykeModeTimeZoneIdentifiers"
+    static let mykeModeTimeZoneGroupKey = "mykeModeTimeZoneGroup"
     static let mykeModeTimeZoneIdentifiersUsingEUFlagKey = "mykeModeTimeZoneIdentifiersUsingEUFlag"
     static let mykeModeTimeZoneIdentifiersUsingNoFlagKey = "mykeModeTimeZoneIdentifiersUsingNoFlag"
     static let mykeModeTimeZoneIdentifiersUsing12HourTimeKey = "mykeModeTimeZoneIdentifiersUsing12HourTime"
@@ -35,6 +36,7 @@ extension UserDefaults {
     func reset() {
         lastSeenVersionForSettings = ""
         mykeModeTimeZones = UserDefaults.defaultMykeModeTimeZoneIdentifiers.compactMap { TimeZone(identifier: $0) }
+        mykeModeTimeZoneGroupId = nil
         mykeModeTimeZonesUsingEUFlag = Set(Array(europeanUnionTimeZones).compactMap { TimeZone(identifier: $0) })
         mykeModeTimeZonesUsingNoFlag = []
         mykeModeTimeZoneIdentifiersUsing12HourTime = []
@@ -54,6 +56,15 @@ extension UserDefaults {
         }
         set {
             set(newValue.map { $0.identifier }, forKey: Self.mykeModeTimeZoneIdentifiersKey)
+        }
+    }
+    
+    var mykeModeTimeZoneGroupId: UUID? {
+        get {
+            return UUID(uuidString: string(forKey: Self.mykeModeTimeZoneGroupKey) ?? "")
+        }
+        set {
+            set(newValue?.uuidString ?? nil, forKey: Self.mykeModeTimeZoneGroupKey)
         }
     }
     

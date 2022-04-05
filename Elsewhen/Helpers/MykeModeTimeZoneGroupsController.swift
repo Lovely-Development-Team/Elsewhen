@@ -18,8 +18,7 @@ class MykeModeTimeZoneGroupsController: ObservableObject {
             selector: #selector(ubiquitousKeyValueStoreDidChange(_:)),
             name: NSUbiquitousKeyValueStore.didChangeExternallyNotification,
             object: NSUbiquitousKeyValueStore.default)
-        let result = NSUbiquitousKeyValueStore.default.synchronize()
-        print("BEN: sync result 1: \(result)")
+        NSUbiquitousKeyValueStore.default.synchronize()
         updateTimeZoneGroupsFromStore()
     }
     
@@ -31,20 +30,22 @@ class MykeModeTimeZoneGroupsController: ObservableObject {
     func addTimeZoneGroup(_ group: TimeZoneGroup) {
         timeZoneGroups.append(group)
         NSUbiquitousKeyValueStore.default.addTimeZoneGroup(group)
-        let result = NSUbiquitousKeyValueStore.default.synchronize()
-        print("BEN: sync result 2: \(result)")
+        NSUbiquitousKeyValueStore.default.synchronize()
     }
     
     func removeTimeZoneGroup(id: UUID) {
         timeZoneGroups = timeZoneGroups.filter { $0.id != id }
         NSUbiquitousKeyValueStore.default.removeTimeZoneGroup(id: id)
-        let result = NSUbiquitousKeyValueStore.default.synchronize()
-        print("BEN: sync result 3: \(result)")
+        NSUbiquitousKeyValueStore.default.synchronize()
+    }
+    
+    func updateTimeZoneGroup(_ tzGroup: TimeZoneGroup, with timeZones: [TimeZone]) {
+        NSUbiquitousKeyValueStore.default.updateTimeZoneGroup(tzGroup, with: timeZones)
+        updateTimeZoneGroupsFromStore()
     }
     
     func updateTimeZoneGroupsFromStore() {
         timeZoneGroups = NSUbiquitousKeyValueStore.default.timeZoneGroups
-        print("BEN: Updated time zone groups: \(timeZoneGroups)")
     }
     
 }

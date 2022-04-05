@@ -45,4 +45,13 @@ extension NSUbiquitousKeyValueStore {
         timeZoneGroups = timeZoneGroups.filter { $0.id != id }
     }
     
+    func updateTimeZoneGroup(_ tzGroup: TimeZoneGroup, with timeZones: [TimeZone]) {
+        timeZoneGroups = timeZoneGroups.map { tzGroup in
+            if tzGroup.id == tzGroup.id {
+                return TimeZoneGroup(copy: tzGroup, with: timeZones)
+            }
+            return tzGroup
+        }
+    }
+    
 }
