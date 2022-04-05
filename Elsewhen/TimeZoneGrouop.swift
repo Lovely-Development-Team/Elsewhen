@@ -8,13 +8,13 @@
 import Foundation
 
 
-struct TimeZoneGroupEntry {
+struct TimeZoneGroupEntry: Codable {
     let identifier: String
 }
 
 
-struct TimeZoneGroup {
-    let id = UUID()
+struct TimeZoneGroup: Codable {
+    var id = UUID()
     let name: String
     let identifiers: [TimeZoneGroupEntry]
 }

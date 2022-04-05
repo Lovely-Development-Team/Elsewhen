@@ -115,6 +115,10 @@
 		5ECBAA322719D60E00A1BF6C /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECBAA312719D60E00A1BF6C /* ActivityView.swift */; };
 		5ECBAA342719D62800A1BF6C /* ShareButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECBAA332719D62800A1BF6C /* ShareButton.swift */; };
 		5ECE1FBB279EE50F00EBFDEA /* AboutElsewhen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E54BBB52737C290005CF7A6 /* AboutElsewhen.swift */; };
+		5EDCC69D27EA13A90074F534 /* NSUbiquitousKeyValueStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDCC69C27EA13A90074F534 /* NSUbiquitousKeyValueStore.swift */; };
+		5EDCC69E27EA13A90074F534 /* NSUbiquitousKeyValueStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDCC69C27EA13A90074F534 /* NSUbiquitousKeyValueStore.swift */; };
+		5EDCC6A027EA37890074F534 /* MykeModeTimeZoneGroupsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDCC69F27EA37890074F534 /* MykeModeTimeZoneGroupsController.swift */; };
+		5EDCC6A127EA37890074F534 /* MykeModeTimeZoneGroupsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDCC69F27EA37890074F534 /* MykeModeTimeZoneGroupsController.swift */; };
 		5EE2D2CA26F2506A00D61875 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5EB23BA026E406B900203153 /* Assets.xcassets */; };
 		5EE2D2CB26F2506B00D61875 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5EB23BA026E406B900203153 /* Assets.xcassets */; };
 		5EE2D2CD26F2717E00D61875 /* EasterEggView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE2D2CC26F2717E00D61875 /* EasterEggView.swift */; };
@@ -402,6 +406,8 @@
 		5EBEEE8127123385001501EC /* Discord Helper IntentsUI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Discord Helper IntentsUI.entitlements"; sourceTree = "<group>"; };
 		5ECBAA312719D60E00A1BF6C /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
 		5ECBAA332719D62800A1BF6C /* ShareButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareButton.swift; sourceTree = "<group>"; };
+		5EDCC69C27EA13A90074F534 /* NSUbiquitousKeyValueStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSUbiquitousKeyValueStore.swift; sourceTree = "<group>"; };
+		5EDCC69F27EA37890074F534 /* MykeModeTimeZoneGroupsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MykeModeTimeZoneGroupsController.swift; sourceTree = "<group>"; };
 		5EE2D2CC26F2717E00D61875 /* EasterEggView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasterEggView.swift; sourceTree = "<group>"; };
 		5EE2D2CE26F28CE000D61875 /* KeyboardHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHelpers.swift; sourceTree = "<group>"; };
 		5EE70E2626ECCC0700F3F164 /* TimeCodeGeneratorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCodeGeneratorView.swift; sourceTree = "<group>"; };
@@ -711,6 +717,7 @@
 				5E7D36AC27830DEB00E39333 /* Elsewhen-Bridging-Header.h */,
 				5E7D36AD27830DEC00E39333 /* MacElsewhen-Bridging-Header.h */,
 				5E0A4168278AD8CF00FAB5F8 /* TimeZoneSearchController.swift */,
+				5EDCC69F27EA37890074F534 /* MykeModeTimeZoneGroupsController.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -791,6 +798,7 @@
 				638A72D52711B75C00E0171D /* TimeZone.swift */,
 				638A72DB2711D9A600E0171D /* TimeInterval.swift */,
 				63BEF692271EDE8B000CAC95 /* EnvironmentValues.swift */,
+				5EDCC69C27EA13A90074F534 /* NSUbiquitousKeyValueStore.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1289,6 +1297,7 @@
 				63BEF68E271ECDA2000CAC95 /* FormatStyleButton.swift in Sources */,
 				5E835B4E2796C57D002B91FF /* DefaultTabPicker.swift in Sources */,
 				5E835B5327999F5F002B91FF /* Tab.swift in Sources */,
+				5EDCC6A027EA37890074F534 /* MykeModeTimeZoneGroupsController.swift in Sources */,
 				6346ADA526F3D4E600E406D0 /* SelectTimeZoneButton.swift in Sources */,
 				638A72DC2711D9A600E0171D /* TimeInterval.swift in Sources */,
 				5EE70E2A26ED21AA00F3F164 /* DateTimeZonePicker.swift in Sources */,
@@ -1344,6 +1353,7 @@
 				5E9BD45526EF446900383233 /* DateHelpers.swift in Sources */,
 				5E54BBB427373603005CF7A6 /* Settings.swift in Sources */,
 				63DDFB9C26F23DF00021ACFD /* DeviceType.swift in Sources */,
+				5EDCC69D27EA13A90074F534 /* NSUbiquitousKeyValueStore.swift in Sources */,
 				5E54BBB62737C290005CF7A6 /* AboutElsewhen.swift in Sources */,
 				6346ADA126F3C5E900E406D0 /* InlineNavigationBarTitle.swift in Sources */,
 			);
@@ -1353,6 +1363,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5EDCC69E27EA13A90074F534 /* NSUbiquitousKeyValueStore.swift in Sources */,
 				6346ADA626F3D55300E406D0 /* SelectTimeZoneButton.swift in Sources */,
 				5E0A416A278AD8CF00FAB5F8 /* TimeZoneSearchController.swift in Sources */,
 				6346AD8926F3C16700E406D0 /* Loggers.swift in Sources */,
@@ -1366,6 +1377,7 @@
 				63BEF694271EDEDD000CAC95 /* EnvironmentValues.swift in Sources */,
 				6346AD9326F3C1F400E406D0 /* DateTimeZonePicker.swift in Sources */,
 				63BEF697271EE275000CAC95 /* NotRepresentativeWarning.swift in Sources */,
+				5EDCC6A127EA37890074F534 /* MykeModeTimeZoneGroupsController.swift in Sources */,
 				6346AD8B26F3C1A100E406D0 /* MykeMode.swift in Sources */,
 				6346AD9426F3C1F800E406D0 /* TimeZoneChoiceItem.swift in Sources */,
 				63BB87BC271B6B65000E8820 /* SharingHelpers.swift in Sources */,

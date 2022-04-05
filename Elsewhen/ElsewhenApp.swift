@@ -30,6 +30,7 @@ struct ElsewhenApp: App {
             #else
             ContentView()
                 .environmentObject(OrientationObserver.shared)
+                .environmentObject(MykeModeTimeZoneGroupsController.shared)
             #endif
         }
     }
