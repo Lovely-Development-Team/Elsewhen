@@ -233,28 +233,22 @@ struct MykeMode: View, OrientationObserving {
     
     @ViewBuilder
     var dateTimeZonePicker: some View {
-        
+            
         Group {
+        
+            DateTimeZonePicker(selectedDate: $selectedDate, selectedTimeZone: $selectedTimeZone, showFullCalendar: false, maxWidth: nil)
+                .padding(.top, 5)
+                .padding(.horizontal, 8)
             
             Group {
-            
-                DateTimeZonePicker(selectedDate: $selectedDate, selectedTimeZone: $selectedTimeZone, showFullCalendar: false, maxWidth: nil)
-                    .padding(.top, 5)
-                    .padding(.horizontal, 8)
-                
-                Group {
-                    HStack {
-                        mykeModeButtons
-                    }
+                HStack {
+                    mykeModeButtons
                 }
-                .padding(.horizontal, 8)
-                
             }
             .padding(.horizontal, 8)
             
-            timeZoneGroupChoices
-            
         }
+        .padding(.horizontal, 8)
         
     }
     
@@ -317,6 +311,9 @@ struct MykeMode: View, OrientationObserving {
                             .padding()
                             .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
 #endif
+                        
+                        timeZoneGroupChoices
+                        
                         timeZoneList
                     }
                     
@@ -346,10 +343,12 @@ struct MykeMode: View, OrientationObserving {
                     VStack {
                         
                         dateTimeZonePicker
+                            .frame(minWidth: 0, maxWidth: 390)
+                        
+                        timeZoneGroupChoices
                         
                     }
                     .padding(.bottom, 10)
-                    .frame(minWidth: 0, maxWidth: 390)
                     .background(GeometryReader { geometry in
                         Color.clear.preference(
                             key: ViewHeightPreferenceKey.self,
