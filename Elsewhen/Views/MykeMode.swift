@@ -271,17 +271,16 @@ struct MykeMode: View, OrientationObserving {
                             }
                         }) {
                             Text(tzGroup.name)
-                                .font(.caption)
                                 .foregroundColor(selectedTimeZoneGroup == tzGroup ? .white : .primary)
                         }
                         .roundedRectangle(colour: selectedTimeZoneGroup == tzGroup ? .accentColor : .secondarySystemBackground, horizontalPadding: 14)
                         .contentShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
                         .contextMenu {
                             Button(action: {
-                                timeZoneGroupController.updateTimeZoneGroup(tzGroup, with: selectedTimeZones)
                                 selectedTimeZoneGroup = tzGroup
+                                timeZoneGroupController.updateTimeZoneGroup(tzGroup, with: selectedTimeZones)
                             }) {
-                                Text("Update")
+                                Text("Update Group")
                             }
                             Divider()
                             DeleteButton(text: "Remove Group") {
