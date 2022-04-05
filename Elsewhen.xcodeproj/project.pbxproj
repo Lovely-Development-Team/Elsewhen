@@ -89,7 +89,7 @@
 		5E6C8C4627468950003244DF /* progressive@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E6C8C3F2746894F003244DF /* progressive@2x.png */; };
 		5E6C8C4727468950003244DF /* progressive@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E6C8C402746894F003244DF /* progressive@3x.png */; };
 		5E6C8C4827468950003244DF /* progressive@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E6C8C402746894F003244DF /* progressive@3x.png */; };
-		5E7B92FA27C0DB2600E95C43 /* TimeZoneGrouop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7B92F927C0DB2600E95C43 /* TimeZoneGrouop.swift */; };
+		5E7B92FA27C0DB2600E95C43 /* TimeZoneGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7B92F927C0DB2600E95C43 /* TimeZoneGroup.swift */; };
 		5E7D36B027830DEE00E39333 /* BuildConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E7D36AE27830DEE00E39333 /* BuildConstants.m */; };
 		5E7D36B127830DEE00E39333 /* BuildConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E7D36AE27830DEE00E39333 /* BuildConstants.m */; };
 		5E835B4E2796C57D002B91FF /* DefaultTabPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E835B4D2796C57D002B91FF /* DefaultTabPicker.swift */; };
@@ -382,7 +382,7 @@
 		5E6C8C3E2746894F003244DF /* progressive@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "progressive@2x~ipad.png"; sourceTree = "<group>"; };
 		5E6C8C3F2746894F003244DF /* progressive@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "progressive@2x.png"; sourceTree = "<group>"; };
 		5E6C8C402746894F003244DF /* progressive@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "progressive@3x.png"; sourceTree = "<group>"; };
-		5E7B92F927C0DB2600E95C43 /* TimeZoneGrouop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeZoneGrouop.swift; sourceTree = "<group>"; };
+		5E7B92F927C0DB2600E95C43 /* TimeZoneGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeZoneGroup.swift; sourceTree = "<group>"; };
 		5E7D36AC27830DEB00E39333 /* Elsewhen-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Elsewhen-Bridging-Header.h"; sourceTree = "<group>"; };
 		5E7D36AD27830DEC00E39333 /* MacElsewhen-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MacElsewhen-Bridging-Header.h"; sourceTree = "<group>"; };
 		5E7D36AE27830DEE00E39333 /* BuildConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildConstants.m; sourceTree = "<group>"; };
@@ -672,7 +672,6 @@
 				5EB23BA026E406B900203153 /* Assets.xcassets */,
 				5EB23BA226E406B900203153 /* Preview Content */,
 				6378397F26EA61AB0055A10D /* Launch Screen.storyboard */,
-				5E7B92F927C0DB2600E95C43 /* TimeZoneGrouop.swift */,
 			);
 			path = Elsewhen;
 			sourceTree = "<group>";
@@ -718,6 +717,7 @@
 				5E7D36AD27830DEC00E39333 /* MacElsewhen-Bridging-Header.h */,
 				5E0A4168278AD8CF00FAB5F8 /* TimeZoneSearchController.swift */,
 				5EDCC69F27EA37890074F534 /* MykeModeTimeZoneGroupsController.swift */,
+				5E7B92F927C0DB2600E95C43 /* TimeZoneGroup.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1313,7 +1313,7 @@
 				63BB87BB271B6B41000E8820 /* SharingHelpers.swift in Sources */,
 				6378397E26EA5FD60055A10D /* UIApplication+clearLaunchScreenCache.swift in Sources */,
 				63AC5A072747F3BE008D10C6 /* TimeListSettings.swift in Sources */,
-				5E7B92FA27C0DB2600E95C43 /* TimeZoneGrouop.swift in Sources */,
+				5E7B92FA27C0DB2600E95C43 /* TimeZoneGroup.swift in Sources */,
 				5E9BD45926EF44B700383233 /* MykeMode.swift in Sources */,
 				5E54BBB82737C339005CF7A6 /* AltIconOption.swift in Sources */,
 				63C51BAB26FA343600145662 /* TimeZoneChoiceCell.swift in Sources */,
