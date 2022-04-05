@@ -13,6 +13,7 @@ struct MykeMode: View, OrientationObserving {
     
     #if !os(macOS)
     @EnvironmentObject internal var orientationObserver: OrientationObserver
+    @EnvironmentObject internal var timeZoneGroupController: MykeModeTimeZoneGroupsController
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     #endif
     @Environment(\.isInPopover) private var isInPopover
@@ -259,7 +260,7 @@ struct MykeMode: View, OrientationObserving {
     var timeZoneGroupChoices: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack {
-                ForEach(TIME_ZONE_GROUPS, id: \.id) { tzGroup in
+                ForEach(timeZoneGroupController.timeZoneGroups, id: \.id) { tzGroup in
                     Button(action: {
                         withAnimation {
                             selectedTimeZones = tzGroup.identifiers.compactMap { TimeZone(identifier: $0.identifier) }
@@ -272,11 +273,8 @@ struct MykeMode: View, OrientationObserving {
                     .roundedRectangle(colour: .secondarySystemBackground, horizontalPadding: 14)
                     .contentShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
                     .contextMenu {
-                        Button(action: {}) {
-                            Text("Edit Group")
-                        }
                         DeleteButton(text: "Remove Group") {
-                            
+                            timeZoneGroupController.removeTimeZoneGroup(id: tzGroup.id)
                         }
                     }
                 }
@@ -357,8 +355,10 @@ struct MykeMode: View, OrientationObserving {
                 #if os(iOS)
                 TimezoneChoiceView(selectedTimeZone: .constant(TimeZone.current), selectedTimeZones: $selectedTimeZones, selectedDate: $selectedDate, selectMultiple: true)
                     .navigationBarItems(leading: Button(action: {
-                        self.alertMessage(title: "Save as a group?", message: "Provide a name for the Time Zone group below.") { action in
-                            print("\(action)")
+                        self.alertMessage(title: "Save as a group?", message: "Provide a name for the Time Zone group below.") { action, text in
+                            timeZoneGroupController.addTimeZoneGroup(
+                                TimeZoneGroup(name: text, identifiers: selectedTimeZones.map { TimeZoneGroupEntry(identifier: $0.identifier) })
+                            )
                             self.showTimeZoneSheet = false
                         }
                     }) {
@@ -413,10 +413,12 @@ struct MykeMode: View, OrientationObserving {
         selectedTimeZones.remove(atOffsets: offsets)
     }
     
-    func alertMessage(title: String, message: String, okButtonTitle: String = "OK", completion: @escaping (UIAlertAction) -> ()) {
+    func alertMessage(title: String, message: String, okButtonTitle: String = "OK", completion: @escaping (UIAlertAction, String) -> ()) {
         let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alertVC.addTextField()
-        let okAction = UIAlertAction(title: okButtonTitle, style: .default, handler: completion)
+        let okAction = UIAlertAction(title: okButtonTitle, style: .default, handler: { action in
+            completion(action, alertVC.textFields?.first?.text ?? "")
+        })
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
         alertVC.addAction(okAction)
         alertVC.addAction(cancelAction)
