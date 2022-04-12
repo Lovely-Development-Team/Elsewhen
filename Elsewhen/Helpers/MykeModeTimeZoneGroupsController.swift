@@ -11,7 +11,8 @@ class MykeModeTimeZoneGroupsController: ObservableObject {
     
     static let shared = MykeModeTimeZoneGroupsController()
     
-    @Published var timeZoneGroups: [TimeZoneGroup] = []
+    @Published var timeZoneGroupNames: [String] = []
+    @Published var timeZoneGroups: [NewTimeZoneGroup] = []
     
     init() {
         NotificationCenter.default.addObserver(self,
@@ -27,25 +28,30 @@ class MykeModeTimeZoneGroupsController: ObservableObject {
         updateTimeZoneGroupsFromStore()
     }
     
-    func addTimeZoneGroup(_ group: TimeZoneGroup) {
+    func addTimeZoneGroup(_ group: NewTimeZoneGroup) {
         timeZoneGroups.append(group)
-        NSUbiquitousKeyValueStore.default.addTimeZoneGroup(group)
+        NSUbiquitousKeyValueStore.default.newAddTimeZoneGroup(group)
         NSUbiquitousKeyValueStore.default.synchronize()
     }
     
-    func removeTimeZoneGroup(id: UUID) {
-        timeZoneGroups = timeZoneGroups.filter { $0.id != id }
-        NSUbiquitousKeyValueStore.default.removeTimeZoneGroup(id: id)
+    func removeTimeZoneGroup(_ group: NewTimeZoneGroup) {
+        timeZoneGroups = timeZoneGroups.filter { $0.name != group.name }
+        NSUbiquitousKeyValueStore.default.newRemoveTimeZoneGroup(group)
         NSUbiquitousKeyValueStore.default.synchronize()
     }
     
-    func updateTimeZoneGroup(_ tzGroup: TimeZoneGroup, with timeZones: [TimeZone]) {
-        NSUbiquitousKeyValueStore.default.updateTimeZoneGroup(tzGroup, with: timeZones)
+    func updateTimeZoneGroup(_ tzGroup: NewTimeZoneGroup, with timeZones: [TimeZone]) {
+        NSUbiquitousKeyValueStore.default.newUpdateTimeZoneGroup(tzGroup, with: timeZones)
         updateTimeZoneGroupsFromStore()
     }
     
     func updateTimeZoneGroupsFromStore() {
-        timeZoneGroups = NSUbiquitousKeyValueStore.default.timeZoneGroups
+        timeZoneGroupNames = NSUbiquitousKeyValueStore.default.timeZoneGroupNames
+        timeZoneGroups = NSUbiquitousKeyValueStore.default.newTimeZoneGroups
+    }
+    
+    func retrieveTimeZoneGroup(byName name: String) -> NewTimeZoneGroup {
+        return NewTimeZoneGroup(name: name, timeZones: NSUbiquitousKeyValueStore.default.retrieveTimeZones(name))
     }
     
 }

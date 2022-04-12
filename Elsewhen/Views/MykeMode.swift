@@ -29,7 +29,7 @@ struct MykeMode: View, OrientationObserving {
     @State private var timeZonesUsing24HourTime: Set<TimeZone> = []
     @State private var timeZonesUsing12HourTime: Set<TimeZone> = []
     
-    @State private var selectedTimeZoneGroup: TimeZoneGroup? = nil
+    @State private var selectedTimeZoneGroup: NewTimeZoneGroup? = nil
     
     @AppStorage(UserDefaults.mykeModeDefaultTimeFormatKey, store: UserDefaults.shared) private var defaultTimeFormat: TimeFormat = .systemLocale
     @AppStorage(UserDefaults.mykeModeSeparatorKey, store: UserDefaults.shared) private var mykeModeSeparator: MykeModeSeparator = .hyphen
@@ -45,6 +45,9 @@ struct MykeMode: View, OrientationObserving {
     @State private var showTimeZoneSheet: Bool = false
     @State private var showTimeZonePopover: Bool = false
     @State private var selectionViewMaxHeight: CGFloat?
+    
+    @State private var showTimeZoneGroupNameClashAlert: Bool = false
+    @State private var pendingNewTimeZoneGroupName: String = ""
     
     @State private var viewId: Int = 1
     
@@ -257,7 +260,7 @@ struct MykeMode: View, OrientationObserving {
         ScrollView(.horizontal, showsIndicators: false) {
             ScrollViewReader { scrollViewReader in
                 HStack {
-                    ForEach(timeZoneGroupController.timeZoneGroups, id: \.id) { tzGroup in
+                    ForEach(timeZoneGroupController.timeZoneGroups, id: \.name) { tzGroup in
                         Button(action: {
                             selectedTimeZoneGroup = tzGroup
                             withAnimation {
@@ -278,10 +281,10 @@ struct MykeMode: View, OrientationObserving {
                             }
                             Divider()
                             DeleteButton(text: "Remove Group") {
-                                timeZoneGroupController.removeTimeZoneGroup(id: tzGroup.id)
+                                timeZoneGroupController.removeTimeZoneGroup(tzGroup)
                             }
                         }
-                        .id(tzGroup.id)
+                        .id(tzGroup.name)
                     }
                 }
                 .padding(.bottom, 2)
@@ -289,7 +292,7 @@ struct MykeMode: View, OrientationObserving {
                 .onChange(of: selectedTimeZoneGroup) { target in
                     guard let target = target else { return }
                     withAnimation {
-                        scrollViewReader.scrollTo(target.id, anchor: .center)
+                        scrollViewReader.scrollTo(target.name, anchor: .center)
                     }
                 }
             }
@@ -370,13 +373,19 @@ struct MykeMode: View, OrientationObserving {
         .sheet(isPresented: $showTimeZoneSheet) {
             NavigationView {
                 #if os(iOS)
-                TimezoneChoiceView(selectedTimeZone: .constant(TimeZone.current), selectedTimeZones: $selectedTimeZones, selectedDate: $selectedDate, selectMultiple: true)
+                    TimezoneChoiceView(selectedTimeZone: .constant(TimeZone.current), selectedTimeZones: $selectedTimeZones, selectedDate: $selectedDate, selectMultiple: true)
                     .navigationBarItems(leading: Button(action: {
-                        self.alertMessage(title: "Save as a group?", message: "Provide a name for the Time Zone group below.") { action, text in
-                            let tzGroup = TimeZoneGroup(name: text, timeZones: selectedTimeZones)
-                            timeZoneGroupController.addTimeZoneGroup(tzGroup)
-                            self.selectedTimeZoneGroup = tzGroup
-                            self.showTimeZoneSheet = false
+//                        showTimeZoneGroupNameClashAlert = true
+                        self.showSaveGroupDialog(title: "Save as a Group?", message: "Provide a name for the Time Zone Group below.") { action, text in
+                            if timeZoneGroupController.timeZoneGroupNames.contains(text) {
+                                pendingNewTimeZoneGroupName = text
+                                showTimeZoneGroupNameClashAlert = true
+                            } else {
+                                let tzGroup = NewTimeZoneGroup(name: text, timeZones: selectedTimeZones)
+                                timeZoneGroupController.addTimeZoneGroup(tzGroup)
+                                selectedTimeZoneGroup = tzGroup
+                                showTimeZoneSheet = false
+                            }
                         }
                     }) {
                         Text("Save...")
@@ -389,6 +398,19 @@ struct MykeMode: View, OrientationObserving {
                         Text("Done")
                     }
                     )
+                    .alert(isPresented: $showTimeZoneGroupNameClashAlert) {
+                        Alert(
+                            title: Text("Group already exists"),
+                            message: Text("Would you like to update the group \(pendingNewTimeZoneGroupName) with the selected Time Zones?"),
+                            primaryButton: .default(Text("Update Group")) {
+                                let tzGroup = timeZoneGroupController.retrieveTimeZoneGroup(byName: pendingNewTimeZoneGroupName)
+                                timeZoneGroupController.updateTimeZoneGroup(tzGroup, with: selectedTimeZones)
+                                selectedTimeZoneGroup = tzGroup
+                                showTimeZoneSheet = false
+                            },
+                            secondaryButton: .cancel(Text("Cancel"))
+                        )
+                    }
                 #else
                 TimezoneChoiceView(selectedTimeZone: .constant(TimeZone.current), selectedTimeZones: $selectedTimeZones, selectedDate: $selectedDate, selectMultiple: true)
                 #endif
@@ -402,9 +424,9 @@ struct MykeMode: View, OrientationObserving {
             timeZonesUsingNoFlag = UserDefaults.shared.mykeModeTimeZonesUsingNoFlag
             timeZonesUsing12HourTime = UserDefaults.shared.mykeModeTimeZoneIdentifiersUsing12HourTime
             timeZonesUsing24HourTime = UserDefaults.shared.mykeModeTimeZoneIdentifiersUsing24HourTime
-            if let groupId = UserDefaults.shared.mykeModeTimeZoneGroupId {
+            if let mykeModeTimeZoneGroupName = UserDefaults.shared.mykeModeTimeZoneGroupName {
                 for group in timeZoneGroupController.timeZoneGroups {
-                    if group.id == groupId {
+                    if group.name == mykeModeTimeZoneGroupName {
                         selectedTimeZoneGroup = group
                         break
                     }
@@ -418,9 +440,9 @@ struct MykeMode: View, OrientationObserving {
         }
         .onChange(of: selectedTimeZoneGroup) { newValue in
             if let newValue = newValue {
-                UserDefaults.shared.mykeModeTimeZoneGroupId = newValue.id
+                UserDefaults.shared.mykeModeTimeZoneGroupName = newValue.name
             } else {
-                UserDefaults.shared.mykeModeTimeZoneGroupId = nil
+                UserDefaults.shared.mykeModeTimeZoneGroupName = nil
             }
         }
         .onChange(of: timeZonesUsingEUFlag) { newValue in
@@ -452,10 +474,10 @@ struct MykeMode: View, OrientationObserving {
         selectedTimeZoneGroup = nil
     }
     
-    func alertMessage(title: String, message: String, okButtonTitle: String = "OK", completion: @escaping (UIAlertAction, String) -> ()) {
+    func showSaveGroupDialog(title: String, message: String, completion: @escaping (UIAlertAction, String) -> ()) {
         let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alertVC.addTextField()
-        let okAction = UIAlertAction(title: okButtonTitle, style: .default, handler: { action in
+        let okAction = UIAlertAction(title: "Save", style: .default, handler: { action in
             completion(action, alertVC.textFields?.first?.text ?? "")
         })
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)

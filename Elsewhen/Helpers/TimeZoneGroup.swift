@@ -32,3 +32,13 @@ struct TimeZoneGroup: Codable, Equatable {
     }
     
 }
+
+struct NewTimeZoneGroup: Equatable {
+    let name: String
+    let timeZones: [TimeZone]
+    
+    static func == (lhs: NewTimeZoneGroup, rhs: NewTimeZoneGroup) -> Bool {
+        lhs.name == rhs.name
+    }
+    
+}
