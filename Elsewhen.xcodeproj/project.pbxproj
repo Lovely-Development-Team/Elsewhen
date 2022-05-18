@@ -106,6 +106,7 @@
 		5E9BD45B26EF460D00383233 /* TimeZoneFlags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9BD45426EF446900383233 /* TimeZoneFlags.swift */; };
 		5E9BD45F26F0962D00383233 /* TimeZoneChoiceItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9BD45E26F0962D00383233 /* TimeZoneChoiceItem.swift */; };
 		5EAB48DD26E624CD00B04A60 /* TimezoneChoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAB48DC26E624CD00B04A60 /* TimezoneChoiceView.swift */; };
+		5EADF90C2832DA90004C32A5 /* ImportTimeZoneGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EADF90B2832DA90004C32A5 /* ImportTimeZoneGroupView.swift */; };
 		5EB23B9D26E406B600203153 /* ElsewhenApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB23B9C26E406B600203153 /* ElsewhenApp.swift */; };
 		5EB23B9F26E406B600203153 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB23B9E26E406B600203153 /* ContentView.swift */; };
 		5EB23BA126E406B900203153 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5EB23BA026E406B900203153 /* Assets.xcassets */; };
@@ -397,6 +398,7 @@
 		5E9BD45826EF44B700383233 /* MykeMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MykeMode.swift; sourceTree = "<group>"; };
 		5E9BD45E26F0962D00383233 /* TimeZoneChoiceItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeZoneChoiceItem.swift; sourceTree = "<group>"; };
 		5EAB48DC26E624CD00B04A60 /* TimezoneChoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimezoneChoiceView.swift; sourceTree = "<group>"; };
+		5EADF90B2832DA90004C32A5 /* ImportTimeZoneGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportTimeZoneGroupView.swift; sourceTree = "<group>"; };
 		5EB23B9926E406B600203153 /* Elsewhen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Elsewhen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EB23B9C26E406B600203153 /* ElsewhenApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElsewhenApp.swift; sourceTree = "<group>"; };
 		5EB23B9E26E406B600203153 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -972,6 +974,7 @@
 				5E2D6B1D277C48470065781E /* DefaultTimeFormatPicker.swift */,
 				5E2D6B1F277C4CBF0065781E /* SeparatorPicker.swift */,
 				5E835B4D2796C57D002B91FF /* DefaultTabPicker.swift */,
+				5EADF90B2832DA90004C32A5 /* ImportTimeZoneGroupView.swift */,
 			);
 			path = SettingsComponents;
 			sourceTree = "<group>";
@@ -1349,6 +1352,7 @@
 				637839BA26ECB58D0055A10D /* Intents.intentdefinition in Sources */,
 				5EB23B9D26E406B600203153 /* ElsewhenApp.swift in Sources */,
 				5E835B50279981BA002B91FF /* Badge.swift in Sources */,
+				5EADF90C2832DA90004C32A5 /* ImportTimeZoneGroupView.swift in Sources */,
 				5E9BD45F26F0962D00383233 /* TimeZoneChoiceItem.swift in Sources */,
 				5E9BD45526EF446900383233 /* DateHelpers.swift in Sources */,
 				5E54BBB427373603005CF7A6 /* Settings.swift in Sources */,
@@ -1661,7 +1665,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Elsewhen/Elsewhen.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 50;
+				CURRENT_PROJECT_VERSION = 54;
 				DEVELOPMENT_ASSET_PATHS = "\"Elsewhen/Preview Content\"";
 				DEVELOPMENT_TEAM = 56477RN8FN;
 				ENABLE_PREVIEWS = YES;
@@ -1678,7 +1682,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4;
+				MARKETING_VERSION = 1.5;
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.bencardy.Elsewhen;
 				PRODUCT_NAME = Elsewhen;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1698,7 +1702,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Elsewhen/Elsewhen.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 50;
+				CURRENT_PROJECT_VERSION = 54;
 				DEVELOPMENT_ASSET_PATHS = "\"Elsewhen/Preview Content\"";
 				DEVELOPMENT_TEAM = 56477RN8FN;
 				ENABLE_PREVIEWS = YES;
@@ -1715,7 +1719,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4;
+				MARKETING_VERSION = 1.5;
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.bencardy.Elsewhen;
 				PRODUCT_NAME = Elsewhen;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1736,7 +1740,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 50;
+				CURRENT_PROJECT_VERSION = 54;
 				DEVELOPMENT_ASSET_PATHS = "\"MacElsewhen/Preview Content\"";
 				DEVELOPMENT_TEAM = 56477RN8FN;
 				ENABLE_APP_SANDBOX = YES;
@@ -1753,7 +1757,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.3;
-				MARKETING_VERSION = 1.4;
+				MARKETING_VERSION = 1.5;
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.bencardy.Elsewhen;
 				PRODUCT_NAME = "$(PRODUCT_NAME)";
 				SDKROOT = macosx;
@@ -1775,7 +1779,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 50;
+				CURRENT_PROJECT_VERSION = 54;
 				DEVELOPMENT_ASSET_PATHS = "\"MacElsewhen/Preview Content\"";
 				DEVELOPMENT_TEAM = 56477RN8FN;
 				ENABLE_APP_SANDBOX = YES;
@@ -1792,7 +1796,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.3;
-				MARKETING_VERSION = 1.4;
+				MARKETING_VERSION = 1.5;
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.bencardy.Elsewhen;
 				PRODUCT_NAME = "$(PRODUCT_NAME)";
 				SDKROOT = macosx;
@@ -1809,7 +1813,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 50;
+				CURRENT_PROJECT_VERSION = 54;
 				DEVELOPMENT_TEAM = 56477RN8FN;
 				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1818,7 +1822,7 @@
 					"@loader_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.5;
-				MARKETING_VERSION = 1.4;
+				MARKETING_VERSION = 1.5;
 				PRODUCT_BUNDLE_IDENTIFIER = org.dwrs.MacElsewhenTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -1835,7 +1839,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 50;
+				CURRENT_PROJECT_VERSION = 54;
 				DEVELOPMENT_TEAM = 56477RN8FN;
 				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1844,7 +1848,7 @@
 					"@loader_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.5;
-				MARKETING_VERSION = 1.4;
+				MARKETING_VERSION = 1.5;
 				PRODUCT_BUNDLE_IDENTIFIER = org.dwrs.MacElsewhenTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -1860,7 +1864,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 50;
+				CURRENT_PROJECT_VERSION = 54;
 				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1868,7 +1872,7 @@
 					"@loader_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.5;
-				MARKETING_VERSION = 1.4;
+				MARKETING_VERSION = 1.5;
 				PRODUCT_BUNDLE_IDENTIFIER = org.dwrs.MacElsewhenUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -1884,7 +1888,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 50;
+				CURRENT_PROJECT_VERSION = 54;
 				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1892,7 +1896,7 @@
 					"@loader_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.5;
-				MARKETING_VERSION = 1.4;
+				MARKETING_VERSION = 1.5;
 				PRODUCT_BUNDLE_IDENTIFIER = org.dwrs.MacElsewhenUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -1907,7 +1911,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Discord Helper Intents/Discord Helper Intents.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 50;
+				CURRENT_PROJECT_VERSION = 54;
 				DEVELOPMENT_TEAM = 56477RN8FN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Discord Helper Intents/Info.plist";
@@ -1919,7 +1923,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.4;
+				MARKETING_VERSION = 1.5;
 				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.bencardy.Elsewhen.Elsewhen-Intents";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1934,7 +1938,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Discord Helper Intents/Discord Helper Intents.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 50;
+				CURRENT_PROJECT_VERSION = 54;
 				DEVELOPMENT_TEAM = 56477RN8FN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Discord Helper Intents/Info.plist";
@@ -1946,7 +1950,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.4;
+				MARKETING_VERSION = 1.5;
 				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.bencardy.Elsewhen.Elsewhen-Intents";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1961,7 +1965,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Discord Helper IntentsUI/Discord Helper IntentsUI.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 50;
+				CURRENT_PROJECT_VERSION = 54;
 				DEVELOPMENT_TEAM = 56477RN8FN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Discord Helper IntentsUI/Info.plist";
@@ -1973,7 +1977,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.4;
+				MARKETING_VERSION = 1.5;
 				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.bencardy.Elsewhen.Discord-Helper-IntentsUI";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1988,7 +1992,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Discord Helper IntentsUI/Discord Helper IntentsUI.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 50;
+				CURRENT_PROJECT_VERSION = 54;
 				DEVELOPMENT_TEAM = 56477RN8FN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Discord Helper IntentsUI/Info.plist";
@@ -2000,7 +2004,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.4;
+				MARKETING_VERSION = 1.5;
 				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.bencardy.Elsewhen.Discord-Helper-IntentsUI";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

@@ -279,6 +279,11 @@ struct MykeMode: View, OrientationObserving {
                             }) {
                                 Text("Update Group")
                             }
+                            Button(action: {
+                                postShowShareSheet(with: [tzGroup.exportText])
+                            }) {
+                                Text("Share Group")
+                            }
                             Divider()
                             DeleteButton(text: "Remove Group") {
                                 timeZoneGroupController.removeTimeZoneGroup(tzGroup)
@@ -377,7 +382,7 @@ struct MykeMode: View, OrientationObserving {
                     .navigationBarItems(leading: Button(action: {
 //                        showTimeZoneGroupNameClashAlert = true
                         self.showSaveGroupDialog(title: "Save as a Group?", message: "Provide a name for the Time Zone Group below.") { action, text in
-                            if timeZoneGroupController.timeZoneGroupNames.contains(text) {
+                            if timeZoneGroupController.timeZoneGroups.map({ $0.name }).contains(text) {
                                 pendingNewTimeZoneGroupName = text
                                 showTimeZoneGroupNameClashAlert = true
                             } else {

@@ -8,12 +8,16 @@
 import SwiftUI
 
 struct TimeListSettings: View {
+    @EnvironmentObject internal var timeZoneGroupController: MykeModeTimeZoneGroupsController
+    
     @Binding var defaultTimeFormat: TimeFormat
     @Binding var mykeModeSeparator: MykeModeSeparator
     @Binding var showCities: Bool
     
     @Binding var selectedView: SettingsViews?
     @State private var viewId: Int = 1
+    
+    @State private var showImportTimeZoneGroupSheet: Bool = false
     
     var exampleOutput: String {
         let tz = UserDefaults.shared.resetButtonTimeZone ?? TimeZone.current
@@ -53,29 +57,56 @@ struct TimeListSettings: View {
     }
     
     var body: some View {
-        Section(header: Text("Time List Settings"), footer: Text(exampleOutput)) {
-            if DeviceType.isPadAndNotCompact {
-                Button(action: { selectedView = .mykeModeDefaultTimeFormat }) {
-                    defaultTimeFormatPickerLink
-                }.listRowBackground(selectedView == .mykeModeDefaultTimeFormat ? Color.accentColor : Color(UIColor.systemBackground))
-                    .foregroundColor(selectedView == .mykeModeDefaultTimeFormat ? .white : .primary)
-                Button(action: { selectedView = .mykeModeSeparator }) {
-                    separatorPickerLink
-                }.listRowBackground(selectedView == .mykeModeSeparator ? Color.accentColor : Color(UIColor.systemBackground))
-                    .foregroundColor(selectedView == .mykeModeSeparator ? .white : .primary)
-            } else {
-                NavigationLink(destination: defaultTimeFormatPicker, tag: SettingsViews.mykeModeDefaultTimeFormat, selection: $selectedView) {
-                    defaultTimeFormatPickerLink
+        Group {
+            Section(header: Text("Time List Settings"), footer: Text(exampleOutput)) {
+                if DeviceType.isPadAndNotCompact {
+                    Button(action: { selectedView = .mykeModeDefaultTimeFormat }) {
+                        defaultTimeFormatPickerLink
+                    }.listRowBackground(selectedView == .mykeModeDefaultTimeFormat ? Color.accentColor : Color(UIColor.systemBackground))
+                        .foregroundColor(selectedView == .mykeModeDefaultTimeFormat ? .white : .primary)
+                    Button(action: { selectedView = .mykeModeSeparator }) {
+                        separatorPickerLink
+                    }.listRowBackground(selectedView == .mykeModeSeparator ? Color.accentColor : Color(UIColor.systemBackground))
+                        .foregroundColor(selectedView == .mykeModeSeparator ? .white : .primary)
+                } else {
+                    NavigationLink(destination: defaultTimeFormatPicker, tag: SettingsViews.mykeModeDefaultTimeFormat, selection: $selectedView) {
+                        defaultTimeFormatPickerLink
+                    }
+                    NavigationLink(destination: separatorPicker, tag: SettingsViews.mykeModeSeparator, selection: $selectedView) {
+                        separatorPickerLink
+                    }
                 }
-                NavigationLink(destination: separatorPicker, tag: SettingsViews.mykeModeSeparator, selection: $selectedView) {
-                    separatorPickerLink
-                }
+                Toggle("Include City Names", isOn: $showCities)
             }
-            Toggle("Include City Names", isOn: $showCities)
-        }
+            Button(action: {
+                if DeviceType.isPadAndNotCompact {
+                    selectedView = .importTimeZoneGroup
+                } else {
+                    showImportTimeZoneGroupSheet = true
+                }
+            }) {
+                Text("Import Time Zone Group")
+                    .foregroundColor(selectedView == .importTimeZoneGroup && DeviceType.isPadAndNotCompact ? .white : .primary)
+            }
+            .listRowBackground(selectedView == .importTimeZoneGroup && DeviceType.isPadAndNotCompact ? Color.accentColor : Color(UIColor.systemBackground))        }
         .id(viewId)
         .onChange(of: defaultTimeFormat) { newValue in
             viewId += 1
+        }
+        .sheet(isPresented: $showImportTimeZoneGroupSheet) {
+            NavigationView {
+                ImportTimeZoneGroupView() {
+                    showImportTimeZoneGroupSheet = false
+                }
+                    .navigationTitle("Import")
+                    .inlineNavigationBarTitle()
+                    .toolbar {
+                        Button("Cancel") {
+                            showImportTimeZoneGroupSheet = false
+                        }
+                    }
+                    
+            }
         }
     }
 }
@@ -84,7 +115,7 @@ struct TimeListSettings_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             Form {
-                TimeListSettings(defaultTimeFormat: .constant(.systemLocale), mykeModeSeparator: .constant(.hyphen), showCities: .constant(true), selectedView: .constant(.mykeModeSeparator))
+                TimeListSettings(defaultTimeFormat: .constant(.systemLocale), mykeModeSeparator: .constant(.hyphen), showCities: .constant(true), selectedView: .constant(nil))
             }
         }.environmentObject(OrientationObserver())
     }

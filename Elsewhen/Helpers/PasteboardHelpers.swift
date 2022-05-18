@@ -20,6 +20,9 @@ enum EWPasteboard {
         UIPasteboard.general.setValue(string,
                                       forPasteboardType: type.identifier)
     }
+    static func get() -> String? {
+        return UIPasteboard.general.string
+    }
     #elseif os(macOS)
     static func set(_ string: String, forType type: UTType) {
         NSPasteboard.general.clearContents()
