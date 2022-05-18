@@ -14,6 +14,7 @@ struct TimeZoneChoiceCell: View {
     @Binding var isFavourite: Bool
     let onSelect: (TimeZone) -> ()
     var isFromLocationSearch: Bool = false
+    var isButton: Bool = true
     
     @ViewBuilder
     var content: some View {
@@ -27,9 +28,13 @@ struct TimeZoneChoiceCell: View {
             }
         Divider()
         #else
-        Button(action: {
-            onSelect(tz)
-        }) {
+        if isButton {
+            Button(action: {
+                onSelect(tz)
+            }) {
+                TimeZoneChoiceItem(tz: tz, isSelected: isSelected, abbreviation: abbreviation, isFavourite: $isFavourite, isFromLocationSearch: isFromLocationSearch)
+            }
+        } else {
             TimeZoneChoiceItem(tz: tz, isSelected: isSelected, abbreviation: abbreviation, isFavourite: $isFavourite, isFromLocationSearch: isFromLocationSearch)
         }
         #endif

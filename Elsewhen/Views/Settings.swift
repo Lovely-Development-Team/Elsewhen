@@ -14,6 +14,7 @@ enum SettingsViews: Int {
     case mykeModeDefaultTimeFormat
     case mykeModeSeparator
     case defaultTabPicker
+    case importTimeZoneGroup
 }
 
 struct Settings: View {
@@ -239,7 +240,11 @@ struct Settings: View {
                         DefaultTimeFormatPicker(defaultTimeFormat: $defaultTimeFormat)
                     case .defaultTabPicker:
                         defaultTabView
-                    case nil:
+                    case .importTimeZoneGroup:
+                        ImportTimeZoneGroupView() {
+                            
+                        }
+                    default:
                         Rectangle()
                             .fill(Color(UIColor.systemBackground))
                     }

@@ -41,4 +41,10 @@ struct NewTimeZoneGroup: Equatable {
         lhs.name == rhs.name
     }
     
+    var exportText: String {
+        var exportData = [name]
+        exportData += timeZones.map { $0.identifier }
+        return exportData.joined(separator: "\n")
+    }
+    
 }
