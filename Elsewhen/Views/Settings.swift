@@ -24,6 +24,8 @@ struct Settings: View {
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     #endif
     
+    @Binding var selectedTab: Int
+    
     @State private var defaultTimeZone: TimeZone? = nil
     @State private var defaultDate: Date = Date.distantPast
     @State private var defaultTimeFormat: TimeFormat = .systemLocale
@@ -242,7 +244,7 @@ struct Settings: View {
                         defaultTabView
                     case .importTimeZoneGroup:
                         ImportTimeZoneGroupView() {
-                            
+                            selectedTab = 1
                         }
                     default:
                         Rectangle()
@@ -264,7 +266,7 @@ struct Settings: View {
 
 struct Settings_Previews: PreviewProvider {
     static var previews: some View {
-        Settings()
+        Settings(selectedTab: .constant(0))
             .environmentObject(OrientationObserver())
     }
 }
