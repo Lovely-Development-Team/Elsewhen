@@ -42,7 +42,7 @@ struct ContentView: View {
                 .tabItem { Label("Time List", systemImage: "list.dash") }
                 .tag(Tab.mykeMode.rawValue)
             
-            Settings()
+            Settings(selectedTab: $selectedTab)
                 .overlay(Rectangle().frame(width: nil, height: 1, alignment: .bottom).foregroundColor(Color.secondary.opacity(0.5)), alignment: .bottom)
                 .tabItem { Label("Settings", systemImage: "gear") }
                 .iconBadge(isPresented: false)
