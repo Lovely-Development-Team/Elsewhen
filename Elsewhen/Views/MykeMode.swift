@@ -5,7 +5,9 @@
 //  Created by Ben Cardy on 11/09/2021.
 //
 
+#if !os(macOS)
 import UIKit
+#endif
 import SwiftUI
 import UniformTypeIdentifiers
 
@@ -255,6 +257,7 @@ struct MykeMode: View, OrientationObserving {
         
     }
     
+    #if !os(macOS)
     @ViewBuilder
     var timeZoneGroupChoices: some View {
         ScrollView(.horizontal, showsIndicators: false) {
@@ -303,6 +306,7 @@ struct MykeMode: View, OrientationObserving {
             }
         }
     }
+    #endif
     
     var body: some View {
         
@@ -318,9 +322,9 @@ struct MykeMode: View, OrientationObserving {
                             .font(.title)
                             .padding()
                             .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-#endif
                         
                         timeZoneGroupChoices
+#endif
                         
                         timeZoneList
                     }
@@ -353,7 +357,9 @@ struct MykeMode: View, OrientationObserving {
                         dateTimeZonePicker
                             .frame(minWidth: 0, maxWidth: 390)
                         
+#if !os(macOS)
                         timeZoneGroupChoices
+                        #endif
                         
                     }
                     .padding(.bottom, 10)
@@ -429,6 +435,7 @@ struct MykeMode: View, OrientationObserving {
             timeZonesUsingNoFlag = UserDefaults.shared.mykeModeTimeZonesUsingNoFlag
             timeZonesUsing12HourTime = UserDefaults.shared.mykeModeTimeZoneIdentifiersUsing12HourTime
             timeZonesUsing24HourTime = UserDefaults.shared.mykeModeTimeZoneIdentifiersUsing24HourTime
+            #if !os(macOS)
             if let mykeModeTimeZoneGroupName = UserDefaults.shared.mykeModeTimeZoneGroupName {
                 for group in timeZoneGroupController.timeZoneGroups {
                     if group.name == mykeModeTimeZoneGroupName {
@@ -439,6 +446,7 @@ struct MykeMode: View, OrientationObserving {
             } else {
                 selectedTimeZoneGroup = nil
             }
+            #endif
         }
         .onChange(of: selectedTimeZones) { newValue in
             UserDefaults.shared.mykeModeTimeZones = newValue
@@ -479,6 +487,7 @@ struct MykeMode: View, OrientationObserving {
         selectedTimeZoneGroup = nil
     }
     
+    #if !os(macOS)
     func showSaveGroupDialog(title: String, message: String, completion: @escaping (UIAlertAction, String) -> ()) {
         let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alertVC.addTextField()
@@ -491,9 +500,11 @@ struct MykeMode: View, OrientationObserving {
         let viewController = UIApplication.shared.windows.first!.visibleViewController!
         viewController.present(alertVC, animated: true, completion: nil)
     }
+    #endif
     
 }
 
+#if !os(macOS)
 public extension UIWindow {
     var visibleViewController: UIViewController? {
         return UIWindow.getVisibleViewControllerFrom(self.rootViewController)
@@ -513,6 +524,7 @@ public extension UIWindow {
         }
     }
 }
+#endif
 
 private extension MykeMode {
     struct ViewHeightPreferenceKey: PreferenceKey {
