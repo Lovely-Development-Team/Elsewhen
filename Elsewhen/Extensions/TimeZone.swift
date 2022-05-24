@@ -10,7 +10,10 @@ import Foundation
 extension TimeZone {
     
     var friendlyName: String {
-        identifier.replacingOccurrences(of: "_", with: " ")
+        if identifier == "GMT" {
+            return "UTC / GMT"
+        }
+        return identifier.replacingOccurrences(of: "_", with: " ")
     }
     
     var country: String? {
