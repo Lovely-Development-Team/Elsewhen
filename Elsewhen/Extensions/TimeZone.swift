@@ -33,14 +33,14 @@ extension TimeZone {
         europeanUnionTimeZones.contains(self.identifier)
     }
     
-    static func filtered(by searchTerm: String) -> [TimeZone] {
+    static func filtered(by searchTerm: String, onDate: Date = Date()) -> [TimeZone] {
         let timezones = TimeZone.knownTimeZoneIdentifiers.compactMap { tz in
             TimeZone(identifier: tz)
         }
-        return filter(timezones: timezones, by: searchTerm)
+        return filter(timezones: timezones, by: searchTerm, onDate: onDate)
     }
     
-    func matches(searchTerm: String) -> Bool {
+    func matches(searchTerm: String, onDate: Date = Date()) -> Bool {
         let st = searchTerm.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
         guard st != "" else { return true }
         let alternativeSearchTerm = st.replacingOccurrences(of: "_", with: " ")
@@ -48,6 +48,9 @@ extension TimeZone {
             return true
         }
         if let abbreviation = abbreviation(), abbreviation.lowercased().contains(st) {
+            return true
+        }
+        if let fudgedAbbreviation = fudgedAbbreviation(for: onDate), fudgedAbbreviation.lowercased().contains(st) {
             return true
         }
         if identifier.starts(with: "America/") {
@@ -70,7 +73,7 @@ extension TimeZone {
         return false
     }
     
-    func fudgedAbbreviation(for selectedDate: Date) -> String? {
+    func fudgedAbbreviation(for selectedDate: Date = Date()) -> String? {
         
         let isDaylightSavingTime = isDaylightSavingTime(for: selectedDate)
         
