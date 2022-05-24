@@ -115,7 +115,9 @@ struct ResultSheet: View {
             }
             
             HStack {
+                #if !os(macOS)
                 Image(systemName: "square.and.arrow.up").opacity(0).accessibility(hidden: true)
+                #endif
                 CopyButton(text: "Copy Discord Code", generateText: { self.discordFormat }, showCopied: $showCopied)
                 #if !os(macOS)
                 ShareButton(generateText: { self.discordFormat })

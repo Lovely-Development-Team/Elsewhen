@@ -126,6 +126,7 @@
 		5EE2D2CF26F28CE100D61875 /* KeyboardHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE2D2CE26F28CE000D61875 /* KeyboardHelpers.swift */; };
 		5EE70E2726ECCC0700F3F164 /* TimeCodeGeneratorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE70E2626ECCC0700F3F164 /* TimeCodeGeneratorView.swift */; };
 		5EE70E2A26ED21AA00F3F164 /* DateTimeZonePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE70E2926ED21AA00F3F164 /* DateTimeZonePicker.swift */; };
+		5EEEF98D283BE9B900E75667 /* TimeZoneGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7B92F927C0DB2600E95C43 /* TimeZoneGroup.swift */; };
 		63087E97271B633700D6EEE8 /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63087E96271B633500D6EEE8 /* NotificationName.swift */; };
 		631E3F2226FCE9B60025F080 /* SelectedTimeZoneCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631E3F2126FCE9B60025F080 /* SelectedTimeZoneCell.swift */; };
 		631E3F2526FCEF1F0025F080 /* DeleteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631E3F2426FCEF1F0025F080 /* DeleteButton.swift */; };
@@ -1389,6 +1390,7 @@
 				6346AD9826F3C2B800E406D0 /* TimeZoneFlags.swift in Sources */,
 				63C51BAC26FA346B00145662 /* TimeZoneChoiceCell.swift in Sources */,
 				5E7D36B127830DEE00E39333 /* BuildConstants.m in Sources */,
+				5EEEF98D283BE9B900E75667 /* TimeZoneGroup.swift in Sources */,
 				635CE6E927032B36006BC7D3 /* MacDatePicker.swift in Sources */,
 				632F38C9274850C700F0C064 /* DefaultTimeZonePopoverController.swift in Sources */,
 				6346AD9626F3C23500E406D0 /* TimeZone+ItemProvider.swift in Sources */,
