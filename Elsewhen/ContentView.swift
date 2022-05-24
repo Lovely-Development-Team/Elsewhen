@@ -45,7 +45,7 @@ struct ContentView: View {
             Settings(selectedTab: $selectedTab)
                 .overlay(Rectangle().frame(width: nil, height: 1, alignment: .bottom).foregroundColor(Color.secondary.opacity(0.5)), alignment: .bottom)
                 .tabItem { Label("Settings", systemImage: "gear") }
-                .iconBadge(isPresented: false)
+                .iconBadge(isPresented: showSettingsIcon)
                 .tag(Tab.settings.rawValue)
             
         }
