@@ -76,7 +76,7 @@ struct TimezoneChoiceView: View {
     }
     
     private var filteredTimeZones: [TimeZone] {
-        TimeZone.filtered(by: searchTerm)
+        TimeZone.filtered(by: searchTerm, onDate: selectedDate)
     }
     
     private var sortedFilteredTimeZones: [TimeZone] {
