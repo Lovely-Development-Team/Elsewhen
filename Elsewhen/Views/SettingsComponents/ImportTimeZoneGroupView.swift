@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ImportTimeZoneGroupView: View {
     
-    @EnvironmentObject internal var timeZoneGroupController: MykeModeTimeZoneGroupsController
+    @EnvironmentObject private var timeZoneGroupController: MykeModeTimeZoneGroupsController
     
     @State private var clipboardContents: String? = nil
     @State private var timeZoneGroup: TimeZoneGroup? = nil

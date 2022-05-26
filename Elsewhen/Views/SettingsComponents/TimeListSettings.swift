@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TimeListSettings: View {
-    @EnvironmentObject internal var timeZoneGroupController: MykeModeTimeZoneGroupsController
+    @EnvironmentObject private var timeZoneGroupController: MykeModeTimeZoneGroupsController
     
     @Binding var defaultTimeFormat: TimeFormat
     @Binding var mykeModeSeparator: MykeModeSeparator
