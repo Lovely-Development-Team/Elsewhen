@@ -47,104 +47,113 @@ private static let pickerStackSpacing: CGFloat = 20
 private static let pickerStackSpacing: CGFloat = 5
 #endif
     
+    @ViewBuilder
+    var timeZoneButton: some View {
+        SelectTimeZoneButton(selectedTimeZone: $selectedTimeZone) {
+#if os(macOS)
+            showTimeZoneChoicePopover = true
+#else
+            self.showTimeZoneChoiceSheet = true
+#endif
+        }
+        .background(GeometryReader { geometry in
+            Color.clear.preference(
+                key: SelectTimeZoneButtonWidthPreferenceKey.self,
+                value: geometry.size.width
+            )
+        })
+        .onPreferenceChange(SelectTimeZoneButtonWidthPreferenceKey.self) {
+            selectTimeZoneButtonMaxWidth = $0
+        }
+        .popover(isPresented: $showTimeZoneChoicePopover, arrowEdge: .leading) {
+            TimezoneChoiceView(selectedTimeZone: $selectedTimeZone, selectedTimeZones: .constant([]), selectedDate: $selectedDate, selectMultiple: false) {
+                showTimeZoneChoicePopover = false
+            }
+            .frame(minWidth: 300, minHeight: 300)
+        }
+    }
+    
     var body: some View {
         Group {
             
-            if showFullCalendar {
-                #if os(macOS)
-                HStack {
-                    Button {
-                        isPresentingDatePopover = true
-                    } label: {
-                        Text("\(selectedDate, style: .date)").foregroundColor(.primary)
-                    }
-                    .popover(isPresented: $isPresentingDatePopover, arrowEdge: .top) {
-                        Group {
-                            MacDatePicker(selectedDate: $selectedDate)
-                                .padding(8)
-                        }.background(Color(NSColor.controlColor))
-                    }
-                    
-                    if !isInPopover {
-                        Spacer(minLength: 20)
-                    }
-                    
-                    DatePicker("", selection: $selectedDate, displayedComponents: [.hourAndMinute])
-                        .datePickerStyle(Self.timePickerStyle)
-                        .frame(maxWidth: selectTimeZoneButtonMaxWidth)
-                        .padding(.horizontal, 8)
+            #if os(macOS)
+            
+            HStack {
+                Button {
+                    isPresentingDatePopover = true
+                } label: {
+                    Text("\(selectedDate, style: .date)").foregroundColor(.primary)
                 }
-                .padding(isInPopover ? [] : .vertical)
-                .frame(maxWidth: maxWidth.map { $0 })
-                #else
+                .popover(isPresented: $isPresentingDatePopover, arrowEdge: .top) {
+                    Group {
+                        MacDatePicker(selectedDate: $selectedDate)
+                            .padding(8)
+                    }.background(Color(NSColor.controlColor))
+                }
+                
+                Spacer(minLength: 20)
+                
+                DatePicker("", selection: $selectedDate, displayedComponents: [.hourAndMinute])
+                    .datePickerStyle(Self.timePickerStyle)
+                    .frame(maxWidth: selectTimeZoneButtonMaxWidth)
+                    .padding(.horizontal, 8)
+                
+                if isInPopover {
+                    Spacer(minLength: 20)
+                    timeZoneButton
+                }
+                
+            }
+            .padding(isInPopover ? .bottom : .vertical)
+            .frame(minWidth: 0, maxWidth: .infinity)
+            
+            #else
+            
+            if showFullCalendar {
                 DatePicker("Date", selection: $selectedDate)
                     .datePickerStyle(.graphical)
                     .padding(.top)
-                #endif
             } else {
                 HStack {
                     Text("Time")
                         .fontWeight(.semibold)
                     Spacer()
-#if os(macOS)
-                    DatePicker("", selection: $selectedDate, displayedComponents: [.date, .hourAndMinute])
-                        .datePickerStyle(Self.timePickerStyle)
-                        .frame(maxWidth: selectTimeZoneButtonMaxWidth)
-                        .padding(.trailing)
-#else
                     DatePicker("Time", selection: $selectedDate, displayedComponents: [.date, .hourAndMinute])
                         .datePickerStyle(.compact)
                         .labelsHidden()
                     Button(action: {
-#if os(iOS)
                         mediumImpactFeedbackGenerator.impactOccurred()
-#endif
                         self.selectedDate = Date()
                         
                     }) {
                         Text("Now")
                     }
-#endif
                 }
             }
             
-            HStack {
-                Text("Time zone")
-                    .fontWeight(.semibold)
-                Spacer()
-                SelectTimeZoneButton(selectedTimeZone: $selectedTimeZone) {
-#if os(macOS)
-                    showTimeZoneChoicePopover = true
-#else
-                    self.showTimeZoneChoiceSheet = true
-#endif
+            #endif
+            
+            if !isInPopover {
+            
+                HStack {
+                    Text("Time zone")
+                        .fontWeight(.semibold)
+                    Spacer()
+                    timeZoneButton
                 }
-                .background(GeometryReader { geometry in
-                    Color.clear.preference(
-                        key: SelectTimeZoneButtonWidthPreferenceKey.self,
-                        value: geometry.size.width
-                    )
-                })
-                .onPreferenceChange(SelectTimeZoneButtonWidthPreferenceKey.self) {
-                    selectTimeZoneButtonMaxWidth = $0
-                }
-                .popover(isPresented: $showTimeZoneChoicePopover, arrowEdge: .leading) {
-                    TimezoneChoiceView(selectedTimeZone: $selectedTimeZone, selectedTimeZones: .constant([]), selectedDate: $selectedDate, selectMultiple: false) {
-                        showTimeZoneChoicePopover = false
-                    }
-                    .frame(minWidth: 300, minHeight: 300)
-                }
-            }
-            .padding(.bottom, 10)
-            .padding(.horizontal, showFullCalendar ? 8 : 0)
-            .frame(minWidth: 0, maxWidth: DeviceType.isPad() || DeviceType.isMac() ? maxWidth.map { $0 + 16 } : .infinity)
-            .sheet(isPresented: $showTimeZoneChoiceSheet) {
-                NavigationView {
-                    TimezoneChoiceView(selectedTimeZone: $selectedTimeZone, selectedTimeZones: .constant([]), selectedDate: $selectedDate, selectMultiple: false) {
-                        showTimeZoneChoiceSheet = false
+                .padding(.bottom, 10)
+                .padding(.horizontal, showFullCalendar ? 8 : 0)
+                .frame(minWidth: 0, maxWidth: DeviceType.isPad() || DeviceType.isMac() ? maxWidth.map { $0 + 16 } : .infinity)
+                .sheet(isPresented: $showTimeZoneChoiceSheet) {
+                    NavigationView {
+                        TimezoneChoiceView(selectedTimeZone: $selectedTimeZone, selectedTimeZones: .constant([]), selectedDate: $selectedDate, selectMultiple: false) {
+                            showTimeZoneChoiceSheet = false
+                        }
                     }
                 }
+                
             }
+            
         }
         .frame(maxWidth: .infinity)
     }
