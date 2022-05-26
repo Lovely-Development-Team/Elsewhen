@@ -21,7 +21,11 @@ enum EWPasteboard {
                                       forPasteboardType: type.identifier)
     }
     static func get() -> String? {
-        return UIPasteboard.general.string
+        if UIPasteboard.general.hasStrings {
+            return UIPasteboard.general.string
+        } else {
+            return nil
+        }
     }
     #elseif os(macOS)
     static func set(_ string: String, forType type: UTType) {
