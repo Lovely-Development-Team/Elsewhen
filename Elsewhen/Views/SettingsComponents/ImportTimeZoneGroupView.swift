@@ -90,12 +90,13 @@ struct ImportTimeZoneGroupView: View {
                             .padding(.bottom)
                         Text("Nothing found on the clipboard!")
                             .multilineTextAlignment(.center)
-                        Button(action: doImport) {
-                            Text(importIsDisabled ? "Update Time Zone Group" : "Import Time Zone Group")
+                        Button(action: checkClipboard) {
+                            Text("Try again")
                                 .font(.headline)
                                 .foregroundColor(.white)
                         }
                         .roundedRectangle()
+                        .padding(.top)
                         
                         
                     } else {
