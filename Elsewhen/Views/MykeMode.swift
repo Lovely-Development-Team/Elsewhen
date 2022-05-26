@@ -285,7 +285,7 @@ struct MykeMode: View, OrientationObserving {
                             Button(action: {
                                 postShowShareSheet(with: [tzGroup.exportText])
                             }) {
-                                Text("Share Group")
+                                Label("Share Group", systemImage: "square.and.arrow.up")
                             }
                             Divider()
                             DeleteButton(text: "Remove Group") {
