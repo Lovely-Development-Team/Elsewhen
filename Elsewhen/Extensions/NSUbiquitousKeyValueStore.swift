@@ -16,11 +16,11 @@ extension NSUbiquitousKeyValueStore {
     var timeZoneGroupNames: [String] {
         get {
             guard let names = array(forKey: Self.mykeModeTimeZoneGroupNamesKey) as? [String] else { return [] }
-            print("BEN: Fetched timeZoneGroupNames: \(names)")
+            logger.debug("NSUbiquitousKeyValueStore: Fetched timeZoneGroupNames: \(names)")
             return names
         }
         set {
-            print("BEN: Updating timeZoneGroupNames: \(newValue)")
+            logger.debug("NSUbiquitousKeyValueStore: Updating timeZoneGroupNames: \(newValue)")
             set(newValue, forKey: Self.mykeModeTimeZoneGroupNamesKey)
         }
     }
@@ -32,38 +32,38 @@ extension NSUbiquitousKeyValueStore {
     private func storeTimeZones(_ group: NewTimeZoneGroup) {
         let timeZoneIdentifiers = group.timeZones.map { $0.identifier }
         let key = makeTimeZoneGroupKey(forName: group.name)
-        print("BEN: Storing time zones for group \(group.name): \(key)=\(timeZoneIdentifiers)")
+        logger.debug("NSUbiquitousKeyValueStore: Storing time zones for group \(group.name): \(key)=\(timeZoneIdentifiers)")
         set(timeZoneIdentifiers, forKey: key)
     }
     
     func retrieveTimeZones(_ groupName: String) -> [TimeZone] {
         guard let identifiers = array(forKey: makeTimeZoneGroupKey(forName: groupName)) as? [String] else { return [] }
-        print("BEN: Fetched time zones for group \(groupName): \(identifiers)")
+        logger.debug("NSUbiquitousKeyValueStore: Fetched time zones for group \(groupName): \(identifiers)")
         return identifiers.compactMap { TimeZone(identifier: $0) }
     }
     
     var newTimeZoneGroups: [NewTimeZoneGroup] {
         get {
             let results = timeZoneGroupNames.map { NewTimeZoneGroup(name: $0, timeZones: retrieveTimeZones($0)) }
-            print("BEN: Fetched time zone groups: \(results)")
+            logger.debug("NSUbiquitousKeyValueStore: Fetched time zone groups: \(results)")
             return results
         }
     }
     
     func newAddTimeZoneGroup(_ group: NewTimeZoneGroup) {
-        print("BEN: Asked to add: \(group)")
+        logger.debug("NSUbiquitousKeyValueStore: Asked to add: \(group)")
         storeTimeZones(group)
         timeZoneGroupNames = timeZoneGroupNames + [group.name]
     }
     
     func newRemoveTimeZoneGroup(_ group: NewTimeZoneGroup) {
-        print("BEN: Asked to remove: \(group)")
+        logger.debug("NSUbiquitousKeyValueStore: Asked to remove: \(group)")
         timeZoneGroupNames = timeZoneGroupNames.filter { $0 != group.name }
         removeObject(forKey: makeTimeZoneGroupKey(forName: group.name))
     }
     
     func newUpdateTimeZoneGroup(_ group: NewTimeZoneGroup, with timeZones: [TimeZone]) {
-        print("BEN: Asked to update \(group.name) with \(timeZones)")
+        logger.debug("NSUbiquitousKeyValueStore: Asked to update \(group.name) with \(timeZones)")
         storeTimeZones(NewTimeZoneGroup(name: group.name, timeZones: timeZones))
     }
     

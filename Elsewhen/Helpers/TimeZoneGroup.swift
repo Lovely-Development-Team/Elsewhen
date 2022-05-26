@@ -33,7 +33,8 @@ struct TimeZoneGroup: Codable, Equatable {
     
 }
 
-struct NewTimeZoneGroup: Equatable {
+struct NewTimeZoneGroup: Equatable, CustomStringConvertible {
+    
     let name: String
     let timeZones: [TimeZone]
     
@@ -45,6 +46,10 @@ struct NewTimeZoneGroup: Equatable {
         var exportData = [name]
         exportData += timeZones.map { $0.identifier }
         return exportData.joined(separator: "\n")
+    }
+    
+    var description: String {
+        "\(name): \(timeZones)"
     }
     
 }
