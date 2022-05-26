@@ -15,9 +15,9 @@ struct MykeMode: View, OrientationObserving {
     
     #if !os(macOS)
     @EnvironmentObject internal var orientationObserver: OrientationObserver
-    @EnvironmentObject internal var timeZoneGroupController: MykeModeTimeZoneGroupsController
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     #endif
+    @EnvironmentObject private var timeZoneGroupController: MykeModeTimeZoneGroupsController
     @Environment(\.isInPopover) private var isInPopover
     
     @State private var selectedDate = Date()
