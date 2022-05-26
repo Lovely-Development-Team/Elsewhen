@@ -224,13 +224,12 @@ struct MykeMode: View, OrientationObserving {
             TimezoneChoiceView(selectedTimeZone: .constant(TimeZone.current), selectedTimeZones: $selectedTimeZones, selectedDate: $selectedDate, selectMultiple: true)
                 .frame(minWidth: 300, minHeight: 300)
         }
-        .padding(.vertical)
+        .padding(isInPopover ? .bottom : .vertical)
         
-        if !isInPopover {
-            Spacer()
-        }
+        Spacer()
         
         CopyButton(text: "Copy", generateText: generateTimesAndFlagsText, showCopied: $showCopied)
+            .padding(isInPopover ? .bottom : [])
         #if !os(macOS)
         ShareButton(generateText: generateTimesAndFlagsText)
         #endif
@@ -244,6 +243,7 @@ struct MykeMode: View, OrientationObserving {
             DateTimeZonePicker(selectedDate: $selectedDate, selectedTimeZone: $selectedTimeZone, showFullCalendar: false, maxWidth: nil)
                 .padding(.top, 5)
                 .padding(.horizontal, 8)
+                
             
             Group {
                 HStack {
@@ -377,6 +377,7 @@ struct MykeMode: View, OrientationObserving {
                         .padding(.top, (selectionViewMaxHeight ?? 0))
                     
                 }
+                .padding(.top, isInPopover ? 15 : 0)
                 
             }
             
