@@ -12,7 +12,7 @@ class MykeModeTimeZoneGroupsController: ObservableObject {
     static let shared = MykeModeTimeZoneGroupsController()
     
     @Published var timeZoneGroupNames: [String] = []
-    @Published var timeZoneGroups: [NewTimeZoneGroup] = []
+    @Published var timeZoneGroups: [TimeZoneGroup] = []
     
     init() {
         NotificationCenter.default.addObserver(self,
@@ -28,32 +28,32 @@ class MykeModeTimeZoneGroupsController: ObservableObject {
         updateTimeZoneGroupsFromStore()
     }
     
-    func addTimeZoneGroup(_ group: NewTimeZoneGroup) {
+    func addTimeZoneGroup(_ group: TimeZoneGroup) {
         timeZoneGroups.append(group)
         timeZoneGroupNames = timeZoneGroups.map { $0.name }
-        NSUbiquitousKeyValueStore.default.newAddTimeZoneGroup(group)
+        NSUbiquitousKeyValueStore.default.addTimeZoneGroup(group)
         NSUbiquitousKeyValueStore.default.synchronize()
     }
     
-    func removeTimeZoneGroup(_ group: NewTimeZoneGroup) {
+    func removeTimeZoneGroup(_ group: TimeZoneGroup) {
         timeZoneGroups = timeZoneGroups.filter { $0.name != group.name }
         timeZoneGroupNames = timeZoneGroups.map { $0.name }
-        NSUbiquitousKeyValueStore.default.newRemoveTimeZoneGroup(group)
+        NSUbiquitousKeyValueStore.default.removeTimeZoneGroup(group)
         NSUbiquitousKeyValueStore.default.synchronize()
     }
     
-    func updateTimeZoneGroup(_ tzGroup: NewTimeZoneGroup, with timeZones: [TimeZone]) {
-        NSUbiquitousKeyValueStore.default.newUpdateTimeZoneGroup(tzGroup, with: timeZones)
+    func updateTimeZoneGroup(_ tzGroup: TimeZoneGroup, with timeZones: [TimeZone]) {
+        NSUbiquitousKeyValueStore.default.updateTimeZoneGroup(tzGroup, with: timeZones)
         updateTimeZoneGroupsFromStore()
     }
     
     func updateTimeZoneGroupsFromStore() {
         timeZoneGroupNames = NSUbiquitousKeyValueStore.default.timeZoneGroupNames
-        timeZoneGroups = NSUbiquitousKeyValueStore.default.newTimeZoneGroups
+        timeZoneGroups = NSUbiquitousKeyValueStore.default.timeZoneGroups
     }
     
-    func retrieveTimeZoneGroup(byName name: String) -> NewTimeZoneGroup {
-        return NewTimeZoneGroup(name: name, timeZones: NSUbiquitousKeyValueStore.default.retrieveTimeZones(name))
+    func retrieveTimeZoneGroup(byName name: String) -> TimeZoneGroup {
+        return TimeZoneGroup(name: name, timeZones: NSUbiquitousKeyValueStore.default.retrieveTimeZones(name))
     }
     
     func importTimeZoneGroup(fromString groupDetails: String) -> Bool {
@@ -70,11 +70,11 @@ class MykeModeTimeZoneGroupsController: ObservableObject {
         }
     }
     
-    func parseTimeZoneGroupDetails(_ groupDetails: String) -> NewTimeZoneGroup? {
+    func parseTimeZoneGroupDetails(_ groupDetails: String) -> TimeZoneGroup? {
         let lines = groupDetails.trimmingCharacters(in: .whitespacesAndNewlines).split(whereSeparator: \.isNewline)
         guard let groupName = lines.first else { return nil }
         let timeZones = lines.dropFirst().compactMap { TimeZone(identifier: String($0).trimmingCharacters(in: .whitespacesAndNewlines)) }
-        return NewTimeZoneGroup(name: String(groupName), timeZones: timeZones)
+        return TimeZoneGroup(name: String(groupName), timeZones: timeZones)
     }
     
 }

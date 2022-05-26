@@ -12,7 +12,7 @@ struct ImportTimeZoneGroupView: View {
     @EnvironmentObject internal var timeZoneGroupController: MykeModeTimeZoneGroupsController
     
     @State private var clipboardContents: String? = nil
-    @State private var timeZoneGroup: NewTimeZoneGroup? = nil
+    @State private var timeZoneGroup: TimeZoneGroup? = nil
     @State private var nothingOnClipboard: Bool = false
     @State private var importIsDisabled: Bool = false
     

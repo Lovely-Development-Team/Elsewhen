@@ -31,7 +31,7 @@ struct MykeMode: View, OrientationObserving {
     @State private var timeZonesUsing24HourTime: Set<TimeZone> = []
     @State private var timeZonesUsing12HourTime: Set<TimeZone> = []
     
-    @State private var selectedTimeZoneGroup: NewTimeZoneGroup? = nil
+    @State private var selectedTimeZoneGroup: TimeZoneGroup? = nil
     
     @AppStorage(UserDefaults.mykeModeDefaultTimeFormatKey, store: UserDefaults.shared) private var defaultTimeFormat: TimeFormat = .systemLocale
     @AppStorage(UserDefaults.mykeModeSeparatorKey, store: UserDefaults.shared) private var mykeModeSeparator: MykeModeSeparator = .hyphen
@@ -393,7 +393,7 @@ struct MykeMode: View, OrientationObserving {
                                 pendingNewTimeZoneGroupName = text
                                 showTimeZoneGroupNameClashAlert = true
                             } else {
-                                let tzGroup = NewTimeZoneGroup(name: text, timeZones: selectedTimeZones)
+                                let tzGroup = TimeZoneGroup(name: text, timeZones: selectedTimeZones)
                                 timeZoneGroupController.addTimeZoneGroup(tzGroup)
                                 selectedTimeZoneGroup = tzGroup
                                 showTimeZoneSheet = false
