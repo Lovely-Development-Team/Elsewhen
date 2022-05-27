@@ -127,6 +127,9 @@
 		5EE70E2726ECCC0700F3F164 /* TimeCodeGeneratorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE70E2626ECCC0700F3F164 /* TimeCodeGeneratorView.swift */; };
 		5EE70E2A26ED21AA00F3F164 /* DateTimeZonePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE70E2926ED21AA00F3F164 /* DateTimeZonePicker.swift */; };
 		5EEEF98D283BE9B900E75667 /* TimeZoneGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7B92F927C0DB2600E95C43 /* TimeZoneGroup.swift */; };
+		5EF7801F284165180028597B /* MykeModeTimeZoneGroupsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDCC69F27EA37890074F534 /* MykeModeTimeZoneGroupsController.swift */; };
+		5EF78020284166240028597B /* TimeZoneGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7B92F927C0DB2600E95C43 /* TimeZoneGroup.swift */; };
+		5EF78021284166330028597B /* NSUbiquitousKeyValueStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDCC69C27EA13A90074F534 /* NSUbiquitousKeyValueStore.swift */; };
 		63087E97271B633700D6EEE8 /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63087E96271B633500D6EEE8 /* NotificationName.swift */; };
 		631E3F2226FCE9B60025F080 /* SelectedTimeZoneCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631E3F2126FCE9B60025F080 /* SelectedTimeZoneCell.swift */; };
 		631E3F2526FCEF1F0025F080 /* DeleteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631E3F2426FCEF1F0025F080 /* DeleteButton.swift */; };
@@ -1467,6 +1470,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5EF78021284166330028597B /* NSUbiquitousKeyValueStore.swift in Sources */,
 				637839B026EBF4910055A10D /* Intents.intentdefinition in Sources */,
 				6378399226EBF4750055A10D /* IntentHandler.swift in Sources */,
 				5E6C8C3C2746764B003244DF /* MykeModeSeparator.swift in Sources */,
@@ -1478,6 +1482,8 @@
 				5E9BD45A26EF45FB00383233 /* DateHelpers.swift in Sources */,
 				5E9BD45B26EF460D00383233 /* TimeZoneFlags.swift in Sources */,
 				637839B826ECAF830055A10D /* InTimeZoneExtension.swift in Sources */,
+				5EF78020284166240028597B /* TimeZoneGroup.swift in Sources */,
+				5EF7801F284165180028597B /* MykeModeTimeZoneGroupsController.swift in Sources */,
 				63B0886527109E6200CA9980 /* CommonResolution.swift in Sources */,
 				5E835B5427999F5F002B91FF /* Tab.swift in Sources */,
 				637839C126ECBA5B0055A10D /* NSUserInfoKeys.swift in Sources */,
