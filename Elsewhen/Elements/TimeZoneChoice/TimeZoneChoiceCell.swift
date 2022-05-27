@@ -13,8 +13,8 @@ struct TimeZoneChoiceCell: View {
     let abbreviation: String?
     @Binding var isFavourite: Bool
     let onSelect: (TimeZone) -> ()
-    var isFromLocationSearch: Bool = false
-    var isButton: Bool = true
+    let isFromLocationSearch: Bool
+    let isButton: Bool
     
     @ViewBuilder
     var content: some View {

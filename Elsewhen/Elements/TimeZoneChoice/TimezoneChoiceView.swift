@@ -124,12 +124,12 @@ struct TimezoneChoiceView: View {
             }
             ForEach(sortedFilteredTimeZones, id: \.self) { tz in
                 let isFavourite = isFavouriteBinding(for: tz)
-                TimeZoneChoiceCell(tz: tz, isSelected: timeZoneIsSelected(tz), abbreviation: tz.fudgedAbbreviation(for: selectedDate), isFavourite: isFavourite, onSelect: onSelect(tz:))
+                TimeZoneChoiceCell(tz: tz, isSelected: timeZoneIsSelected(tz), abbreviation: tz.fudgedAbbreviation(for: selectedDate), isFavourite: isFavourite, onSelect: onSelect(tz:), isFromLocationSearch: false, isButton: true)
             }
             if !searchController.results.isEmpty {
                 ForEach(sortedFoundTimeZones, id: \.self) { tz in
                     let isFavourite = isFavouriteBinding(for: tz)
-                    TimeZoneChoiceCell(tz: tz, isSelected: timeZoneIsSelected(tz), abbreviation: tz.fudgedAbbreviation(for: selectedDate), isFavourite: isFavourite, onSelect: onSelect(tz:), isFromLocationSearch: true)
+                    TimeZoneChoiceCell(tz: tz, isSelected: timeZoneIsSelected(tz), abbreviation: tz.fudgedAbbreviation(for: selectedDate), isFavourite: isFavourite, onSelect: onSelect(tz:), isFromLocationSearch: true, isButton: true)
                 }
             }
         }
