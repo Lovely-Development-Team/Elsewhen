@@ -32,7 +32,7 @@ struct ImportTimeZoneGroupView: View {
                             ForEach(timeZoneGroup.timeZones, id: \.self) { tz in
                                 HStack {
                                     Text(flagForTimeZone(tz))
-                                    TimeZoneChoiceCell(tz: tz, isSelected: false, abbreviation: tz.fudgedAbbreviation(for: Date()), isFavourite: .constant(false), onSelect: {_ in }, isButton: false)
+                                    TimeZoneChoiceCell(tz: tz, isSelected: false, abbreviation: tz.fudgedAbbreviation(for: Date()), isFavourite: .constant(false), onSelect: {_ in }, isFromLocationSearch: false, isButton: false)
                                 }
                                 .frame(minWidth: 0, maxWidth: .infinity)
                                 .padding(.top)
