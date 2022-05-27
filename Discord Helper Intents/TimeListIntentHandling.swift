@@ -9,6 +9,21 @@ import Foundation
 import Intents
 
 class TimeListIntentHandling: NSObject, GetTimeListIntentHandling {
+    
+    func provideTimeZoneGroupOptionsCollection(for intent: GetTimeListIntent, with completion: @escaping (INObjectCollection<INTimeZoneGroup>?, Error?) -> Void) {
+        completion(.init(items: MykeModeTimeZoneGroupsController.shared.timeZoneGroupNames.map { tzGroupName in
+            INTimeZoneGroup(identifier: tzGroupName, display: tzGroupName)
+        }), nil)
+    }
+    
+    func resolveTimeZoneGroup(for intent: GetTimeListIntent, with completion: @escaping (INTimeZoneGroupResolutionResult) -> Void) {
+        guard let timeZoneGroup = intent.timeZoneGroup else {
+            completion(.needsValue())
+            return
+        }
+        completion(.success(with: timeZoneGroup))
+    }
+    
     func resolveDate(for intent: GetTimeListIntent, with completion: @escaping (INDateComponentsResolutionResult) -> Void) {
         guard let date = intent.date else {
             completion(.needsValue())
@@ -75,6 +90,14 @@ class TimeListIntentHandling: NSObject, GetTimeListIntentHandling {
             return filter(timezones: Array(UserDefaults.shared.favouriteTimeZones), by: "")
         case .all:
             return TimeZone.filtered(by: "")
+        case .group:
+            guard let timeZoneGroup = intent.timeZoneGroup else {
+                return nil
+            }
+            guard let name = timeZoneGroup.identifier else {
+                return nil
+            }
+            return MykeModeTimeZoneGroupsController.shared.retrieveTimeZoneGroup(byName: name).timeZones
         default:
             return nil
         }
@@ -91,10 +114,14 @@ class TimeListIntentHandling: NSObject, GetTimeListIntentHandling {
         }
         let timezoneIdentifier = intent.timezone?.identifier
         let timezone = timezoneIdentifier.flatMap { TimeZone(identifier: $0) } ?? TimeZone.current
+        
         guard let chosenTimezones = timezones(for: intent) else {
             completion(.init(code: .noChosenTimezones, userActivity: userActivity))
             return
         }
+        
+        
+        
         let response = GetTimeListIntentResponse(code: .success, userActivity: userActivity)
         response.discordFormat = stringForTimesAndFlags(of: date, in: timezone, for: chosenTimezones, separator: UserDefaults.shared.mykeModeSeparator, timeZonesUsingEUFlag: UserDefaults.shared.mykeModeTimeZonesUsingEUFlag, timeZonesUsingNoFlag: UserDefaults.shared.mykeModeTimeZonesUsingNoFlag, showCities: UserDefaults.shared.mykeModeShowCities)
         completion(response)
