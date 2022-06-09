@@ -255,16 +255,6 @@ struct DateTimeSelection: View, OrientationObserving {
     }
 }
 
-private extension DateTimeSelection {
-    struct DateFormatsWidthPreferenceKey: PreferenceKey {
-        static let defaultValue: CGFloat = 0
-        static func reduce(value: inout CGFloat,
-                           nextValue: () -> CGFloat) {
-            value = max(value, nextValue())
-        }
-    }
-}
-
 struct DateTimeSelection_Previews: PreviewProvider {
     static var previews: some View {
         VStack {

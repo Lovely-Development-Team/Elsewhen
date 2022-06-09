@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TimeListSettings: View {
     @EnvironmentObject private var timeZoneGroupController: MykeModeTimeZoneGroupsController
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
     
     @Binding var defaultTimeFormat: TimeFormat
     @Binding var mykeModeSeparator: MykeModeSeparator
@@ -18,6 +19,10 @@ struct TimeListSettings: View {
     @State private var viewId: Int = 1
     
     @State private var showImportTimeZoneGroupSheet: Bool = false
+    
+    var isPadAndNotCompact: Bool {
+        DeviceType.isPad() && horizontalSizeClass != .compact
+    }
     
     var exampleOutput: String {
         let tz = UserDefaults.shared.resetButtonTimeZone ?? TimeZone.current
@@ -59,7 +64,7 @@ struct TimeListSettings: View {
     var body: some View {
         Group {
             Section(header: Text("Time List Settings"), footer: Text(exampleOutput)) {
-                if DeviceType.isPadAndNotCompact {
+                if isPadAndNotCompact {
                     Button(action: { selectedView = .mykeModeDefaultTimeFormat }) {
                         defaultTimeFormatPickerLink
                     }.listRowBackground(selectedView == .mykeModeDefaultTimeFormat ? Color.accentColor : Color(UIColor.systemBackground))
@@ -81,16 +86,16 @@ struct TimeListSettings: View {
             
             if EWPasteboard.hasStrings() {
                 Button(action: {
-                    if DeviceType.isPadAndNotCompact {
+                    if isPadAndNotCompact {
                         selectedView = .importTimeZoneGroup
                     } else {
                         showImportTimeZoneGroupSheet = true
                     }
                 }) {
                     Text("Import Time Zone Group")
-                        .foregroundColor(selectedView == .importTimeZoneGroup && DeviceType.isPadAndNotCompact ? .white : .primary)
+                        .foregroundColor(selectedView == .importTimeZoneGroup && isPadAndNotCompact ? .white : .primary)
                 }
-                .listRowBackground(selectedView == .importTimeZoneGroup && DeviceType.isPadAndNotCompact ? Color.accentColor : Color(UIColor.systemBackground))
+                .listRowBackground(selectedView == .importTimeZoneGroup && isPadAndNotCompact ? Color.accentColor : Color(UIColor.systemBackground))
             }
         }
         .id(viewId)

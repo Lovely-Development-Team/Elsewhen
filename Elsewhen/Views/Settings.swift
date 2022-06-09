@@ -43,6 +43,10 @@ struct Settings: View {
         defaultTimeZone?.friendlyName ?? "Device"
     }
     
+    var isPadAndNotCompact: Bool {
+        DeviceType.isPad() && horizontalSizeClass != .compact
+    }
+    
     var footer: some View {
         VStack(spacing: 2) {
             Link(destination: URL(string: "https://tildy.dev")!) {
@@ -122,7 +126,7 @@ struct Settings: View {
     @ViewBuilder
     var settings: some View {
         Group {
-            if DeviceType.isPadAndNotCompact {
+            if isPadAndNotCompact {
                 Section(footer: Text("Settings").font(.largeTitle).fontWeight(.bold).foregroundColor(.primary).padding(.leading, -10)) {
                     EmptyView()
                 }
@@ -139,7 +143,7 @@ struct Settings: View {
             }
             
             Section(header: Text("General Settings"), footer: smartTimeZoneSearchExplanation) {
-                if DeviceType.isPadAndNotCompact {
+                if isPadAndNotCompact {
                     Button(action: {
                         self.selectedView = .altIcon
                     }) {
@@ -217,7 +221,7 @@ struct Settings: View {
         .onAppear {
             defaultTimeZone = UserDefaults.shared.resetButtonTimeZone
             defaultTimeFormat = UserDefaults.shared.mykeModeDefaultTimeFormat
-            if DeviceType.isPadAndNotCompact {
+            if isPadAndNotCompact {
                 if selectedView == nil {
                     selectedView = .altIcon
                 }
@@ -233,7 +237,7 @@ struct Settings: View {
     }
     
     var body: some View {
-        if DeviceType.isPadAndNotCompact {
+        if isPadAndNotCompact {
             HStack(spacing: 0) {
                 Form {
                     settings
