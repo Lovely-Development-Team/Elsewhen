@@ -78,17 +78,21 @@ struct TimeListSettings: View {
                 }
                 Toggle("Include City Names", isOn: $showCities)
             }
-            Button(action: {
-                if DeviceType.isPadAndNotCompact {
-                    selectedView = .importTimeZoneGroup
-                } else {
-                    showImportTimeZoneGroupSheet = true
+            
+            if EWPasteboard.hasStrings() {
+                Button(action: {
+                    if DeviceType.isPadAndNotCompact {
+                        selectedView = .importTimeZoneGroup
+                    } else {
+                        showImportTimeZoneGroupSheet = true
+                    }
+                }) {
+                    Text("Import Time Zone Group")
+                        .foregroundColor(selectedView == .importTimeZoneGroup && DeviceType.isPadAndNotCompact ? .white : .primary)
                 }
-            }) {
-                Text("Import Time Zone Group")
-                    .foregroundColor(selectedView == .importTimeZoneGroup && DeviceType.isPadAndNotCompact ? .white : .primary)
+                .listRowBackground(selectedView == .importTimeZoneGroup && DeviceType.isPadAndNotCompact ? Color.accentColor : Color(UIColor.systemBackground))
             }
-            .listRowBackground(selectedView == .importTimeZoneGroup && DeviceType.isPadAndNotCompact ? Color.accentColor : Color(UIColor.systemBackground))        }
+        }
         .id(viewId)
         .onChange(of: defaultTimeFormat) { newValue in
             viewId += 1

@@ -132,7 +132,7 @@ struct ResultSheet: View {
         .background(
             Color.secondarySystemBackground
                 .cornerRadius(15)
-                .shadow(color: Color.primary.opacity(0.3), radius: 5, x: 0, y: 0)
+                .shadow(color: Color.primary.opacity(DeviceType.isPhone() ? 0.3 : 0), radius: 5, x: 0, y: 0)
         )
         .padding()
     }

@@ -20,6 +20,9 @@ enum EWPasteboard {
         UIPasteboard.general.setValue(string,
                                       forPasteboardType: type.identifier)
     }
+    static func hasStrings() -> Bool {
+        UIPasteboard.general.hasStrings
+    }
     static func get() -> String? {
         if UIPasteboard.general.hasStrings {
             return UIPasteboard.general.string

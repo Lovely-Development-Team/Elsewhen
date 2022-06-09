@@ -7,7 +7,13 @@
 
 import SwiftUI
 
-struct FormatStyleButton: View {
+struct FormatStyleButton: View, OrientationObserving {
+
+    #if !os(macOS)
+    @EnvironmentObject internal var orientationObserver: OrientationObserver
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass: UserInterfaceSizeClass?
+    #endif
+    
     // MARK: Environment
     @Environment(\.isInPopover) private var isInPopover
     
@@ -48,7 +54,7 @@ struct FormatStyleButton: View {
             HStack {
                 formatStyleButton(for: formatStyle)
                     .help(Text(formatStyle.name))
-                if !isInPopover {
+                if !isInPopover && isOrientationLandscape && isRegularHorizontalSize {
                     Text(formatStyle.name)
                         .foregroundColor(isSelected ? Color.accentColor : .secondary)
                 }
@@ -64,6 +70,7 @@ struct FormatStyleButton_Previews: PreviewProvider {
     static var previews: some View {
         ForEach(dateFormats, id: \.self) { formatStyle in
             FormatStyleButton(formatStyle: formatStyle, isSelected: false, onTap: {_ in })
+                .environmentObject(OrientationObserver.shared)
         }
     }
 }
