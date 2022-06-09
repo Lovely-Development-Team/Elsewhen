@@ -14,7 +14,13 @@ import SwiftUI
 struct DefaultTabPicker: View {
     
     @Environment(\.presentationMode) var presentationMode
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    
     @Binding var defaultTabIndex: Int
+    
+    var isPadAndNotCompact: Bool {
+        DeviceType.isPad() && horizontalSizeClass != .compact
+    }
     
     private func setDefaultTab(_ defaultTab: Int) {
         defaultTabIndex = defaultTab
@@ -59,7 +65,7 @@ struct DefaultTabPicker: View {
     }
     
     var body: some View {
-        if DeviceType.isPadAndNotCompact {
+        if isPadAndNotCompact {
             NavigationView {
                 content
             }

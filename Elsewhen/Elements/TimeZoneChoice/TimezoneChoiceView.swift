@@ -11,6 +11,7 @@ import CoreLocation
 struct TimezoneChoiceView: View {
     
     @Environment(\.presentationMode) var presentationMode
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
     
     @Binding var selectedTimeZone: TimeZone?
     @Binding var selectedTimeZones: [TimeZone]
@@ -34,6 +35,10 @@ struct TimezoneChoiceView: View {
     @State private var favouriteTimeZones: Set<TimeZone> = []
     
     @StateObject private var searchController = TimeZoneSearchController()
+    
+    var isPadAndNotCompact: Bool {
+        DeviceType.isPad() && horizontalSizeClass != .compact
+    }
     
     #if os(iOS)
     let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
@@ -152,7 +157,7 @@ struct TimezoneChoiceView: View {
     }
     
     var body: some View {
-        if DeviceType.isPadAndNotCompact {
+        if isPadAndNotCompact {
             NavigationView {
                 content
                     .navigationTitle("Default Time Zone")

@@ -57,6 +57,7 @@ struct FormatStyleButton: View, OrientationObserving {
                 if !isInPopover && isOrientationLandscape && isRegularHorizontalSize {
                     Text(formatStyle.name)
                         .foregroundColor(isSelected ? Color.accentColor : .secondary)
+                        .multilineTextAlignment(.leading)
                 }
             }
             .frame(minWidth: isInPopover ? nil : 0, maxWidth: isInPopover ? nil : .infinity, alignment: isInPopover ? .center : .leading)

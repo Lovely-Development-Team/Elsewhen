@@ -10,7 +10,12 @@ import SwiftUI
 struct SeparatorPicker: View {
     
     @Environment(\.presentationMode) var presentationMode
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @Binding var mykeModeSeparator: MykeModeSeparator
+    
+    var isPadAndNotCompact: Bool {
+        DeviceType.isPad() && horizontalSizeClass != .compact
+    }
     
     var content: some View {
         Form {
@@ -41,7 +46,7 @@ struct SeparatorPicker: View {
     }
     
     var body: some View {
-        if DeviceType.isPadAndNotCompact {
+        if isPadAndNotCompact {
             NavigationView {
                 content
             }

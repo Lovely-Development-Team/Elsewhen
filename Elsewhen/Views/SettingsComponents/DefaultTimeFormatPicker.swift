@@ -9,8 +9,13 @@ import SwiftUI
 
 struct DefaultTimeFormatPicker: View {
     @Environment(\.presentationMode) var presentationMode
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
     
     @Binding var defaultTimeFormat: TimeFormat
+    
+    var isPadAndNotCompact: Bool {
+        DeviceType.isPad() && horizontalSizeClass != .compact
+    }
     
     var content: some View {
         Form {
@@ -41,7 +46,7 @@ struct DefaultTimeFormatPicker: View {
     }
     
     var body: some View {
-        if DeviceType.isPadAndNotCompact {
+        if isPadAndNotCompact {
             NavigationView {
                 content
             }
