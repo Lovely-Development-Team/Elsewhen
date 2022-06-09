@@ -71,7 +71,9 @@ struct FormatStyleButton_Previews: PreviewProvider {
     static var previews: some View {
         ForEach(dateFormats, id: \.self) { formatStyle in
             FormatStyleButton(formatStyle: formatStyle, isSelected: false, onTap: {_ in })
+            #if !os(macOS)
                 .environmentObject(OrientationObserver.shared)
+            #endif
         }
     }
 }

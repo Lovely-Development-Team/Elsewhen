@@ -112,7 +112,6 @@
 		5EB23BA126E406B900203153 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5EB23BA026E406B900203153 /* Assets.xcassets */; };
 		5EB23BA426E406B900203153 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5EB23BA326E406B900203153 /* Preview Assets.xcassets */; };
 		5EC79972277DA14A000C565F /* DefaultTimeFormatPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2D6B1D277C48470065781E /* DefaultTimeFormatPicker.swift */; };
-		5EC79973277DA177000C565F /* SeparatorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2D6B1F277C4CBF0065781E /* SeparatorPicker.swift */; };
 		5ECBAA322719D60E00A1BF6C /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECBAA312719D60E00A1BF6C /* ActivityView.swift */; };
 		5ECBAA342719D62800A1BF6C /* ShareButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECBAA332719D62800A1BF6C /* ShareButton.swift */; };
 		5ECE1FBB279EE50F00EBFDEA /* AboutElsewhen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E54BBB52737C290005CF7A6 /* AboutElsewhen.swift */; };
@@ -1437,7 +1436,6 @@
 				631E3F2626FCEFEC0025F080 /* DeleteButton.swift in Sources */,
 				6346AD8F26F3C1E400E406D0 /* ResultSheet.swift in Sources */,
 				63BEF68F271ECE25000CAC95 /* FormatStyleButton.swift in Sources */,
-				5EC79973277DA177000C565F /* SeparatorPicker.swift in Sources */,
 				63A90DE426F4CAA900CACCB9 /* MenuItem.swift in Sources */,
 				63B5EF6A2720A49900AA576E /* SelectedTimeZoneCell.swift in Sources */,
 				63A90DEF26F5465D00CACCB9 /* ContentTabViewController.swift in Sources */,

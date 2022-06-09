@@ -7,15 +7,14 @@
 
 import SwiftUI
 
-struct SeparatorPicker: View {
+struct SeparatorPicker: View, OrientationObserving {
     
     @Environment(\.presentationMode) var presentationMode
+    #if !os(macOS)
+    @EnvironmentObject internal var orientationObserver: OrientationObserver
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    #endif
     @Binding var mykeModeSeparator: MykeModeSeparator
-    
-    var isPadAndNotCompact: Bool {
-        DeviceType.isPad() && horizontalSizeClass != .compact
-    }
     
     var content: some View {
         Form {

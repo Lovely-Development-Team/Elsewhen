@@ -8,10 +8,13 @@
 import SwiftUI
 import CoreLocation
 
-struct TimezoneChoiceView: View {
+struct TimezoneChoiceView: View, OrientationObserving {
     
     @Environment(\.presentationMode) var presentationMode
+    #if !os(macOS)
+    @EnvironmentObject internal var orientationObserver: OrientationObserver
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    #endif
     
     @Binding var selectedTimeZone: TimeZone?
     @Binding var selectedTimeZones: [TimeZone]
@@ -35,10 +38,6 @@ struct TimezoneChoiceView: View {
     @State private var favouriteTimeZones: Set<TimeZone> = []
     
     @StateObject private var searchController = TimeZoneSearchController()
-    
-    var isPadAndNotCompact: Bool {
-        DeviceType.isPad() && horizontalSizeClass != .compact
-    }
     
     #if os(iOS)
     let selectionFeedbackGenerator = UISelectionFeedbackGenerator()

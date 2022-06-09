@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct AltIconView: View {
+struct AltIconView: View, OrientationObserving {
     
 #if !os(macOS)
     @EnvironmentObject internal var orientationObserver: OrientationObserver
@@ -18,10 +18,6 @@ struct AltIconView: View {
     
     @State var viewId = 1
     var done: () -> ()
-    
-    var isPadAndNotCompact: Bool {
-        DeviceType.isPad() && horizontalSizeClass != .compact
-    }
     
     var columns: Int {
         Int(containerWidth ?? 300) / 90 - 1

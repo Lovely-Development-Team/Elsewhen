@@ -17,7 +17,7 @@ enum SettingsViews: Int {
     case importTimeZoneGroup
 }
 
-struct Settings: View {
+struct Settings: View, OrientationObserving {
     
     #if !os(macOS)
     @EnvironmentObject internal var orientationObserver: OrientationObserver
@@ -41,10 +41,6 @@ struct Settings: View {
     
     private var defaultTimeZoneName: String {
         defaultTimeZone?.friendlyName ?? "Device"
-    }
-    
-    var isPadAndNotCompact: Bool {
-        DeviceType.isPad() && horizontalSizeClass != .compact
     }
     
     var footer: some View {
