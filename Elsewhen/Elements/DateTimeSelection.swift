@@ -25,8 +25,6 @@ struct DateTimeSelection: View, OrientationObserving {
     let mediumImpactFeedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
 #endif
     
-    @State private var dateFormatsMaxWidth: CGFloat?
-    
     var relativeDateButtonBackground: Color {
         if selectedFormatStyle == relativeDateFormat {
             return Color.accentColor
@@ -206,7 +204,7 @@ struct DateTimeSelection: View, OrientationObserving {
                 
             } else {
                 
-                DateTimeZonePicker(selectedDate: $selectedDate, selectedTimeZone: $selectedTimeZone, maxWidth: dateFormatsMaxWidth)
+                DateTimeZonePicker(selectedDate: $selectedDate, selectedTimeZone: $selectedTimeZone, maxWidth: 376)
                 
                 HStack(spacing: 5) {
                     ForEach(dateFormats, id: \.self) { formatStyle in
@@ -238,15 +236,7 @@ struct DateTimeSelection: View, OrientationObserving {
                     #endif
                 }
                 .padding(.bottom, 10)
-                .background(GeometryReader { geometry in
-                    Color.clear.preference(
-                        key: DateFormatsWidthPreferenceKey.self,
-                        value: geometry.size.width
-                    )
-                })
-                .onPreferenceChange(DateFormatsWidthPreferenceKey.self) {
-                    dateFormatsMaxWidth = $0
-                }
+                .frame(maxWidth: 376)
                 
                 Button(action: reset) {
                     Text("Reset")

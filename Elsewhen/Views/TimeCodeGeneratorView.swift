@@ -118,11 +118,16 @@ struct TimeCodeGeneratorView: View, KeyboardReadable, OrientationObserving {
         }
         .onAppear {
             selectedTimeZone = UserDefaults.shared.resetButtonTimeZone
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                withAnimation {
-                    self.showResultsSheet = true
-                    self.resultsSheetOffset = 0.0
+            if DeviceType.isPhone() {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                    withAnimation {
+                        self.showResultsSheet = true
+                        self.resultsSheetOffset = 0.0
+                    }
                 }
+            } else {
+                self.showResultsSheet = true
+                self.resultsSheetOffset = 0.0
             }
         }
         .sheet(isPresented: $showEasterEggSheet) {
