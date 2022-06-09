@@ -7,8 +7,9 @@
 
 import SwiftUI
 
-struct TimeListSettings: View {
+struct TimeListSettings: View, OrientationObserving {
     @EnvironmentObject private var timeZoneGroupController: MykeModeTimeZoneGroupsController
+    @EnvironmentObject internal var orientationObserver: OrientationObserver
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     
     @Binding var defaultTimeFormat: TimeFormat
@@ -19,10 +20,6 @@ struct TimeListSettings: View {
     @State private var viewId: Int = 1
     
     @State private var showImportTimeZoneGroupSheet: Bool = false
-    
-    var isPadAndNotCompact: Bool {
-        DeviceType.isPad() && horizontalSizeClass != .compact
-    }
     
     var exampleOutput: String {
         let tz = UserDefaults.shared.resetButtonTimeZone ?? TimeZone.current

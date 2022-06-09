@@ -46,4 +46,12 @@ extension OrientationObserving {
         false
         #endif
     }
+    
+    var isPadAndNotCompact: Bool {
+        #if !os(macOS)
+        DeviceType.isPad() && horizontalSizeClass != .compact
+        #else
+        false
+        #endif
+    }
 }

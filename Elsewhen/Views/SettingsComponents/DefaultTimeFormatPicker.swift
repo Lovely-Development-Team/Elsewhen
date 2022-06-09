@@ -7,15 +7,14 @@
 
 import SwiftUI
 
-struct DefaultTimeFormatPicker: View {
+struct DefaultTimeFormatPicker: View, OrientationObserving {
     @Environment(\.presentationMode) var presentationMode
+    #if !os(macOS)
+    @EnvironmentObject internal var orientationObserver: OrientationObserver
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    #endif
     
     @Binding var defaultTimeFormat: TimeFormat
-    
-    var isPadAndNotCompact: Bool {
-        DeviceType.isPad() && horizontalSizeClass != .compact
-    }
     
     var content: some View {
         Form {

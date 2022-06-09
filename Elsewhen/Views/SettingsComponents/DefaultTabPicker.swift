@@ -11,16 +11,13 @@ import SwiftUI
 
 
 
-struct DefaultTabPicker: View {
+struct DefaultTabPicker: View, OrientationObserving {
     
     @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject internal var orientationObserver: OrientationObserver
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     
     @Binding var defaultTabIndex: Int
-    
-    var isPadAndNotCompact: Bool {
-        DeviceType.isPad() && horizontalSizeClass != .compact
-    }
     
     private func setDefaultTab(_ defaultTab: Int) {
         defaultTabIndex = defaultTab
