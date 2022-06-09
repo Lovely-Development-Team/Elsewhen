@@ -20,7 +20,15 @@ struct AltIconView: View, OrientationObserving {
     var done: () -> ()
     
     var columns: Int {
-        Int(containerWidth ?? 300) / 90 - 1
+        /// Calculate the number of columns for the grid of app icons.
+        /// Divide the container width by the width of a single icon (80) plus some padding (90)
+        /// The width of 80 is set in AltIconOption.swift
+        /// Then remove one column to make sure the grid has some breathing room
+        if let containerWidth = containerWidth {
+            return Int(containerWidth / 90) - 1
+        }
+        /// Default to 3 columns if the container width couldn't be determined
+        return 3
     }
     
     var iconGrid: some View {
