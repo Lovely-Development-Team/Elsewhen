@@ -19,13 +19,15 @@ struct AltIconView: View, OrientationObserving {
     @State var viewId = 1
     var done: () -> ()
     
+    let iconWidth: CGFloat = 80
+    let iconPadding: CGFloat = 10
+    
     var columns: Int {
         /// Calculate the number of columns for the grid of app icons.
-        /// Divide the container width by the width of a single icon (80) plus some padding (90)
-        /// The width of 80 is set in AltIconOption.swift
+        /// Divide the container width by the width of a single icon plus its padding
         /// Then remove one column to make sure the grid has some breathing room
         if let containerWidth = containerWidth {
-            return Int(containerWidth / 90) - 1
+            return Int(containerWidth / (iconWidth + iconPadding)) - 1
         }
         /// Default to 3 columns if the container width couldn't be determined
         return 3
@@ -36,7 +38,7 @@ struct AltIconView: View, OrientationObserving {
         return ScrollView {
             LazyVGrid(columns: Array(repeating: .init(alignment: .top), count: columns)) {
                 ForEach(alternativeElsewhenIcons, id: \.name) { icon in
-                    AltIconOption(icon: icon, selected: currentIconName == icon.fileName, onTap: setIcon)
+                    AltIconOption(icon: icon, selected: currentIconName == icon.fileName, onTap: setIcon, size: iconWidth, padding: iconPadding)
                         .padding(.top, 20)
                 }
             }

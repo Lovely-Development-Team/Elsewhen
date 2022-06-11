@@ -12,7 +12,8 @@ struct AltIconOption: View {
     let icon: AlternativeIcon
     let selected: Bool
     let onTap: (_ icon: AlternativeIcon) -> ()
-    var size: CGFloat = 80
+    let size: CGFloat
+    let padding: CGFloat
     var borderWidth: CGFloat = 2
     
     var body: some View {
@@ -21,7 +22,7 @@ struct AltIconOption: View {
                 onTap(icon)
             }
         }) {
-            VStack(spacing: 5) {
+            VStack(spacing: padding / 2) {
                 ZStack {
                     RoundedRectangle(cornerRadius: 10 / 57 * size, style: .continuous)
                         .fill(selected ? Color.accentColor : Color.secondary)
@@ -48,6 +49,6 @@ struct AltIconOption: View {
 
 struct AltIconOption_Previews: PreviewProvider {
     static var previews: some View {
-        AltIconOption(icon: alternativeElsewhenIcons[0], selected: true, onTap: {icon in })
+        AltIconOption(icon: alternativeElsewhenIcons[0], selected: true, onTap: {icon in }, size: 80, padding: 10)
     }
 }
