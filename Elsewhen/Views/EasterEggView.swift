@@ -114,7 +114,7 @@ struct EasterEggView: View {
             Spacer()
             Section{
                 Text("L2CU drawing by rhl_. \nElsewhen crafted with care by The Lovely Developers. ")
-                    .font(.body)
+                    .font(.caption)
                     .multilineTextAlignment(.center)
                     .allowsTightening(true)
                     .minimumScaleFactor(0.7)

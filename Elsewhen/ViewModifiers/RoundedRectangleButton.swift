@@ -10,13 +10,14 @@ import SwiftUI
 struct RoundedRectangleButton: ViewModifier {
     let colour: Color
     let horizontalPadding: CGFloat?
+    let cornerRadius: CGFloat
     
     func contentView(_ content: Content) -> some View {
         content
         .padding(.horizontal, horizontalPadding)
         .padding(.vertical, 5)
         .background(
-            RoundedRectangle(cornerRadius: 15, style: .continuous)
+            RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
                 .fill(colour)
         )
     }
@@ -32,7 +33,10 @@ struct RoundedRectangleButton: ViewModifier {
 }
 
 extension Button {
+    func roundedRectangle(colour: Color = .accentColor, horizontalPadding: CGFloat? = nil, cornerRadius: CGFloat) -> ModifiedContent<Self, RoundedRectangleButton> {
+        self.modifier(RoundedRectangleButton(colour: colour, horizontalPadding: horizontalPadding, cornerRadius: cornerRadius))
+    }
     func roundedRectangle(colour: Color = .accentColor, horizontalPadding: CGFloat? = nil) -> ModifiedContent<Self, RoundedRectangleButton> {
-        self.modifier(RoundedRectangleButton(colour: colour, horizontalPadding: horizontalPadding))
+        roundedRectangle(cornerRadius: 15)
     }
 }
