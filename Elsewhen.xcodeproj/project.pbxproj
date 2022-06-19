@@ -111,6 +111,12 @@
 		5EB23B9F26E406B600203153 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB23B9E26E406B600203153 /* ContentView.swift */; };
 		5EB23BA126E406B900203153 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5EB23BA026E406B900203153 /* Assets.xcassets */; };
 		5EB23BA426E406B900203153 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5EB23BA326E406B900203153 /* Preview Assets.xcassets */; };
+		5EC4E5DD285DAFE1008EEE6C /* TimeCodeGeneratorView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC4E5DC285DAFE1008EEE6C /* TimeCodeGeneratorView2.swift */; };
+		5EC4E5DF285DB8EE008EEE6C /* DateTimeZoneSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC4E5DE285DB8EE008EEE6C /* DateTimeZoneSheet.swift */; };
+		5EC4E5E1285DB93A008EEE6C /* RoundedCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC4E5E0285DB93A008EEE6C /* RoundedCorner.swift */; };
+		5EC4E5E3285DBA18008EEE6C /* FormatChoiceButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC4E5E2285DBA18008EEE6C /* FormatChoiceButton.swift */; };
+		5EC4E5E5285F093D008EEE6C /* MykeMode2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC4E5E4285F093D008EEE6C /* MykeMode2.swift */; };
+		5EC4E5E7285F09CD008EEE6C /* SelectedTimeZoneCell2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC4E5E6285F09CD008EEE6C /* SelectedTimeZoneCell2.swift */; };
 		5EC79972277DA14A000C565F /* DefaultTimeFormatPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2D6B1D277C48470065781E /* DefaultTimeFormatPicker.swift */; };
 		5ECBAA322719D60E00A1BF6C /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECBAA312719D60E00A1BF6C /* ActivityView.swift */; };
 		5ECBAA342719D62800A1BF6C /* ShareButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECBAA332719D62800A1BF6C /* ShareButton.swift */; };
@@ -409,6 +415,12 @@
 		5EB23BA326E406B900203153 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		5EBEEE8027123373001501EC /* Discord Helper Intents.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Discord Helper Intents.entitlements"; sourceTree = "<group>"; };
 		5EBEEE8127123385001501EC /* Discord Helper IntentsUI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Discord Helper IntentsUI.entitlements"; sourceTree = "<group>"; };
+		5EC4E5DC285DAFE1008EEE6C /* TimeCodeGeneratorView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCodeGeneratorView2.swift; sourceTree = "<group>"; };
+		5EC4E5DE285DB8EE008EEE6C /* DateTimeZoneSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTimeZoneSheet.swift; sourceTree = "<group>"; };
+		5EC4E5E0285DB93A008EEE6C /* RoundedCorner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCorner.swift; sourceTree = "<group>"; };
+		5EC4E5E2285DBA18008EEE6C /* FormatChoiceButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatChoiceButton.swift; sourceTree = "<group>"; };
+		5EC4E5E4285F093D008EEE6C /* MykeMode2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MykeMode2.swift; sourceTree = "<group>"; };
+		5EC4E5E6285F09CD008EEE6C /* SelectedTimeZoneCell2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedTimeZoneCell2.swift; sourceTree = "<group>"; };
 		5ECBAA312719D60E00A1BF6C /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
 		5ECBAA332719D62800A1BF6C /* ShareButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareButton.swift; sourceTree = "<group>"; };
 		5EDCC69C27EA13A90074F534 /* NSUbiquitousKeyValueStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSUbiquitousKeyValueStore.swift; sourceTree = "<group>"; };
@@ -694,7 +706,9 @@
 			children = (
 				63AC5A052747F3B0008D10C6 /* SettingsComponents */,
 				5EE70E2626ECCC0700F3F164 /* TimeCodeGeneratorView.swift */,
+				5EC4E5DC285DAFE1008EEE6C /* TimeCodeGeneratorView2.swift */,
 				5E9BD45826EF44B700383233 /* MykeMode.swift */,
+				5EC4E5E4285F093D008EEE6C /* MykeMode2.swift */,
 				5EE2D2CC26F2717E00D61875 /* EasterEggView.swift */,
 				5E07E84E2734760F00D9350E /* AltIconView.swift */,
 				5E54BBB327373603005CF7A6 /* Settings.swift */,
@@ -723,6 +737,7 @@
 				5E0A4168278AD8CF00FAB5F8 /* TimeZoneSearchController.swift */,
 				5EDCC69F27EA37890074F534 /* MykeModeTimeZoneGroupsController.swift */,
 				5E7B92F927C0DB2600E95C43 /* TimeZoneGroup.swift */,
+				5EC4E5E0285DB93A008EEE6C /* RoundedCorner.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -731,6 +746,7 @@
 			isa = PBXGroup;
 			children = (
 				631E3F2126FCE9B60025F080 /* SelectedTimeZoneCell.swift */,
+				5EC4E5E6285F09CD008EEE6C /* SelectedTimeZoneCell2.swift */,
 			);
 			path = MykeMode;
 			sourceTree = "<group>";
@@ -824,6 +840,7 @@
 				63BEF695271EE275000CAC95 /* NotRepresentativeWarning.swift */,
 				5E54BBB72737C339005CF7A6 /* AltIconOption.swift */,
 				5E54BBB92737C3BB005CF7A6 /* AppIcon.swift */,
+				5EC4E5DE285DB8EE008EEE6C /* DateTimeZoneSheet.swift */,
 			);
 			path = Elements;
 			sourceTree = "<group>";
@@ -966,6 +983,7 @@
 				5ECBAA332719D62800A1BF6C /* ShareButton.swift */,
 				63BEF68D271ECDA2000CAC95 /* FormatStyleButton.swift */,
 				63B5EF6727208E5000AA576E /* FormatLabel.swift */,
+				5EC4E5E2285DBA18008EEE6C /* FormatChoiceButton.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -1297,8 +1315,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				639FFFAB271B75E7008897E8 /* OrientationObserving.swift in Sources */,
+				5EC4E5DD285DAFE1008EEE6C /* TimeCodeGeneratorView2.swift in Sources */,
 				5E2D6B20277C4CC00065781E /* SeparatorPicker.swift in Sources */,
 				5E0A4169278AD8CF00FAB5F8 /* TimeZoneSearchController.swift in Sources */,
+				5EC4E5E7285F09CD008EEE6C /* SelectedTimeZoneCell2.swift in Sources */,
 				63087E97271B633700D6EEE8 /* NotificationName.swift in Sources */,
 				63BEF68E271ECDA2000CAC95 /* FormatStyleButton.swift in Sources */,
 				5E835B4E2796C57D002B91FF /* DefaultTabPicker.swift in Sources */,
@@ -1333,6 +1353,7 @@
 				63B5EF6827208E5000AA576E /* FormatLabel.swift in Sources */,
 				5EE70E2726ECCC0700F3F164 /* TimeCodeGeneratorView.swift in Sources */,
 				631E3F2526FCEF1F0025F080 /* DeleteButton.swift in Sources */,
+				5EC4E5DF285DB8EE008EEE6C /* DateTimeZoneSheet.swift in Sources */,
 				638B47BD26FC98D900B26B26 /* EasterEggButton.swift in Sources */,
 				638A72D62711B75C00E0171D /* TimeZone.swift in Sources */,
 				5EE2D2CD26F2717E00D61875 /* EasterEggView.swift in Sources */,
@@ -1355,7 +1376,10 @@
 				637839BA26ECB58D0055A10D /* Intents.intentdefinition in Sources */,
 				5EB23B9D26E406B600203153 /* ElsewhenApp.swift in Sources */,
 				5E835B50279981BA002B91FF /* Badge.swift in Sources */,
+				5EC4E5E3285DBA18008EEE6C /* FormatChoiceButton.swift in Sources */,
 				5EADF90C2832DA90004C32A5 /* ImportTimeZoneGroupView.swift in Sources */,
+				5EC4E5E5285F093D008EEE6C /* MykeMode2.swift in Sources */,
+				5EC4E5E1285DB93A008EEE6C /* RoundedCorner.swift in Sources */,
 				5E9BD45F26F0962D00383233 /* TimeZoneChoiceItem.swift in Sources */,
 				5E9BD45526EF446900383233 /* DateHelpers.swift in Sources */,
 				5E54BBB427373603005CF7A6 /* Settings.swift in Sources */,
@@ -1683,7 +1707,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1720,7 +1744,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1758,6 +1782,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = Elsewhen;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -1797,6 +1822,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = Elsewhen;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -1923,7 +1949,7 @@
 				INFOPLIST_FILE = "Discord Helper Intents/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Elsewhen Intents";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1950,7 +1976,7 @@
 				INFOPLIST_FILE = "Discord Helper Intents/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Elsewhen Intents";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1977,7 +2003,7 @@
 				INFOPLIST_FILE = "Discord Helper IntentsUI/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Discord Helper IntentsUI";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2004,7 +2030,7 @@
 				INFOPLIST_FILE = "Discord Helper IntentsUI/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Discord Helper IntentsUI";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

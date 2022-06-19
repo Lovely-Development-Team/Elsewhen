@@ -12,7 +12,7 @@ import os.log
 
 struct ContentView: View {
     
-    @State private var selectedTab: Int = 0
+    @State private var selectedTab: Int = 1
     @State private var showShareSheet: ShareSheetItem? = nil
     @AppStorage(UserDefaults.lastSeenVersionForSettingsKey) private var lastSeenVersionForSettings: String = ""
     
@@ -33,17 +33,18 @@ struct ContentView: View {
     var body: some View {
         TabView(selection: $selectedTab) {
             
-            TimeCodeGeneratorView()
-                .overlay(Rectangle().frame(width: nil, height: 1, alignment: .bottom).foregroundColor(Color.secondary.opacity(0.5)), alignment: .bottom)
+            TimeCodeGeneratorView2()
+//            TimeCodeGeneratorView()
+//                .overlay(Rectangle().frame(width: nil, height: 1, alignment: .bottom).foregroundColor(Color.secondary.opacity(0.5)), alignment: .bottom)
                 .tabItem { Label("Time Codes", systemImage: "clock") }
                 .tag(Tab.timeCodes.rawValue)
-            MykeMode()
-                .overlay(Rectangle().frame(width: nil, height: 1, alignment: .bottom).foregroundColor(Color.secondary.opacity(0.5)), alignment: .bottom)
+            MykeMode2()
+//                .overlay(Rectangle().frame(width: nil, height: 1, alignment: .bottom).foregroundColor(Color.secondary.opacity(0.5)), alignment: .bottom)
                 .tabItem { Label("Time List", systemImage: "list.dash") }
                 .tag(Tab.mykeMode.rawValue)
             
             Settings(selectedTab: $selectedTab)
-                .overlay(Rectangle().frame(width: nil, height: 1, alignment: .bottom).foregroundColor(Color.secondary.opacity(0.5)), alignment: .bottom)
+//                .overlay(Rectangle().frame(width: nil, height: 1, alignment: .bottom).foregroundColor(Color.secondary.opacity(0.5)), alignment: .bottom)
                 .tabItem { Label("Settings", systemImage: "gear") }
                 .iconBadge(isPresented: showSettingsIcon)
                 .tag(Tab.settings.rawValue)
@@ -73,7 +74,7 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         if #available(iOS 15.0, *) {
-            ContentView().previewInterfaceOrientation(.landscapeRight).environmentObject(OrientationObserver.shared)
+            ContentView().environmentObject(OrientationObserver.shared)
         } else {
             ContentView()
         }

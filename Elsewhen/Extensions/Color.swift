@@ -15,6 +15,7 @@ import Cocoa
 
 extension Color {
     #if os(iOS)
+    static let systemBackground: Color = Color(UIColor.systemBackground)
     static let secondarySystemBackground: Color = Color(UIColor.secondarySystemBackground)
     #elseif os(macOS)
     static let secondarySystemBackground: Color = Color(NSColor.controlBackgroundColor)
