@@ -16,6 +16,8 @@ struct ContentView: View {
     @State private var showShareSheet: ShareSheetItem? = nil
     @AppStorage(UserDefaults.lastSeenVersionForSettingsKey) private var lastSeenVersionForSettings: String = ""
     
+    @State private var selectedDate = Date()
+    
     init() {
         // Disables the shadow pixel above the topbar
         UITabBar.appearance().clipsToBounds = true
@@ -33,18 +35,18 @@ struct ContentView: View {
     var body: some View {
         TabView(selection: $selectedTab) {
             
-            TimeCodeGeneratorView2()
+            TimeCodeGeneratorView2(selectedDate: $selectedDate)
 //            TimeCodeGeneratorView()
 //                .overlay(Rectangle().frame(width: nil, height: 1, alignment: .bottom).foregroundColor(Color.secondary.opacity(0.5)), alignment: .bottom)
                 .tabItem { Label("Time Codes", systemImage: "clock") }
                 .tag(Tab.timeCodes.rawValue)
-            MykeMode2()
+            MykeMode2(selectedDate: $selectedDate)
 //                .overlay(Rectangle().frame(width: nil, height: 1, alignment: .bottom).foregroundColor(Color.secondary.opacity(0.5)), alignment: .bottom)
                 .tabItem { Label("Time List", systemImage: "list.dash") }
                 .tag(Tab.mykeMode.rawValue)
             
             Settings(selectedTab: $selectedTab)
-//                .overlay(Rectangle().frame(width: nil, height: 1, alignment: .bottom).foregroundColor(Color.secondary.opacity(0.5)), alignment: .bottom)
+                .overlay(Rectangle().frame(width: nil, height: 1, alignment: .bottom).foregroundColor(Color.secondary.opacity(0.5)), alignment: .bottom)
                 .tabItem { Label("Settings", systemImage: "gear") }
                 .iconBadge(isPresented: showSettingsIcon)
                 .tag(Tab.settings.rawValue)

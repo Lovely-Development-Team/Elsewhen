@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TimeCodeGeneratorView2: View {
     
-    @State private var selectedDate = Date()
+    @Binding var selectedDate: Date
     @State private var selectedTimeZone: TimeZone? = nil
     @State private var appendRelative: Bool = false
     
@@ -52,6 +52,6 @@ struct TimeCodeGeneratorView2: View {
 
 struct TimeCodeGeneratorView2_Previews: PreviewProvider {
     static var previews: some View {
-        TimeCodeGeneratorView2()
+        TimeCodeGeneratorView2(selectedDate: .constant(Date()))
     }
 }

@@ -11,7 +11,7 @@ import UniformTypeIdentifiers
 struct MykeMode2: View {
     
     // MARK: State
-    @State private var selectedDate = Date()
+    @Binding var selectedDate: Date
     @State private var selectedTimeZone: TimeZone? = nil
     @State private var selectedFormatStyle: DateFormat = dateFormats[0]
     @State private var selectedTimeZones: [TimeZone] = []
@@ -277,18 +277,38 @@ struct MykeMode2: View {
                 .background(Color.systemBackground)
                 .id(viewId)
                 
-                Button(action: {
-                    postShowShareSheet(with: [generateTimesAndFlagsText()])
-                }) {
-//                    Text(showCopied ? "Copied ✓" : "Copy")
-                    Image(systemName: "square.and.arrow.up")
-                        .font(.title)
-                        .foregroundColor(.white)
-                        .padding(15)
-                        .background(Color.accentColor)
-                        .clipShape(Circle())
+                HStack(spacing: 0) {
+                    Button(action: {
+                        postShowShareSheet(with: [generateTimesAndFlagsText()])
+                    }) {
+                        Image(systemName: "square.and.arrow.up")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            .padding(15)
+                            .padding(.leading, 5)
+                            .frame(maxHeight: .infinity)
+                            .background(Color.accentColor)
+                            .clipShape(RoundedCorner(cornerRadius: 25, corners: [.topLeft, .bottomLeft]))
+                    }
+                    Divider()
+                    Button(action: copyText) {
+                        ZStack {
+                            Group {
+                                Image(systemName: "doc.on.doc").opacity(0)
+                                Image(systemName: showCopied ? "checkmark" : "doc.on.doc")
+                            }
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            .padding(15)
+                            .padding(.trailing, 5)
+                            .frame(maxHeight: .infinity)
+                            .background(Color.accentColor)
+                            .clipShape(RoundedCorner(cornerRadius: 25, corners: [.topRight, .bottomRight]))
+                        }
+                    }
                 }
-//                .roundedRectangle()
+                .fixedSize(horizontal: false, vertical: true)
+                .frame(maxHeight: 100, alignment: .bottom)
                 .padding()
                 
             }
@@ -376,6 +396,6 @@ struct MykeMode2: View {
 
 struct MykeMode2_Previews: PreviewProvider {
     static var previews: some View {
-        MykeMode2().environmentObject(MykeModeTimeZoneGroupsController.shared)
+        MykeMode2(selectedDate: .constant(Date())).environmentObject(MykeModeTimeZoneGroupsController.shared)
     }
 }
