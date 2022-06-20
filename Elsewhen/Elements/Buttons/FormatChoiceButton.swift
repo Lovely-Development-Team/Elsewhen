@@ -19,8 +19,6 @@ struct FormatChoiceButton: View {
     @State private var notificationFeedbackGenerator: UINotificationFeedbackGenerator? = nil
     @State private var viewId: Int = 0
     
-//    let timer = Timer.publish(every: 1, on: .current, in: .common).autoconnect()
-    
     var resolvedTimeZone: TimeZone {
         timeZone ?? .current
     }
@@ -64,8 +62,6 @@ struct FormatChoiceButton: View {
                 
                 HStack {
                     Image(systemName: dateFormat.icon)
-                    Text(dateFormat.name)
-                        .fontWeight(.semibold)
                     Spacer()
                     Image(systemName: "doc.on.doc").opacity(0)
                     if justCopied {
@@ -94,6 +90,8 @@ struct FormatChoiceButton: View {
             }
         }
         .contextMenu {
+            Text(dateFormat.name)
+            Divider()
             Button(action: doCopy) {
                 Label("Copy", systemImage: "doc.on.doc")
             }
@@ -101,16 +99,12 @@ struct FormatChoiceButton: View {
                 Label("Share", systemImage: "square.and.arrow.up")
             }
         }
-//        .id(viewId)
-//        .onReceive(timer) { input in
-//            viewId += 1
-//        }
     }
     
 }
 
 struct FormatChoiceButton_Previews: PreviewProvider {
     static var previews: some View {
-        FormatChoiceButton(dateFormat: dateFormats[0], selectedDate: .constant(Date()), appendRelative: .constant(true), timeZone: .constant(TimeZone(identifier: "Australia/Brisbane")!))
+        FormatChoiceButton(dateFormat: dateFormats[1], selectedDate: .constant(Date()), appendRelative: .constant(true), timeZone: .constant(TimeZone(identifier: "Australia/Brisbane")!))
     }
 }
