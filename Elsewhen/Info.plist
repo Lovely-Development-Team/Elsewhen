@@ -132,6 +132,15 @@
 				<key>UIPrerenderedIcon</key>
 				<false/>
 			</dict>
+			<key>ukraine</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>ukraine</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
 			<key>wiggles</key>
 			<dict>
 				<key>CFBundleIconFiles</key>
@@ -269,6 +278,15 @@
 				<key>CFBundleIconFiles</key>
 				<array>
 					<string>transgender</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>ukraine</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>ukraine</string>
 				</array>
 				<key>UIPrerenderedIcon</key>
 				<false/>

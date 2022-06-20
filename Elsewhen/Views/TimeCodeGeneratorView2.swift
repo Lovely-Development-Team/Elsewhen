@@ -7,20 +7,25 @@
 
 import SwiftUI
 
-struct TimeCodeGeneratorView2: View {
+struct TimeCodeGeneratorView2: View, OrientationObserving {
     
     // MARK: Environment
     @Environment(\.dynamicTypeSize) var dynamicTypesSize
+    @EnvironmentObject internal var orientationObserver: OrientationObserver
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
     
     // MARK: State
     @Binding var selectedDate: Date
     @State private var selectedTimeZone: TimeZone? = nil
-    @State private var appendRelative: Bool = true
+    @State private var appendRelative: Bool = false
     @State private var showEasterEggSheet: Bool = false
     
     let gridBreakPoint: Int = 170
     
     var gridItems: [GridItem] {
+        if isPadAndNotCompact {
+            return Array.init(repeating: .init(.flexible(), alignment: .top), count: 3)
+        }
         if dynamicTypesSize >= .xxLarge {
             return [GridItem(.flexible(), alignment: .top)]
         }
@@ -29,10 +34,6 @@ struct TimeCodeGeneratorView2: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            Toggle("Include Relative Time", isOn: $appendRelative.animation())
-                .tint(.accentColor)
-                .padding()
-                .background(Color(UIColor.systemBackground))
             ScrollView {
                 LazyVGrid(columns: gridItems, spacing: 0) {
                     ForEach(dateFormats, id: \.self) { dateFormat in
@@ -42,6 +43,7 @@ struct TimeCodeGeneratorView2: View {
                     FormatChoiceButton(dateFormat: relativeDateFormat, selectedDate: $selectedDate, appendRelative: .constant(false), timeZone: $selectedTimeZone)
                         .padding(.bottom)
                 }
+                .padding(.top)
                 .fixedSize(horizontal: false, vertical: true)
                 NotRepresentativeWarning()
                     .padding([.horizontal, .bottom])
@@ -52,8 +54,25 @@ struct TimeCodeGeneratorView2: View {
             }
             .padding(.horizontal)
             .frame(minWidth: 0, maxWidth: .infinity)
+            .clipped()
             .background(Color.systemBackground)
-            DateTimeZoneSheet(selectedDate: $selectedDate, selectedTimeZone: $selectedTimeZone, selectedTimeZones: .constant([]), selectedTimeZoneGroup: .constant(nil), multipleTimeZones: false, saveButtonTapped: nil)
+            VStack {
+                Toggle("Include Relative Time", isOn: $appendRelative.animation())
+                    .tint(.accentColor)
+                    .padding([.horizontal, .top])
+                    .padding(.bottom, 10)
+                Divider()
+                    .padding(.horizontal)
+                DateTimeZoneSheet(selectedDate: $selectedDate, selectedTimeZone: $selectedTimeZone, selectedTimeZones: .constant([]), selectedTimeZoneGroup: .constant(nil), multipleTimeZones: false)
+            }
+            .background(
+                ZStack {
+                    Rectangle().fill(Color(UIColor.systemBackground))
+                    RoundedCorner(cornerRadius: 15, corners: [.topLeft, .topRight])
+                        .fill(Color(UIColor.secondarySystemBackground))
+                        .shadow(color: .black.opacity(0.2), radius: 5, x: 0, y: 0)
+                }
+            )
         }
         .background(Color.secondarySystemBackground)
         .sheet(isPresented: $showEasterEggSheet) {
