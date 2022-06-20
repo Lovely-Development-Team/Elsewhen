@@ -149,7 +149,7 @@ struct MykeMode2: View {
                     }
                 }
                 .padding(.bottom, 2)
-                .padding(.horizontal, 8)
+                .padding(.horizontal, 10)
                 .onChange(of: selectedTimeZoneGroup) { target in
                     guard let target = target else { return }
                     withAnimation {
@@ -180,6 +180,7 @@ struct MykeMode2: View {
                     Section(footer: listFooter) {
                         ForEach(selectedTimeZones, id: \.self) { tz in
                             SelectedTimeZoneCell2(tz: tz, timeInZone: stringForSelectedTime(in: tz), selectedDate: selectedDate, formattedString: stringForTimeAndFlag(in: tz, date: selectedDate, sourceZone: selectedTimeZone ?? TimeZone.current, separator: mykeModeSeparator, timeZonesUsingEUFlag: timeZonesUsingEUFlag, timeZonesUsingNoFlag: timeZonesUsingNoFlag, showCities: mykeModeShowCities), onTap: tzTapped)
+                                .hoverEffect()
                                 .contextMenu {
                                     if flagForTimeZone(tz) != NoFlagTimeZoneEmoji {
                                         Button(action: {
@@ -274,6 +275,7 @@ struct MykeMode2: View {
                 }
                 .listStyle(.plain)
                 .frame(minWidth: 0, maxWidth: .infinity)
+                .clipped()
                 .background(Color.systemBackground)
                 .id(viewId)
                 
@@ -289,6 +291,7 @@ struct MykeMode2: View {
                             .frame(maxHeight: .infinity)
                             .background(Color.accentColor)
                             .clipShape(RoundedCorner(cornerRadius: 25, corners: [.topLeft, .bottomLeft]))
+                            .hoverEffect()
                     }
                     Divider()
                     Button(action: copyText) {
@@ -304,6 +307,7 @@ struct MykeMode2: View {
                             .frame(maxHeight: .infinity)
                             .background(Color.accentColor)
                             .clipShape(RoundedCorner(cornerRadius: 25, corners: [.topRight, .bottomRight]))
+                            .hoverEffect()
                         }
                     }
                 }
@@ -313,22 +317,27 @@ struct MykeMode2: View {
                 
             }
             
-            if !timeZoneGroupController.timeZoneGroups.isEmpty {
-                timeZoneGroupChoices
-                    .padding(.vertical)
-                    .background(
-                        ZStack {
-                            Rectangle().fill(Color(UIColor.systemBackground))
-                            RoundedCorner(cornerRadius: 15, corners: [.topLeft, .topRight])
-                                .fill(Color(UIColor.secondarySystemBackground))
-                                .shadow(color: .black.opacity(0.2), radius: 5, x: 0, y: 0)
-                        }
-                    )
+            VStack {
+                if !timeZoneGroupController.timeZoneGroups.isEmpty {
+                    timeZoneGroupChoices
+                        .padding(.top, 18)
+                        .padding(.bottom, 10)
+                    Divider()
+                        .padding(.horizontal)
+                }
+                Button(action: {}) {
+                    Text("Sort by Time")
+                }
+                DateTimeZoneSheet(selectedDate: $selectedDate, selectedTimeZone: .constant(TimeZone.current), selectedTimeZones: $selectedTimeZones, selectedTimeZoneGroup: $selectedTimeZoneGroup, multipleTimeZones: true)
             }
-            
-            DateTimeZoneSheet(selectedDate: $selectedDate, selectedTimeZone: .constant(TimeZone.current), selectedTimeZones: $selectedTimeZones, selectedTimeZoneGroup: $selectedTimeZoneGroup, multipleTimeZones: true, saveButtonTapped: { selectedTimeZones in
-                
-            })
+            .background(
+                ZStack {
+                    Rectangle().fill(Color(UIColor.systemBackground))
+                    RoundedCorner(cornerRadius: 15, corners: [.topLeft, .topRight])
+                        .fill(Color(UIColor.secondarySystemBackground))
+                        .shadow(color: .black.opacity(0.2), radius: 5, x: 0, y: 0)
+                }
+            )
             
         }
         .background(Color.secondarySystemBackground)

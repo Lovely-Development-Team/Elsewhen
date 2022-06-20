@@ -60,20 +60,25 @@ struct FormatChoiceButton: View {
         Button(action: doCopy) {
             GroupBox {
                 
-                HStack {
+                HStack(alignment: .center) {
                     Image(systemName: dateFormat.icon)
+                        .font(.title)
+                        .foregroundColor(.secondary)
+//                        .foregroundColor(.accentColor)
                     Spacer()
-                    Image(systemName: "doc.on.doc").opacity(0)
-                    if justCopied {
-                        Text("Copied ✓")
-                    } else {
-                        Image(systemName: "doc.on.doc")
-                    }
+                    
+                    Text(justCopied ? "Copied ✓" : "Copy")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .padding(.vertical, 5)
+                        .padding(.horizontal, 10)
+                        .background(Color.accentColor)
+                        .clipShape(
+                            RoundedCorner(cornerRadius: 25)
+                        )
                 }
-                .font(.caption)
-                .foregroundColor(.accentColor)
-                .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                 .padding(.bottom, 2)
+                
                 Text(formattedDate)
                     .multilineTextAlignment(.leading)
                     .foregroundColor(.primary)
@@ -89,6 +94,7 @@ struct FormatChoiceButton: View {
                 
             }
         }
+        .hoverEffect()
         .contextMenu {
             Text(dateFormat.name)
             Divider()

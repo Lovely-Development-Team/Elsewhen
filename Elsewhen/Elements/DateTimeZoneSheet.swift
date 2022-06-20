@@ -16,7 +16,6 @@ struct DateTimeZoneSheet: View {
     @Binding var selectedTimeZones: [TimeZone]
     @Binding var selectedTimeZoneGroup: TimeZoneGroup?
     let multipleTimeZones: Bool
-    let saveButtonTapped: ((_ selectedTimeZones: [TimeZone]) -> ())?
     
     // MARK: State
     
@@ -60,6 +59,7 @@ struct DateTimeZoneSheet: View {
                 }) {
                     Image(systemName: "arrow.clockwise")
                 }
+                .hoverEffect()
             }
             HStack {
                 Text(timeZoneLabel).fontWeight(.semibold)
@@ -72,21 +72,23 @@ struct DateTimeZoneSheet: View {
                 .foregroundColor(.primary)
                 .padding(.vertical, 8)
                 .padding(.horizontal, 10)
+                .hoverEffect()
                 .background(
                     RoundedRectangle(cornerRadius: 10, style: .continuous)
                         .fill(Color(UIColor.systemGray5))
                 )
             }
         }
-        .padding()
-        .background(
-            ZStack {
-                Rectangle().fill(Color(UIColor.systemBackground))
-                RoundedCorner(cornerRadius: 15, corners: [.topLeft, .topRight])
-                    .fill(Color(UIColor.secondarySystemBackground))
-                    .shadow(color: .black.opacity(0.2), radius: 5, x: 0, y: 0)
-            }
-        )
+        .padding([.horizontal, .bottom])
+        .padding(.top, 10)
+//        .background(
+//            ZStack {
+//                Rectangle().fill(Color(UIColor.systemBackground))
+//                RoundedCorner(cornerRadius: 15, corners: [.topLeft, .topRight])
+//                    .fill(Color(UIColor.secondarySystemBackground))
+//                    .shadow(color: .black.opacity(0.2), radius: 5, x: 0, y: 0)
+//            }
+//        )
         .sheet(isPresented: $showTimeZoneChoiceSheet) {
             NavigationView {
                 TimezoneChoiceView(selectedTimeZone: $selectedTimeZone, selectedTimeZones: $selectedTimeZones, selectedDate: $selectedDate, selectMultiple: multipleTimeZones) {
@@ -136,6 +138,6 @@ struct DateTimeZoneSheet: View {
 
 struct DateTimeZoneSheet_Previews: PreviewProvider {
     static var previews: some View {
-        DateTimeZoneSheet(selectedDate: .constant(Date()), selectedTimeZone: .constant(nil), selectedTimeZones: .constant([]), selectedTimeZoneGroup: .constant(nil), multipleTimeZones: false, saveButtonTapped: nil)
+        DateTimeZoneSheet(selectedDate: .constant(Date()), selectedTimeZone: .constant(nil), selectedTimeZones: .constant([]), selectedTimeZoneGroup: .constant(nil), multipleTimeZones: false)
     }
 }
