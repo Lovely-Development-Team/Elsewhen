@@ -9,9 +9,12 @@ import SwiftUI
 
 struct NewTimeZoneGroupView: View {
     
-    // MARK: State
+    // MARK: Init
     @Binding var selectedTimeZones: [TimeZone]
+    @Binding var selectedTimeZoneGroup: TimeZoneGroup?
     @Binding var sheetIsPresented: Bool
+    
+    // MARK: State
     @State private var name: String = ""
     @State private var nameClashes: Bool = false
     @FocusState private var nameInFocus: Bool
@@ -19,25 +22,29 @@ struct NewTimeZoneGroupView: View {
     var body: some View {
         Form {
             Section {
+                Text("Enter a name to save the currently selected Time Zones as a group:")
                 TextField("Group Name", text: $name)
                     .focused($nameInFocus)
             } footer: {
                 VStack {
                     if nameClashes {
-                        Text("A group with that name already exists.")
+                        Text("A group with that name already exists. The contents will be updated with the currently selected Time Zones.")
+                            .multilineTextAlignment(.center)
                             .foregroundColor(.primary)
                             .font(.body)
                             .padding(.top)
                     }
                     HStack {
                         Button(action: {
+                            var tzGroup: TimeZoneGroup? = nil
                             if nameClashes {
-                                let tzGroup = MykeModeTimeZoneGroupsController.shared.retrieveTimeZoneGroup(byName: name)
-                                MykeModeTimeZoneGroupsController.shared.updateTimeZoneGroup(tzGroup, with: selectedTimeZones)
+                                tzGroup = MykeModeTimeZoneGroupsController.shared.retrieveTimeZoneGroup(byName: name)
+                                MykeModeTimeZoneGroupsController.shared.updateTimeZoneGroup(tzGroup!, with: selectedTimeZones)
                             } else {
-                                let tzGroup = TimeZoneGroup(name: name, timeZones: selectedTimeZones)
-                                MykeModeTimeZoneGroupsController.shared.addTimeZoneGroup(tzGroup)
+                                tzGroup = TimeZoneGroup(name: name, timeZones: selectedTimeZones)
+                                MykeModeTimeZoneGroupsController.shared.addTimeZoneGroup(tzGroup!)
                             }
+                            selectedTimeZoneGroup = tzGroup
                             sheetIsPresented = false
                         }) {
                             Text(nameClashes ? "Update Time Zone Group" : "Save Time Zone Group")
@@ -66,7 +73,7 @@ struct NewTimeZoneGroupView: View {
 struct NewTimeZoneGroupView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            NewTimeZoneGroupView(selectedTimeZones: .constant([]), sheetIsPresented: .constant(true))
+            NewTimeZoneGroupView(selectedTimeZones: .constant([]), selectedTimeZoneGroup: .constant(nil), sheetIsPresented: .constant(true))
                 .navigationTitle("Save Time Zone Group")
                 .navigationBarTitleDisplayMode(.inline)
         }

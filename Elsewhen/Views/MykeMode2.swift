@@ -379,7 +379,7 @@ struct MykeMode2: View {
         .background(Color.secondarySystemBackground)
         .sheet(isPresented: $showNewTimeZoneGroupSheet) {
             NavigationView {
-                NewTimeZoneGroupView(selectedTimeZones: $selectedTimeZones, sheetIsPresented: $showNewTimeZoneGroupSheet)
+                NewTimeZoneGroupView(selectedTimeZones: $selectedTimeZones, selectedTimeZoneGroup: $selectedTimeZoneGroup, sheetIsPresented: $showNewTimeZoneGroupSheet)
                     .navigationTitle("Save")
                     .navigationBarTitleDisplayMode(.inline)
                     .navigationBarItems(leading: Button(action: {
