@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5E01E2F228621E8300782A37 /* NewTimeZoneGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E01E2F128621E8300782A37 /* NewTimeZoneGroupView.swift */; };
 		5E07E84A273475E300D9350E /* rainbow@3x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E07E846273475E300D9350E /* rainbow@3x~ipad.png */; };
 		5E07E84B273475E300D9350E /* rainbow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E07E847273475E300D9350E /* rainbow@2x.png */; };
 		5E07E84C273475E300D9350E /* rainbow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E07E848273475E300D9350E /* rainbow@3x.png */; };
@@ -321,6 +322,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		5E01E2F128621E8300782A37 /* NewTimeZoneGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTimeZoneGroupView.swift; sourceTree = "<group>"; };
 		5E07E846273475E300D9350E /* rainbow@3x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rainbow@3x~ipad.png"; sourceTree = "<group>"; };
 		5E07E847273475E300D9350E /* rainbow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rainbow@2x.png"; sourceTree = "<group>"; };
 		5E07E848273475E300D9350E /* rainbow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rainbow@3x.png"; sourceTree = "<group>"; };
@@ -724,6 +726,7 @@
 				5EE2D2CC26F2717E00D61875 /* EasterEggView.swift */,
 				5E07E84E2734760F00D9350E /* AltIconView.swift */,
 				5E54BBB327373603005CF7A6 /* Settings.swift */,
+				5E01E2F128621E8300782A37 /* NewTimeZoneGroupView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1394,6 +1397,7 @@
 				5E835B50279981BA002B91FF /* Badge.swift in Sources */,
 				5EC4E5E3285DBA18008EEE6C /* FormatChoiceButton.swift in Sources */,
 				5EADF90C2832DA90004C32A5 /* ImportTimeZoneGroupView.swift in Sources */,
+				5E01E2F228621E8300782A37 /* NewTimeZoneGroupView.swift in Sources */,
 				5EC4E5E5285F093D008EEE6C /* MykeMode2.swift in Sources */,
 				5EC4E5E1285DB93A008EEE6C /* RoundedCorner.swift in Sources */,
 				5E9BD45F26F0962D00383233 /* TimeZoneChoiceItem.swift in Sources */,

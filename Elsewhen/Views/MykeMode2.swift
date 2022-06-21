@@ -21,6 +21,7 @@ struct MykeMode2: View {
     @State private var timeZonesUsing12HourTime: Set<TimeZone> = []
     @State private var selectedTimeZoneGroup: TimeZoneGroup? = nil
     @State private var showCopied: Bool = false
+    @State private var showNewTimeZoneGroupSheet: Bool = false
     @State private var showTimeZoneGroupNameClashAlert: Bool = false
     @State private var pendingNewTimeZoneGroupName: String = ""
     @State private var viewId: Int = 0
@@ -149,7 +150,7 @@ struct MykeMode2: View {
                     }
                 }
                 .padding(.bottom, 2)
-                .padding(.horizontal, 10)
+                .padding(.horizontal)
                 .onChange(of: selectedTimeZoneGroup) { target in
                     guard let target = target else { return }
                     withAnimation {
@@ -320,16 +321,51 @@ struct MykeMode2: View {
             VStack {
                 if !timeZoneGroupController.timeZoneGroups.isEmpty {
                     timeZoneGroupChoices
-                        .padding(.top, 18)
-                        .padding(.bottom, 10)
+                        .padding(.vertical, 10)
                     Divider()
                         .padding(.horizontal)
                 }
-                Button(action: {}) {
-                    Text("Sort by Time")
+                HStack {
+                    Button(action: {
+                        showNewTimeZoneGroupSheet = true
+                    }) {
+                        Label("Save as Group", systemImage: "plus.square")
+                    }
+                    .padding(.trailing)
+                    .padding(.leading, 12)
+                    .padding(.vertical, 10)
+                    .hoverEffect()
+                    Spacer()
+                    Button(action: {
+                        withAnimation {
+                            selectedTimeZones = selectedTimeZones.sorted { tz1, tz2 in
+                                let tz1offset = tz1.secondsFromGMT(for: selectedDate)
+                                let tz2offset = tz2.secondsFromGMT(for: selectedDate)
+                                if tz1offset == tz2offset {
+                                    return tz1.identifier < tz2.identifier
+                                }
+                                return tz1offset < tz2offset
+                            }
+                            if let selectedTimeZoneGroup = selectedTimeZoneGroup {
+                                if selectedTimeZoneGroup.timeZones != selectedTimeZones {
+                                    self.selectedTimeZoneGroup = nil
+                                }
+                            }
+                        }
+                    }) {
+                        Label("Sort by Time", systemImage: "arrow.up.arrow.down")
+                    }
+                    .padding(.trailing)
+                    .padding(.leading, 12)
+                    .padding(.vertical, 10)
+                    .hoverEffect()
                 }
+                .padding(.horizontal, 8)
+                Divider()
+                    .padding(.horizontal)
                 DateTimeZoneSheet(selectedDate: $selectedDate, selectedTimeZone: .constant(TimeZone.current), selectedTimeZones: $selectedTimeZones, selectedTimeZoneGroup: $selectedTimeZoneGroup, multipleTimeZones: true)
             }
+            .padding(.top, 10)
             .background(
                 ZStack {
                     Rectangle().fill(Color(UIColor.systemBackground))
@@ -341,6 +377,19 @@ struct MykeMode2: View {
             
         }
         .background(Color.secondarySystemBackground)
+        .sheet(isPresented: $showNewTimeZoneGroupSheet) {
+            NavigationView {
+                NewTimeZoneGroupView(selectedTimeZones: $selectedTimeZones, sheetIsPresented: $showNewTimeZoneGroupSheet)
+                    .navigationTitle("Save")
+                    .navigationBarTitleDisplayMode(.inline)
+                    .navigationBarItems(leading: Button(action: {
+                            showNewTimeZoneGroupSheet = false
+                        }) {
+                            Text("Cancel")
+                        }
+                    )
+            }
+        }
         .onAppear {
             selectedTimeZone = UserDefaults.shared.resetButtonTimeZone
             selectedTimeZones = UserDefaults.shared.mykeModeTimeZones
