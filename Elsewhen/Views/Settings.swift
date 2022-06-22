@@ -53,6 +53,7 @@ struct Settings: View, OrientationObserving {
         .padding(.top, 5)
         .frame(maxWidth: .infinity, alignment: .center)
         .foregroundColor(.secondary)
+        .padding(.bottom)
     }
     
     var smartTimeZoneSearchExplanation: some View {

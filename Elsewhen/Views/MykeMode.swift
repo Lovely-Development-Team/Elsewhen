@@ -1,78 +1,55 @@
 //
 //  MykeMode.swift
-//  MykeMode
+//  Elsewhen
 //
-//  Created by Ben Cardy on 11/09/2021.
+//  Created by Ben Cardy on 19/06/2022.
 //
 
-#if !os(macOS)
-import UIKit
-#endif
 import SwiftUI
 import UniformTypeIdentifiers
 
-struct MykeMode: View, OrientationObserving {
+struct MykeMode: View {
     
-    #if !os(macOS)
-    @EnvironmentObject internal var orientationObserver: OrientationObserver
-    @Environment(\.horizontalSizeClass) var horizontalSizeClass
-    #endif
-    @EnvironmentObject private var timeZoneGroupController: MykeModeTimeZoneGroupsController
-    @Environment(\.isInPopover) private var isInPopover
-    
-    @State private var selectedDate = Date()
+    // MARK: State
+    @Binding var selectedDate: Date
     @State private var selectedTimeZone: TimeZone? = nil
-    
     @State private var selectedFormatStyle: DateFormat = dateFormats[0]
-    
     @State private var selectedTimeZones: [TimeZone] = []
     @State private var timeZonesUsingEUFlag: Set<TimeZone> = []
     @State private var timeZonesUsingNoFlag: Set<TimeZone> = []
     @State private var timeZonesUsing24HourTime: Set<TimeZone> = []
     @State private var timeZonesUsing12HourTime: Set<TimeZone> = []
-    
     @State private var selectedTimeZoneGroup: TimeZoneGroup? = nil
+    @State private var showCopied: Bool = false
+    @State private var showNewTimeZoneGroupSheet: Bool = false
+    @State private var showTimeZoneGroupNameClashAlert: Bool = false
+    @State private var pendingNewTimeZoneGroupName: String = ""
+    @State private var viewId: Int = 0
     
+    // MARK: Environment
+    @EnvironmentObject private var timeZoneGroupController: MykeModeTimeZoneGroupsController
+    
+    // MARK: UserDefaults
     @AppStorage(UserDefaults.mykeModeDefaultTimeFormatKey, store: UserDefaults.shared) private var defaultTimeFormat: TimeFormat = .systemLocale
     @AppStorage(UserDefaults.mykeModeSeparatorKey, store: UserDefaults.shared) private var mykeModeSeparator: MykeModeSeparator = .hyphen
     @AppStorage(UserDefaults.mykeModeShowCitiesKey, store: UserDefaults.shared) private var mykeModeShowCities: Bool = false
     
-    @State private var showCopied: Bool = false
+    // MARK: Parameters
     
-    #if os(iOS)
+#if os(iOS)
     let mediumImpactFeedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
     let notificationFeedbackGenerator = UINotificationFeedbackGenerator()
-    #endif
+#endif
     
-    @State private var showTimeZoneSheet: Bool = false
-    @State private var showTimeZonePopover: Bool = false
-    @State private var selectionViewMaxHeight: CGFloat?
-    
-    @State private var showTimeZoneGroupNameClashAlert: Bool = false
-    @State private var pendingNewTimeZoneGroupName: String = ""
-    
-    @State private var viewId: Int = 1
+    // MARK: Functions
     
     func generateTimesAndFlagsText() -> String {
         stringForTimesAndFlags(of: selectedDate, in: selectedTimeZone ?? TimeZone.current, for: selectedTimeZones, separator: mykeModeSeparator, timeZonesUsingEUFlag: timeZonesUsingEUFlag, timeZonesUsingNoFlag: timeZonesUsingNoFlag, showCities: mykeModeShowCities)
     }
     
-    func flagForTimeZone(_ tz: TimeZone, ignoringEUFlags: Bool = false) -> String {
-        if !ignoringEUFlags && timeZonesUsingEUFlag.contains(tz) {
-            return "🇪🇺"
-        }
-        return tz.flag
-    }
-    
     func stringForSelectedTime(in zone: TimeZone) -> String {
         stringFor(time: selectedDate, in: zone, sourceZone: selectedTimeZone ?? TimeZone.current)
     }
-    
-    #if os(iOS)
-    static let navigationViewStyle = StackNavigationViewStyle()
-    #else
-    static let navigationViewStyle = DefaultNavigationViewStyle()
-    #endif
     
     func tzTapped(_ tz: TimeZone) {
         if flagForTimeZone(tz) != NoFlagTimeZoneEmoji {
@@ -101,163 +78,31 @@ struct MykeMode: View, OrientationObserving {
         }
     }
     
-    @ViewBuilder
-    var timeZoneList: some View {
-        
-        List {
-            ForEach(selectedTimeZones, id: \.identifier) { tz in
-                SelectedTimeZoneCell(tz: tz, timeInZone: stringForSelectedTime(in: tz), selectedDate: selectedDate, formattedString: stringForTimeAndFlag(in: tz, date: selectedDate, sourceZone: selectedTimeZone ?? TimeZone.current, separator: mykeModeSeparator, timeZonesUsingEUFlag: timeZonesUsingEUFlag, timeZonesUsingNoFlag: timeZonesUsingNoFlag, showCities: mykeModeShowCities), onTap: tzTapped)
-                    .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                    .contentShape(Rectangle())
+    func flagForTimeZone(_ tz: TimeZone, ignoringEUFlags: Bool = false) -> String {
+        if !ignoringEUFlags && timeZonesUsingEUFlag.contains(tz) {
+            return "🇪🇺"
+        }
+        return tz.flag
+    }
+    
+    func copyText() {
+        EWPasteboard.set(generateTimesAndFlagsText(), forType: UTType.utf8PlainText)
+        withAnimation {
+            showCopied = true
 #if os(iOS)
-                    .onTapGesture {
-                        tzTapped(tz)
-                    }
+            notificationFeedbackGenerator.notificationOccurred(.success)
 #endif
-                    .contextMenu {
-                        if flagForTimeZone(tz) != NoFlagTimeZoneEmoji {
-                            Button(action: {
-                                #if os(iOS)
-                                mediumImpactFeedbackGenerator.impactOccurred()
-                                #endif
-                                timeZonesUsingNoFlag.insert(tz)
-                            }) {
-                                Text("\(NoFlagTimeZoneEmoji) Use Clock Emoji")
-                            }
-                            Button(action: {
-                                #if os(iOS)
-                                mediumImpactFeedbackGenerator.impactOccurred()
-                                #endif
-                                timeZonesUsingNoFlag.remove(tz)
-                                timeZonesUsingEUFlag.remove(tz)
-                            }) {
-                                Text("\(flagForTimeZone(tz, ignoringEUFlags: true)) Use Country Flag")
-                            }
-                            if tz.isMemberOfEuropeanUnion {
-                                Button(action: {
-                                    #if os(iOS)
-                                    mediumImpactFeedbackGenerator.impactOccurred()
-                                    #endif
-                                    timeZonesUsingNoFlag.remove(tz)
-                                    timeZonesUsingEUFlag.insert(tz)
-                                }) {
-                                    Text("🇪🇺 Use EU Flag")
-                                }
-                            }
-                            Divider()
-                        }
-                        Button(action: {
-                            #if os(iOS)
-                            mediumImpactFeedbackGenerator.impactOccurred()
-                            #endif
-                            self.timeZonesUsing24HourTime.remove(tz)
-                            self.timeZonesUsing12HourTime.insert(tz)
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                                self.viewId += 1
-                            }
-                        }) {
-                            Text("12-Hour Time Format")
-                        }
-                        Button(action: {
-                            #if os(iOS)
-                            mediumImpactFeedbackGenerator.impactOccurred()
-                            #endif
-                            self.timeZonesUsing12HourTime.remove(tz)
-                            self.timeZonesUsing24HourTime.insert(tz)
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                                self.viewId += 1
-                            }
-                        }) {
-                            Text("24-Hour Time Format")
-                        }
-                        Button(action: {
-                            #if os(iOS)
-                            mediumImpactFeedbackGenerator.impactOccurred()
-                            #endif
-                            self.timeZonesUsing12HourTime.remove(tz)
-                            self.timeZonesUsing24HourTime.remove(tz)
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                                self.viewId += 1
-                            }
-                        }) {
-                            Text("Default Time Format")
-                        }
-                        Divider()
-                        DeleteButton(text: "Remove from List") {
-                            #if os(iOS)
-                            notificationFeedbackGenerator.prepare()
-                            #endif
-                            DispatchQueue.main.asyncAfter(deadline: .now().advanced(by: .milliseconds(600))) {
-                                withAnimation {
-                                    selectedTimeZones.removeAll { $0 == tz }
-                                    #if (iOS)
-                                    notificationFeedbackGenerator.notificationOccurred(.success)
-                                    #endif
-                                }
-                            }
-                        }
-                    }
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            withAnimation {
+                showCopied = false
             }
-            .onMove(perform: move)
-            .onDelete(perform: delete)
         }
-        .listStyle(PlainListStyle())
-        .id(viewId)
-        
     }
     
-    @ViewBuilder
-    var mykeModeButtons: some View {
-        Button(action: {
-            #if os(macOS)
-            self.showTimeZonePopover = true
-            #else
-            self.showTimeZoneSheet = true
-            #endif
-        }) {
-            Text("Choose time zones…")
-            #if os(macOS)
-                .foregroundColor(.primary)
-            #endif
-        }
-        .popover(isPresented: $showTimeZonePopover, arrowEdge: .leading) {
-            TimezoneChoiceView(selectedTimeZone: .constant(TimeZone.current), selectedTimeZones: $selectedTimeZones, selectedDate: $selectedDate, selectMultiple: true)
-                .frame(minWidth: 300, minHeight: 300)
-        }
-        .padding(isInPopover ? .bottom : .vertical)
-        
-        Spacer()
-        
-        CopyButton(text: "Copy", generateText: generateTimesAndFlagsText, showCopied: $showCopied)
-            .padding(isInPopover ? .bottom : [])
-        #if !os(macOS)
-        ShareButton(generateText: generateTimesAndFlagsText)
-        #endif
-    }
+    // MARK: View Builders
     
-    @ViewBuilder
-    var dateTimeZonePicker: some View {
-            
-        Group {
-        
-            DateTimeZonePicker(selectedDate: $selectedDate, selectedTimeZone: $selectedTimeZone, showFullCalendar: false, maxWidth: nil)
-                .padding(.top, 5)
-                .padding(.horizontal, 8)
-                
-            
-            Group {
-                HStack {
-                    mykeModeButtons
-                }
-            }
-            .padding(.horizontal, 8)
-            
-        }
-        .padding(.horizontal, 8)
-        
-    }
-    
-    #if !os(macOS)
+#if !os(macOS)
     @ViewBuilder
     var timeZoneGroupChoices: some View {
         ScrollView(.horizontal, showsIndicators: false) {
@@ -273,7 +118,7 @@ struct MykeMode: View, OrientationObserving {
                             Text(tzGroup.name)
                                 .foregroundColor(selectedTimeZoneGroup == tzGroup ? .white : .primary)
                         }
-                        .roundedRectangle(colour: selectedTimeZoneGroup == tzGroup ? .accentColor : .secondarySystemBackground, horizontalPadding: 14)
+                        .roundedRectangle(colour: selectedTimeZoneGroup == tzGroup ? .accentColor : Color(UIColor.systemGray5), horizontalPadding: 14, cornerRadius: 10)
                         .contentShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
                         .contextMenu {
                             Button(action: {
@@ -296,7 +141,7 @@ struct MykeMode: View, OrientationObserving {
                     }
                 }
                 .padding(.bottom, 2)
-                .padding(.horizontal, 8)
+                .padding(.horizontal)
                 .onChange(of: selectedTimeZoneGroup) { target in
                     guard let target = target else { return }
                     withAnimation {
@@ -306,129 +151,290 @@ struct MykeMode: View, OrientationObserving {
             }
         }
     }
-    #endif
+#endif
+    
+    
+    @ViewBuilder
+    var listFooter: some View {
+        Text(generateTimesAndFlagsText().trimmingCharacters(in: .whitespacesAndNewlines))
+            .foregroundColor(.secondary)
+#if os(iOS)
+            .listRowSeparator(.hidden)
+#endif
+            .padding(.horizontal)
+            .padding(.vertical, 8)
+    }
+    
+    @ViewBuilder
+    func timeZoneListItem(for tz: TimeZone) -> some View {
+        SelectedTimeZoneCell(tz: tz, timeInZone: stringForSelectedTime(in: tz), selectedDate: selectedDate, formattedString: stringForTimeAndFlag(in: tz, date: selectedDate, sourceZone: selectedTimeZone ?? TimeZone.current, separator: mykeModeSeparator, timeZonesUsingEUFlag: timeZonesUsingEUFlag, timeZonesUsingNoFlag: timeZonesUsingNoFlag, showCities: mykeModeShowCities), onTap: tzTapped)
+#if os(iOS)
+            .hoverEffect()
+#endif
+            .contextMenu {
+                if flagForTimeZone(tz) != NoFlagTimeZoneEmoji {
+                    Button(action: {
+#if os(iOS)
+                        mediumImpactFeedbackGenerator.impactOccurred()
+#endif
+                        timeZonesUsingNoFlag.insert(tz)
+                    }) {
+                        Text("\(NoFlagTimeZoneEmoji) Use Clock Emoji")
+                    }
+                    Button(action: {
+#if os(iOS)
+                        mediumImpactFeedbackGenerator.impactOccurred()
+#endif
+                        timeZonesUsingNoFlag.remove(tz)
+                        timeZonesUsingEUFlag.remove(tz)
+                    }) {
+                        Text("\(flagForTimeZone(tz, ignoringEUFlags: true)) Use Country Flag")
+                    }
+                    if tz.isMemberOfEuropeanUnion {
+                        Button(action: {
+#if os(iOS)
+                            mediumImpactFeedbackGenerator.impactOccurred()
+#endif
+                            timeZonesUsingNoFlag.remove(tz)
+                            timeZonesUsingEUFlag.insert(tz)
+                        }) {
+                            Text("🇪🇺 Use EU Flag")
+                        }
+                    }
+                    Divider()
+                }
+                Button(action: {
+#if os(iOS)
+                    mediumImpactFeedbackGenerator.impactOccurred()
+#endif
+                    self.timeZonesUsing24HourTime.remove(tz)
+                    self.timeZonesUsing12HourTime.insert(tz)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                        self.viewId += 1
+                    }
+                }) {
+                    Text("12-Hour Time Format")
+                }
+                Button(action: {
+#if os(iOS)
+                    mediumImpactFeedbackGenerator.impactOccurred()
+#endif
+                    self.timeZonesUsing12HourTime.remove(tz)
+                    self.timeZonesUsing24HourTime.insert(tz)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                        self.viewId += 1
+                    }
+                }) {
+                    Text("24-Hour Time Format")
+                }
+                Button(action: {
+#if os(iOS)
+                    mediumImpactFeedbackGenerator.impactOccurred()
+#endif
+                    self.timeZonesUsing12HourTime.remove(tz)
+                    self.timeZonesUsing24HourTime.remove(tz)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                        self.viewId += 1
+                    }
+                }) {
+                    Text("Default Time Format")
+                }
+                Divider()
+                DeleteButton(text: "Remove from List") {
+#if os(iOS)
+                    notificationFeedbackGenerator.prepare()
+#endif
+                    DispatchQueue.main.asyncAfter(deadline: .now().advanced(by: .milliseconds(600))) {
+                        withAnimation {
+                            selectedTimeZones.removeAll { $0 == tz }
+#if (iOS)
+                            notificationFeedbackGenerator.notificationOccurred(.success)
+#endif
+                        }
+                    }
+                }
+            }
+    }
+    
+    // MARK: Body
     
     var body: some View {
-        
-        Group {
-            
-            if isOrientationLandscape && isRegularHorizontalSize && !isInPopover {
-                
-                HStack(alignment: .top) {
-                
-                    VStack {
-#if !os(macOS)
-                        Text("Time Zone List")
-                            .font(.title)
-                            .padding()
-                            .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                        
-                        timeZoneGroupChoices
-#endif
-                        
-                        timeZoneList
-                    }
-                    
-                    VStack {
-                        dateTimeZonePicker
-                        
-                        Group {
-                            Text("Text to be copied:")
-                                .padding(.top)
-                            Text(generateTimesAndFlagsText())
-                                .padding(.horizontal)
-                                .selectable()
+        VStack(alignment: .center, spacing: 0) {
+            ZStack(alignment: .bottomTrailing) {
+                List {
+                    Section {
+                        ForEach(selectedTimeZones, id: \.self) { tz in
+                            #if os(macOS)
+                            HStack {
+                                timeZoneListItem(for: tz)
+                                Image(systemName: "line.3.horizontal")
+                            }
+                            #else
+                            timeZoneListItem(for: tz)
+                            #endif
                         }
-                        .foregroundColor(.secondary)
-                        .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                        .padding(.horizontal, 8)
-                        
+                        .onMove(perform: move)
+                        .onDelete(perform: delete)
+                        .padding(.vertical, 5)
+                        .padding(.leading)
+#if os(iOS)
+                        .padding(.trailing)
+                        .listRowSeparator(.hidden)
+                        #else
+                        .padding(.trailing, 8)
+#endif
+                        .listRowInsets(EdgeInsets())
+                    } header: {
+                        EmptyView()
+                    } footer: {
+                        listFooter
                     }
-                    .padding()
-                    
                 }
+                .listStyle(.plain)
+                .frame(minWidth: 0, maxWidth: .infinity)
+                .clipped()
+                .background(Color.systemBackground)
+                .id(viewId)
                 
-            } else {
-        
-                ZStack(alignment: .top) {
-                    
-                    VStack {
-                        
-                        dateTimeZonePicker
-                            .frame(minWidth: 0, maxWidth: 390)
-                        
-#if !os(macOS)
-                        timeZoneGroupChoices
-                        #endif
-                        
+#if os(iOS)
+                HStack(spacing: 0) {
+                    Button(action: {
+                        postShowShareSheet(with: [generateTimesAndFlagsText()])
+                    }) {
+                        Image(systemName: "square.and.arrow.up")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            .padding(15)
+                            .padding(.leading, 5)
+                            .frame(maxHeight: .infinity)
+                            .background(Color.accentColor)
+                            .clipShape(RoundedCorner(cornerRadius: 25, corners: [.topLeft, .bottomLeft]))
+                            .hoverEffect()
                     }
-                    .padding(.bottom, 10)
-                    .background(GeometryReader { geometry in
-                        Color.clear.preference(
-                            key: ViewHeightPreferenceKey.self,
-                            value: geometry.size.height
-                        )
-                    })
-                    .onPreferenceChange(ViewHeightPreferenceKey.self) {
-                        selectionViewMaxHeight = $0
+                    Divider()
+                    Button(action: copyText) {
+                        ZStack {
+                            Group {
+                                Image(systemName: "doc.on.doc").opacity(0)
+                                Image(systemName: showCopied ? "checkmark" : "doc.on.doc")
+                            }
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            .padding(15)
+                            .padding(.trailing, 5)
+                            .frame(maxHeight: .infinity)
+                            .background(Color.accentColor)
+                            .clipShape(RoundedCorner(cornerRadius: 25, corners: [.topRight, .bottomRight]))
+                            .hoverEffect()
+                        }
                     }
-                    
-                    timeZoneList
-                        .padding(.top, (selectionViewMaxHeight ?? 0))
-                    
                 }
-                .padding(.top, isInPopover ? 15 : 0)
+                .fixedSize(horizontal: false, vertical: true)
+                .frame(maxHeight: 100, alignment: .bottom)
+                .padding()
+#endif
                 
             }
             
-        }
-        .sheet(isPresented: $showTimeZoneSheet) {
-            NavigationView {
-                #if os(iOS)
-                    TimezoneChoiceView(selectedTimeZone: .constant(TimeZone.current), selectedTimeZones: $selectedTimeZones, selectedDate: $selectedDate, selectMultiple: true)
-                    .navigationBarItems(leading: Button(action: {
-//                        showTimeZoneGroupNameClashAlert = true
-                        self.showSaveGroupDialog(title: "Save as a Group?", message: "Provide a name for the Time Zone Group below.") { action, text in
-                            if timeZoneGroupController.timeZoneGroups.map({ $0.name }).contains(text) {
-                                pendingNewTimeZoneGroupName = text
-                                showTimeZoneGroupNameClashAlert = true
-                            } else {
-                                let tzGroup = TimeZoneGroup(name: text, timeZones: selectedTimeZones)
-                                timeZoneGroupController.addTimeZoneGroup(tzGroup)
-                                selectedTimeZoneGroup = tzGroup
-                                showTimeZoneSheet = false
+            VStack {
+#if os(iOS)
+                if !timeZoneGroupController.timeZoneGroups.isEmpty {
+                    timeZoneGroupChoices
+                        .padding(.vertical, 10)
+                    Divider()
+                        .padding(.horizontal)
+                }
+#endif
+                HStack {
+#if os(iOS)
+                    Button(action: {
+                        showNewTimeZoneGroupSheet = true
+                    }) {
+                        Label("Save as Group", systemImage: "plus.square")
+                    }
+                    .padding(.trailing)
+                    .padding(.leading, 12)
+                    .padding(.vertical, 10)
+                    .hoverEffect()
+#endif
+                    Spacer()
+                    Button(action: {
+                        withAnimation {
+                            selectedTimeZones = selectedTimeZones.sorted { tz1, tz2 in
+                                let tz1offset = tz1.secondsFromGMT(for: selectedDate)
+                                let tz2offset = tz2.secondsFromGMT(for: selectedDate)
+                                if tz1offset == tz2offset {
+                                    return tz1.identifier < tz2.identifier
+                                }
+                                return tz1offset < tz2offset
+                            }
+                            if let selectedTimeZoneGroup = selectedTimeZoneGroup {
+                                if selectedTimeZoneGroup.timeZones != selectedTimeZones {
+                                    self.selectedTimeZoneGroup = nil
+                                }
                             }
                         }
                     }) {
-                        Text("Save...")
-                    }, trailing: Button(action: {
-                        if let selectedTimeZoneGroup = selectedTimeZoneGroup, selectedTimeZones != selectedTimeZoneGroup.timeZones {
-                            self.selectedTimeZoneGroup = nil
-                        }
-                        self.showTimeZoneSheet = false
+                        Label("Sort by Time", systemImage: "arrow.up.arrow.down")
+                    }
+                    .padding(.trailing)
+                    .padding(.leading, 12)
+                    .padding(.vertical, 10)
+#if os(iOS)
+                    .hoverEffect()
+                    #endif
+                    
+                    #if os(macOS)
+                    Button(action: {
+                        // TODO: How to share on macOS?
                     }) {
-                        Text("Done")
+                        Label("Share", systemImage: "square.and.arrow.up")
                     }
+                    Button(action: copyText) {
+                        Label("Copy", systemImage: "doc.on.doc")
+                    }
+                    .padding(.trailing, 8)
+                    #endif
+                    
+                }
+                .padding(.horizontal, 8)
+                Divider()
+                    .padding(.horizontal)
+                DateTimeZoneSheet(selectedDate: $selectedDate, selectedTimeZone: .constant(TimeZone.current), selectedTimeZones: $selectedTimeZones, selectedTimeZoneGroup: $selectedTimeZoneGroup, multipleTimeZones: true)
+            }
+            .padding(.top, 10)
+            .background(
+                ZStack {
+                    Rectangle().fill(Color.systemBackground)
+#if os(iOS)
+                    RoundedCorner(cornerRadius: 15, corners: [.topLeft, .topRight])
+                        .fill(Color.secondarySystemBackground)
+                        .shadow(color: .black.opacity(0.2), radius: 5, x: 0, y: 0)
+                    #endif
+                }
+            )
+#if os(macOS)
+            .overlay(
+                Rectangle().frame(width: nil, height: 1, alignment: .top).foregroundColor(Color.secondary.opacity(0.3)), alignment: .top
+            )
+#endif
+        }
+        .background(Color.secondarySystemBackground)
+#if os(iOS)
+        .sheet(isPresented: $showNewTimeZoneGroupSheet) {
+            NavigationView {
+                NewTimeZoneGroupView(selectedTimeZones: $selectedTimeZones, selectedTimeZoneGroup: $selectedTimeZoneGroup, sheetIsPresented: $showNewTimeZoneGroupSheet)
+                    .navigationTitle("Save")
+                    .navigationBarTitleDisplayMode(.inline)
+                    .navigationBarItems(leading: Button(action: {
+                            showNewTimeZoneGroupSheet = false
+                        }) {
+                            Text("Cancel")
+                        }
                     )
-                    .alert(isPresented: $showTimeZoneGroupNameClashAlert) {
-                        Alert(
-                            title: Text("Group already exists"),
-                            message: Text("Would you like to update the group \(pendingNewTimeZoneGroupName) with the selected Time Zones?"),
-                            primaryButton: .default(Text("Update Group")) {
-                                let tzGroup = timeZoneGroupController.retrieveTimeZoneGroup(byName: pendingNewTimeZoneGroupName)
-                                timeZoneGroupController.updateTimeZoneGroup(tzGroup, with: selectedTimeZones)
-                                selectedTimeZoneGroup = tzGroup
-                                showTimeZoneSheet = false
-                            },
-                            secondaryButton: .cancel(Text("Cancel"))
-                        )
-                    }
-                #else
-                TimezoneChoiceView(selectedTimeZone: .constant(TimeZone.current), selectedTimeZones: $selectedTimeZones, selectedDate: $selectedDate, selectMultiple: true)
-                #endif
             }
         }
-        .navigationViewStyle(Self.navigationViewStyle)
+#endif
         .onAppear {
             selectedTimeZone = UserDefaults.shared.resetButtonTimeZone
             selectedTimeZones = UserDefaults.shared.mykeModeTimeZones
@@ -436,7 +442,7 @@ struct MykeMode: View, OrientationObserving {
             timeZonesUsingNoFlag = UserDefaults.shared.mykeModeTimeZonesUsingNoFlag
             timeZonesUsing12HourTime = UserDefaults.shared.mykeModeTimeZoneIdentifiersUsing12HourTime
             timeZonesUsing24HourTime = UserDefaults.shared.mykeModeTimeZoneIdentifiersUsing24HourTime
-            #if !os(macOS)
+#if !os(macOS)
             if let mykeModeTimeZoneGroupName = UserDefaults.shared.mykeModeTimeZoneGroupName {
                 for group in timeZoneGroupController.timeZoneGroups {
                     if group.name == mykeModeTimeZoneGroupName {
@@ -447,7 +453,7 @@ struct MykeMode: View, OrientationObserving {
             } else {
                 selectedTimeZoneGroup = nil
             }
-            #endif
+#endif
         }
         .onChange(of: selectedTimeZones) { newValue in
             UserDefaults.shared.mykeModeTimeZones = newValue
@@ -475,8 +481,9 @@ struct MykeMode: View, OrientationObserving {
             /// This is purely here to update the view state when the user changes the default time format in settings
             return
         }
-        
     }
+    
+    // MARK: List Operations
     
     func move(from source: IndexSet, to destination: Int) {
         selectedTimeZones.move(fromOffsets: source, toOffset: destination)
@@ -488,65 +495,10 @@ struct MykeMode: View, OrientationObserving {
         selectedTimeZoneGroup = nil
     }
     
-    #if !os(macOS)
-    func showSaveGroupDialog(title: String, message: String, completion: @escaping (UIAlertAction, String) -> ()) {
-        let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alertVC.addTextField()
-        let okAction = UIAlertAction(title: "Save", style: .default, handler: { action in
-            completion(action, alertVC.textFields?.first?.text ?? "")
-        })
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
-        alertVC.addAction(okAction)
-        alertVC.addAction(cancelAction)
-        let viewController = UIApplication.shared.windows.first!.visibleViewController!
-        viewController.present(alertVC, animated: true, completion: nil)
-    }
-    #endif
-    
-}
-
-#if !os(macOS)
-public extension UIWindow {
-    var visibleViewController: UIViewController? {
-        return UIWindow.getVisibleViewControllerFrom(self.rootViewController)
-    }
-
-    static func getVisibleViewControllerFrom(_ vc: UIViewController?) -> UIViewController? {
-        if let nc = vc as? UINavigationController {
-            return UIWindow.getVisibleViewControllerFrom(nc.visibleViewController)
-        } else if let tc = vc as? UITabBarController {
-            return UIWindow.getVisibleViewControllerFrom(tc.selectedViewController)
-        } else {
-            if let pvc = vc?.presentedViewController {
-                return UIWindow.getVisibleViewControllerFrom(pvc)
-            } else {
-                return vc
-            }
-        }
-    }
-}
-#endif
-
-private extension MykeMode {
-    struct ViewHeightPreferenceKey: PreferenceKey {
-        static let defaultValue: CGFloat = 0
-        static func reduce(value: inout CGFloat,
-                           nextValue: () -> CGFloat) {
-            value = max(value, nextValue())
-        }
-    }
 }
 
 struct MykeMode_Previews: PreviewProvider {
     static var previews: some View {
-        #if !os(macOS)
-        if #available(iOS 15.0, *) {
-            MykeMode().environmentObject(OrientationObserver.shared)
-        } else {
-            MykeMode()
-        }
-        #else
-        MykeMode()
-        #endif
+        MykeMode(selectedDate: .constant(Date())).environmentObject(MykeModeTimeZoneGroupsController.shared)
     }
 }
