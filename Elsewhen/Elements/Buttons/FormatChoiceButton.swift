@@ -15,8 +15,10 @@ struct FormatChoiceButton: View {
     @Binding var appendRelative: Bool
     @Binding var timeZone: TimeZone?
     
-    @State private var justCopied: Bool = false    
+    @State private var justCopied: Bool = false
+#if os(iOS)
     @State private var notificationFeedbackGenerator: UINotificationFeedbackGenerator? = nil
+#endif
     @State private var viewId: Int = 0
     
     var resolvedTimeZone: TimeZone {
@@ -37,18 +39,24 @@ struct FormatChoiceButton: View {
     }
     
     func doCopy() {
+#if os(iOS)
         notificationFeedbackGenerator = UINotificationFeedbackGenerator()
         notificationFeedbackGenerator?.prepare()
+#endif
         EWPasteboard.set(discordFormattedText, forType: UTType.utf8PlainText)
         withAnimation {
             justCopied = true
         }
+#if os(iOS)
         notificationFeedbackGenerator?.notificationOccurred(.success)
+#endif
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             withAnimation {
                 justCopied = false
             }
+#if os(iOS)
             notificationFeedbackGenerator = nil
+#endif
         }
     }
     
@@ -56,45 +64,48 @@ struct FormatChoiceButton: View {
         postShowShareSheet(with: [discordFormattedText])
     }
     
-    var body: some View {
-        Button(action: doCopy) {
-            GroupBox {
-                
-                HStack(alignment: .center) {
-                    Image(systemName: dateFormat.icon)
-                        .font(.title)
-                        .foregroundColor(.secondary)
-//                        .foregroundColor(.accentColor)
-                    Spacer()
-                    
-                    Text(justCopied ? "Copied ✓" : "Copy")
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        .padding(.vertical, 5)
-                        .padding(.horizontal, 10)
-                        .background(Color.accentColor)
-                        .clipShape(
-                            RoundedCorner(cornerRadius: 25)
-                        )
-                }
-                .padding(.bottom, 2)
-                
-                Text(formattedDate)
-                    .multilineTextAlignment(.leading)
-                    .foregroundColor(.primary)
-                    .font(.system(.headline, design: .rounded))
-                    .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                    .padding(.bottom, 2)
-                
-                Text(discordFormattedText)
-                    .multilineTextAlignment(.leading)
-                    .font(.system(.caption, design: .monospaced))
+    @ViewBuilder
+    var timeFormatView: some View {
+        GroupBox {
+            
+            HStack(alignment: .center) {
+                Image(systemName: dateFormat.icon)
+                    .font(.title)
                     .foregroundColor(.secondary)
-                    .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                Spacer()
                 
+#if os(iOS)
+                Text(justCopied ? "Copied ✓" : "Copy")
+                    .font(.headline)
+                    .foregroundColor(.white)
+                    .padding(.vertical, 5)
+                    .padding(.horizontal, 10)
+                    .background(Color.accentColor)
+                    .clipShape(
+                        RoundedCorner(cornerRadius: 25)
+                    )
+#else
+                Button(action: doCopy) {
+                    Text("Copy")
+                }
+#endif
             }
+            .padding(.bottom, 2)
+            
+            Text(formattedDate)
+                .multilineTextAlignment(.leading)
+                .foregroundColor(.primary)
+                .font(.system(.headline, design: .rounded))
+                .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                .padding(.bottom, 2)
+            
+            Text(discordFormattedText)
+                .multilineTextAlignment(.leading)
+                .font(.system(.caption, design: .monospaced))
+                .foregroundColor(.secondary)
+                .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+            
         }
-        .hoverEffect()
         .contextMenu {
             Text(dateFormat.name)
             Divider()
@@ -105,6 +116,17 @@ struct FormatChoiceButton: View {
                 Label("Share", systemImage: "square.and.arrow.up")
             }
         }
+    }
+    
+    var body: some View {
+#if os(iOS)
+        Button(action: doCopy) {
+            timeFormatView
+        }
+        .hoverEffect()
+#else
+        timeFormatView
+#endif
     }
     
 }

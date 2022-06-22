@@ -1,165 +1,117 @@
 //
 //  TimeCodeGeneratorView.swift
-//  TimeCodeGeneratorView
+//  Elsewhen
 //
-//  Created by Ben Cardy on 11/09/2021.
+//  Created by Ben Cardy on 18/06/2022.
 //
 
 import SwiftUI
-import UniformTypeIdentifiers
 
-struct TimeCodeGeneratorView: View, KeyboardReadable, OrientationObserving {
+struct TimeCodeGeneratorView: View, OrientationObserving {
     
-    #if !os(macOS)
+    // MARK: Environment
+#if os(iOS)
+    @Environment(\.dynamicTypeSize) var dynamicTypesSize
     @EnvironmentObject internal var orientationObserver: OrientationObserver
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
-    #endif
-    @Environment(\.isInPopover) var isInPopover
+#endif
     
-    @State private var selectedDate = Date()
+    // MARK: State
+    @Binding var selectedDate: Date
     @State private var selectedTimeZone: TimeZone? = nil
-    @State private var selectedFormatStyle: DateFormat = dateFormats[0]
-    @State private var showLocalTimeInstead: Bool = false
     @State private var appendRelative: Bool = false
+    @State private var showEasterEggSheet: Bool = false
     
-    @State private var resultSheetMaxHeight: CGFloat?
+    let gridBreakPoint: Int = 170
     
-    @State private var isKeyboardVisible = false
-    @State private var showResultsSheet = false
-    @State private var resultsSheetOffset = 20.0
-    @State private var showEasterEggSheet = false
+    var gridItems: [GridItem] {
+        #if os(macOS)
+        return Array.init(repeating: .init(.flexible(), alignment: .top), count: 2)
+        #else
+        if isPadAndNotCompact {
+            return Array.init(repeating: .init(.flexible(), alignment: .top), count: 3)
+        }
+        if dynamicTypesSize >= .xxLarge {
+            return [GridItem(.flexible(), alignment: .top)]
+        }
+        return [GridItem(.adaptive(minimum: CGFloat(gridBreakPoint)), alignment: .top)]
+        #endif
+    }
     
-    private var discordFormatString: String {
-        return discordFormat(for: selectedDate, in: selectedTimeZone ?? TimeZone.current, with: selectedFormatStyle.code, appendRelative: appendRelative)
+    @ViewBuilder
+    var gridOfItems: some View {
+        LazyVGrid(columns: gridItems, spacing: 0) {
+            ForEach(dateFormats, id: \.self) { dateFormat in
+                FormatChoiceButton(dateFormat: dateFormat, selectedDate: $selectedDate, appendRelative: $appendRelative, timeZone: $selectedTimeZone)
+                    .padding(.bottom)
+            }
+            FormatChoiceButton(dateFormat: relativeDateFormat, selectedDate: $selectedDate, appendRelative: .constant(false), timeZone: $selectedTimeZone)
+                .padding(.bottom)
+        }
+        .padding(.top)
+        .fixedSize(horizontal: false, vertical: true)
+        NotRepresentativeWarning()
+            .padding([.horizontal, .bottom])
+        EasterEggButton {
+            showEasterEggSheet = true
+        }
+        .padding(.bottom)
     }
     
     var body: some View {
-        ZStack(alignment: .bottom) {
-            if isOrientationLandscape && isRegularHorizontalSize {
-                VStack {
-                    DateTimeSelection(selectedFormatStyle: $selectedFormatStyle.animation(), selectedDate: $selectedDate, selectedTimeZone: $selectedTimeZone, appendRelative: $appendRelative.animation(), showLocalTimeInstead: $showLocalTimeInstead)
-                        #if !os(macOS)
-                        .padding(.top, 30)
-                        #endif
-                        .accessibilitySortPriority(2)
-                    
-                        Spacer()
-                    
-                    Group {
-                        if DeviceType.isMac() && isInPopover {
-                            VStack {
-                                NotRepresentativeWarning()
-                                
-                                EasterEggButton {
-                                    showEasterEggSheet = true
-                                }
-                            }
-                        } else {
-                            HStack {
-                                NotRepresentativeWarning()
-                                
-                                EasterEggButton {
-                                    showEasterEggSheet = true
-                                }
-                            }
-                        }
-                    }
-                    .padding(.bottom, 20)
-                    .accessibilitySortPriority(0)
-                }
-                .accessibilitySortPriority(2)
-                
-            } else {
-            
-                VStack(spacing: 0) {
-                    Rectangle().fill(Color.clear).frame(height: 1)
-                    ScrollView {
-                        
-                        DateTimeSelection(selectedFormatStyle: $selectedFormatStyle.animation(), selectedDate: $selectedDate, selectedTimeZone: $selectedTimeZone, appendRelative: $appendRelative.animation(), showLocalTimeInstead: $showLocalTimeInstead)
-                            .accessibilitySortPriority(2)
-                        
-                        FormattedDateAndWarning(display: discordFormatString, showEasterEggSheet: $showEasterEggSheet)
-                        .padding(.horizontal)
-                        .padding(.bottom, (resultSheetMaxHeight ?? 0))
-                        .accessibilitySortPriority(0)
-                        
-                    }
-                }
-                .accessibilitySortPriority(2)
-                
+        VStack(spacing: 0) {
+            ScrollView {
+                gridOfItems
             }
-            
-            if !isKeyboardVisible && (isOrientationPortrait || isCompactHorizontalSize) {
-                ResultSheet(selectedDate: selectedDate, selectedTimeZone: selectedTimeZone ?? TimeZone.current, discordFormat: discordFormatString, appendRelative: $appendRelative.animation(), showLocalTimeInstead: $showLocalTimeInstead, selectedFormatStyle: $selectedFormatStyle.animation())
-                    .opacity(showResultsSheet ? 1 : 0)
-                    .background(GeometryReader { geometry in
-                        Color.clear.preference(
-                            key: ResultSheetHeightPreferenceKey.self,
-                            value: geometry.size.height
-                        )
-                    })
-                    .onPreferenceChange(ResultSheetHeightPreferenceKey.self) {
-                        resultSheetMaxHeight = $0
-                    }
-                    .offset(x: 0.0, y: resultsSheetOffset)
+            .padding(.horizontal)
+            .frame(minWidth: 0, maxWidth: .infinity)
+            .clipped()
+            #if os(macOS)
+            .background(Color.secondarySystemBackground)
+            #else
+            .background(Color.systemBackground)
+            #endif
+            VStack {
+                HStack {
+                    #if os(macOS)
+                    Spacer()
+                    #endif
+                    Toggle("Include Relative Time", isOn: $appendRelative.animation())
+                }
+#if os(iOS)
+                    .tint(.accentColor)
+                #endif
+                    .padding([.horizontal, .top])
+                    .padding(.bottom, 10)
+                Divider()
                     .padding(.horizontal)
-                    .accessibilitySortPriority(1)
+                DateTimeZoneSheet(selectedDate: $selectedDate, selectedTimeZone: $selectedTimeZone, selectedTimeZones: .constant([]), selectedTimeZoneGroup: .constant(nil), multipleTimeZones: false)
             }
-            
-        }
-        .accessibilityElement(children: .contain)
-        .onChange(of: selectedTimeZone) { _ in
-            showLocalTimeInstead = false
-        }
-        .onReceive(keyboardPublisher) { newIsKeyboardVisible in
-            if DeviceType.isPhone() {
-                isKeyboardVisible = newIsKeyboardVisible
-            }
-        }
-        .onAppear {
-            selectedTimeZone = UserDefaults.shared.resetButtonTimeZone
-            if DeviceType.isPhone() {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                    withAnimation {
-                        self.showResultsSheet = true
-                        self.resultsSheetOffset = 0.0
-                    }
+            .background(
+                ZStack {
+                    Rectangle().fill(Color.systemBackground)
+#if os(iOS)
+                    RoundedCorner(cornerRadius: 15, corners: [.topLeft, .topRight])
+                        .fill(Color.secondarySystemBackground)
+                        .shadow(color: .black.opacity(0.2), radius: 5, x: 0, y: 0)
+#endif
                 }
-            } else {
-                self.showResultsSheet = true
-                self.resultsSheetOffset = 0.0
-            }
+            )
+#if os(macOS)
+            .overlay(
+                Rectangle().frame(width: nil, height: 1, alignment: .top).foregroundColor(Color.secondary.opacity(0.3)), alignment: .top
+            )
+#endif
         }
+        .background(Color.secondarySystemBackground)
         .sheet(isPresented: $showEasterEggSheet) {
             EasterEggView()
-        }
-    }
-    
-    func convertSelectedDate(from initialTimezone: TimeZone, to targetTimezone: TimeZone) -> Date {
-        return convert(date: selectedDate, from: initialTimezone, to: targetTimezone)
-    }
-}
-
-private extension TimeCodeGeneratorView {
-    struct ResultSheetHeightPreferenceKey: PreferenceKey {
-        static let defaultValue: CGFloat = 0
-        static func reduce(value: inout CGFloat,
-                           nextValue: () -> CGFloat) {
-            value = max(value, nextValue())
         }
     }
 }
 
 struct TimeCodeGeneratorView_Previews: PreviewProvider {
     static var previews: some View {
-        #if !os(macOS)
-        if #available(iOS 15.0, *) {
-            TimeCodeGeneratorView().environmentObject(OrientationObserver.shared)//.previewInterfaceOrientation(.landscapeLeft)
-        } else {
-            TimeCodeGeneratorView()
-        }
-        #else
-        TimeCodeGeneratorView()
-        #endif
+        TimeCodeGeneratorView(selectedDate: .constant(Date()))
     }
 }

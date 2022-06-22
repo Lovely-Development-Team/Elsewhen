@@ -8,64 +8,14 @@
 import Cocoa
 import SwiftUI
 
-class TimeZonePopoverData: ObservableObject {
-    @Published var selectedDate: Date
-    @Published var selectedTimeZone: TimeZone?
-    @Published var selectedFormatStyle: DateFormat
-    @Published var showLocalTimeInstead: Bool
-    @Published var appendRelative: Bool
-    
-    init(selectedDate: Date, selectedTimeZone: TimeZone?, formatStyle: DateFormat, showLocalTimeInstead: Bool, appendRelative: Bool) {
-        self.selectedDate = selectedDate
-        self.selectedTimeZone = selectedTimeZone
-        self.selectedFormatStyle = formatStyle
-        self.showLocalTimeInstead = showLocalTimeInstead
-        self.appendRelative = appendRelative
-    }
-}
-
-struct DateTimeSelectionContainerView: View {
-    @ObservedObject var data: TimeZonePopoverData
-    
-    var body: some View {
-        DateTimeSelection(selectedFormatStyle: $data.selectedFormatStyle.animation(), selectedDate: $data.selectedDate, selectedTimeZone: $data.selectedTimeZone, appendRelative: $data.appendRelative.animation(), showLocalTimeInstead: $data.showLocalTimeInstead)
-            .frame(maxWidth: 400)
-            .padding(.horizontal, 20)
-            .environment(\.isInPopover, true)
-    }
-}
-
-struct FormattedDateAndWarningContainerView: View {
-    @ObservedObject var data: TimeZonePopoverData
-    @State private var showEasterEggSheet: Bool = false
-    
-    private var discordFormatString: String {
-        return discordFormat(for: data.selectedDate, in: data.selectedTimeZone ?? TimeZone.current, with: data.selectedFormatStyle.code, appendRelative: data.appendRelative)
-    }
-    
-    var body: some View {
-        FormattedDateAndWarning(display: discordFormatString, showEasterEggSheet: $showEasterEggSheet)
-            .frame(maxWidth: 430)
-            .fixedSize(horizontal: false, vertical: true)
-            .environment(\.isInPopover, true)
-            .sheet(isPresented: $showEasterEggSheet) {
-                EasterEggView().environment(\.isInPopover, true)
-            }
-    }
-}
-
 class TimeCodesPopoverViewController: NSViewController {
-    @IBOutlet weak var dateTimeSelectionContainer: NSView!
-    @IBOutlet weak var resultSheetContainer: NSView!
-    
-    let data = TimeZonePopoverData(selectedDate: Date(), selectedTimeZone: nil, formatStyle: dateFormats[0], showLocalTimeInstead: false, appendRelative: false)
+
+    var date: Date = Date()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let dateSelectionHostingView = NSHostingView(rootView: DateTimeSelectionContainerView(data: data))
-        attach(subview: dateSelectionHostingView, to: dateTimeSelectionContainer)
-        let resultSheetHostingView = NSHostingView(rootView: FormattedDateAndWarningContainerView(data: data))
-        attach(subview: resultSheetHostingView, to: resultSheetContainer)
+        let timeCodeHostingView = NSHostingView(rootView: TimeCodeGeneratorView(selectedDate: Binding(get: { self.date }, set: { [self] in self.date = $0 })).environment(\.isInPopover, true))
+        attach(subview: timeCodeHostingView, to: self.view)
         // Do view setup here.
     }
     
@@ -82,4 +32,5 @@ class TimeCodesPopoverViewController: NSViewController {
         subview.viewDidMoveToWindow()
         subview.viewDidMoveToSuperview()
     }
+    
 }

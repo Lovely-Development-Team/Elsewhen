@@ -20,6 +20,10 @@ struct DateTimeZoneSheet: View {
     // MARK: State
     
     @State private var showTimeZoneChoiceSheet: Bool = false
+#if os(macOS)
+    @State private var isPresentingDatePopover: Bool = false
+    @State private var showTimeZoneChoicePopover: Bool = false
+#endif
     
     var timeZoneLabel: String {
         multipleTimeZones ? "Time Zones" : "Time Zone"
@@ -34,9 +38,29 @@ struct DateTimeZoneSheet: View {
             HStack {
                 Text("Time").fontWeight(.semibold)
                 Spacer()
+                
+#if os(macOS)
+                Button {
+                    isPresentingDatePopover = true
+                } label: {
+                    Text("\(selectedDate, style: .date)").foregroundColor(.primary)
+                }
+                .popover(isPresented: $isPresentingDatePopover, arrowEdge: .top) {
+                    Group {
+                        MacDatePicker(selectedDate: $selectedDate)
+                            .padding(8)
+                    }.background(Color(NSColor.controlColor))
+                }
+                
+                DatePicker("", selection: $selectedDate, displayedComponents: [.hourAndMinute])
+                    .frame(maxWidth: 100)
+                    .padding(.trailing)
+                
+#else
                 DatePicker("Time", selection: $selectedDate, displayedComponents: [.date, .hourAndMinute])
                     .datePickerStyle(.compact)
                     .labelsHidden()
+#endif
                 Button(action: {
                     withAnimation {
                         selectedDate = Date()
@@ -44,28 +68,45 @@ struct DateTimeZoneSheet: View {
                 }) {
                     Image(systemName: "arrow.clockwise")
                 }
+#if os(iOS)
                 .hoverEffect()
+#endif
             }
             HStack {
                 Text(timeZoneLabel).fontWeight(.semibold)
                 Spacer()
                 Button(action: {
+#if os(macOS)
+                    showTimeZoneChoicePopover = true
+#else
                     showTimeZoneChoiceSheet = true
+#endif
                 }) {
                     Text(timeZoneButtonValue)
                 }
                 .foregroundColor(.primary)
                 .padding(.vertical, 8)
+#if os(iOS)
                 .padding(.horizontal, 10)
                 .hoverEffect()
                 .background(
                     RoundedRectangle(cornerRadius: 10, style: .continuous)
                         .fill(Color(UIColor.systemGray5))
                 )
+#endif
+                #if os(macOS)
+                .popover(isPresented: $showTimeZoneChoicePopover, arrowEdge: .leading) {
+                    TimezoneChoiceView(selectedTimeZone: $selectedTimeZone, selectedTimeZones: $selectedTimeZones, selectedDate: $selectedDate, selectMultiple: multipleTimeZones) {
+                        showTimeZoneChoicePopover = false
+                    }
+                    .frame(minWidth: 300, minHeight: 300)
+                }
+                #endif
             }
         }
         .padding([.horizontal, .bottom])
         .padding(.top, 10)
+#if os(iOS)
         .sheet(isPresented: $showTimeZoneChoiceSheet) {
             NavigationView {
                 TimezoneChoiceView(selectedTimeZone: $selectedTimeZone, selectedTimeZones: $selectedTimeZones, selectedDate: $selectedDate, selectMultiple: multipleTimeZones) {
@@ -82,6 +123,7 @@ struct DateTimeZoneSheet: View {
                 )
             }
         }
+#endif
     }
     
 }
