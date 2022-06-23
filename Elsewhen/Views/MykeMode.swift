@@ -356,8 +356,8 @@ struct MykeMode: View {
                     .padding(.leading, 12)
                     .padding(.vertical, 10)
                     .hoverEffect()
-#endif
                     Spacer()
+#endif
                     Button(action: {
                         withAnimation {
                             selectedTimeZones = selectedTimeZones.sorted { tz1, tz2 in
@@ -385,6 +385,7 @@ struct MykeMode: View {
                     #endif
                     
                     #if os(macOS)
+                    Spacer()
                     Button(action: {
                         // TODO: How to share on macOS?
                     }) {
@@ -394,6 +395,7 @@ struct MykeMode: View {
                         Label("Copy", systemImage: "doc.on.doc")
                     }
                     .padding(.trailing, 8)
+                    .keyboardShortcut("c", modifiers: [.command])
                     #endif
                     
                 }
