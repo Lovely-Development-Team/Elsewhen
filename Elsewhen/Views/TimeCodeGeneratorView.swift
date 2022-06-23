@@ -52,10 +52,12 @@ struct TimeCodeGeneratorView: View, OrientationObserving {
         .fixedSize(horizontal: false, vertical: true)
         NotRepresentativeWarning()
             .padding([.horizontal, .bottom])
+        #if os(iOS)
         EasterEggButton {
             showEasterEggSheet = true
         }
         .padding(.bottom)
+        #endif
     }
     
     var body: some View {
@@ -74,6 +76,9 @@ struct TimeCodeGeneratorView: View, OrientationObserving {
             VStack {
                 HStack {
                     #if os(macOS)
+                    EasterEggButton {
+                        showEasterEggSheet = true
+                    }
                     Spacer()
                     #endif
                     Toggle("Include Relative Time", isOn: $appendRelative.animation())
