@@ -375,7 +375,11 @@ struct MykeMode: View {
                             }
                         }
                     }) {
+                        #if os(iOS)
                         Label("Sort by Time", systemImage: "arrow.up.arrow.down")
+                        #else
+                        Text("Sort by Time")
+                        #endif
                     }
                     .padding(.trailing)
                     .padding(.leading, 12)
@@ -386,13 +390,9 @@ struct MykeMode: View {
                     
                     #if os(macOS)
                     Spacer()
-                    Button(action: {
-                        // TODO: How to share on macOS?
-                    }) {
-                        Label("Share", systemImage: "square.and.arrow.up")
-                    }
+                    Text("Copied!").opacity(showCopied ? 1 : 0)
                     Button(action: copyText) {
-                        Label("Copy", systemImage: "doc.on.doc")
+                        Text("Copy")
                     }
                     .padding(.trailing, 8)
                     .keyboardShortcut("c", modifiers: [.command])
