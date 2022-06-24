@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct TimeZoneGroup: Equatable, CustomStringConvertible {
+struct TimeZoneGroup: Equatable, CustomStringConvertible, Hashable {
     
     let name: String
     let timeZones: [TimeZone]

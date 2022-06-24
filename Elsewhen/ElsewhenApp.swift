@@ -27,6 +27,7 @@ struct ElsewhenApp: App {
             #if os(macOS)
             MacContentView()
                 .frame(minWidth: 400, minHeight: 500)
+                .environmentObject(MykeModeTimeZoneGroupsController.shared)
             #else
             ContentView()
                 .environmentObject(OrientationObserver.shared)
