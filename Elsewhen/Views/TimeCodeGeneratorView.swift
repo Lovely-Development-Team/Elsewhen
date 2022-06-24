@@ -9,6 +9,8 @@ import SwiftUI
 
 struct TimeCodeGeneratorView: View, OrientationObserving {
     
+    let pub = NotificationCenter.default.publisher(for: NSNotification.Name("SelectedDateChanged"))
+    
     // MARK: Environment
 #if os(iOS)
     @Environment(\.dynamicTypeSize) var dynamicTypesSize
@@ -17,7 +19,7 @@ struct TimeCodeGeneratorView: View, OrientationObserving {
 #endif
     
     // MARK: State
-    @Binding var selectedDate: Date
+    @State var selectedDate: Date = Date()
     @State private var selectedTimeZone: TimeZone? = nil
     @State private var appendRelative: Bool = false
     @State private var showEasterEggSheet: Bool = false
@@ -112,11 +114,19 @@ struct TimeCodeGeneratorView: View, OrientationObserving {
         .sheet(isPresented: $showEasterEggSheet) {
             EasterEggView()
         }
+        .onChange(of: selectedDate) { newValue in
+            NotificationCenter.default.post(name: .init("SelectedDateChanged"), object: newValue)
+        }
+        .onReceive(pub) { output in
+            if let date = output.object as? Date {
+                selectedDate = date
+            }
+        }
     }
 }
 
 struct TimeCodeGeneratorView_Previews: PreviewProvider {
     static var previews: some View {
-        TimeCodeGeneratorView(selectedDate: .constant(Date()))
+        TimeCodeGeneratorView()
     }
 }

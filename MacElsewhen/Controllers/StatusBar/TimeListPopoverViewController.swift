@@ -9,12 +9,10 @@ import Cocoa
 import SwiftUI
 
 class TimeListPopoverViewController: NSViewController {
-
-    var date: Date = Date()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let mykeModeHostingView = NSHostingView(rootView: MykeMode(selectedDate: Binding(get: { self.date }, set: { [self] in self.date = $0 })).frame(width: 400).environment(\.isInPopover, true))
+        let mykeModeHostingView = NSHostingView(rootView: MykeMode().frame(width: 400).environment(\.isInPopover, true))
         attach(subview: mykeModeHostingView, to: self.view)
         // Do view setup here.
     }
