@@ -10,8 +10,10 @@ import UniformTypeIdentifiers
 
 struct MykeMode: View {
     
+    let pub = NotificationCenter.default.publisher(for: NSNotification.Name("SelectedDateChanged"))
+                           
     // MARK: State
-    @Binding var selectedDate: Date
+    @State private var selectedDate: Date = Date()
     @State private var selectedTimeZone: TimeZone? = nil
     @State private var selectedFormatStyle: DateFormat = dateFormats[0]
     @State private var selectedTimeZones: [TimeZone] = []
@@ -483,6 +485,14 @@ struct MykeMode: View {
             /// This is purely here to update the view state when the user changes the default time format in settings
             return
         }
+        .onChange(of: selectedDate) { newValue in
+            NotificationCenter.default.post(name: .init("SelectedDateChanged"), object: newValue)
+        }
+        .onReceive(pub) { output in
+            if let date = output.object as? Date {
+                selectedDate = date
+            }
+        }
     }
     
     // MARK: List Operations
@@ -501,6 +511,6 @@ struct MykeMode: View {
 
 struct MykeMode_Previews: PreviewProvider {
     static var previews: some View {
-        MykeMode(selectedDate: .constant(Date())).environmentObject(MykeModeTimeZoneGroupsController.shared)
+        MykeMode().environmentObject(MykeModeTimeZoneGroupsController.shared)
     }
 }

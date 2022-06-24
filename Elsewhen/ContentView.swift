@@ -15,9 +15,7 @@ struct ContentView: View {
     @State private var selectedTab: Int = 1
     @State private var showShareSheet: ShareSheetItem? = nil
     @AppStorage(UserDefaults.lastSeenVersionForSettingsKey) private var lastSeenVersionForSettings: String = ""
-    
-    @State private var selectedDate = Date()
-    
+        
     init() {
         // Disables the shadow pixel above the topbar
         UITabBar.appearance().clipsToBounds = true
@@ -35,12 +33,12 @@ struct ContentView: View {
     var body: some View {
         TabView(selection: $selectedTab) {
             
-            TimeCodeGeneratorView(selectedDate: $selectedDate)
+            TimeCodeGeneratorView()
 //            TimeCodeGeneratorView()
 //                .overlay(Rectangle().frame(width: nil, height: 1, alignment: .bottom).foregroundColor(Color.secondary.opacity(0.5)), alignment: .bottom)
                 .tabItem { Label("Time Codes", systemImage: "clock") }
                 .tag(Tab.timeCodes.rawValue)
-            MykeMode(selectedDate: $selectedDate)
+            MykeMode()
 //                .overlay(Rectangle().frame(width: nil, height: 1, alignment: .bottom).foregroundColor(Color.secondary.opacity(0.5)), alignment: .bottom)
                 .tabItem { Label("Time List", systemImage: "list.dash") }
                 .tag(Tab.mykeMode.rawValue)
