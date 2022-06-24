@@ -26,7 +26,7 @@ struct ElsewhenApp: App {
         WindowGroup {
             #if os(macOS)
             MacContentView()
-                .frame(minWidth: 700, minHeight: 400)
+                .frame(minWidth: 400, minHeight: 500)
             #else
             ContentView()
                 .environmentObject(OrientationObserver.shared)
