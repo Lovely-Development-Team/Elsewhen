@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TimeCodeGeneratorView: View, OrientationObserving {
     
-    let pub = NotificationCenter.default.publisher(for: NSNotification.Name("SelectedDateChanged"))
+    let pub = NotificationCenter.default.publisher(for: NSNotification.Name(NotificationCenter.SelectedDateChanged))
     
     // MARK: Environment
 #if os(iOS)
@@ -115,7 +115,7 @@ struct TimeCodeGeneratorView: View, OrientationObserving {
             EasterEggView()
         }
         .onChange(of: selectedDate) { newValue in
-            NotificationCenter.default.post(name: .init("SelectedDateChanged"), object: newValue)
+            NotificationCenter.default.post(name: .init(NotificationCenter.SelectedDateChanged), object: newValue)
         }
         .onReceive(pub) { output in
             if let date = output.object as? Date {
