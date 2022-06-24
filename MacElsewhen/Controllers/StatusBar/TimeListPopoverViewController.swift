@@ -12,7 +12,7 @@ class TimeListPopoverViewController: NSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let mykeModeHostingView = NSHostingView(rootView: MykeMode().frame(width: 400).environment(\.isInPopover, true))
+        let mykeModeHostingView = NSHostingView(rootView: MykeMode().frame(width: 400).environmentObject(MykeModeTimeZoneGroupsController.shared).environment(\.isInPopover, true))
         attach(subview: mykeModeHostingView, to: self.view)
         // Do view setup here.
     }
