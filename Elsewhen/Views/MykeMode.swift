@@ -11,7 +11,7 @@ import UniformTypeIdentifiers
 struct MykeMode: View {
     
     let pub = NotificationCenter.default.publisher(for: NSNotification.Name("SelectedDateChanged"))
-                           
+    
     // MARK: State
     @State private var selectedDate: Date = Date()
     @State private var selectedTimeZone: TimeZone? = nil
@@ -104,18 +104,15 @@ struct MykeMode: View {
     
     // MARK: View Builders
     
-#if !os(macOS)
     @ViewBuilder
     var timeZoneGroupChoices: some View {
+    #if !os(macOS)
         ScrollView(.horizontal, showsIndicators: false) {
             ScrollViewReader { scrollViewReader in
                 HStack {
                     ForEach(timeZoneGroupController.timeZoneGroups, id: \.name) { tzGroup in
                         Button(action: {
                             selectedTimeZoneGroup = tzGroup
-                            withAnimation {
-                                selectedTimeZones = tzGroup.timeZones
-                            }
                         }) {
                             Text(tzGroup.name)
                                 .foregroundColor(selectedTimeZoneGroup == tzGroup ? .white : .primary)
@@ -152,8 +149,21 @@ struct MykeMode: View {
                 }
             }
         }
+        .padding(.vertical, 10)
+        #else
+        HStack {
+            Picker("Group", selection: $selectedTimeZoneGroup) {
+                Text("Group...").tag(TimeZoneGroup?.none)
+                ForEach(timeZoneGroupController.timeZoneGroups, id: \.name) { tzGroup in
+                    Text(tzGroup.name).tag(TimeZoneGroup?.some(tzGroup))
+                }
+            }
+            .labelsHidden()
+        }
+        .padding(.horizontal, 10)
+        .padding(.vertical, 10)
+        #endif
     }
-#endif
     
     
     @ViewBuilder
@@ -287,7 +297,11 @@ struct MykeMode: View {
 #endif
                         .listRowInsets(EdgeInsets())
                     } header: {
-                        EmptyView()
+                        #if os(macOS)
+                        if !timeZoneGroupController.timeZoneGroups.isEmpty {
+                            timeZoneGroupChoices
+                        }
+                        #endif
                     } footer: {
                         listFooter
                     }
@@ -339,27 +353,35 @@ struct MykeMode: View {
             }
             
             VStack {
-#if os(iOS)
+                #if os(iOS)
                 if !timeZoneGroupController.timeZoneGroups.isEmpty {
                     timeZoneGroupChoices
-                        .padding(.vertical, 10)
                     Divider()
                         .padding(.horizontal)
                 }
-#endif
+                #endif
                 HStack {
+                    
 #if os(iOS)
                     Button(action: {
                         showNewTimeZoneGroupSheet = true
                     }) {
+                        #if os(iOS)
                         Label("Save as Group", systemImage: "plus.square")
+                        #else
+                        Text("Save as Group&hellip;")
+                        #endif
                     }
-                    .padding(.trailing)
                     .padding(.leading, 12)
                     .padding(.vertical, 10)
+                    .padding(.trailing)
                     .hoverEffect()
-                    Spacer()
 #endif
+                    
+                    #if os(iOS)
+                    Spacer()
+                    #endif
+                    
                     Button(action: {
                         withAnimation {
                             selectedTimeZones = selectedTimeZones.sorted { tz1, tz2 in
@@ -464,6 +486,9 @@ struct MykeMode: View {
         }
         .onChange(of: selectedTimeZoneGroup) { newValue in
             if let newValue = newValue {
+                withAnimation {
+                    selectedTimeZones = newValue.timeZones
+                }
                 UserDefaults.shared.mykeModeTimeZoneGroupName = newValue.name
             } else {
                 UserDefaults.shared.mykeModeTimeZoneGroupName = nil
