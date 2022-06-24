@@ -85,6 +85,7 @@ struct FormatChoiceButton: View {
                         RoundedCorner(cornerRadius: 25)
                     )
 #else
+                Text("Copied!").opacity(justCopied ? 1 : 0)
                 Button(action: doCopy) {
                     Text("Copy")
                 }
@@ -94,12 +95,19 @@ struct FormatChoiceButton: View {
             
             Text(formattedDate)
                 .multilineTextAlignment(.leading)
+#if os(macOS)
+                .textSelection(.enabled)
+                .foregroundColor(.accentColor)
+                .font(.system(.body, design: .rounded))
+            #else
                 .foregroundColor(.primary)
                 .font(.system(.headline, design: .rounded))
+#endif
                 .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                 .padding(.bottom, 2)
             
             Text(discordFormattedText)
+                .textSelection(.enabled)
                 .multilineTextAlignment(.leading)
                 .font(.system(.caption, design: .monospaced))
                 .foregroundColor(.secondary)

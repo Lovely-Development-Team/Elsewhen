@@ -64,8 +64,8 @@ struct TimeCodeGeneratorView: View, OrientationObserving {
         VStack(spacing: 0) {
             ScrollView {
                 gridOfItems
+                    .padding(.horizontal)
             }
-            .padding(.horizontal)
             .frame(minWidth: 0, maxWidth: .infinity)
             .clipped()
             #if os(macOS)
