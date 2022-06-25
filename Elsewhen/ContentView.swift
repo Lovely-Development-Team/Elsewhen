@@ -34,12 +34,9 @@ struct ContentView: View {
         TabView(selection: $selectedTab) {
             
             TimeCodeGeneratorView(dateHolder: DateHolder.shared)
-//            TimeCodeGeneratorView()
-//                .overlay(Rectangle().frame(width: nil, height: 1, alignment: .bottom).foregroundColor(Color.secondary.opacity(0.5)), alignment: .bottom)
                 .tabItem { Label("Time Codes", systemImage: "clock") }
                 .tag(Tab.timeCodes.rawValue)
             MykeMode(dateHolder: DateHolder.shared)
-//                .overlay(Rectangle().frame(width: nil, height: 1, alignment: .bottom).foregroundColor(Color.secondary.opacity(0.5)), alignment: .bottom)
                 .tabItem { Label("Time List", systemImage: "list.dash") }
                 .tag(Tab.mykeMode.rawValue)
             
