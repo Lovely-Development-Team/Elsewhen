@@ -165,3 +165,10 @@ func filter<TZSequence>(timezones: TZSequence, by searchTerm: String, onDate: Da
     }
     return timezones.filter { $0.matches(searchTerm: st, onDate: onDate) }
 }
+
+class DateHolder: ObservableObject {
+    
+    static let shared: DateHolder = DateHolder()
+    @Published var date: Date = Date()
+    
+}

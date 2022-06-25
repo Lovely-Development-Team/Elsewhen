@@ -10,10 +10,7 @@ import UniformTypeIdentifiers
 
 struct MykeMode: View {
     
-    let pub = NotificationCenter.default.publisher(for: NSNotification.Name(NotificationCenter.SelectedDateChanged))
-    
     // MARK: State
-    @State private var selectedDate: Date = Date()
     @State private var selectedTimeZone: TimeZone? = nil
     @State private var selectedFormatStyle: DateFormat = dateFormats[0]
     @State private var selectedTimeZones: [TimeZone] = []
@@ -30,6 +27,7 @@ struct MykeMode: View {
     
     // MARK: Environment
     @EnvironmentObject private var timeZoneGroupController: MykeModeTimeZoneGroupsController
+    @EnvironmentObject var dateHolder: DateHolder
     
     // MARK: UserDefaults
     @AppStorage(UserDefaults.mykeModeDefaultTimeFormatKey, store: UserDefaults.shared) private var defaultTimeFormat: TimeFormat = .systemLocale
@@ -46,11 +44,11 @@ struct MykeMode: View {
     // MARK: Functions
     
     func generateTimesAndFlagsText() -> String {
-        stringForTimesAndFlags(of: selectedDate, in: selectedTimeZone ?? TimeZone.current, for: selectedTimeZones, separator: mykeModeSeparator, timeZonesUsingEUFlag: timeZonesUsingEUFlag, timeZonesUsingNoFlag: timeZonesUsingNoFlag, showCities: mykeModeShowCities)
+        stringForTimesAndFlags(of: dateHolder.date, in: selectedTimeZone ?? TimeZone.current, for: selectedTimeZones, separator: mykeModeSeparator, timeZonesUsingEUFlag: timeZonesUsingEUFlag, timeZonesUsingNoFlag: timeZonesUsingNoFlag, showCities: mykeModeShowCities)
     }
     
     func stringForSelectedTime(in zone: TimeZone) -> String {
-        stringFor(time: selectedDate, in: zone, sourceZone: selectedTimeZone ?? TimeZone.current)
+        stringFor(time: dateHolder.date, in: zone, sourceZone: selectedTimeZone ?? TimeZone.current)
     }
     
     func tzTapped(_ tz: TimeZone) {
@@ -179,7 +177,7 @@ struct MykeMode: View {
     
     @ViewBuilder
     func timeZoneListItem(for tz: TimeZone) -> some View {
-        SelectedTimeZoneCell(tz: tz, timeInZone: stringForSelectedTime(in: tz), selectedDate: selectedDate, formattedString: stringForTimeAndFlag(in: tz, date: selectedDate, sourceZone: selectedTimeZone ?? TimeZone.current, separator: mykeModeSeparator, timeZonesUsingEUFlag: timeZonesUsingEUFlag, timeZonesUsingNoFlag: timeZonesUsingNoFlag, showCities: mykeModeShowCities), onTap: tzTapped)
+        SelectedTimeZoneCell(tz: tz, timeInZone: stringForSelectedTime(in: tz), selectedDate: dateHolder.date, formattedString: stringForTimeAndFlag(in: tz, date: dateHolder.date, sourceZone: selectedTimeZone ?? TimeZone.current, separator: mykeModeSeparator, timeZonesUsingEUFlag: timeZonesUsingEUFlag, timeZonesUsingNoFlag: timeZonesUsingNoFlag, showCities: mykeModeShowCities), onTap: tzTapped)
 #if os(iOS)
             .hoverEffect()
 #endif
@@ -385,8 +383,8 @@ struct MykeMode: View {
                     Button(action: {
                         withAnimation {
                             selectedTimeZones = selectedTimeZones.sorted { tz1, tz2 in
-                                let tz1offset = tz1.secondsFromGMT(for: selectedDate)
-                                let tz2offset = tz2.secondsFromGMT(for: selectedDate)
+                                let tz1offset = tz1.secondsFromGMT(for: dateHolder.date)
+                                let tz2offset = tz2.secondsFromGMT(for: dateHolder.date)
                                 if tz1offset == tz2offset {
                                     return tz1.identifier < tz2.identifier
                                 }
@@ -426,7 +424,7 @@ struct MykeMode: View {
                 .padding(.horizontal, 8)
                 Divider()
                     .padding(.horizontal)
-                DateTimeZoneSheet(selectedDate: $selectedDate, selectedTimeZone: .constant(TimeZone.current), selectedTimeZones: $selectedTimeZones, selectedTimeZoneGroup: $selectedTimeZoneGroup, multipleTimeZones: true)
+                DateTimeZoneSheet(selectedDate: $dateHolder.date, selectedTimeZone: .constant(TimeZone.current), selectedTimeZones: $selectedTimeZones, selectedTimeZoneGroup: $selectedTimeZoneGroup, multipleTimeZones: true)
             }
             .padding(.top, 10)
             .background(
@@ -510,14 +508,6 @@ struct MykeMode: View {
             /// This is purely here to update the view state when the user changes the default time format in settings
             return
         }
-        .onChange(of: selectedDate) { newValue in
-            NotificationCenter.default.post(name: .init(NotificationCenter.SelectedDateChanged), object: newValue)
-        }
-        .onReceive(pub) { output in
-            if let date = output.object as? Date {
-                selectedDate = date
-            }
-        }
     }
     
     // MARK: List Operations
@@ -536,6 +526,6 @@ struct MykeMode: View {
 
 struct MykeMode_Previews: PreviewProvider {
     static var previews: some View {
-        MykeMode().environmentObject(MykeModeTimeZoneGroupsController.shared)
+        MykeMode().environmentObject(MykeModeTimeZoneGroupsController.shared).environmentObject(DateHolder.shared)
     }
 }
