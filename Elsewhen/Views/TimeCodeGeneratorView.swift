@@ -9,17 +9,15 @@ import SwiftUI
 
 struct TimeCodeGeneratorView: View, OrientationObserving {
     
-    let pub = NotificationCenter.default.publisher(for: NSNotification.Name(NotificationCenter.SelectedDateChanged))
-    
     // MARK: Environment
 #if os(iOS)
     @Environment(\.dynamicTypeSize) var dynamicTypesSize
     @EnvironmentObject internal var orientationObserver: OrientationObserver
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
 #endif
+    @EnvironmentObject var dateHolder: DateHolder
     
     // MARK: State
-    @State var selectedDate: Date = Date()
     @State private var selectedTimeZone: TimeZone? = nil
     @State private var appendRelative: Bool = false
     @State private var showEasterEggSheet: Bool = false
@@ -44,10 +42,10 @@ struct TimeCodeGeneratorView: View, OrientationObserving {
     var gridOfItems: some View {
         LazyVGrid(columns: gridItems, spacing: 0) {
             ForEach(dateFormats, id: \.self) { dateFormat in
-                FormatChoiceButton(dateFormat: dateFormat, selectedDate: $selectedDate, appendRelative: $appendRelative, timeZone: $selectedTimeZone)
+                FormatChoiceButton(dateFormat: dateFormat, selectedDate: $dateHolder.date, appendRelative: $appendRelative, timeZone: $selectedTimeZone)
                     .padding(.bottom)
             }
-            FormatChoiceButton(dateFormat: relativeDateFormat, selectedDate: $selectedDate, appendRelative: .constant(false), timeZone: $selectedTimeZone)
+            FormatChoiceButton(dateFormat: relativeDateFormat, selectedDate: $dateHolder.date, appendRelative: .constant(false), timeZone: $selectedTimeZone)
                 .padding(.bottom)
         }
         .padding(.top)
@@ -92,7 +90,7 @@ struct TimeCodeGeneratorView: View, OrientationObserving {
                     .padding(.bottom, 10)
                 Divider()
                     .padding(.horizontal)
-                DateTimeZoneSheet(selectedDate: $selectedDate, selectedTimeZone: $selectedTimeZone, selectedTimeZones: .constant([]), selectedTimeZoneGroup: .constant(nil), multipleTimeZones: false)
+                DateTimeZoneSheet(selectedDate: $dateHolder.date, selectedTimeZone: $selectedTimeZone, selectedTimeZones: .constant([]), selectedTimeZoneGroup: .constant(nil), multipleTimeZones: false)
             }
             .background(
                 ZStack {
@@ -114,19 +112,12 @@ struct TimeCodeGeneratorView: View, OrientationObserving {
         .sheet(isPresented: $showEasterEggSheet) {
             EasterEggView()
         }
-        .onChange(of: selectedDate) { newValue in
-            NotificationCenter.default.post(name: .init(NotificationCenter.SelectedDateChanged), object: newValue)
-        }
-        .onReceive(pub) { output in
-            if let date = output.object as? Date {
-                selectedDate = date
-            }
-        }
+        
     }
 }
 
 struct TimeCodeGeneratorView_Previews: PreviewProvider {
     static var previews: some View {
-        TimeCodeGeneratorView()
+        TimeCodeGeneratorView().environmentObject(DateHolder.shared)
     }
 }
