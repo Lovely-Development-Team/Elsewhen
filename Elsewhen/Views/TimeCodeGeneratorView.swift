@@ -15,7 +15,8 @@ struct TimeCodeGeneratorView: View, OrientationObserving {
     @EnvironmentObject internal var orientationObserver: OrientationObserver
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
 #endif
-    @EnvironmentObject var dateHolder: DateHolder
+    
+    @ObservedObject var dateHolder: DateHolder
     
     // MARK: State
     @State private var selectedTimeZone: TimeZone? = nil
@@ -118,6 +119,6 @@ struct TimeCodeGeneratorView: View, OrientationObserving {
 
 struct TimeCodeGeneratorView_Previews: PreviewProvider {
     static var previews: some View {
-        TimeCodeGeneratorView().environmentObject(DateHolder.shared)
+        TimeCodeGeneratorView(dateHolder: DateHolder.shared)
     }
 }

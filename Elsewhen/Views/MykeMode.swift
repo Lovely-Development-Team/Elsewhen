@@ -10,6 +10,8 @@ import UniformTypeIdentifiers
 
 struct MykeMode: View {
     
+    @ObservedObject var dateHolder: DateHolder
+    
     // MARK: State
     @State private var selectedTimeZone: TimeZone? = nil
     @State private var selectedFormatStyle: DateFormat = dateFormats[0]
@@ -27,7 +29,6 @@ struct MykeMode: View {
     
     // MARK: Environment
     @EnvironmentObject private var timeZoneGroupController: MykeModeTimeZoneGroupsController
-    @EnvironmentObject var dateHolder: DateHolder
     
     // MARK: UserDefaults
     @AppStorage(UserDefaults.mykeModeDefaultTimeFormatKey, store: UserDefaults.shared) private var defaultTimeFormat: TimeFormat = .systemLocale
@@ -526,6 +527,6 @@ struct MykeMode: View {
 
 struct MykeMode_Previews: PreviewProvider {
     static var previews: some View {
-        MykeMode().environmentObject(MykeModeTimeZoneGroupsController.shared).environmentObject(DateHolder.shared)
+        MykeMode(dateHolder: DateHolder.shared).environmentObject(MykeModeTimeZoneGroupsController.shared)
     }
 }
