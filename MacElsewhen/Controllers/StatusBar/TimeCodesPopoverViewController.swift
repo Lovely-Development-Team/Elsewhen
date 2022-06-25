@@ -12,7 +12,7 @@ class TimeCodesPopoverViewController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let timeCodeHostingView = NSHostingView(rootView: TimeCodeGeneratorView().frame(width: 400).environment(\.isInPopover, true).environmentObject(DateHolder.shared))
+        let timeCodeHostingView = NSHostingView(rootView: TimeCodeGeneratorView(dateHolder: DateHolder.shared).frame(width: 400).environment(\.isInPopover, true))
         attach(subview: timeCodeHostingView, to: self.view)
         // Do view setup here.
     }

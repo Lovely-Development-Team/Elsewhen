@@ -12,8 +12,8 @@ class ContentTabViewController: NSTabViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        addSwiftUITab(containing: TimeCodeGeneratorView(), label: "TimeCodeLabel", image: NSImage(systemSymbolName: "clock", accessibilityDescription: nil))
-        addSwiftUITab(containing: MykeMode(), label: "TimeListLabel", image: NSImage(systemSymbolName: "list.dash", accessibilityDescription: nil))
+        addSwiftUITab(containing: TimeCodeGeneratorView(dateHolder: DateHolder.shared), label: "TimeCodeLabel", image: NSImage(systemSymbolName: "clock", accessibilityDescription: nil))
+        addSwiftUITab(containing: MykeMode(dateHolder: DateHolder.shared), label: "TimeListLabel", image: NSImage(systemSymbolName: "list.dash", accessibilityDescription: nil))
         tabStyle = .toolbar
     }
     
