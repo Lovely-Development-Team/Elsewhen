@@ -23,6 +23,9 @@ struct MykeMode: View {
     @State private var selectedTimeZoneGroup: TimeZoneGroup? = nil
     @State private var showCopied: Bool = false
     @State private var showNewTimeZoneGroupSheet: Bool = false
+    @State private var showSaveGroupConfirmation: Bool = false
+    @State private var showmacOSUpdateGroupConfirmation: Bool = false
+    @State private var macOSUpdateGroupDetails: TimeZoneGroup? = nil
     @State private var showTimeZoneGroupNameClashAlert: Bool = false
     @State private var pendingNewTimeZoneGroupName: String = ""
     @State private var viewId: Int = 0
@@ -105,7 +108,7 @@ struct MykeMode: View {
     
     @ViewBuilder
     var timeZoneGroupChoices: some View {
-    #if !os(macOS)
+#if !os(macOS)
         ScrollView(.horizontal, showsIndicators: false) {
             ScrollViewReader { scrollViewReader in
                 HStack {
@@ -119,12 +122,6 @@ struct MykeMode: View {
                         .roundedRectangle(colour: selectedTimeZoneGroup == tzGroup ? .accentColor : Color(UIColor.systemGray5), horizontalPadding: 14, cornerRadius: 10)
                         .contentShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
                         .contextMenu {
-                            Button(action: {
-                                selectedTimeZoneGroup = tzGroup
-                                timeZoneGroupController.updateTimeZoneGroup(tzGroup, with: selectedTimeZones)
-                            }) {
-                                Text("Update Group")
-                            }
                             Button(action: {
                                 postShowShareSheet(with: [tzGroup.exportText])
                             }) {
@@ -149,19 +146,17 @@ struct MykeMode: View {
             }
         }
         .padding(.vertical, 10)
-        #else
+#else
         HStack {
-            Picker("Group", selection: $selectedTimeZoneGroup) {
-                Text("Group...").tag(TimeZoneGroup?.none)
+            MenuButton(selectedTimeZoneGroup == nil ? "Group…" : selectedTimeZoneGroup!.name) {
                 ForEach(timeZoneGroupController.timeZoneGroups, id: \.name) { tzGroup in
-                    Text(tzGroup.name).tag(TimeZoneGroup?.some(tzGroup))
+                    Button(tzGroup.name) { selectedTimeZoneGroup = tzGroup }
                 }
             }
-            .labelsHidden()
         }
         .padding(.horizontal, 10)
         .padding(.vertical, 10)
-        #endif
+#endif
     }
     
     
@@ -254,15 +249,17 @@ struct MykeMode: View {
                 DeleteButton(text: "Remove from List") {
 #if os(iOS)
                     notificationFeedbackGenerator.prepare()
-#endif
                     DispatchQueue.main.asyncAfter(deadline: .now().advanced(by: .milliseconds(600))) {
                         withAnimation {
                             selectedTimeZones.removeAll { $0 == tz }
-#if (iOS)
                             notificationFeedbackGenerator.notificationOccurred(.success)
-#endif
                         }
                     }
+#else
+                    withAnimation {
+                        selectedTimeZones.removeAll { $0 == tz }
+                    }
+#endif
                 }
             }
     }
@@ -275,14 +272,14 @@ struct MykeMode: View {
                 List {
                     Section {
                         ForEach(selectedTimeZones, id: \.self) { tz in
-                            #if os(macOS)
+#if os(macOS)
                             HStack {
                                 timeZoneListItem(for: tz)
                                 Image(systemName: "line.3.horizontal")
                             }
-                            #else
+#else
                             timeZoneListItem(for: tz)
-                            #endif
+#endif
                         }
                         .onMove(perform: move)
                         .onDelete(perform: delete)
@@ -291,16 +288,33 @@ struct MykeMode: View {
 #if os(iOS)
                         .padding(.trailing)
                         .listRowSeparator(.hidden)
-                        #else
+#else
                         .padding(.trailing, 8)
 #endif
                         .listRowInsets(EdgeInsets())
                     } header: {
-                        #if os(macOS)
+#if os(macOS)
                         if !timeZoneGroupController.timeZoneGroups.isEmpty {
-                            timeZoneGroupChoices
+                            HStack(spacing: 0) {
+                                timeZoneGroupChoices
+                                Button(action: {
+                                    if let tzGroup = selectedTimeZoneGroup {
+                                        DispatchQueue.main.async {
+                                            withAnimation {
+                                                selectedTimeZoneGroup = nil
+                                            }
+                                        }
+                                        timeZoneGroupController.removeTimeZoneGroup(tzGroup)
+                                    }
+                                }) {
+                                    Image(systemName: "trash")
+                                }
+                                .disabled(selectedTimeZoneGroup == nil)
+                                .help("Remove Group")
+                                .padding(.trailing, 8)
+                            }
                         }
-                        #endif
+#endif
                     } footer: {
                         listFooter
                     }
@@ -352,34 +366,57 @@ struct MykeMode: View {
             }
             
             VStack {
-                #if os(iOS)
+#if os(iOS)
                 if !timeZoneGroupController.timeZoneGroups.isEmpty {
                     timeZoneGroupChoices
                     Divider()
                         .padding(.horizontal)
                 }
-                #endif
+#endif
                 HStack {
                     
 #if os(iOS)
                     Button(action: {
-                        showNewTimeZoneGroupSheet = true
+                        if timeZoneGroupController.timeZoneGroups.isEmpty {
+                            showNewTimeZoneGroupSheet = true
+                        } else {
+                            showSaveGroupConfirmation = true
+                        }
                     }) {
-                        #if os(iOS)
-                        Label("Save as Group", systemImage: "plus.square")
-                        #else
-                        Text("Save as Group&hellip;")
-                        #endif
+                        Label("Save Group", systemImage: "plus.square")
                     }
                     .padding(.leading, 12)
                     .padding(.vertical, 10)
                     .padding(.trailing)
                     .hoverEffect()
+#else
+                    Group {
+                        if timeZoneGroupController.timeZoneGroups.isEmpty {
+                            Button("Save Group…") {
+                                showNewTimeZoneGroupSheet = true
+                            }
+                        } else {
+                            MenuButton("Save Group…") {
+                                Button("New Group") {
+                                    showNewTimeZoneGroupSheet = true
+                                }
+                                Divider()
+                                ForEach(timeZoneGroupController.timeZoneGroups, id: \.self) { tzGroup in
+                                    Button(tzGroup.name) {
+                                        macOSUpdateGroupDetails = tzGroup
+                                        showmacOSUpdateGroupConfirmation = true
+                                    }
+                                }
+                            }
+                            .fixedSize(horizontal: true, vertical: false)
+                        }
+                    }
+                    .padding(.leading, 10)
 #endif
                     
-                    #if os(iOS)
+#if os(iOS)
                     Spacer()
-                    #endif
+#endif
                     
                     Button(action: {
                         withAnimation {
@@ -398,28 +435,28 @@ struct MykeMode: View {
                             }
                         }
                     }) {
-                        #if os(iOS)
+#if os(iOS)
                         Label("Sort by Time", systemImage: "arrow.up.arrow.down")
-                        #else
+#else
                         Text("Sort by Time")
-                        #endif
+#endif
                     }
                     .padding(.trailing)
                     .padding(.leading, 12)
                     .padding(.vertical, 10)
 #if os(iOS)
                     .hoverEffect()
-                    #endif
+#endif
                     
-                    #if os(macOS)
+#if os(macOS)
                     Spacer()
                     Text("Copied!").opacity(showCopied ? 1 : 0)
                     Button(action: copyText) {
                         Text("Copy")
-                    }
-                    .padding(.trailing, 8)
-                    .keyboardShortcut("c", modifiers: [.command])
-                    #endif
+                    }.buttonStyle(DefaultButtonStyle())
+                        .padding(.trailing, 8)
+                        .keyboardShortcut("c", modifiers: [.command])
+#endif
                     
                 }
                 .padding(.horizontal, 8)
@@ -435,7 +472,7 @@ struct MykeMode: View {
                     RoundedCorner(cornerRadius: 15, corners: [.topLeft, .topRight])
                         .fill(Color.secondarySystemBackground)
                         .shadow(color: .black.opacity(0.2), radius: 5, x: 0, y: 0)
-                    #endif
+#endif
                 }
             )
 #if os(macOS)
@@ -445,21 +482,44 @@ struct MykeMode: View {
 #endif
         }
         .background(Color.secondarySystemBackground)
-#if os(iOS)
         .sheet(isPresented: $showNewTimeZoneGroupSheet) {
+#if os(iOS)
             NavigationView {
                 NewTimeZoneGroupView(selectedTimeZones: $selectedTimeZones, selectedTimeZoneGroup: $selectedTimeZoneGroup, sheetIsPresented: $showNewTimeZoneGroupSheet)
                     .navigationTitle("Save")
                     .navigationBarTitleDisplayMode(.inline)
                     .navigationBarItems(leading: Button(action: {
-                            showNewTimeZoneGroupSheet = false
-                        }) {
-                            Text("Cancel")
-                        }
+                        showNewTimeZoneGroupSheet = false
+                    }) {
+                        Text("Cancel")
+                    }
                     )
             }
-        }
+#else
+            NewTimeZoneGroupView(selectedTimeZones: $selectedTimeZones, selectedTimeZoneGroup: $selectedTimeZoneGroup, sheetIsPresented: $showNewTimeZoneGroupSheet)
 #endif
+        }
+        .confirmationDialog("Save Group", isPresented: $showSaveGroupConfirmation) {
+            Button("New Group…") { showNewTimeZoneGroupSheet = true }
+            ForEach(timeZoneGroupController.timeZoneGroups, id: \.name) { tzGroup in
+                Button(tzGroup.name) {
+                    selectedTimeZoneGroup = timeZoneGroupController.updateTimeZoneGroup(tzGroup, with: selectedTimeZones)
+                }
+            }
+            Button("Cancel", role: .cancel) {}
+        } message: {
+            Text("Select a Group")
+        }
+        #if os(macOS)
+        .confirmationDialog("Update Group?", isPresented: $showmacOSUpdateGroupConfirmation, presenting: macOSUpdateGroupDetails) { tzGroup in
+            Button("Update Group") {
+                selectedTimeZoneGroup = timeZoneGroupController.updateTimeZoneGroup(tzGroup, with: selectedTimeZones)
+            }
+            Button("Cancel", role: .cancel) { }
+        } message: { tzGroup in
+            Text("Are you sure you want to update the \(tzGroup.name) Group with the current Time Zones?")
+        }
+        #endif
         .onAppear {
             selectedTimeZone = UserDefaults.shared.resetButtonTimeZone
             selectedTimeZones = UserDefaults.shared.mykeModeTimeZones
@@ -482,9 +542,13 @@ struct MykeMode: View {
         }
         .onChange(of: selectedTimeZones) { newValue in
             UserDefaults.shared.mykeModeTimeZones = newValue
+            if let tzGroup = selectedTimeZoneGroup, selectedTimeZones != tzGroup.timeZones {
+                selectedTimeZoneGroup = nil
+            }
         }
         .onChange(of: selectedTimeZoneGroup) { newValue in
             if let newValue = newValue {
+                print("BEN: .onChange(of: selectedTimeZoneGroup): \(newValue)")
                 withAnimation {
                     selectedTimeZones = newValue.timeZones
                 }

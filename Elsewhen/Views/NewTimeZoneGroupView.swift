@@ -22,9 +22,13 @@ struct NewTimeZoneGroupView: View {
     var body: some View {
         Form {
             Section {
-                Text("Enter a name to save the currently selected Time Zones as a group:")
+                Text("Enter a name to save the currently selected Time Zones as a Group:")
+#if os(macOS)
+                    .multilineTextAlignment(.center)
+                #endif
                 TextField("Group Name", text: $name)
                     .focused($nameInFocus)
+                    .labelsHidden()
             } footer: {
                 VStack {
                     if nameClashes {
@@ -33,13 +37,23 @@ struct NewTimeZoneGroupView: View {
                             .foregroundColor(.primary)
                             .font(.body)
                             .padding(.top)
+                        #if os(macOS)
+                            .padding(.bottom)
+                        #endif
                     }
                     HStack {
+                        #if os(macOS)
+                        Button(action: {
+                            sheetIsPresented = false
+                        }) {
+                            Text("Cancel")
+                        }
+                        #endif
                         Button(action: {
                             var tzGroup: TimeZoneGroup? = nil
                             if nameClashes {
                                 tzGroup = MykeModeTimeZoneGroupsController.shared.retrieveTimeZoneGroup(byName: name)
-                                MykeModeTimeZoneGroupsController.shared.updateTimeZoneGroup(tzGroup!, with: selectedTimeZones)
+                                selectedTimeZoneGroup = MykeModeTimeZoneGroupsController.shared.updateTimeZoneGroup(tzGroup!, with: selectedTimeZones)
                             } else {
                                 tzGroup = TimeZoneGroup(name: name, timeZones: selectedTimeZones)
                                 MykeModeTimeZoneGroupsController.shared.addTimeZoneGroup(tzGroup!)
@@ -48,21 +62,31 @@ struct NewTimeZoneGroupView: View {
                             sheetIsPresented = false
                         }) {
                             Text(nameClashes ? "Update Time Zone Group" : "Save Time Zone Group")
+#if os(iOS)
                                 .font(.headline)
                                 .foregroundColor(.white)
                                 .padding(10)
+                            #endif
                         }
+                        .disabled(name.trimmingCharacters(in: .whitespacesAndNewlines) == "")
+                        #if os(iOS)
                         .roundedRectangle()
                         .padding()
+#endif
                     }
                 }
                 .frame(minWidth: 0, maxWidth: .infinity)
             }
         }
+        #if os(macOS)
+        .frame(width: 300)
+        .fixedSize()
+        .padding(20)
+        #endif
         .onAppear {
-          DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
-            self.nameInFocus = true
-          }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
+                self.nameInFocus = true
+            }
         }
         .onChange(of: name) { newName in
             nameClashes = MykeModeTimeZoneGroupsController.shared.timeZoneGroups.map({ $0.name }).contains(newName)
@@ -72,10 +96,14 @@ struct NewTimeZoneGroupView: View {
 
 struct NewTimeZoneGroupView_Previews: PreviewProvider {
     static var previews: some View {
+#if os(iOS)
         NavigationView {
             NewTimeZoneGroupView(selectedTimeZones: .constant([]), selectedTimeZoneGroup: .constant(nil), sheetIsPresented: .constant(true))
                 .navigationTitle("Save Time Zone Group")
                 .navigationBarTitleDisplayMode(.inline)
         }
+#else
+        NewTimeZoneGroupView(selectedTimeZones: .constant([]), selectedTimeZoneGroup: .constant(nil), sheetIsPresented: .constant(true))
+#endif
     }
 }

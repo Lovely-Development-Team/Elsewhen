@@ -107,6 +107,7 @@
 		5E835B5327999F5F002B91FF /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E835B5227999F5E002B91FF /* Tab.swift */; };
 		5E835B5427999F5F002B91FF /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E835B5227999F5E002B91FF /* Tab.swift */; };
 		5E835B5527999F5F002B91FF /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E835B5227999F5E002B91FF /* Tab.swift */; };
+		5E97CF31286DEC0400A35E8F /* NewTimeZoneGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E01E2F128621E8300782A37 /* NewTimeZoneGroupView.swift */; };
 		5E9BD45126EEA11900383233 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9BD45026EEA11900383233 /* UserDefaults.swift */; };
 		5E9BD45526EF446900383233 /* DateHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9BD45226EF446900383233 /* DateHelpers.swift */; };
 		5E9BD45626EF446900383233 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9BD45326EF446900383233 /* SearchBar.swift */; };
@@ -1366,6 +1367,7 @@
 				632F38E3274B88DB00F0C064 /* TimeCodesPopoverViewController.swift in Sources */,
 				5E6C8C3B27467487003244DF /* MykeModeSeparator.swift in Sources */,
 				63C51BA826FA333200145662 /* FavouriteIndicator.swift in Sources */,
+				5E97CF31286DEC0400A35E8F /* NewTimeZoneGroupView.swift in Sources */,
 				63A90DD126F4298A00CACCB9 /* Bundle.swift in Sources */,
 				5E48E3BF28636B7000F3613C /* MykeMode.swift in Sources */,
 				6346ADA226F3C5EC00E406D0 /* InlineNavigationBarTitle.swift in Sources */,
@@ -1655,7 +1657,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Elsewhen/Elsewhen.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 64;
+				CURRENT_PROJECT_VERSION = 65;
 				DEVELOPMENT_ASSET_PATHS = "\"Elsewhen/Preview Content\"";
 				DEVELOPMENT_TEAM = 56477RN8FN;
 				ENABLE_PREVIEWS = YES;
@@ -1692,7 +1694,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Elsewhen/Elsewhen.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 64;
+				CURRENT_PROJECT_VERSION = 65;
 				DEVELOPMENT_ASSET_PATHS = "\"Elsewhen/Preview Content\"";
 				DEVELOPMENT_TEAM = 56477RN8FN;
 				ENABLE_PREVIEWS = YES;
@@ -1730,7 +1732,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 64;
+				CURRENT_PROJECT_VERSION = 65;
 				DEVELOPMENT_ASSET_PATHS = "\"MacElsewhen/Preview Content\"";
 				DEVELOPMENT_TEAM = 56477RN8FN;
 				ENABLE_APP_SANDBOX = YES;
@@ -1770,7 +1772,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 64;
+				CURRENT_PROJECT_VERSION = 65;
 				DEVELOPMENT_ASSET_PATHS = "\"MacElsewhen/Preview Content\"";
 				DEVELOPMENT_TEAM = 56477RN8FN;
 				ENABLE_APP_SANDBOX = YES;
@@ -1805,7 +1807,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 64;
+				CURRENT_PROJECT_VERSION = 65;
 				DEVELOPMENT_TEAM = 56477RN8FN;
 				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1831,7 +1833,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 64;
+				CURRENT_PROJECT_VERSION = 65;
 				DEVELOPMENT_TEAM = 56477RN8FN;
 				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1856,7 +1858,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 64;
+				CURRENT_PROJECT_VERSION = 65;
 				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1880,7 +1882,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 64;
+				CURRENT_PROJECT_VERSION = 65;
 				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1903,7 +1905,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Discord Helper Intents/Discord Helper Intents.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 64;
+				CURRENT_PROJECT_VERSION = 65;
 				DEVELOPMENT_TEAM = 56477RN8FN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Discord Helper Intents/Info.plist";
@@ -1930,7 +1932,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Discord Helper Intents/Discord Helper Intents.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 64;
+				CURRENT_PROJECT_VERSION = 65;
 				DEVELOPMENT_TEAM = 56477RN8FN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Discord Helper Intents/Info.plist";
@@ -1957,7 +1959,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Discord Helper IntentsUI/Discord Helper IntentsUI.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 64;
+				CURRENT_PROJECT_VERSION = 65;
 				DEVELOPMENT_TEAM = 56477RN8FN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Discord Helper IntentsUI/Info.plist";
@@ -1984,7 +1986,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Discord Helper IntentsUI/Discord Helper IntentsUI.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 64;
+				CURRENT_PROJECT_VERSION = 65;
 				DEVELOPMENT_TEAM = 56477RN8FN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Discord Helper IntentsUI/Info.plist";
