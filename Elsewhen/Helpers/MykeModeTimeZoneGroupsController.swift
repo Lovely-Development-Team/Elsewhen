@@ -42,14 +42,19 @@ class MykeModeTimeZoneGroupsController: ObservableObject {
         NSUbiquitousKeyValueStore.default.synchronize()
     }
     
-    func updateTimeZoneGroup(_ tzGroup: TimeZoneGroup, with timeZones: [TimeZone]) {
+    func updateTimeZoneGroup(_ tzGroup: TimeZoneGroup, with timeZones: [TimeZone]) -> TimeZoneGroup {
         NSUbiquitousKeyValueStore.default.updateTimeZoneGroup(tzGroup, with: timeZones)
         updateTimeZoneGroupsFromStore()
+        return retrieveTimeZoneGroup(byName: tzGroup.name)
     }
     
     func updateTimeZoneGroupsFromStore() {
-        timeZoneGroupNames = NSUbiquitousKeyValueStore.default.timeZoneGroupNames
-        timeZoneGroups = NSUbiquitousKeyValueStore.default.timeZoneGroups
+        DispatchQueue.main.async {
+            logger.debug("MykeModeTimeZoneGroupsController: Updating published groups from Store")
+            self.timeZoneGroupNames = NSUbiquitousKeyValueStore.default.timeZoneGroupNames
+            self.timeZoneGroups = NSUbiquitousKeyValueStore.default.timeZoneGroups
+            logger.debug("MykeModeTimeZoneGroupsController: Updated to: \(self.timeZoneGroupNames): \(self.timeZoneGroups)")
+        }
     }
     
     func retrieveTimeZoneGroup(byName name: String) -> TimeZoneGroup {
