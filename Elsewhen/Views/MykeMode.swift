@@ -548,7 +548,6 @@ struct MykeMode: View {
         }
         .onChange(of: selectedTimeZoneGroup) { newValue in
             if let newValue = newValue {
-                print("BEN: .onChange(of: selectedTimeZoneGroup): \(newValue)")
                 withAnimation {
                     selectedTimeZones = newValue.timeZones
                 }
