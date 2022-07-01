@@ -68,11 +68,11 @@ struct NewTimeZoneGroupView: View {
                                 .padding(10)
                             #endif
                         }
-                        .disabled(name.trimmingCharacters(in: .whitespacesAndNewlines) == "")
                         #if os(iOS)
                         .roundedRectangle()
                         .padding()
 #endif
+                        .disabled(name.trimmingCharacters(in: .whitespacesAndNewlines) == "")
                     }
                 }
                 .frame(minWidth: 0, maxWidth: .infinity)
