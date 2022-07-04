@@ -108,6 +108,7 @@
 		5E835B5427999F5F002B91FF /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E835B5227999F5E002B91FF /* Tab.swift */; };
 		5E835B5527999F5F002B91FF /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E835B5227999F5E002B91FF /* Tab.swift */; };
 		5E97CF31286DEC0400A35E8F /* NewTimeZoneGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E01E2F128621E8300782A37 /* NewTimeZoneGroupView.swift */; };
+		5E97CF3328718FFA00A35E8F /* Changelog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E97CF3228718FFA00A35E8F /* Changelog.swift */; };
 		5E9BD45126EEA11900383233 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9BD45026EEA11900383233 /* UserDefaults.swift */; };
 		5E9BD45526EF446900383233 /* DateHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9BD45226EF446900383233 /* DateHelpers.swift */; };
 		5E9BD45626EF446900383233 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9BD45326EF446900383233 /* SearchBar.swift */; };
@@ -393,6 +394,7 @@
 		5E835B4D2796C57D002B91FF /* DefaultTabPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTabPicker.swift; sourceTree = "<group>"; };
 		5E835B4F279981B9002B91FF /* Badge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Badge.swift; sourceTree = "<group>"; };
 		5E835B5227999F5E002B91FF /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
+		5E97CF3228718FFA00A35E8F /* Changelog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Changelog.swift; sourceTree = "<group>"; };
 		5E9BD45026EEA11900383233 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		5E9BD45226EF446900383233 /* DateHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateHelpers.swift; sourceTree = "<group>"; };
 		5E9BD45326EF446900383233 /* SearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
@@ -692,10 +694,11 @@
 				63AC5A052747F3B0008D10C6 /* SettingsComponents */,
 				5EC4E5DC285DAFE1008EEE6C /* TimeCodeGeneratorView.swift */,
 				5EC4E5E4285F093D008EEE6C /* MykeMode.swift */,
+				5E01E2F128621E8300782A37 /* NewTimeZoneGroupView.swift */,
 				5EE2D2CC26F2717E00D61875 /* EasterEggView.swift */,
 				5E07E84E2734760F00D9350E /* AltIconView.swift */,
 				5E54BBB327373603005CF7A6 /* Settings.swift */,
-				5E01E2F128621E8300782A37 /* NewTimeZoneGroupView.swift */,
+				5E97CF3228718FFA00A35E8F /* Changelog.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1303,6 +1306,7 @@
 				5EDCC6A027EA37890074F534 /* MykeModeTimeZoneGroupsController.swift in Sources */,
 				638A72DC2711D9A600E0171D /* TimeInterval.swift in Sources */,
 				5E54BBC427383F36005CF7A6 /* AltIcons.swift in Sources */,
+				5E97CF3328718FFA00A35E8F /* Changelog.swift in Sources */,
 				63A915F726FB42CE0027B18D /* StarUnstarButton.swift in Sources */,
 				635CE6E52703264F006BC7D3 /* RoundedRectangleButton.swift in Sources */,
 				5EB23B9F26E406B600203153 /* ContentView.swift in Sources */,
