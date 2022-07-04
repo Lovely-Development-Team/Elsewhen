@@ -15,6 +15,7 @@ enum SettingsViews: Int {
     case mykeModeSeparator
     case defaultTabPicker
     case importTimeZoneGroup
+    case changelog
 }
 
 struct Settings: View, OrientationObserving {
@@ -120,6 +121,10 @@ struct Settings: View, OrientationObserving {
         }
     }
     
+    var appVersionLink: some View {
+        Text("What's New?")
+    }
+    
     @ViewBuilder
     var settings: some View {
         Group {
@@ -213,6 +218,19 @@ struct Settings: View, OrientationObserving {
                     Text("\(AboutElsewhen.appVersion) (\(AboutElsewhen.buildNumber))")
                         .foregroundColor(.secondary)
                 }
+                if isPadAndNotCompact {
+                    Button(action: {
+                        self.selectedView = .changelog
+                    }) {
+                        appVersionLink
+                    }
+                    .listRowBackground(selectedView == .changelog ? Color.accentColor : Color(UIColor.systemBackground))
+                    .foregroundColor(selectedView == .changelog ? .white : .primary)
+                } else {
+                    NavigationLink(destination: Changelog()) {
+                        appVersionLink
+                    }
+                }
             }
         }
         .onAppear {
@@ -257,6 +275,8 @@ struct Settings: View, OrientationObserving {
                         ImportTimeZoneGroupView() {
                             selectedTab = 1
                         }
+                    case .changelog:
+                        Changelog()
                     default:
                         Rectangle()
                             .fill(Color(UIColor.systemBackground))
