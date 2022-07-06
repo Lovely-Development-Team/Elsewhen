@@ -39,6 +39,17 @@ struct TimeCodeGeneratorView: View, OrientationObserving {
         #endif
     }
     
+    var localDate: Date {
+        convert(date: dateHolder.date, from: selectedTimeZone ?? TimeZone.current, to: TimeZone.current)
+    }
+    
+    var formattedLocalDate: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .long
+        dateFormatter.timeStyle = .short
+        return dateFormatter.string(from: localDate)
+    }
+    
     @ViewBuilder
     var gridOfItems: some View {
         LazyVGrid(columns: gridItems, spacing: 0) {
@@ -91,6 +102,14 @@ struct TimeCodeGeneratorView: View, OrientationObserving {
                     .padding(.bottom, 10)
                 Divider()
                     .padding(.horizontal)
+                if let selectedTimeZone, selectedTimeZone != TimeZone.current {
+                    Text("\(formattedLocalDate) local time")
+                        .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                        .padding(.horizontal)
+                        .padding(.top, 5)
+                    Divider()
+                        .padding(.horizontal)
+                }
                 DateTimeZoneSheet(selectedDate: $dateHolder.date, selectedTimeZone: $selectedTimeZone, selectedTimeZones: .constant([]), selectedTimeZoneGroup: .constant(nil), multipleTimeZones: false)
             }
             .background(
