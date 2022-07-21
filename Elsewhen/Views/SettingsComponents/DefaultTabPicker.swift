@@ -33,7 +33,7 @@ struct DefaultTabPicker: View, OrientationObserving {
                 setDefaultTab(Tab.timeCodes.rawValue)
             }) {
                 HStack {
-                    Text("Time Codes")
+                    Text("TIME_CODES_LABEL")
                     Spacer()
                     if defaultTabIndex == Tab.timeCodes.rawValue {
                         Image(systemName: "checkmark")
@@ -45,7 +45,7 @@ struct DefaultTabPicker: View, OrientationObserving {
                 setDefaultTab(Tab.mykeMode.rawValue)
             }) {
                 HStack {
-                    Text("Time List")
+                    Text("TIME_LIST_LABEL")
                     Spacer()
                     if defaultTabIndex == Tab.mykeMode.rawValue {
                         Image(systemName: "checkmark")
@@ -55,7 +55,7 @@ struct DefaultTabPicker: View, OrientationObserving {
             }
         }
         .foregroundColor(.primary)
-        .navigationTitle("Default Tab")
+        .navigationTitle("DEFAULT_TAB_TITLE")
         #if !os(macOS)
         .navigationBarTitleDisplayMode(.inline)
         #endif

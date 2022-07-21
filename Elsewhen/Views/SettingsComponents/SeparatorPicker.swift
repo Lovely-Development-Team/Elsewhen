@@ -38,7 +38,7 @@ struct SeparatorPicker: View, OrientationObserving {
                 }
             }
         }
-        .navigationTitle("Separator")
+        .navigationTitle("SEPARATOR_LABEL")
         #if !os(macOS)
         .navigationBarTitleDisplayMode(.inline)
         #endif

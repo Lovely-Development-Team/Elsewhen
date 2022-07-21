@@ -34,15 +34,15 @@ struct ContentView: View {
         TabView(selection: $selectedTab) {
             
             TimeCodeGeneratorView(dateHolder: DateHolder.shared)
-                .tabItem { Label("Time Codes", systemImage: "clock") }
+                .tabItem { Label("TIME_CODES_LABEL", systemImage: "clock") }
                 .tag(Tab.timeCodes.rawValue)
             MykeMode(dateHolder: DateHolder.shared)
-                .tabItem { Label("Time List", systemImage: "list.dash") }
+                .tabItem { Label("TIME_LIST_LABEL", systemImage: "list.dash") }
                 .tag(Tab.mykeMode.rawValue)
             
             Settings(selectedTab: $selectedTab)
                 .overlay(Rectangle().frame(width: nil, height: 1, alignment: .bottom).foregroundColor(Color.secondary.opacity(0.5)), alignment: .bottom)
-                .tabItem { Label("Settings", systemImage: "gear") }
+                .tabItem { Label("SETTINGS_LABEL", systemImage: "gear") }
                 .iconBadge(isPresented: showSettingsIcon)
                 .tag(Tab.settings.rawValue)
             
@@ -71,7 +71,9 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         if #available(iOS 15.0, *) {
-            ContentView().environmentObject(OrientationObserver.shared)
+            ContentView()
+                .environmentObject(OrientationObserver.shared)
+                .environmentObject(MykeModeTimeZoneGroupsController.shared)
         } else {
             ContentView()
         }

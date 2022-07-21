@@ -38,7 +38,7 @@ struct DefaultTimeFormatPicker: View, OrientationObserving {
                 }
             }
         }
-        .navigationTitle("Default Time Format")
+        .navigationTitle("DEFAULT_TIME_FORMAT_TITLE")
         #if !os(macOS)
         .navigationBarTitleDisplayMode(.inline)
         #endif

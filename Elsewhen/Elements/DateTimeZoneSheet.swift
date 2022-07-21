@@ -25,18 +25,10 @@ struct DateTimeZoneSheet: View {
     @State private var showTimeZoneChoicePopover: Bool = false
 #endif
     
-    var timeZoneLabel: String {
-        multipleTimeZones ? "Time Zones" : "Time Zone"
-    }
-    
-    var timeZoneButtonValue: String {
-        multipleTimeZones ? "Choose Time Zones" : selectedTimeZone?.friendlyName ?? TimeZone.current.friendlyName
-    }
-    
     var body: some View {
         VStack {
             HStack {
-                Text("Time").fontWeight(.semibold)
+                Text("TIME").fontWeight(.semibold)
                 Spacer()
                 
 #if os(macOS)
@@ -57,7 +49,7 @@ struct DateTimeZoneSheet: View {
                     .padding(.trailing)
                 
 #else
-                DatePicker("Time", selection: $selectedDate, displayedComponents: [.date, .hourAndMinute])
+                DatePicker("TIME", selection: $selectedDate, displayedComponents: [.date, .hourAndMinute])
                     .datePickerStyle(.compact)
                     .labelsHidden()
 #endif
@@ -73,7 +65,7 @@ struct DateTimeZoneSheet: View {
 #endif
             }
             HStack {
-                Text(timeZoneLabel).fontWeight(.semibold)
+                Text(multipleTimeZones ? "TIME_ZONE_PLURAL" : "TIME_ZONE").fontWeight(.semibold)
                 Spacer()
                 Button(action: {
 #if os(macOS)
@@ -82,7 +74,11 @@ struct DateTimeZoneSheet: View {
                     showTimeZoneChoiceSheet = true
 #endif
                 }) {
-                    Text(timeZoneButtonValue)
+                    if multipleTimeZones {
+                        Text("CHOOSE_TIME_ZONE_PLURAL")
+                    } else {
+                        Text(selectedTimeZone?.friendlyName ?? TimeZone.current.friendlyName)
+                    }
                 }
                 .foregroundColor(.primary)
                 .padding(.vertical, 8)
@@ -118,7 +114,7 @@ struct DateTimeZoneSheet: View {
                     }
                     showTimeZoneChoiceSheet = false
                 }) {
-                    Text("Done")
+                    Text("DONE")
                 }
                 )
             }
@@ -130,6 +126,6 @@ struct DateTimeZoneSheet: View {
 
 struct DateTimeZoneSheet_Previews: PreviewProvider {
     static var previews: some View {
-        DateTimeZoneSheet(selectedDate: .constant(Date()), selectedTimeZone: .constant(nil), selectedTimeZones: .constant([]), selectedTimeZoneGroup: .constant(nil), multipleTimeZones: false)
+        DateTimeZoneSheet(selectedDate: .constant(Date()), selectedTimeZone: .constant(nil), selectedTimeZones: .constant([]), selectedTimeZoneGroup: .constant(nil), multipleTimeZones: true)
     }
 }

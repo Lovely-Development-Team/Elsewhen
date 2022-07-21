@@ -75,7 +75,7 @@ struct FormatChoiceButton: View {
                 Spacer()
                 
 #if os(iOS)
-                Text(justCopied ? "Copied ✓" : "Copy")
+                Text(justCopied ? "COPIED_IOS_BUTTON" : "COPY")
                     .font(.headline)
                     .foregroundColor(.white)
                     .padding(.vertical, 5)
@@ -85,9 +85,9 @@ struct FormatChoiceButton: View {
                         RoundedCorner(cornerRadius: 25)
                     )
 #else
-                Text("Copied!").opacity(justCopied ? 1 : 0)
+                Text("COPIED_MACOS_BUTTON").opacity(justCopied ? 1 : 0)
                 Button(action: doCopy) {
-                    Text("Copy")
+                    Text("COPY")
                 }
 #endif
             }
@@ -118,10 +118,10 @@ struct FormatChoiceButton: View {
             Text(dateFormat.name)
             Divider()
             Button(action: doCopy) {
-                Label("Copy", systemImage: "doc.on.doc")
+                Label("COPY", systemImage: "doc.on.doc")
             }
             Button(action: doShare) {
-                Label("Share", systemImage: "square.and.arrow.up")
+                Label("SHARE", systemImage: "square.and.arrow.up")
             }
         }
     }

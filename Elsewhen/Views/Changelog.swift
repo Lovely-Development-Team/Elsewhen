@@ -64,7 +64,7 @@ struct Changelog: View, OrientationObserving {
             .frame(minWidth: 0, maxWidth: .infinity)
             .padding()
         }
-        .navigationTitle(Text("Version History"))
+        .navigationTitle(Text("VERSION_HISTORY_TITLE"))
     }
     
     var body: some View {
@@ -83,6 +83,8 @@ struct Changelog: View, OrientationObserving {
 
 struct Changelog_Previews: PreviewProvider {
     static var previews: some View {
-        Changelog()
+        NavigationView {
+            Changelog()
+        }
     }
 }

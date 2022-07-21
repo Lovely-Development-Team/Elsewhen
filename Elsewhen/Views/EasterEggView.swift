@@ -48,7 +48,7 @@ struct EasterEggView: View {
             Button(action: {
                     self.presentationMode.wrappedValue.dismiss()
                   }) {
-                    Text("Dismiss")
+                    Text("DISMISS")
                           .fontWeight(.semibold)
                           .foregroundColor(.accentColor)
                   }
@@ -58,7 +58,7 @@ struct EasterEggView: View {
         }
         #endif
         VStack {
-            Text("Hi there!")
+            Text("TILDY_HELLO")
                 .font(.largeTitle)
                 .fontWeight(.bold)
             Button(action: {
@@ -113,7 +113,7 @@ struct EasterEggView: View {
                 .frame(maxWidth: .infinity, alignment: .center)
             Spacer()
             Section{
-                Text("L2CU drawing by rhl_. \nElsewhen crafted with care by The Lovely Developers. ")
+                Text("TILDY_CREDITS")
                     .font(.caption)
                     .multilineTextAlignment(.center)
                     .allowsTightening(true)

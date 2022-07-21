@@ -138,7 +138,7 @@ struct TimezoneChoiceView: View, OrientationObserving {
             }
         }
         .listStyle(PlainListStyle())
-        .navigationTitle(showDeviceLocalOption ? "Default Time Zone" : "Time Zones")
+        .navigationTitle(showDeviceLocalOption ? "DEFAULT_TIME_ZONE_TITLE" : "TIME_ZONE_PLURAL")
         .inlineNavigationBarTitle()
         .onAppear {
             favouriteTimeZones = UserDefaults.shared.favouriteTimeZones
@@ -159,7 +159,7 @@ struct TimezoneChoiceView: View, OrientationObserving {
         if isPadAndNotCompact {
             NavigationView {
                 content
-                    .navigationTitle("Default Time Zone")
+                    .navigationTitle("DEFAULT_TIME_ZONE_TITLE")
                     #if os(iOS)
                     .navigationBarTitleDisplayMode(.inline)
                     #endif
@@ -211,10 +211,12 @@ struct TimezoneChoiceView: View, OrientationObserving {
 
 struct TimezoneChoiceView_Previews: PreviewProvider {
     static var previews: some View {
-        TimezoneChoiceView(selectedTimeZone: .constant(TimeZone(identifier: "Africa/Accra")!), selectedTimeZones: .constant([TimeZone(identifier: "Africa/Algiers")!, TimeZone(identifier: "Africa/Bissau")!]), selectedDate: .constant(Date()), selectMultiple: true)
-            #if os(iOS)
-            .environmentObject(OrientationObserver())
-            #endif
+        NavigationView {
+            TimezoneChoiceView(selectedTimeZone: .constant(TimeZone(identifier: "Africa/Accra")!), selectedTimeZones: .constant([TimeZone(identifier: "Africa/Algiers")!, TimeZone(identifier: "Africa/Bissau")!]), selectedDate: .constant(Date()), selectMultiple: true, showDeviceLocalOption: true)
+#if os(iOS)
+                .environmentObject(OrientationObserver())
+#endif
+        }
     }
 }
 
@@ -248,7 +250,7 @@ struct LocalDeviceButtonContents: View {
     
     var body: some View {
         HStack {
-            Text("Device")
+            Text("DEVICE")
             Spacer()
             Text("(\(TimeZone.current.friendlyName))")
                 .foregroundColor(.secondary)

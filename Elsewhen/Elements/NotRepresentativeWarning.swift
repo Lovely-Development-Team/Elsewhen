@@ -9,7 +9,7 @@ import SwiftUI
 
 struct NotRepresentativeWarning: View {
     var body: some View {
-        Text("NotRepresentativeWarning")
+        Text("NOT_REPRESENTATIVE_WARNING")
             .multilineTextAlignment(.center)
             .font(.caption2)
             .foregroundColor(.secondary)

@@ -33,7 +33,7 @@ struct TimeListSettings: View, OrientationObserving {
     
     var defaultTimeFormatPickerLink: some View {
         HStack {
-            Text("Default Time Format")
+            Text("DEFAULT_TIME_FORMAT")
                 .lineLimit(1)
                 .layoutPriority(2)
             Spacer()
@@ -50,7 +50,7 @@ struct TimeListSettings: View, OrientationObserving {
     
     var separatorPickerLink: some View {
         HStack {
-            Text("Separator")
+            Text("SEPARATOR_LABEL")
             Spacer()
             Text(mykeModeSeparator.description)
                 .foregroundColor(selectedView == .mykeModeSeparator ? .white : .secondary)
@@ -60,7 +60,7 @@ struct TimeListSettings: View, OrientationObserving {
     
     var body: some View {
         Group {
-            Section(header: Text("Time List Settings"), footer: Text(exampleOutput)) {
+            Section(header: Text("TIME_LIST_SETTINGS_TITLE"), footer: Text(exampleOutput)) {
                 if isPadAndNotCompact {
                     Button(action: { selectedView = .mykeModeDefaultTimeFormat }) {
                         defaultTimeFormatPickerLink
@@ -78,7 +78,7 @@ struct TimeListSettings: View, OrientationObserving {
                         separatorPickerLink
                     }
                 }
-                Toggle("Include City Names", isOn: $showCities)
+                Toggle("INCLUDE_CITY_NAMES_LABEL", isOn: $showCities)
             }
             
             if EWPasteboard.hasStrings() {
@@ -89,7 +89,7 @@ struct TimeListSettings: View, OrientationObserving {
                         showImportTimeZoneGroupSheet = true
                     }
                 }) {
-                    Text("Import Time Zone Group")
+                    Text("IMPORT_TIME_ZONE_GROUP_BUTTON")
                         .foregroundColor(selectedView == .importTimeZoneGroup && isPadAndNotCompact ? .white : .primary)
                 }
                 .listRowBackground(selectedView == .importTimeZoneGroup && isPadAndNotCompact ? Color.accentColor : Color(UIColor.systemBackground))
@@ -104,10 +104,10 @@ struct TimeListSettings: View, OrientationObserving {
                 ImportTimeZoneGroupView() {
                     showImportTimeZoneGroupSheet = false
                 }
-                    .navigationTitle("Import")
+                    .navigationTitle("IMPORT_VIEW_TITLE")
                     .inlineNavigationBarTitle()
                     .toolbar {
-                        Button("Cancel") {
+                        Button("CANCEL") {
                             showImportTimeZoneGroupSheet = false
                         }
                     }

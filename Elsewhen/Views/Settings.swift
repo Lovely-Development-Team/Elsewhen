@@ -40,10 +40,6 @@ struct Settings: View, OrientationObserving {
     @State private var viewId: Int = 1
     @StateObject private var timeZoneSearchController = TimeZoneSearchController()
     
-    private var defaultTimeZoneName: String {
-        defaultTimeZone?.friendlyName ?? "Device"
-    }
-    
     var footer: some View {
         VStack(spacing: 2) {
             Link(destination: URL(string: "https://tildy.dev")!) {
@@ -59,9 +55,9 @@ struct Settings: View, OrientationObserving {
     
     var smartTimeZoneSearchExplanation: some View {
         VStack(spacing: 5) {
-            Text("Smart Time Zone Search will attempt to find the geographically closest time zone for your search result, not just based on the time zone name.")
+            Text("SMART_TIME_ZONE_SEARCH_DESCRIPTION")
             if timeZoneSearchController.lowPowerMode && useMapKitSearch {
-                Text("Smart search results will be slower while on Low Power Mode.")
+                Text("SMART_TIME_ZONE_SEARCH_LOW_POWER_WARNING")
                     .foregroundColor(.red)
             }
         }
@@ -73,9 +69,9 @@ struct Settings: View, OrientationObserving {
     
     var appIconLink: some View {
         HStack {
-            Text("App Icon")
+            Text("APP_ICON_TITLE")
             Spacer()
-            Text(alternativeIconNameByPath[UIApplication.shared.alternateIconName] ?? "Original")
+            Text(alternativeIconNameByPath[UIApplication.shared.alternateIconName] ?? "ORIGINAL")
                 .foregroundColor(selectedView == .altIcon ? .white : .secondary)
                 .opacity(selectedView == .altIcon ? 0.8 : 1)
         }
@@ -87,9 +83,15 @@ struct Settings: View, OrientationObserving {
     
     var defaultTimeZoneLink: some View {
         HStack {
-            Text("Default Time Zone")
+            Text("DEFAULT_TIME_ZONE_TITLE")
             Spacer()
-            Text(defaultTimeZoneName)
+            Group {
+                if let defaultTimeZone = defaultTimeZone {
+                    Text(defaultTimeZone.friendlyName)
+                } else {
+                    Text("DEVICE")
+                }
+            }
                 .foregroundColor(selectedView == .defaultTimeZone ? .white : .secondary)
                 .opacity(selectedView == .defaultTimeZone ? 0.8 : 1)
         }
@@ -99,12 +101,12 @@ struct Settings: View, OrientationObserving {
         DefaultTabPicker(defaultTabIndex: $defaultTabIndex)
     }
     
-    var defaultTabName: String {
+    var defaultTabName: LocalizedStringKey {
         switch defaultTabIndex {
         case 1:
-            return "Time List"
+            return "TIME_LIST_LABEL"
         default:
-            return "Time Codes"
+            return "TIME_CODES_LABEL"
         }
     }
     
@@ -113,7 +115,7 @@ struct Settings: View, OrientationObserving {
 //            if AboutElsewhen.buildNumber != lastSeenVersionForSettings {
 //                Circle().fill(.red).frame(width: 10, height: 10)
 //            }
-            Text("Default Tab")
+            Text("DEFAULT_TAB_TITLE")
             Spacer()
             Text(defaultTabName)
                 .foregroundColor(selectedView == .defaultTabPicker ? .white : .secondary)
@@ -122,29 +124,29 @@ struct Settings: View, OrientationObserving {
     }
     
     var appVersionLink: some View {
-        Text("What's New?")
+        Text("WHATS_NEW_TITLE")
     }
     
     @ViewBuilder
     var settings: some View {
         Group {
             if isPadAndNotCompact {
-                Section(footer: Text("Settings").font(.largeTitle).fontWeight(.bold).foregroundColor(.primary).padding(.leading, -10)) {
+                Section(footer: Text("SETTINGS_TITLE").font(.largeTitle).fontWeight(.bold).foregroundColor(.primary).padding(.leading, -10)) {
                     EmptyView()
                 }
             }
             
-            if AboutElsewhen.buildNumber != lastSeenVersionForSettings {
-                Section(header: HStack {
-                    Circle().fill(.red).frame(width: 10, height: 10)
-                    Text("What's New")
-                }) {
-                    Text("**Time Zone Groups** let you store combinations of Time Zones for quick access in the Time List tab. You can even share them with others, and import them from elsewhere into the app with the button below.")
-                        .fixedSize(horizontal: false, vertical: true)
-                }
-            }
+//            if AboutElsewhen.buildNumber != lastSeenVersionForSettings {
+//                Section(header: HStack {
+//                    Circle().fill(.red).frame(width: 10, height: 10)
+//                    Text("What's New")
+//                }) {
+//                    Text("**Time Zone Groups** let you store combinations of Time Zones for quick access in the Time List tab. You can even share them with others, and import them from elsewhere into the app with the button below.")
+//                        .fixedSize(horizontal: false, vertical: true)
+//                }
+//            }
             
-            Section(header: Text("General Settings"), footer: smartTimeZoneSearchExplanation) {
+            Section(header: Text("GENERAL_SETTINGS_TITLE"), footer: smartTimeZoneSearchExplanation) {
                 if isPadAndNotCompact {
                     Button(action: {
                         self.selectedView = .altIcon
@@ -183,7 +185,7 @@ struct Settings: View, OrientationObserving {
 //                    if AboutElsewhen.buildNumber != lastSeenVersionForSettings {
 //                        Circle().fill(.red).frame(width: 10, height: 10)
 //                    }
-                    Toggle("Smart Time Zone Search", isOn: $useMapKitSearch)
+                    Toggle("SMART_TIME_ZONE_SEARCH_LABEL", isOn: $useMapKitSearch)
                 }
                 
             }
@@ -200,20 +202,20 @@ struct Settings: View, OrientationObserving {
                 }
             }
 #endif
-            Section(header: Text("Feedback")) {
+            Section(header: Text("FEEDBACK_TITLE")) {
                 Link(destination: URL(string: "mailto:elsewhen@tildy.dev")!) {
-                    Text("Send Feedback")
+                    Text("SEND_FEEDBACK")
                         .foregroundColor(.primary)
                 }
                 Link(destination: URL(string: "https://itunes.apple.com/app/id\(AboutElsewhen.appId)?action=write-review")!) {
-                    Text("Rate Elsewhen")
+                    Text("RATE_ELSEWHEN")
                         .foregroundColor(.primary)
                 }
             }
             
             Section(footer: footer) {
                 HStack {
-                    Text("App Version")
+                    Text("APP_VERSION")
                     Spacer()
                     Text("\(AboutElsewhen.appVersion) (\(AboutElsewhen.buildNumber))")
                         .foregroundColor(.secondary)
@@ -289,7 +291,7 @@ struct Settings: View, OrientationObserving {
                 Form {
                     settings
                 }
-                .navigationTitle(Text("Settings"))
+                .navigationTitle(Text("SETTINGS_TITLE"))
             }
         }
     }

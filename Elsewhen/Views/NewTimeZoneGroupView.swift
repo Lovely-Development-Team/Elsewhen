@@ -22,17 +22,17 @@ struct NewTimeZoneGroupView: View {
     var body: some View {
         Form {
             Section {
-                Text("Enter a name to save the currently selected Time Zones as a Group:")
+                Text("ENTER_GROUP_NAME")
 #if os(macOS)
                     .multilineTextAlignment(.center)
                 #endif
-                TextField("Group Name", text: $name)
+                TextField("GROUP_NAME_PLACEHOLDER", text: $name)
                     .focused($nameInFocus)
                     .labelsHidden()
             } footer: {
                 VStack {
                     if nameClashes {
-                        Text("A group with that name already exists. The contents will be updated with the currently selected Time Zones.")
+                        Text("GROUP_NAME_CLASHES")
                             .multilineTextAlignment(.center)
                             .foregroundColor(.primary)
                             .font(.body)
@@ -46,7 +46,7 @@ struct NewTimeZoneGroupView: View {
                         Button(action: {
                             sheetIsPresented = false
                         }) {
-                            Text("Cancel")
+                            Text("CANCEL")
                         }
                         #endif
                         Button(action: {
@@ -61,7 +61,7 @@ struct NewTimeZoneGroupView: View {
                             selectedTimeZoneGroup = tzGroup
                             sheetIsPresented = false
                         }) {
-                            Text(nameClashes ? "Update Time Zone Group" : "Save Time Zone Group")
+                            Text(nameClashes ? "UPDATE_GROUP_BUTTON" : "SAVE_GROUP_BUTTON")
 #if os(iOS)
                                 .font(.headline)
                                 .foregroundColor(.white)

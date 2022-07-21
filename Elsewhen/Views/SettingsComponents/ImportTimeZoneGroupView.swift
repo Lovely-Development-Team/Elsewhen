@@ -39,14 +39,14 @@ struct ImportTimeZoneGroupView: View {
                             }
                             
                             Button(action: doImport) {
-                                Text(importIsDisabled ? "Update Time Zone Group" : "Import Time Zone Group")
+                                Text(importIsDisabled ? "UPDATE_GROUP_BUTTON" : "IMPORT_TIME_ZONE_GROUP_BUTTON")
                                     .font(.headline)
                                     .foregroundColor(.white)
                             }
                             .roundedRectangle()
                             .padding()
                             if importIsDisabled {
-                                Text("You already have a Time Zone Group with this name. Importing this Group will update the existing one.")
+                                Text("GROUP_NAME_CLASHES_IMPORT")
                                     .frame(minWidth: 0, maxWidth: .infinity)
                                     .multilineTextAlignment(.center)
                                     .font(.caption)
@@ -65,10 +65,10 @@ struct ImportTimeZoneGroupView: View {
                             .foregroundColor(.secondary)
                             .opacity(0.75)
                             .padding(.bottom)
-                        Text("Couldn't parse the clipboard contents as a Time Zone Group.")
+                        Text("CLIPBOARD_INVALID_TIME_ZONE_GROUP")
                             .multilineTextAlignment(.center)
                         Button(action: checkClipboard) {
-                            Text("Try again")
+                            Text("TRY_AGAIN")
                                 .font(.headline)
                                 .foregroundColor(.white)
                         }
@@ -88,10 +88,10 @@ struct ImportTimeZoneGroupView: View {
                             .foregroundColor(.secondary)
                             .opacity(0.75)
                             .padding(.bottom)
-                        Text("Nothing found on the clipboard!")
+                        Text("CLIPBOARD_EMPTY")
                             .multilineTextAlignment(.center)
                         Button(action: checkClipboard) {
-                            Text("Try again")
+                            Text("TRY_AGAIN")
                                 .font(.headline)
                                 .foregroundColor(.white)
                         }

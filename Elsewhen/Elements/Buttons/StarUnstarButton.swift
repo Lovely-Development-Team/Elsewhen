@@ -14,8 +14,8 @@ struct StarUnstarButton: View {
         Button {
             isStarred.toggle()
         } label: {
-            Label(isStarred ? "Unstar" : "Star", systemImage: isStarred ? "star.slash" : "star.fill")
-                .accessibilityHint(isStarred ? "Removes 'favourite' status from this item" : "Adds 'favourite' status to this item")
+            Label(isStarred ? "UNSTAR" : "STAR", systemImage: isStarred ? "star.slash" : "star.fill")
+                .accessibilityHint(isStarred ? "STAR_HINT" : "UNSTAR_HINT")
         }
     }
     

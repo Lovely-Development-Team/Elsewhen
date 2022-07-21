@@ -45,7 +45,7 @@ struct AltIconView: View, OrientationObserving {
             .id(viewId)
             .padding([.bottom, .horizontal])
         }
-        .navigationTitle(Text("App Icon"))
+        .navigationTitle(Text("APP_ICON_TITLE"))
     }
     
     var body: some View {

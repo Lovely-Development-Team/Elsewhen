@@ -6,5 +6,83 @@
   
 */
 
-"NotRepresentativeWarning" = "Date and time representative of components only; may not match exact Discord formatting.";
-"FromTLD" = "From the Lovely Developers";
+"NOT_REPRESENTATIVE_WARNING" = "Date and time representative of components only; may not match exact Discord formatting.";
+"FROM_TLD" = "From the Lovely Developers";
+
+"TIME_CODES_LABEL" = "Time Codes";
+"TIME_LIST_LABEL" = "Time List";
+"SETTINGS_LABEL" = "Settings";
+
+"TIME_ZONE" = "Time Zone";
+"TIME_ZONE_PLURAL" = "Time Zones";
+"CHOOSE_TIME_ZONE_PLURAL" = "Choose Time Zones";
+
+"TIME" = "Time";
+
+"DONE" = "Done";
+"SAVE" = "Save";
+"CANCEL" = "Cancel";
+"DISMISS" = "Dismiss";
+"TILDY_HELLO" = "Hi there!";
+"TILDY_CREDITS" = "L2CU drawing by rhl_. \nElsewhen crafted with care by The Lovely Developers.";
+
+"INCLUDE_RELATIVE_TIME" = "Include Relative Time";
+"COPY" = "Copy";
+"COPIED_IOS_BUTTON" = "Copied ✓";
+"COPIED_MACOS_BUTTON" = "Copied!";
+"SHARE" = "Share";
+
+"STAR" = "Star";
+"UNSTAR" = "Unstar";
+"STAR_HINT" = "Removes 'favourite' status from this item";
+"UNSTAR_HINT" = "Adds 'favourite' status to this item";
+
+"SHARE_GROUP" = "Share Group";
+"REMOVE_GROUP" = "Remove Group";
+"SAVE_GROUP_IOS" = "Save Group";
+"SAVE_GROUP_MACOS" = "Save Group…";
+"NEW_GROUP_IOS" = "New Group…";
+"NEW_GROUP_MACOS" = "New Group";
+"GROUP_DROPDOWN_LABEL_MACOS" = "Group…";
+"SELECT_A_GROUP" = "Select a Group";
+"UPDATE_GROUP_QUESTION" = "Update Group?";
+"UPDATE_GROUP" = "Update Group";
+"UPDATE_GROUP_BUTTON" = "Update Time Zone Group";
+"SAVE_GROUP_BUTTON" = "Save Time Zone Group";
+"ENTER_GROUP_NAME" = "Enter a name to save the currently selected Time Zones as a Group:";
+"GROUP_NAME_PLACEHOLDER" = "Group Name";
+"GROUP_NAME_CLASHES" = "A group with that name already exists. The contents will be updated with the currently selected Time Zones.";
+"GROUP_NAME_CLASHES_IMPORT" = "You already have a Time Zone Group with this name. Importing this Group will update the existing one.";
+"CLIPBOARD_INVALID_TIME_ZONE_GROUP" = "Couldn't parse the clipboard contents as a Time Zone Group.";
+"CLIPBOARD_EMPTY" = "Nothing found on the clipboard!";
+"TRY_AGAIN" = "Try again";
+
+"SORT_BY_TIME" = "Sort by Time";
+
+"USE_EU_FLAG" = "🇪🇺 Use EU Flag";
+"12_HOUR_TIME_FORMAT" = "12-Hour Time Format";
+"24_HOUR_TIME_FORMAT" = "24-Hour Time Format";
+"DEFAULT_TIME_FORMAT" = "Default Time Format";
+
+"APP_ICON_TITLE" = "App Icon";
+"ORIGINAL" = "Original";
+"DEVICE" = "Device";
+"SMART_TIME_ZONE_SEARCH_DESCRIPTION" = "Smart Time Zone Search will attempt to find the geographically closest time zone for your search result, not just based on the time zone name.";
+"SMART_TIME_ZONE_SEARCH_LOW_POWER_WARNING" = "Smart search results will be slower while on Low Power Mode.";
+"DEFAULT_TIME_ZONE_TITLE" = "Default Time Zone";
+"DEFAULT_TAB_TITLE" = "Default Tab";
+"WHATS_NEW_TITLE" = "What's New?";
+"SETTINGS_TITLE" = "Settings";
+"GENERAL_SETTINGS_TITLE" = "General Settings";
+"SMART_TIME_ZONE_SEARCH_LABEL" = "Smart Time Zone Search";
+"FEEDBACK_TITLE" = "Feedback";
+"SEND_FEEDBACK" = "Send Feedback";
+"RATE_ELSEWHEN" = "Rate Elsewhen";
+"APP_VERSION" = "App Version";
+"VERSION_HISTORY_TITLE" = "Version History";
+"SEPARATOR_LABEL" = "Separator";
+"TIME_LIST_SETTINGS_TITLE" = "Time List Settings";
+"INCLUDE_CITY_NAMES_LABEL" = "Include City Names";
+"IMPORT_TIME_ZONE_GROUP_BUTTON" = "Import Time Zone Group";
+"IMPORT_VIEW_TITLE" = "Import";
+"DEFAULT_TIME_FORMAT_TITLE" = "Default Time Format";
