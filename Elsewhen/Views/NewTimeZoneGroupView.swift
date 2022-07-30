@@ -52,11 +52,11 @@ struct NewTimeZoneGroupView: View {
                         Button(action: {
                             var tzGroup: TimeZoneGroup? = nil
                             if nameClashes {
-                                tzGroup = MykeModeTimeZoneGroupsController.shared.retrieveTimeZoneGroup(byName: name)
-                                selectedTimeZoneGroup = MykeModeTimeZoneGroupsController.shared.updateTimeZoneGroup(tzGroup!, with: selectedTimeZones)
+                                tzGroup = NSUbiquitousKeyValueStoreController.shared.retrieveTimeZoneGroup(byName: name)
+                                selectedTimeZoneGroup = NSUbiquitousKeyValueStoreController.shared.updateTimeZoneGroup(tzGroup!, with: selectedTimeZones)
                             } else {
                                 tzGroup = TimeZoneGroup(name: name, timeZones: selectedTimeZones)
-                                MykeModeTimeZoneGroupsController.shared.addTimeZoneGroup(tzGroup!)
+                                NSUbiquitousKeyValueStoreController.shared.addTimeZoneGroup(tzGroup!)
                             }
                             selectedTimeZoneGroup = tzGroup
                             sheetIsPresented = false
@@ -89,7 +89,7 @@ struct NewTimeZoneGroupView: View {
             }
         }
         .onChange(of: name) { newName in
-            nameClashes = MykeModeTimeZoneGroupsController.shared.timeZoneGroups.map({ $0.name }).contains(newName)
+            nameClashes = NSUbiquitousKeyValueStoreController.shared.timeZoneGroups.map({ $0.name }).contains(newName)
         }
     }
 }

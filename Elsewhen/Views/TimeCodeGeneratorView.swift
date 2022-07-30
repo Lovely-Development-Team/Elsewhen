@@ -16,19 +16,24 @@ struct TimeCodeGeneratorView: View, OrientationObserving {
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
 #endif
     
+    @EnvironmentObject private var customTimeFormatController: NSUbiquitousKeyValueStoreController
+    
     @ObservedObject var dateHolder: DateHolder
     
     // MARK: State
     @State private var selectedTimeZone: TimeZone? = nil
     @State private var appendRelative: Bool = false
     @State private var showEasterEggSheet: Bool = false
+    @State private var showCustomFormatSheet: Bool = false
+    @State private var newCustomFormatString: String = ""
+    @State private var customTimeFormats: [CustomTimeFormat] = []
     
     let gridBreakPoint: Int = 170
     
     var gridItems: [GridItem] {
-        #if os(macOS)
+#if os(macOS)
         return Array.init(repeating: .init(.flexible(), alignment: .top), count: 2)
-        #else
+#else
         if isPadAndNotCompact {
             return Array.init(repeating: .init(.flexible(), alignment: .top), count: 3)
         }
@@ -36,7 +41,7 @@ struct TimeCodeGeneratorView: View, OrientationObserving {
             return [GridItem(.flexible(), alignment: .top)]
         }
         return [GridItem(.adaptive(minimum: CGFloat(gridBreakPoint)), alignment: .top)]
-        #endif
+#endif
     }
     
     var localDate: Date {
@@ -52,24 +57,39 @@ struct TimeCodeGeneratorView: View, OrientationObserving {
     
     @ViewBuilder
     var gridOfItems: some View {
+        GroupBox {
+            Button(action: { showCustomFormatSheet = true }) {
+                HStack {
+                    Spacer()
+                    Image(systemName: "plus.circle.fill")
+                        .font(.title)
+                    Text("Add Custom Format")
+                    Spacer()
+                }
+            }
+        }
         LazyVGrid(columns: gridItems, spacing: 0) {
-            ForEach(dateFormats, id: \.self) { dateFormat in
-                FormatChoiceButton(dateFormat: dateFormat, selectedDate: $dateHolder.date, appendRelative: $appendRelative, timeZone: $selectedTimeZone)
+            ForEach(customTimeFormatController.customTimeFormats) { customFormat in
+                FormatChoiceButton(dateFormat: nil, customFormat: customFormat, selectedDate: $dateHolder.date, appendRelative: .constant(false), timeZone: $selectedTimeZone)
                     .padding(.bottom)
             }
-            FormatChoiceButton(dateFormat: relativeDateFormat, selectedDate: $dateHolder.date, appendRelative: .constant(false), timeZone: $selectedTimeZone)
+            ForEach(dateFormats, id: \.self) { dateFormat in
+                FormatChoiceButton(dateFormat: dateFormat, customFormat: nil, selectedDate: $dateHolder.date, appendRelative: $appendRelative, timeZone: $selectedTimeZone)
+                    .padding(.bottom)
+            }
+            FormatChoiceButton(dateFormat: relativeDateFormat, customFormat: nil, selectedDate: $dateHolder.date, appendRelative: .constant(false), timeZone: $selectedTimeZone)
                 .padding(.bottom)
         }
         .padding(.top)
         .fixedSize(horizontal: false, vertical: true)
         NotRepresentativeWarning()
             .padding([.horizontal, .bottom])
-        #if os(iOS)
+#if os(iOS)
         EasterEggButton {
             showEasterEggSheet = true
         }
         .padding(.bottom)
-        #endif
+#endif
     }
     
     var body: some View {
@@ -80,26 +100,26 @@ struct TimeCodeGeneratorView: View, OrientationObserving {
             }
             .frame(minWidth: 0, maxWidth: .infinity)
             .clipped()
-            #if os(macOS)
+#if os(macOS)
             .background(Color.secondarySystemBackground)
-            #else
+#else
             .background(Color.systemBackground)
-            #endif
+#endif
             VStack {
                 HStack {
-                    #if os(macOS)
+#if os(macOS)
                     EasterEggButton {
                         showEasterEggSheet = true
                     }
                     Spacer()
-                    #endif
+#endif
                     Toggle("Include Relative Time", isOn: $appendRelative.animation())
                 }
 #if os(iOS)
-                    .tint(.accentColor)
-                #endif
-                    .padding([.horizontal, .top])
-                    .padding(.bottom, 10)
+                .tint(.accentColor)
+#endif
+                .padding([.horizontal, .top])
+                .padding(.bottom, 10)
                 Divider()
                     .padding(.horizontal)
                 if let selectedTimeZone, selectedTimeZone != TimeZone.current {
@@ -132,6 +152,29 @@ struct TimeCodeGeneratorView: View, OrientationObserving {
         .sheet(isPresented: $showEasterEggSheet) {
             EasterEggView()
         }
+        .sheet(isPresented: $showCustomFormatSheet) {
+            NavigationView {
+                CustomFormat(customFormat: $newCustomFormatString)
+                    .toolbar {
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            Button("Save") {
+                                customTimeFormatController.addCustomTimeFormat(newCustomFormatString)
+                                newCustomFormatString = ""
+                                showCustomFormatSheet = false
+                            }
+                            .disabled(newCustomFormatString == "")
+                        }
+                        ToolbarItem(placement: .navigationBarLeading) {
+                            Button("Cancel") {
+                                showCustomFormatSheet = false
+                            }
+                        }
+                    }
+            }
+        }
+        .onAppear {
+            customTimeFormats = NSUbiquitousKeyValueStore.default.customTimeCodeFormats
+        }
         
     }
 }
@@ -139,5 +182,6 @@ struct TimeCodeGeneratorView: View, OrientationObserving {
 struct TimeCodeGeneratorView_Previews: PreviewProvider {
     static var previews: some View {
         TimeCodeGeneratorView(dateHolder: DateHolder.shared)
+            .environmentObject(NSUbiquitousKeyValueStoreController.shared)
     }
 }

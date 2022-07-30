@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TimeListSettings: View, OrientationObserving {
-    @EnvironmentObject private var timeZoneGroupController: MykeModeTimeZoneGroupsController
+    @EnvironmentObject private var timeZoneGroupController: NSUbiquitousKeyValueStoreController
     @EnvironmentObject internal var orientationObserver: OrientationObserver
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     

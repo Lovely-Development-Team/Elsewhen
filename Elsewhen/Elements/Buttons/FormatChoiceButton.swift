@@ -10,7 +10,10 @@ import UniformTypeIdentifiers
 
 struct FormatChoiceButton: View {
     
-    let dateFormat: DateFormat
+    @EnvironmentObject private var customTimeFormatController: NSUbiquitousKeyValueStoreController
+    
+    let dateFormat: DateFormat?
+    let customFormat: CustomTimeFormat?
     @Binding var selectedDate: Date
     @Binding var appendRelative: Bool
     @Binding var timeZone: TimeZone?
@@ -26,16 +29,39 @@ struct FormatChoiceButton: View {
     }
     
     var formattedDate: String {
-        let date = format(date: selectedDate, in: resolvedTimeZone, with: dateFormat.code)
-        if appendRelative && dateFormat != relativeDateFormat {
-            let relative = format(date: selectedDate, in: resolvedTimeZone, with: relativeDateFormat.code)
-            return "\(date) (\(relative))"
+        if let dateFormat = dateFormat {
+            let date = format(date: selectedDate, in: resolvedTimeZone, with: dateFormat.code)
+            if appendRelative && dateFormat != relativeDateFormat {
+                let relative = format(date: selectedDate, in: resolvedTimeZone, with: relativeDateFormat.code)
+                return "\(date) (\(relative))"
+            }
+            return date
         }
-        return date
+        var customFormat = customFormat?.format ?? ""
+        for df in dateFormats {
+            let date = format(date: selectedDate, in: resolvedTimeZone, with: df.code)
+            customFormat = customFormat.replacingOccurrences(of: "[\(df.code.rawValue)]", with: date)
+        }
+        return customFormat
     }
     
     var discordFormattedText: String {
-        discordFormat(for: selectedDate, in: resolvedTimeZone, with: dateFormat.code, appendRelative: appendRelative)
+        if let dateFormat = dateFormat {
+            return discordFormat(for: selectedDate, in: resolvedTimeZone, with: dateFormat.code, appendRelative: appendRelative)
+        }
+        var customFormat = customFormat?.format ?? ""
+        for df in dateFormats {
+            let discordFormat = discordFormat(for: selectedDate, in: resolvedTimeZone, with: df.code, appendRelative: false)
+            customFormat = customFormat.replacingOccurrences(of: "[\(df.code.rawValue)]", with: discordFormat)
+        }
+        return customFormat
+    }
+    
+    var color: Color {
+        if let customFormat = customFormat {
+            return customFormat.color
+        }
+        return Color.accentColor
     }
     
     func doCopy() {
@@ -69,7 +95,7 @@ struct FormatChoiceButton: View {
         GroupBox {
             
             HStack(alignment: .center) {
-                Image(systemName: dateFormat.icon)
+                Image(systemName: dateFormat?.icon ?? customFormat?.icon ?? "star")
                     .font(.title)
                     .foregroundColor(.secondary)
                 Spacer()
@@ -80,7 +106,7 @@ struct FormatChoiceButton: View {
                     .foregroundColor(.white)
                     .padding(.vertical, 5)
                     .padding(.horizontal, 10)
-                    .background(Color.accentColor)
+                    .background(color)
                     .clipShape(
                         RoundedCorner(cornerRadius: 25)
                     )
@@ -115,13 +141,18 @@ struct FormatChoiceButton: View {
             
         }
         .contextMenu {
-            Text(dateFormat.name)
+            Text(dateFormat?.name ?? "Custom Format")
             Divider()
             Button(action: doCopy) {
                 Label("Copy", systemImage: "doc.on.doc")
             }
             Button(action: doShare) {
                 Label("Share", systemImage: "square.and.arrow.up")
+            }
+            if let customFormat = customFormat {
+                DeleteButton(text: "Remove Custom Format") {
+                    customTimeFormatController.removeCustomTimeFormat(customFormat)
+                }
             }
         }
     }
@@ -141,6 +172,10 @@ struct FormatChoiceButton: View {
 
 struct FormatChoiceButton_Previews: PreviewProvider {
     static var previews: some View {
-        FormatChoiceButton(dateFormat: dateFormats[1], selectedDate: .constant(Date()), appendRelative: .constant(true), timeZone: .constant(TimeZone(identifier: "Australia/Brisbane")!))
+        VStack {
+            FormatChoiceButton(dateFormat: dateFormats[1], customFormat: nil, selectedDate: .constant(Date()), appendRelative: .constant(true), timeZone: .constant(TimeZone(identifier: "Australia/Brisbane")!))
+            FormatChoiceButton(dateFormat: nil, customFormat: CustomTimeFormat(id: UUID(), format: "[d] at [t]", icon: "dollarsign", red: 0.5, green: 0.2, blue: 0.5), selectedDate: .constant(Date()), appendRelative: .constant(true), timeZone: .constant(TimeZone(identifier: "Australia/Brisbane")!))
+        }
+        .padding()
     }
 }

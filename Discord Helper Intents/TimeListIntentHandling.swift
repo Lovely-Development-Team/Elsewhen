@@ -11,7 +11,7 @@ import Intents
 class TimeListIntentHandling: NSObject, GetTimeListIntentHandling {
     
     func provideTimeZoneGroupOptionsCollection(for intent: GetTimeListIntent, with completion: @escaping (INObjectCollection<INTimeZoneGroup>?, Error?) -> Void) {
-        completion(.init(items: MykeModeTimeZoneGroupsController.shared.timeZoneGroupNames.map { tzGroupName in
+        completion(.init(items: NSUbiquitousKeyValueStoreController.shared.timeZoneGroupNames.map { tzGroupName in
             INTimeZoneGroup(identifier: tzGroupName, display: tzGroupName)
         }), nil)
     }
@@ -97,7 +97,7 @@ class TimeListIntentHandling: NSObject, GetTimeListIntentHandling {
             guard let name = timeZoneGroup.identifier else {
                 return nil
             }
-            return MykeModeTimeZoneGroupsController.shared.retrieveTimeZoneGroup(byName: name).timeZones
+            return NSUbiquitousKeyValueStoreController.shared.retrieveTimeZoneGroup(byName: name).timeZones
         default:
             return nil
         }
