@@ -31,7 +31,7 @@ struct MykeMode: View {
     @State private var viewId: Int = 0
     
     // MARK: Environment
-    @EnvironmentObject private var timeZoneGroupController: MykeModeTimeZoneGroupsController
+    @EnvironmentObject private var timeZoneGroupController: NSUbiquitousKeyValueStoreController
     
     // MARK: UserDefaults
     @AppStorage(UserDefaults.mykeModeDefaultTimeFormatKey, store: UserDefaults.shared) private var defaultTimeFormat: TimeFormat = .systemLocale
@@ -590,6 +590,6 @@ struct MykeMode: View {
 
 struct MykeMode_Previews: PreviewProvider {
     static var previews: some View {
-        MykeMode(dateHolder: DateHolder.shared).environmentObject(MykeModeTimeZoneGroupsController.shared)
+        MykeMode(dateHolder: DateHolder.shared).environmentObject(NSUbiquitousKeyValueStoreController.shared)
     }
 }

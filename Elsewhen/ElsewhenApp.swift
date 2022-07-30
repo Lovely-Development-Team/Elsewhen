@@ -27,11 +27,11 @@ struct ElsewhenApp: App {
             #if os(macOS)
             MacContentView()
                 .frame(minWidth: 400, minHeight: 500)
-                .environmentObject(MykeModeTimeZoneGroupsController.shared)
+                .environmentObject(NSUbiquitousKeyValueStoreController.shared)
             #else
             ContentView()
                 .environmentObject(OrientationObserver.shared)
-                .environmentObject(MykeModeTimeZoneGroupsController.shared)
+                .environmentObject(NSUbiquitousKeyValueStoreController.shared)
             #endif
         }
     }

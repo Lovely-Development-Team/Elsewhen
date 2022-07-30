@@ -10,8 +10,49 @@ import Foundation
 extension NSUbiquitousKeyValueStore {
     
     static let mykeModeTimeZoneGroupsKey = "mykeModeTimeZoneGroups"
-    
     static let mykeModeTimeZoneGroupNamesKey = "mykeModeTimeZoneGroupNames"
+    static let customTimeCodesFormatsKey = "customTimeCodesFormats"
+    
+    var customTimeCodeFormats: [CustomTimeFormat] {
+        get {
+            guard let customTimeCodeFormats = data(forKey: Self.customTimeCodesFormatsKey) else { return [] }
+            logger.debug("NSUbiquitousKeyValueStore: Fetched customTimeCodeFormats: \(customTimeCodeFormats)")
+            let decoder = JSONDecoder()
+            do {
+                return try decoder.decode([CustomTimeFormat].self, from: customTimeCodeFormats)
+            } catch {
+                logger.debug("NSUbiquitousKeyValueStore: Error fetching customTimeCodeFormats: \(error)")
+            }
+            return []
+        }
+        set {
+            logger.debug("NSUbiquitousKeyValueStore: Updating customTimeCodesFormats: \(newValue)")
+            let encoder = JSONEncoder()
+            do {
+                set(try encoder.encode(newValue), forKey: Self.customTimeCodesFormatsKey)
+            } catch {
+                logger.debug("NSUbiquitousKeyValueStore: Error encoding customTimeCodeFormats: \(error)")
+            }
+        }
+    }
+    
+    func addCustomTimeFormat(_ customFormat: CustomTimeFormat) {
+        var existingFormats = customTimeCodeFormats
+        existingFormats.append(customFormat)
+        customTimeCodeFormats = existingFormats
+    }
+    
+    var customTimeCodesFormats1: [String] {
+        get {
+            guard let customTimeCodesFormats = array(forKey: Self.customTimeCodesFormatsKey) as? [String] else { return [] }
+            logger.debug("NSUbiquitousKeyValueStore: Fetched NSUbiquitousKeyValueStore: \(customTimeCodesFormats)")
+            return customTimeCodesFormats
+        }
+        set {
+            logger.debug("NSUbiquitousKeyValueStore: Updating customTimeCodesFormats: \(newValue)")
+            set(newValue, forKey: Self.customTimeCodesFormatsKey)
+        }
+    }
     
     var timeZoneGroupNames: [String] {
         get {
