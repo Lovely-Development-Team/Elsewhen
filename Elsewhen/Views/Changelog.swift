@@ -14,6 +14,12 @@ struct Version {
 
 let CHANGELOG: [Version] = [
     Version(
+        number: "1.6",
+        bullets: [
+            "Added Short Date format code (e.g. 2/3/22)."
+        ]
+    ),
+    Version(
         number: "1.5",
         bullets: [
             "All-new interface for selecting dates, time code formats, and time zone lists.",

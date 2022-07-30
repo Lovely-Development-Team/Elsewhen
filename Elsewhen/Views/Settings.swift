@@ -134,15 +134,15 @@ struct Settings: View, OrientationObserving {
                 }
             }
             
-            if AboutElsewhen.buildNumber != lastSeenVersionForSettings {
-                Section(header: HStack {
-                    Circle().fill(.red).frame(width: 10, height: 10)
-                    Text("What's New")
-                }) {
-                    Text("**Time Zone Groups** let you store combinations of Time Zones for quick access in the Time List tab. You can even share them with others, and import them from elsewhere into the app with the button below.")
-                        .fixedSize(horizontal: false, vertical: true)
-                }
-            }
+//            if AboutElsewhen.buildNumber != lastSeenVersionForSettings {
+//                Section(header: HStack {
+//                    Circle().fill(.red).frame(width: 10, height: 10)
+//                    Text("What's New")
+//                }) {
+//                    Text("**Time Zone Groups** let you store combinations of Time Zones for quick access in the Time List tab. You can even share them with others, and import them from elsewhere into the app with the button below.")
+//                        .fixedSize(horizontal: false, vertical: true)
+//                }
+//            }
             
             Section(header: Text("General Settings"), footer: smartTimeZoneSearchExplanation) {
                 if isPadAndNotCompact {

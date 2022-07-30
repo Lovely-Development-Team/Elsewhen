@@ -40,6 +40,7 @@ enum FormatCode: String {
     case f
     case F
     case D
+    case d
     case t
     case T
     case R
@@ -57,6 +58,7 @@ let dateFormats: [DateFormat] = [
     DateFormat(icon: "calendar.badge.clock", name: "Full date and time", code: .f),
     DateFormat(icon: "calendar.badge.plus", name: "Full date and time, including day", code: .F),
     DateFormat(icon: "calendar", name: "Date only", code: .D),
+    DateFormat(icon: "calendar", name: "Short date", code: .d),
     DateFormat(icon: "clock", name: "Time only", code: .t),
     DateFormat(icon: "clock.fill", name: "Time only, including seconds", code: .T)
 ]
@@ -79,6 +81,8 @@ func format(date: Date, in timezone: TimeZone, with formatCode: FormatCode) -> S
         dateFormatter.timeStyle = .short
     case .D:
         dateFormatter.dateStyle = .long
+    case .d:
+        dateFormatter.dateStyle = .short
     case .t:
         dateFormatter.dateStyle = .none
         dateFormatter.timeStyle = .short
