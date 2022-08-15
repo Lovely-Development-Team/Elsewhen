@@ -57,39 +57,42 @@ struct TimeCodeGeneratorView: View, OrientationObserving {
     
     @ViewBuilder
     var gridOfItems: some View {
-        GroupBox {
-            Button(action: { showCustomFormatSheet = true }) {
-                HStack {
-                    Spacer()
-                    Image(systemName: "plus.circle.fill")
-                        .font(.title)
-                    Text("Add Custom Format")
-                    Spacer()
+        VStack(spacing: 0) {
+            GroupBox {
+                Button(action: { showCustomFormatSheet = true }) {
+                    HStack {
+                        Spacer()
+                        Image(systemName: "plus.circle.fill")
+                            .font(.headline)
+                        Text("Add Custom Format")
+                        Spacer()
+                    }
                 }
             }
-        }
-        LazyVGrid(columns: gridItems, spacing: 0) {
+            .padding(.bottom)
             ForEach(customTimeFormatController.customTimeFormats) { customFormat in
-                FormatChoiceButton(dateFormat: nil, customFormat: customFormat, selectedDate: $dateHolder.date, appendRelative: .constant(false), timeZone: $selectedTimeZone)
+                FormatChoiceButton(dateFormat: nil, customFormat: customFormat, selectedDate: $dateHolder.date, appendRelative: .constant(false), timeZone: $selectedTimeZone, dateHolder: dateHolder)
                     .padding(.bottom)
             }
-            ForEach(dateFormats, id: \.self) { dateFormat in
-                FormatChoiceButton(dateFormat: dateFormat, customFormat: nil, selectedDate: $dateHolder.date, appendRelative: $appendRelative, timeZone: $selectedTimeZone)
+            LazyVGrid(columns: gridItems, spacing: 0) {
+                ForEach(dateFormats, id: \.self) { dateFormat in
+                    FormatChoiceButton(dateFormat: dateFormat, customFormat: nil, selectedDate: $dateHolder.date, appendRelative: $appendRelative, timeZone: $selectedTimeZone, dateHolder: dateHolder)
+                        .padding(.bottom)
+                }
+                FormatChoiceButton(dateFormat: relativeDateFormat, customFormat: nil, selectedDate: $dateHolder.date, appendRelative: .constant(false), timeZone: $selectedTimeZone, dateHolder: dateHolder)
                     .padding(.bottom)
             }
-            FormatChoiceButton(dateFormat: relativeDateFormat, customFormat: nil, selectedDate: $dateHolder.date, appendRelative: .constant(false), timeZone: $selectedTimeZone)
-                .padding(.bottom)
-        }
-        .padding(.top)
-        .fixedSize(horizontal: false, vertical: true)
-        NotRepresentativeWarning()
-            .padding([.horizontal, .bottom])
+//            .padding(.top)
+            .fixedSize(horizontal: false, vertical: true)
+            NotRepresentativeWarning()
+                .padding([.horizontal, .bottom])
 #if os(iOS)
-        EasterEggButton {
-            showEasterEggSheet = true
-        }
-        .padding(.bottom)
+            EasterEggButton {
+                showEasterEggSheet = true
+            }
+            .padding(.bottom)
 #endif
+        }
     }
     
     var body: some View {
@@ -154,7 +157,7 @@ struct TimeCodeGeneratorView: View, OrientationObserving {
         }
         .sheet(isPresented: $showCustomFormatSheet) {
             NavigationView {
-                CustomFormat(customFormat: $newCustomFormatString)
+                CustomFormat(customFormat: $newCustomFormatString, selectedTimeZone: $selectedTimeZone, dateHolder: dateHolder)
                     .toolbar {
                         ToolbarItem(placement: .navigationBarTrailing) {
                             Button("Save") {
