@@ -125,7 +125,7 @@ struct TimeCodeGeneratorView: View, OrientationObserving {
                 .padding(.bottom, 10)
                 Divider()
                     .padding(.horizontal)
-                if let selectedTimeZone, selectedTimeZone != TimeZone.current {
+                if let selectedTimeZone = selectedTimeZone, selectedTimeZone != TimeZone.current {
                     Text("\(formattedLocalDate) local time")
                         .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                         .padding(.horizontal)
