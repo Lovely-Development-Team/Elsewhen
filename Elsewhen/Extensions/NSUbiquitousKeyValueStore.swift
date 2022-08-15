@@ -21,7 +21,7 @@ extension NSUbiquitousKeyValueStore {
             do {
                 return try decoder.decode([CustomTimeFormat].self, from: customTimeCodeFormats)
             } catch {
-                logger.debug("NSUbiquitousKeyValueStore: Error fetching customTimeCodeFormats: \(error)")
+                logger.debug("NSUbiquitousKeyValueStore: Error fetching customTimeCodeFormats: \(error.localizedDescription)")
             }
             return []
         }
@@ -31,7 +31,7 @@ extension NSUbiquitousKeyValueStore {
             do {
                 set(try encoder.encode(newValue), forKey: Self.customTimeCodesFormatsKey)
             } catch {
-                logger.debug("NSUbiquitousKeyValueStore: Error encoding customTimeCodeFormats: \(error)")
+                logger.debug("NSUbiquitousKeyValueStore: Error encoding customTimeCodeFormats: \(error.localizedDescription)")
             }
         }
     }
