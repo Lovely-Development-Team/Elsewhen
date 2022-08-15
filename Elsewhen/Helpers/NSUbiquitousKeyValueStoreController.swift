@@ -111,7 +111,18 @@ class NSUbiquitousKeyValueStoreController: ObservableObject {
     
     func removeCustomTimeFormat(_ customFormat: CustomTimeFormat) {
         customTimeFormats = customTimeFormats.filter { $0.id != customFormat.id }
-        
+        NSUbiquitousKeyValueStore.default.customTimeCodeFormats = customTimeFormats
+        NSUbiquitousKeyValueStore.default.synchronize()
+    }
+    
+    func updateCustomTimeFormat(id: UUID, formatString: String) {
+        customTimeFormats = customTimeFormats.map  { customFormat in
+            if customFormat.id == id {
+                return CustomTimeFormat(id: id, format: formatString, icon: customFormat.icon, red: customFormat.red, green: customFormat.green, blue: customFormat.blue)
+            } else {
+                return customFormat
+            }
+        }
         NSUbiquitousKeyValueStore.default.customTimeCodeFormats = customTimeFormats
         NSUbiquitousKeyValueStore.default.synchronize()
     }

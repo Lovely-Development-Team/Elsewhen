@@ -18,6 +18,11 @@ struct FormatChoiceButton: View {
     @Binding var appendRelative: Bool
     @Binding var timeZone: TimeZone?
     
+    @ObservedObject var dateHolder: DateHolder
+    
+    @State private var editCustomFormatString: String = ""
+    @State private var editingCustomFormat: Bool = false
+    
     @State private var justCopied: Bool = false
 #if os(iOS)
     @State private var notificationFeedbackGenerator: UINotificationFeedbackGenerator? = nil
@@ -36,25 +41,27 @@ struct FormatChoiceButton: View {
                 return "\(date) (\(relative))"
             }
             return date
+        } else {
+            var customFormat = customFormat?.format ?? ""
+            for df in (dateFormats + [relativeDateFormat]) {
+                let date = format(date: selectedDate, in: resolvedTimeZone, with: df.code)
+                customFormat = customFormat.replacingOccurrences(of: "[\(df.code.rawValue)]", with: date)
+            }
+            return customFormat
         }
-        var customFormat = customFormat?.format ?? ""
-        for df in dateFormats {
-            let date = format(date: selectedDate, in: resolvedTimeZone, with: df.code)
-            customFormat = customFormat.replacingOccurrences(of: "[\(df.code.rawValue)]", with: date)
-        }
-        return customFormat
     }
     
     var discordFormattedText: String {
         if let dateFormat = dateFormat {
             return discordFormat(for: selectedDate, in: resolvedTimeZone, with: dateFormat.code, appendRelative: appendRelative)
+        } else {
+            var customFormat = customFormat?.format ?? ""
+            for df in (dateFormats + [relativeDateFormat]) {
+                let discordFormat = discordFormat(for: selectedDate, in: resolvedTimeZone, with: df.code, appendRelative: false)
+                customFormat = customFormat.replacingOccurrences(of: "[\(df.code.rawValue)]", with: discordFormat)
+            }
+            return customFormat
         }
-        var customFormat = customFormat?.format ?? ""
-        for df in dateFormats {
-            let discordFormat = discordFormat(for: selectedDate, in: resolvedTimeZone, with: df.code, appendRelative: false)
-            customFormat = customFormat.replacingOccurrences(of: "[\(df.code.rawValue)]", with: discordFormat)
-        }
-        return customFormat
     }
     
     var color: Color {
@@ -150,9 +157,40 @@ struct FormatChoiceButton: View {
                 Label("Share", systemImage: "square.and.arrow.up")
             }
             if let customFormat = customFormat {
+                Button(action: {
+                    editCustomFormatString = customFormat.format
+                    editingCustomFormat = true
+                }) {
+                    Label("Edit Custom Format", systemImage: "pencil")
+                }
+                Button(action: {
+                    postShowShareSheet(with: [customFormat.format])
+                }) {
+                    Label("Share Custom Format", systemImage: "square.and.arrow.up")
+                }
                 DeleteButton(text: "Remove Custom Format") {
                     customTimeFormatController.removeCustomTimeFormat(customFormat)
                 }
+            }
+        }
+        .sheet(isPresented: $editingCustomFormat) {
+            NavigationView {
+                CustomFormat(customFormat: $editCustomFormatString, selectedTimeZone: $timeZone, dateHolder: dateHolder)
+                    .toolbar {
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            Button("Save") {
+                                guard let customFormat = customFormat else { return }
+                                customTimeFormatController.updateCustomTimeFormat(id: customFormat.id, formatString: editCustomFormatString)
+                                editingCustomFormat = false
+                            }
+                            .disabled(editCustomFormatString == "")
+                        }
+                        ToolbarItem(placement: .navigationBarLeading) {
+                            Button("Cancel") {
+                                editingCustomFormat = false
+                            }
+                        }
+                    }
             }
         }
     }
@@ -173,8 +211,8 @@ struct FormatChoiceButton: View {
 struct FormatChoiceButton_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            FormatChoiceButton(dateFormat: dateFormats[1], customFormat: nil, selectedDate: .constant(Date()), appendRelative: .constant(true), timeZone: .constant(TimeZone(identifier: "Australia/Brisbane")!))
-            FormatChoiceButton(dateFormat: nil, customFormat: CustomTimeFormat(id: UUID(), format: "[d] at [t]", icon: "dollarsign", red: 0.5, green: 0.2, blue: 0.5), selectedDate: .constant(Date()), appendRelative: .constant(true), timeZone: .constant(TimeZone(identifier: "Australia/Brisbane")!))
+            FormatChoiceButton(dateFormat: dateFormats[1], customFormat: nil, selectedDate: .constant(Date()), appendRelative: .constant(true), timeZone: .constant(TimeZone(identifier: "Australia/Brisbane")!), dateHolder: DateHolder.shared)
+            FormatChoiceButton(dateFormat: nil, customFormat: CustomTimeFormat(id: UUID(), format: "[d] at [t] [R]", icon: "dollarsign", red: 0.5, green: 0.2, blue: 0.5), selectedDate: .constant(Date()), appendRelative: .constant(true), timeZone: .constant(TimeZone(identifier: "Australia/Brisbane")!), dateHolder: DateHolder.shared)
         }
         .padding()
     }

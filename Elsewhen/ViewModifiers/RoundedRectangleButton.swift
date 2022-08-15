@@ -20,6 +20,7 @@ struct RoundedRectangleButton: ViewModifier {
             RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
                 .fill(colour)
         )
+        .contentShape(RoundedRectangle(cornerRadius: cornerRadius, style: .continuous))
     }
     
     func body(content: Content) -> some View {

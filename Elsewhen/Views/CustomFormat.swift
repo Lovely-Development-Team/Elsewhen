@@ -10,32 +10,82 @@ import SwiftUI
 struct CustomFormat: View {
     
     @Binding var customFormat: String
+    @Binding var selectedTimeZone: TimeZone?
+    @ObservedObject var dateHolder: DateHolder
+
+    @FocusState private var focusField: Bool
+
+    var formattedDate: AttributedString {
+        var customFormatString = AttributedString(customFormat)
+        for df in (dateFormats + [relativeDateFormat]) {
+            var date = AttributedString(format(date: dateHolder.date, in: selectedTimeZone ?? TimeZone.current, with: df.code))
+            date.foregroundColor = .accentColor
+            while true {
+                if let range = customFormatString.range(of: "[\(df.code.rawValue)]") {
+                    customFormatString.replaceSubrange(range, with: date)
+                } else {
+                    break
+                }
+            }
+        }
+        return customFormatString
+    }
+    
+    @ViewBuilder
+    func buttonForFormat(_ df: DateFormat) -> some View {
+        Button(action: {
+            customFormat = customFormat + "[\(df.code.rawValue)]"
+        }) {
+            Text(format(date: dateHolder.date, in: selectedTimeZone ?? TimeZone.current, with: df.code))
+                .foregroundColor(.white)
+        }
+        .roundedRectangle()
+        .onDrag {
+            NSItemProvider(object: "[\(df.code.rawValue)]" as NSString)
+        }
+    }
     
     var body: some View {
         ScrollView {
             VStack {
-                TextField("Custom Format", text: $customFormat)
-                    .textFieldStyle(.roundedBorder)
-                ForEach(dateFormats, id: \.self) { df in
-                    Button(action: {
-                        customFormat = customFormat + "[\(df.code.rawValue)]"
-                    }) {
-                        HStack {
-                            Image(systemName: df.icon)
-                            Text(df.name)
-                        }
-                        .foregroundColor(.white)
+                GroupBox {
+                    TextField("Custom Format", text: $customFormat)
+                        .textFieldStyle(.roundedBorder)
+                        .multilineTextAlignment(.leading)
+                        .focused($focusField)
+                    if !customFormat.isEmpty {
+                        Text(formattedDate)
+                            .multilineTextAlignment(.leading)
+                            .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                            .foregroundColor(.primary)
                     }
-                    .roundedRectangle()
                 }
+                .padding(.bottom)
+                buttonForFormat(dateFormats[0])
+                buttonForFormat(dateFormats[1])
+                HStack {
+                    buttonForFormat(dateFormats[2])
+                    buttonForFormat(dateFormats[3])
+                }
+                HStack {
+                    buttonForFormat(dateFormats[4])
+                    buttonForFormat(dateFormats[5])
+                }
+                buttonForFormat(relativeDateFormat)
+                .padding(.bottom)
             }
             .padding()
+        }
+        .onAppear {
+          DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
+            self.focusField = true
+          }
         }
     }
 }
 
 struct CustomFormat_Previews: PreviewProvider {
     static var previews: some View {
-        CustomFormat(customFormat: .constant(""))
+        CustomFormat(customFormat: .constant(""), selectedTimeZone: .constant(nil), dateHolder: DateHolder.shared)
     }
 }
