@@ -32,6 +32,8 @@ struct MykeMode: View {
     
     // MARK: Environment
     @EnvironmentObject private var timeZoneGroupController: NSUbiquitousKeyValueStoreController
+    @Environment(\.colorScheme) var colorScheme
+    @Environment(\.colorSchemeContrast) var colorSchemeContrast
     
     // MARK: UserDefaults
     @AppStorage(UserDefaults.mykeModeDefaultTimeFormatKey, store: UserDefaults.shared) private var defaultTimeFormat: TimeFormat = .systemLocale
@@ -46,6 +48,13 @@ struct MykeMode: View {
 #endif
     
     // MARK: Functions
+    
+    var buttonTextColor: Color {
+        if colorScheme == .dark && colorSchemeContrast == .increased {
+            return .black
+        }
+        return .white
+    }
     
     func generateTimesAndFlagsText() -> String {
         stringForTimesAndFlags(of: dateHolder.date, in: selectedTimeZone ?? TimeZone.current, for: selectedTimeZones, separator: mykeModeSeparator, timeZonesUsingEUFlag: timeZonesUsingEUFlag, timeZonesUsingNoFlag: timeZonesUsingNoFlag, showCities: mykeModeShowCities)
@@ -117,7 +126,7 @@ struct MykeMode: View {
                             selectedTimeZoneGroup = tzGroup
                         }) {
                             Text(tzGroup.name)
-                                .foregroundColor(selectedTimeZoneGroup == tzGroup ? .white : .primary)
+                                .foregroundColor(selectedTimeZoneGroup == tzGroup ? buttonTextColor : .primary)
                         }
                         .roundedRectangle(colour: selectedTimeZoneGroup == tzGroup ? .accentColor : Color(UIColor.systemGray5), horizontalPadding: 14, cornerRadius: 10)
                         .contentShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
@@ -332,7 +341,7 @@ struct MykeMode: View {
                     }) {
                         Image(systemName: "square.and.arrow.up")
                             .font(.headline)
-                            .foregroundColor(.white)
+                            .foregroundColor(buttonTextColor)
                             .padding(15)
                             .padding(.leading, 5)
                             .frame(maxHeight: .infinity)
@@ -348,7 +357,7 @@ struct MykeMode: View {
                                 Image(systemName: showCopied ? "checkmark" : "doc.on.doc")
                             }
                             .font(.headline)
-                            .foregroundColor(.white)
+                            .foregroundColor(buttonTextColor)
                             .padding(15)
                             .padding(.trailing, 5)
                             .frame(maxHeight: .infinity)
