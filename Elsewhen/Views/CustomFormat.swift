@@ -9,11 +9,21 @@ import SwiftUI
 
 struct CustomFormat: View {
     
+    @Environment(\.colorScheme) var colorScheme
+    @Environment(\.colorSchemeContrast) var colorSchemeContrast
+    
     @Binding var customFormat: String
     @Binding var selectedTimeZone: TimeZone?
     @ObservedObject var dateHolder: DateHolder
 
     @FocusState private var focusField: Bool
+    
+    var buttonTextColor: Color {
+        if colorScheme == .dark && colorSchemeContrast == .increased {
+            return .black
+        }
+        return .white
+    }
 
     var formattedDate: AttributedString {
         var customFormatString = AttributedString(customFormat)
@@ -37,7 +47,7 @@ struct CustomFormat: View {
             customFormat = customFormat + "[\(df.code.rawValue)]"
         }) {
             Text(format(date: dateHolder.date, in: selectedTimeZone ?? TimeZone.current, with: df.code))
-                .foregroundColor(.white)
+                .foregroundColor(buttonTextColor)
         }
         .roundedRectangle()
         .onDrag {

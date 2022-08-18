@@ -12,6 +12,9 @@ struct FormatChoiceButton: View {
     
     @EnvironmentObject private var customTimeFormatController: NSUbiquitousKeyValueStoreController
     
+    @Environment(\.colorScheme) var colorScheme
+    @Environment(\.colorSchemeContrast) var colorSchemeContrast
+    
     let dateFormat: DateFormat?
     let customFormat: CustomTimeFormat?
     @Binding var selectedDate: Date
@@ -31,6 +34,13 @@ struct FormatChoiceButton: View {
     
     var resolvedTimeZone: TimeZone {
         timeZone ?? .current
+    }
+    
+    var buttonTextColor: Color {
+        if colorScheme == .dark && colorSchemeContrast == .increased {
+            return .black
+        }
+        return .white
     }
     
     var formattedDate: String {
@@ -110,10 +120,10 @@ struct FormatChoiceButton: View {
 #if os(iOS)
                 Text(justCopied ? "Copied ✓" : "Copy")
                     .font(.headline)
-                    .foregroundColor(.white)
+                    .foregroundColor(buttonTextColor)
                     .padding(.vertical, 5)
                     .padding(.horizontal, 10)
-                    .background(color)
+                    .background(Color.accentColor)
                     .clipShape(
                         RoundedCorner(cornerRadius: 25)
                     )
