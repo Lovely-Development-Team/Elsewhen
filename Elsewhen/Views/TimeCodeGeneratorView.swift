@@ -58,6 +58,7 @@ struct TimeCodeGeneratorView: View, OrientationObserving {
     @ViewBuilder
     var gridOfItems: some View {
         VStack(spacing: 0) {
+            #if os(iOS)
             GroupBox {
                 Button(action: { showCustomFormatSheet = true }) {
                     HStack {
@@ -70,6 +71,14 @@ struct TimeCodeGeneratorView: View, OrientationObserving {
                 }
             }
             .padding(.bottom)
+            #else
+            Button(action: {
+                showCustomFormatSheet = true
+            }) {
+                Text("Add Custom Format")
+            }
+            .padding(.bottom)
+            #endif
             ForEach(customTimeFormatController.customTimeFormats) { customFormat in
                 FormatChoiceButton(dateFormat: nil, customFormat: customFormat, selectedDate: $dateHolder.date, appendRelative: .constant(false), timeZone: $selectedTimeZone, dateHolder: dateHolder)
                     .padding(.bottom)
@@ -93,6 +102,7 @@ struct TimeCodeGeneratorView: View, OrientationObserving {
             .padding(.bottom)
 #endif
         }
+        .padding(.top)
     }
     
     var body: some View {
@@ -156,14 +166,13 @@ struct TimeCodeGeneratorView: View, OrientationObserving {
             EasterEggView()
         }
         .sheet(isPresented: $showCustomFormatSheet) {
+#if os(iOS)
             NavigationView {
-                CustomFormat(customFormat: $newCustomFormatString, selectedTimeZone: $selectedTimeZone, dateHolder: dateHolder)
+                CustomFormat(customFormat: $newCustomFormatString, selectedTimeZone: $selectedTimeZone, dateHolder: dateHolder, done: nil)
                     .toolbar {
                         ToolbarItem(placement: .navigationBarTrailing) {
                             Button("Save") {
-                                customTimeFormatController.addCustomTimeFormat(newCustomFormatString)
-                                newCustomFormatString = ""
-                                showCustomFormatSheet = false
+                                saveCustomFormat()
                             }
                             .disabled(newCustomFormatString == "")
                         }
@@ -174,12 +183,24 @@ struct TimeCodeGeneratorView: View, OrientationObserving {
                         }
                     }
             }
+#else
+            CustomFormat(customFormat: $newCustomFormatString, selectedTimeZone: $selectedTimeZone, dateHolder: dateHolder) {
+                saveCustomFormat()
+            }
+#endif
         }
         .onAppear {
             customTimeFormats = NSUbiquitousKeyValueStore.default.customTimeCodeFormats
         }
         
     }
+    
+    func saveCustomFormat() {
+        customTimeFormatController.addCustomTimeFormat(newCustomFormatString)
+        newCustomFormatString = ""
+        showCustomFormatSheet = false
+    }
+    
 }
 
 struct TimeCodeGeneratorView_Previews: PreviewProvider {

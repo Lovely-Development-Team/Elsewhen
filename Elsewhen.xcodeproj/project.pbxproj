@@ -54,6 +54,7 @@
 		5E07E89727347C8C00D9350E /* aromantic@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E07E89327347C8C00D9350E /* aromantic@3x.png */; };
 		5E0A4169278AD8CF00FAB5F8 /* TimeZoneSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0A4168278AD8CF00FAB5F8 /* TimeZoneSearchController.swift */; };
 		5E0A416A278AD8CF00FAB5F8 /* TimeZoneSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0A4168278AD8CF00FAB5F8 /* TimeZoneSearchController.swift */; };
+		5E253D9528B60DA100CF024F /* CustomFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E986E612894345600981ADF /* CustomFormat.swift */; };
 		5E2D6B1E277C48470065781E /* DefaultTimeFormatPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2D6B1D277C48470065781E /* DefaultTimeFormatPicker.swift */; };
 		5E2D6B20277C4CC00065781E /* SeparatorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2D6B1F277C4CBF0065781E /* SeparatorPicker.swift */; };
 		5E461740286085A400C84C6B /* ukraine@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E46173C286085A300C84C6B /* ukraine@2x.png */; };
@@ -1402,6 +1403,7 @@
 				63A90DCE26F4287E00CACCB9 /* StatusBarPopoverController.swift in Sources */,
 				63C51BA526F9C9C900145662 /* SelectTimeZoneWindowController.swift in Sources */,
 				63A915F826FB42D60027B18D /* StarUnstarButton.swift in Sources */,
+				5E253D9528B60DA100CF024F /* CustomFormat.swift in Sources */,
 				63A90DD826F42F2F00CACCB9 /* PreferencesWindowController.swift in Sources */,
 				632F38EA274BB50800F0C064 /* TimeListPopoverViewController.swift in Sources */,
 				638B47BE26FC99DF00B26B26 /* EasterEggButton.swift in Sources */,

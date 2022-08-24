@@ -163,9 +163,11 @@ struct FormatChoiceButton: View {
             Button(action: doCopy) {
                 Label("Copy", systemImage: "doc.on.doc")
             }
+#if os(iOS)
             Button(action: doShare) {
                 Label("Share", systemImage: "square.and.arrow.up")
             }
+#endif
             if let customFormat = customFormat {
                 Button(action: {
                     editCustomFormatString = customFormat.format
@@ -173,25 +175,32 @@ struct FormatChoiceButton: View {
                 }) {
                     Label("Edit Custom Format", systemImage: "pencil")
                 }
+#if os(iOS)
                 Button(action: {
                     postShowShareSheet(with: [customFormat.format])
                 }) {
                     Label("Share Custom Format", systemImage: "square.and.arrow.up")
                 }
+#else
+                Button(action: {
+                    EWPasteboard.set(customFormat.format, forType: UTType.utf8PlainText)
+                }) {
+                    Label("Copy Custom Format", systemImage: "doc.on.doc")
+                }
+#endif
                 DeleteButton(text: "Remove Custom Format") {
                     customTimeFormatController.removeCustomTimeFormat(customFormat)
                 }
             }
         }
         .sheet(isPresented: $editingCustomFormat) {
+#if os(iOS)
             NavigationView {
-                CustomFormat(customFormat: $editCustomFormatString, selectedTimeZone: $timeZone, dateHolder: dateHolder)
+                CustomFormat(customFormat: $editCustomFormatString, selectedTimeZone: $timeZone, dateHolder: dateHolder, done: nil)
                     .toolbar {
                         ToolbarItem(placement: .navigationBarTrailing) {
                             Button("Save") {
-                                guard let customFormat = customFormat else { return }
-                                customTimeFormatController.updateCustomTimeFormat(id: customFormat.id, formatString: editCustomFormatString)
-                                editingCustomFormat = false
+                                saveCustomFormat()
                             }
                             .disabled(editCustomFormatString == "")
                         }
@@ -202,7 +211,18 @@ struct FormatChoiceButton: View {
                         }
                     }
             }
+#else
+            CustomFormat(customFormat: $editCustomFormatString, selectedTimeZone: $timeZone, dateHolder: dateHolder) {
+                saveCustomFormat()
+            }
+#endif
         }
+    }
+    
+    func saveCustomFormat() {
+        guard let customFormat = customFormat else { return }
+        customTimeFormatController.updateCustomTimeFormat(id: customFormat.id, formatString: editCustomFormatString)
+        editingCustomFormat = false
     }
     
     var body: some View {
