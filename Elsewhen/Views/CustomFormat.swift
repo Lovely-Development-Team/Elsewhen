@@ -58,6 +58,7 @@ struct CustomFormat: View {
     var body: some View {
         ScrollView {
             VStack {
+                Text("Enter a custom message, using the buttons below to add placeholders for the Time Codes.")
                 GroupBox {
                     TextField("Custom Format", text: $customFormat)
                         .textFieldStyle(.roundedBorder)
