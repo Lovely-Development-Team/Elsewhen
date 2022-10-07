@@ -282,9 +282,14 @@ struct MykeMode: View {
                     Section {
                         ForEach(selectedTimeZones, id: \.self) { tz in
 #if os(macOS)
-                            HStack {
-                                timeZoneListItem(for: tz)
-                                Image(systemName: "line.3.horizontal")
+                            VStack {
+                                HStack {
+                                    timeZoneListItem(for: tz)
+                                    Image(systemName: "line.3.horizontal")
+                                }
+                                .padding(.bottom, 3)
+                                .padding(.top)
+                                Divider()
                             }
 #else
                             timeZoneListItem(for: tz)
@@ -292,9 +297,9 @@ struct MykeMode: View {
                         }
                         .onMove(perform: move)
                         .onDelete(perform: delete)
-                        .padding(.vertical, 5)
                         .padding(.leading)
 #if os(iOS)
+                        .padding(.vertical, 5)
                         .padding(.trailing)
                         .listRowSeparator(.hidden)
 #else

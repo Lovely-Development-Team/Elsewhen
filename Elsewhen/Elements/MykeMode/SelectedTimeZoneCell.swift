@@ -16,10 +16,8 @@ struct SelectedTimeZoneCell: View {
     
     let onTap: (_ tz: TimeZone) -> ()
     
-    var body: some View {
-        let abbreviation = tz.fudgedAbbreviation(for: selectedDate)
-        
-        GroupBox {
+    var groupBody: some View {
+        Group {
             Text(tz.friendlyName)
                 .font(.caption)
                 .fontWeight(.semibold)
@@ -31,6 +29,30 @@ struct SelectedTimeZoneCell: View {
                 .font(.system(.body, design: .rounded))
                 .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                 .padding(.bottom, 2)
+        }
+    }
+    
+    var macOSBody: some View {
+        VStack {
+            groupBody
+        }
+    }
+    
+    var iOSBody: some View {
+        GroupBox {
+            groupBody
+        }
+    }
+    
+    var body: some View {
+        let abbreviation = tz.fudgedAbbreviation(for: selectedDate)
+        
+        Group {
+            #if os(macOS)
+            macOSBody
+            #else
+            iOSBody
+            #endif
         }
         .onDrag {
             return NSItemProvider(object: timeInZone as NSString)
