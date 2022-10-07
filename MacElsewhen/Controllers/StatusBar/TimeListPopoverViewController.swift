@@ -12,7 +12,7 @@ class TimeListPopoverViewController: NSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let mykeModeHostingView = NSHostingView(rootView: MykeMode(dateHolder: DateHolder.shared).frame(width: 400).environmentObject(DateHolder.shared).environmentObject(NSUbiquitousKeyValueStoreController.shared).environment(\.isInPopover, true))
+        let mykeModeHostingView = NSHostingView(rootView: MykeMode(dateHolder: DateHolder.shared).frame(width: 400).environmentObject(DateHolder.shared).environmentObject(NSUbiquitousKeyValueStoreController.shared).environment(\.isInPopover, true).environmentObject(NSUbiquitousKeyValueStoreController.shared))
         attach(subview: mykeModeHostingView, to: self.view)
         // Do view setup here.
     }
