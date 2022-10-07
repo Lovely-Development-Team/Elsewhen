@@ -11,9 +11,9 @@ class StatusItemTabViewController: NSTabViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let timeCoesViewController = TimeCodesPopoverViewController()
-        addChild(timeCoesViewController)
-        configure(for: timeCoesViewController, label: "TimeCodeLabel", image: NSImage(systemSymbolName: "clock", accessibilityDescription: nil))
+        let timeCodesViewController = TimeCodesPopoverViewController()
+        addChild(timeCodesViewController)
+        configure(for: timeCodesViewController, label: "TimeCodeLabel", image: NSImage(systemSymbolName: "clock", accessibilityDescription: nil))
         let timeListViewController = TimeListPopoverViewController()
         addChild(timeListViewController)
         configure(for: timeListViewController, label: "TimeListLabel", image: NSImage(systemSymbolName: "list.dash", accessibilityDescription: nil))
