@@ -111,7 +111,7 @@ struct DateTimeZoneSheet: View {
                 Button(action: {
                     WindowManager.shared.openMain()
                 }) {
-                    Text("Open Main Window")
+                    Text("Open Elsewhen")
                 }
                 .padding(.top, 8)
             }
