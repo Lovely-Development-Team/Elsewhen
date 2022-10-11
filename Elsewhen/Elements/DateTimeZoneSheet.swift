@@ -23,6 +23,7 @@ struct DateTimeZoneSheet: View {
 #if os(macOS)
     @State private var isPresentingDatePopover: Bool = false
     @State private var showTimeZoneChoicePopover: Bool = false
+    @Environment(\.isInPopover) private var isInPopover
 #endif
     
     var timeZoneLabel: String {
@@ -103,6 +104,19 @@ struct DateTimeZoneSheet: View {
                 }
                 #endif
             }
+            
+            #if os(macOS)
+            if isInPopover {
+                Divider()
+                Button(action: {
+                    WindowManager.shared.openMain()
+                }) {
+                    Text("Open Main Window")
+                }
+                .padding(.top, 8)
+            }
+            #endif
+            
         }
         .padding([.horizontal, .bottom])
         .padding(.top, 10)
