@@ -42,7 +42,6 @@ class StatusItemController: NSObject {
         let statusButton = statusItem.button
         statusButton?.target = self
         statusButton?.action = #selector(onClick)
-        statusButton?.title = Bundle.displayName
         let image = NSImage(named: "ElsewhenStatusItem")
         image?.size = NSSize(width: 18, height: 18)
         statusButton?.image = image
