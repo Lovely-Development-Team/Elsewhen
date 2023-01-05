@@ -27,7 +27,7 @@ struct ContentView: View {
     }
     
     var showSettingsIcon: Bool {
-//        return false
+        return false
         return lastSeenVersionForSettings != AboutElsewhen.buildNumber
     }
     

@@ -134,15 +134,15 @@ struct Settings: View, OrientationObserving {
                 }
             }
             
-            if AboutElsewhen.buildNumber != lastSeenVersionForSettings {
-                Section(header: HStack {
-                    Circle().fill(.red).frame(width: 10, height: 10)
-                    Text("What's New")
-                }) {
-                    Text("**Custom Formats** let you compile and store combinations of the different Time Codes to easily copy in one tap. Now you can have quick access to that one phrase you always use. Try them out with the button at the top of the Time Codes tab.")
-                        .fixedSize(horizontal: false, vertical: true)
-                }
-            }
+//            if AboutElsewhen.buildNumber != lastSeenVersionForSettings {
+//                Section(header: HStack {
+//                    Circle().fill(.red).frame(width: 10, height: 10)
+//                    Text("What's New")
+//                }) {
+//                    Text("**Custom Formats** let you compile and store combinations of the different Time Codes to easily copy in one tap. Now you can have quick access to that one phrase you always use. Try them out with the button at the top of the Time Codes tab.")
+//                        .fixedSize(horizontal: false, vertical: true)
+//                }
+//            }
             
             Section(header: Text("General Settings"), footer: smartTimeZoneSearchExplanation) {
                 if isPadAndNotCompact {
