@@ -173,6 +173,7 @@ struct MykeMode: View {
     var listFooter: some View {
         Text(generateTimesAndFlagsText().trimmingCharacters(in: .whitespacesAndNewlines))
             .foregroundColor(.secondary)
+            .fixedSize(horizontal: true, vertical: true)
 #if os(iOS)
             .listRowSeparator(.hidden)
 #endif
@@ -306,6 +307,11 @@ struct MykeMode: View {
                         .padding(.trailing, 8)
 #endif
                         .listRowInsets(EdgeInsets())
+                        
+#if os(macOS)
+                        listFooter
+#endif
+                        
                     } header: {
 #if os(macOS)
                         if !timeZoneGroupController.timeZoneGroups.isEmpty {
@@ -330,7 +336,9 @@ struct MykeMode: View {
                         }
 #endif
                     } footer: {
+#if os(iOS)
                         listFooter
+#endif
                     }
                 }
                 .listStyle(.plain)
@@ -524,7 +532,7 @@ struct MykeMode: View {
         } message: {
             Text("Select a Group")
         }
-        #if os(macOS)
+#if os(macOS)
         .confirmationDialog("Update Group?", isPresented: $showmacOSUpdateGroupConfirmation, presenting: macOSUpdateGroupDetails) { tzGroup in
             Button("Update Group") {
                 selectedTimeZoneGroup = timeZoneGroupController.updateTimeZoneGroup(tzGroup, with: selectedTimeZones)
@@ -533,7 +541,7 @@ struct MykeMode: View {
         } message: { tzGroup in
             Text("Are you sure you want to update the \(tzGroup.name) Group with the current Time Zones?")
         }
-        #endif
+#endif
         .onAppear {
             selectedTimeZone = UserDefaults.shared.resetButtonTimeZone
             selectedTimeZones = UserDefaults.shared.mykeModeTimeZones
