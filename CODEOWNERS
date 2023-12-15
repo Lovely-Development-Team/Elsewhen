@@ -1,10 +1,10 @@
 *                     @Lovely-Development-Team/mottobotto-builders
 
-*.swift                  @dwrss @benbacardi @RosemaryOrchard @majdkoshakji @alexcfaber
-*.h                      @dwrss @benbacardi @RosemaryOrchard @majdkoshakji @alexcfaber
-*.m                      @dwrss @benbacardi @RosemaryOrchard @majdkoshakji @alexcfaber
-*.xcodeproj/*            @dwrss @benbacardi @RosemaryOrchard @majdkoshakji @alexcfaber
-*.xib                    @dwrss @benbacardi @RosemaryOrchard @majdkoshakji @alexcfaber
-*.plist                  @dwrss @benbacardi @RosemaryOrchard @majdkoshakji @alexcfaber
-*.entitlements           @dwrss @benbacardi @RosemaryOrchard @majdkoshakji @alexcfaber
-CODEOWNERS               @dwrss @benbacardi @RosemaryOrchard @majdkoshakji
+*.swift                  @dwrss @benbacardi @RosemaryOrchard @koshakji @alexcfaber
+*.h                      @dwrss @benbacardi @RosemaryOrchard @koshakji @alexcfaber
+*.m                      @dwrss @benbacardi @RosemaryOrchard @koshakji @alexcfaber
+*.xcodeproj/*            @dwrss @benbacardi @RosemaryOrchard @koshakji @alexcfaber
+*.xib                    @dwrss @benbacardi @RosemaryOrchard @koshakji @alexcfaber
+*.plist                  @dwrss @benbacardi @RosemaryOrchard @koshakji @alexcfaber
+*.entitlements           @dwrss @benbacardi @RosemaryOrchard @koshakji @alexcfaber
+CODEOWNERS               @dwrss @benbacardi @RosemaryOrchard @koshakji
