@@ -127,6 +127,12 @@
 		5EB23B9F26E406B600203153 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB23B9E26E406B600203153 /* ContentView.swift */; };
 		5EB23BA126E406B900203153 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5EB23BA026E406B900203153 /* Assets.xcassets */; };
 		5EB23BA426E406B900203153 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5EB23BA326E406B900203153 /* Preview Assets.xcassets */; };
+		5EBD28732BB3775D00746418 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 5EBD28722BB3775B00746418 /* PrivacyInfo.xcprivacy */; };
+		5EBD28742BB3775E00746418 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 5EBD28722BB3775B00746418 /* PrivacyInfo.xcprivacy */; };
+		5EBD28752BB3775E00746418 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 5EBD28722BB3775B00746418 /* PrivacyInfo.xcprivacy */; };
+		5EBD28762BB3775E00746418 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 5EBD28722BB3775B00746418 /* PrivacyInfo.xcprivacy */; };
+		5EBD28772BB3775F00746418 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 5EBD28722BB3775B00746418 /* PrivacyInfo.xcprivacy */; };
+		5EBD28782BB3775F00746418 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 5EBD28722BB3775B00746418 /* PrivacyInfo.xcprivacy */; };
 		5EC4E5DD285DAFE1008EEE6C /* TimeCodeGeneratorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC4E5DC285DAFE1008EEE6C /* TimeCodeGeneratorView.swift */; };
 		5EC4E5DF285DB8EE008EEE6C /* DateTimeZoneSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC4E5DE285DB8EE008EEE6C /* DateTimeZoneSheet.swift */; };
 		5EC4E5E1285DB93A008EEE6C /* RoundedCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC4E5E0285DB93A008EEE6C /* RoundedCorner.swift */; };
@@ -414,6 +420,7 @@
 		5EB23B9E26E406B600203153 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		5EB23BA026E406B900203153 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5EB23BA326E406B900203153 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		5EBD28722BB3775B00746418 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		5EBEEE8027123373001501EC /* Discord Helper Intents.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Discord Helper Intents.entitlements"; sourceTree = "<group>"; };
 		5EBEEE8127123385001501EC /* Discord Helper IntentsUI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Discord Helper IntentsUI.entitlements"; sourceTree = "<group>"; };
 		5EC4E5DC285DAFE1008EEE6C /* TimeCodeGeneratorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCodeGeneratorView.swift; sourceTree = "<group>"; };
@@ -638,6 +645,7 @@
 		5EB23B9026E406B600203153 = {
 			isa = PBXGroup;
 			children = (
+				5EBD28722BB3775B00746418 /* PrivacyInfo.xcprivacy */,
 				6395C6FB271B5B2300BA4A2D /* exportOptions.plist */,
 				632F38EC274D7F4C00F0C064 /* Localizable.strings */,
 				5EB23B9B26E406B600203153 /* Elsewhen */,
@@ -1201,6 +1209,7 @@
 				5E54BBC927384590005CF7A6 /* transgender@2x.png in Resources */,
 				5E07E89427347C8C00D9350E /* aromantic@2x~ipad.png in Resources */,
 				5E54BBC12737C6D2005CF7A6 /* sixcolors@2x.png in Resources */,
+				5EBD28732BB3775D00746418 /* PrivacyInfo.xcprivacy in Resources */,
 				5E54BBD4273863B6005CF7A6 /* wiggles@3x.png in Resources */,
 				5E07E88527347C2500D9350E /* genderfluid@3x.png in Resources */,
 				5E6C8C4127468950003244DF /* progressive@3x~ipad.png in Resources */,
@@ -1252,6 +1261,7 @@
 				5E6C8C4627468950003244DF /* progressive@2x.png in Resources */,
 				632F38E4274B88DB00F0C064 /* TimeCodesPopoverViewController.xib in Resources */,
 				632F38EE274D811600F0C064 /* Localizable.strings in Resources */,
+				5EBD28762BB3775E00746418 /* PrivacyInfo.xcprivacy in Resources */,
 				5E6C8C4427468950003244DF /* progressive@2x~ipad.png in Resources */,
 				632F38EB274BB50800F0C064 /* TimeListPopoverViewController.xib in Resources */,
 				6346AD8426F3C14900E406D0 /* Assets.xcassets in Resources */,
@@ -1268,6 +1278,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5EBD28772BB3775F00746418 /* PrivacyInfo.xcprivacy in Resources */,
 				6346AD8526F3C14A00E406D0 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1276,6 +1287,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5EBD28782BB3775F00746418 /* PrivacyInfo.xcprivacy in Resources */,
 				6346AD8626F3C14A00E406D0 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1284,6 +1296,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5EBD28742BB3775E00746418 /* PrivacyInfo.xcprivacy in Resources */,
 				5EE2D2CA26F2506A00D61875 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1292,6 +1305,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5EBD28752BB3775E00746418 /* PrivacyInfo.xcprivacy in Resources */,
 				5EE2D2CB26F2506B00D61875 /* Assets.xcassets in Resources */,
 				637839A026EBF4750055A10D /* MainInterface.storyboard in Resources */,
 			);
