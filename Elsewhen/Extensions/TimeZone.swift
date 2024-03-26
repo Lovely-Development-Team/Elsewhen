@@ -36,8 +36,12 @@ extension TimeZone {
         europeanUnionTimeZones.contains(self.identifier)
     }
     
+    static var allTimeZoneIdentifiers: [String] {
+        return Set(knownTimeZoneIdentifiers).union(abbreviationDictionary.keys).sorted()
+    }
+    
     static func filtered(by searchTerm: String, onDate: Date = Date()) -> [TimeZone] {
-        let timezones = TimeZone.knownTimeZoneIdentifiers.compactMap { tz in
+        let timezones = TimeZone.allTimeZoneIdentifiers.compactMap { tz in
             TimeZone(identifier: tz)
         }
         return filter(timezones: timezones, by: searchTerm, onDate: onDate)
@@ -76,40 +80,59 @@ extension TimeZone {
         return false
     }
     
-    func fudgedAbbreviation(for selectedDate: Date = Date()) -> String? {
+    func fudgedAbbreviation(for selectedDate: Date = Date(), usingShort: Bool = false) -> String? {
+        
+        // India Standard Time should always say IST
+        if identifier == "IST" {
+            return "IST"
+        }
         
         let isDaylightSavingTime = isDaylightSavingTime(for: selectedDate)
         
+        // Europe/London should always either be BST or GMT
+        if identifier == "Europe/London" {
+            return isDaylightSavingTime ? "BST" : "GMT"
+        }
+        
+        let shortStyle: TimeZone.NameStyle = isDaylightSavingTime ? .shortDaylightSaving : .shortStandard
+        let longStyle: TimeZone.NameStyle = isDaylightSavingTime ? .daylightSaving : .standard
+        let timeZoneStyle = usingShort ? shortStyle : longStyle
+        
+        // America/* time zones should use fudged versions of their localised names
+        // Requested by Myke/Stephen. e.g:
+        // - Pacific Standard Time -> Pacific
+        // - Eastern Daylight Time -> Eastern
+        // - Central Daylight Time -> CT
+        // - Mountain Standard Time -> MT
         if identifier.starts(with: "America/") {
-            if let localizedName = localizedName(for: .generic, locale: Locale(identifier: "en_US")) {
-                return localizedName.replacingOccurrences(of: " Time", with: "")
+            if let localizedName = localizedName(for: timeZoneStyle, locale: Locale(identifier: "en_US")) {
+                return localizedName.replacingOccurrences(of: "DT", with: "T").replacingOccurrences(of: "ST", with: "T").replacingOccurrences(of: " Daylight", with: "").replacingOccurrences(of: " Standard", with: "").replacingOccurrences(of: " Time", with: "")
             }
         }
         
+        // Australia/* time zones should use their localised short names such as AEST/AEDT
         if identifier.starts(with: "Australia/") {
-            let format: NSTimeZone.NameStyle
-            if isDaylightSavingTime {
-                format = .shortDaylightSaving
-            } else {
-                format = .shortGeneric
-            }
-            if let localizedName = localizedName(for: format, locale: Locale(identifier: "en_AU")) {
+            if let localizedName = localizedName(for: shortStyle, locale: Locale(identifier: "en_AU")) {
                 return localizedName
             }
         }
         
         guard let abbreviation = abbreviation(for: selectedDate) else { return nil }
-        if identifier == "Europe/London" && isDaylightSavingTime {
-            return "BST"
-        }
         
+        logger.debug("identifier: \(identifier) abbreviation: \(abbreviation)")
+        
+        // Europe/* time zones should return CET instead of their GMT offsets
         if identifier.starts(with: "Europe") {
+            if abbreviation == "CET" { return abbreviation }
             if isDaylightSavingTime && abbreviation == "GMT+2" || !isDaylightSavingTime && abbreviation == "GMT+1" {
                 return "CET"
             }
         }
         
-        return abbreviation
+        // Finally, use the time zone's localised name if there is one, otherwise the standard abbreviation
+        guard let localizedName = localizedName(for: timeZoneStyle, locale: Locale.current) else { return abbreviation }
+        
+        return localizedName
         
     }
     

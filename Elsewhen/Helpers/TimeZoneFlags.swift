@@ -455,6 +455,7 @@ let timeZoneFlags: [String: String] = [
     "Pacific/Truk": "🇫🇲",
     "Pacific/Wake": "🇺🇸",
     "Pacific/Wallis": "🇼🇫",
+    "IST": "🇮🇳",
 ]
 
 let europeanUnionTimeZones: Set<String> = [
@@ -1286,4 +1287,5 @@ let alternativeTimeZoneSearchTerms: [String: [String]] = [
 //    "Pacific/Tongatapu" : ["Tonga"],
 //    "Pacific/Wake" : ["United States Minor Outlying Islands"],
 //    "Pacific/Wallis" : ["Wallis and Futuna"],
+    "IST": ["India", "Indian Standard Time"],
 ]

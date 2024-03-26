@@ -123,7 +123,7 @@ class TimeListIntentHandling: NSObject, GetTimeListIntentHandling {
         
         
         let response = GetTimeListIntentResponse(code: .success, userActivity: userActivity)
-        response.discordFormat = stringForTimesAndFlags(of: date, in: timezone, for: chosenTimezones, separator: UserDefaults.shared.mykeModeSeparator, timeZonesUsingEUFlag: UserDefaults.shared.mykeModeTimeZonesUsingEUFlag, timeZonesUsingNoFlag: UserDefaults.shared.mykeModeTimeZonesUsingNoFlag, showCities: UserDefaults.shared.mykeModeShowCities)
+        response.discordFormat = stringForTimesAndFlags(of: date, in: timezone, for: chosenTimezones, separator: UserDefaults.shared.mykeModeSeparator, lineSeparator: UserDefaults.shared.mykeModeLineSeparator, timeZonesUsingEUFlag: UserDefaults.shared.mykeModeTimeZonesUsingEUFlag, timeZonesUsingNoFlag: UserDefaults.shared.mykeModeTimeZonesUsingNoFlag, showCities: UserDefaults.shared.mykeModeShowCities, hideFlags: UserDefaults.shared.mykeModeHideFlags)
         completion(response)
     }
     

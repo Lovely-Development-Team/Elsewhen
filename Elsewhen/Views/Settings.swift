@@ -13,6 +13,7 @@ enum SettingsViews: Int {
     case defaultTimeZone
     case mykeModeDefaultTimeFormat
     case mykeModeSeparator
+    case mykeModeLineSeparator
     case defaultTabPicker
     case importTimeZoneGroup
     case changelog
@@ -31,7 +32,11 @@ struct Settings: View, OrientationObserving {
     @State private var defaultDate: Date = Date.distantPast
     @State private var defaultTimeFormat: TimeFormat = .systemLocale
     @AppStorage(UserDefaults.mykeModeSeparatorKey, store: UserDefaults.shared) private var mykeModeSeparator: MykeModeSeparator = .hyphen
+    @AppStorage(UserDefaults.mykeModeLineSeparatorKey, store: UserDefaults.shared) private var mykeModeLineSeparator: MykeModeLineSeparator = .newLine
     @AppStorage(UserDefaults.mykeModeShowCitiesKey, store: UserDefaults.shared) private var mykeModeShowCities: Bool = false
+    @AppStorage(UserDefaults.mykeModeHideFlagsKey, store: UserDefaults.shared) private var mykeModeHideFlags: Bool = false
+    @AppStorage(UserDefaults.mykeModeLowercaseAMPMKey, store: UserDefaults.shared) private var mykeModeLowercaseAMPM: Bool = false
+    @AppStorage(UserDefaults.mykeModeUseShortNamesKey, store: UserDefaults.shared) private var mykeModeUseShortNames: Bool = false
     @AppStorage(UserDefaults.defaultTabKey) private var defaultTabIndex: Int = 0
     @AppStorage(UserDefaults.useMapKitSearchKey) private var useMapKitSearch: Bool = true
     @AppStorage(UserDefaults.lastSeenVersionForSettingsKey) private var lastSeenVersionForSettings: String = ""
@@ -187,7 +192,7 @@ struct Settings: View, OrientationObserving {
                 }
                 
             }
-            TimeListSettings(defaultTimeFormat: $defaultTimeFormat, mykeModeSeparator: $mykeModeSeparator, showCities: $mykeModeShowCities, selectedView: $selectedView)
+            TimeListSettings(defaultTimeFormat: $defaultTimeFormat, mykeModeSeparator: $mykeModeSeparator, mykeModeLineSeparator: $mykeModeLineSeparator, showCities: $mykeModeShowCities, hideFlags: $mykeModeHideFlags, lowercaseAMPM: $mykeModeLowercaseAMPM, useShortNames: $mykeModeUseShortNames, selectedView: $selectedView)
                 .id(viewId)
             
 #if DEBUG

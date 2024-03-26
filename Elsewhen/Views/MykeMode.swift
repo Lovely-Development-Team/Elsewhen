@@ -38,7 +38,11 @@ struct MykeMode: View {
     // MARK: UserDefaults
     @AppStorage(UserDefaults.mykeModeDefaultTimeFormatKey, store: UserDefaults.shared) private var defaultTimeFormat: TimeFormat = .systemLocale
     @AppStorage(UserDefaults.mykeModeSeparatorKey, store: UserDefaults.shared) private var mykeModeSeparator: MykeModeSeparator = .hyphen
+    @AppStorage(UserDefaults.mykeModeLineSeparatorKey, store: UserDefaults.shared) private var mykeModeLineSeparator: MykeModeLineSeparator = .newLine
     @AppStorage(UserDefaults.mykeModeShowCitiesKey, store: UserDefaults.shared) private var mykeModeShowCities: Bool = false
+    @AppStorage(UserDefaults.mykeModeHideFlagsKey, store: UserDefaults.shared) private var mykeModeHideFlags: Bool = false
+    @AppStorage(UserDefaults.mykeModeLowercaseAMPMKey, store: UserDefaults.shared) private var lowercaseAMPM: Bool = false
+    @AppStorage(UserDefaults.mykeModeUseShortNamesKey, store: UserDefaults.shared) private var useShortNames: Bool = false
     
     // MARK: Parameters
     
@@ -57,15 +61,15 @@ struct MykeMode: View {
     }
     
     func generateTimesAndFlagsText() -> String {
-        stringForTimesAndFlags(of: dateHolder.date, in: selectedTimeZone ?? TimeZone.current, for: selectedTimeZones, separator: mykeModeSeparator, timeZonesUsingEUFlag: timeZonesUsingEUFlag, timeZonesUsingNoFlag: timeZonesUsingNoFlag, showCities: mykeModeShowCities)
+        stringForTimesAndFlags(of: dateHolder.date, in: selectedTimeZone ?? TimeZone.current, for: selectedTimeZones, separator: mykeModeSeparator, lineSeparator: mykeModeLineSeparator, timeZonesUsingEUFlag: timeZonesUsingEUFlag, timeZonesUsingNoFlag: timeZonesUsingNoFlag, showCities: mykeModeShowCities, hideFlags: mykeModeHideFlags, lowercaseAMPM: lowercaseAMPM, useShortNames: useShortNames)
     }
     
     func stringForSelectedTime(in zone: TimeZone) -> String {
-        stringFor(time: dateHolder.date, in: zone, sourceZone: selectedTimeZone ?? TimeZone.current)
+        stringFor(time: dateHolder.date, in: zone, sourceZone: selectedTimeZone ?? TimeZone.current, lowercaseAMPM: lowercaseAMPM)
     }
     
     func tzTapped(_ tz: TimeZone) {
-        if flagForTimeZone(tz) != NoFlagTimeZoneEmoji {
+        if !mykeModeHideFlags && flagForTimeZone(tz) != NoFlagTimeZoneEmoji {
 #if os(iOS)
             mediumImpactFeedbackGenerator.impactOccurred()
 #endif
@@ -173,7 +177,7 @@ struct MykeMode: View {
     var listFooter: some View {
         Text(generateTimesAndFlagsText().trimmingCharacters(in: .whitespacesAndNewlines))
             .foregroundColor(.secondary)
-            .fixedSize(horizontal: true, vertical: true)
+            .fixedSize(horizontal: false, vertical: true)
 #if os(iOS)
             .listRowSeparator(.hidden)
 #endif
@@ -183,12 +187,12 @@ struct MykeMode: View {
     
     @ViewBuilder
     func timeZoneListItem(for tz: TimeZone) -> some View {
-        SelectedTimeZoneCell(tz: tz, timeInZone: stringForSelectedTime(in: tz), selectedDate: dateHolder.date, formattedString: stringForTimeAndFlag(in: tz, date: dateHolder.date, sourceZone: selectedTimeZone ?? TimeZone.current, separator: mykeModeSeparator, timeZonesUsingEUFlag: timeZonesUsingEUFlag, timeZonesUsingNoFlag: timeZonesUsingNoFlag, showCities: mykeModeShowCities), onTap: tzTapped)
+        SelectedTimeZoneCell(tz: tz, timeInZone: stringForSelectedTime(in: tz), selectedDate: dateHolder.date, formattedString: stringForTimeAndFlag(in: tz, date: dateHolder.date, sourceZone: selectedTimeZone ?? TimeZone.current, separator: mykeModeSeparator, timeZonesUsingEUFlag: timeZonesUsingEUFlag, timeZonesUsingNoFlag: timeZonesUsingNoFlag, showCities: mykeModeShowCities, hideFlags: mykeModeHideFlags, lowercaseAMPM: lowercaseAMPM, useShortNames: useShortNames), onTap: tzTapped)
 #if os(iOS)
             .hoverEffect()
 #endif
             .contextMenu {
-                if flagForTimeZone(tz) != NoFlagTimeZoneEmoji {
+                if !mykeModeHideFlags && flagForTimeZone(tz) != NoFlagTimeZoneEmoji {
                     Button(action: {
 #if os(iOS)
                         mediumImpactFeedbackGenerator.impactOccurred()
