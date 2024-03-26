@@ -14,7 +14,11 @@ struct TimeListSettings: View, OrientationObserving {
     
     @Binding var defaultTimeFormat: TimeFormat
     @Binding var mykeModeSeparator: MykeModeSeparator
+    @Binding var mykeModeLineSeparator: MykeModeLineSeparator
     @Binding var showCities: Bool
+    @Binding var hideFlags: Bool
+    @Binding var lowercaseAMPM: Bool
+    @Binding var useShortNames: Bool
     
     @Binding var selectedView: SettingsViews?
     @State private var viewId: Int = 1
@@ -23,7 +27,7 @@ struct TimeListSettings: View, OrientationObserving {
     
     var exampleOutput: String {
         let tz = UserDefaults.shared.resetButtonTimeZone ?? TimeZone.current
-        let formatString = stringForTimeAndFlag(in: tz, date: Date(), sourceZone: tz, separator: mykeModeSeparator, timeZonesUsingEUFlag: [], timeZonesUsingNoFlag: [], showCities: showCities, ignoringTimeFormatOverride: true)
+        let formatString = stringForTimesAndFlags(of: Date(), in: tz, for: [TimeZone(identifier: "Europe/London")!, TimeZone(identifier: "America/New_York")!, TimeZone(identifier: "Australia/Brisbane")!], separator: mykeModeSeparator, lineSeparator: mykeModeLineSeparator, timeZonesUsingEUFlag: [], timeZonesUsingNoFlag: [], showCities: showCities, hideFlags: hideFlags, lowercaseAMPM: lowercaseAMPM, useShortNames: useShortNames, ignoringTimeFormatOverride: true).trimmingCharacters(in: .whitespacesAndNewlines).replacingOccurrences(of: "\n", with: "\n  ")
         return "Example:\n  \(formatString)"
     }
     
@@ -50,11 +54,25 @@ struct TimeListSettings: View, OrientationObserving {
     
     var separatorPickerLink: some View {
         HStack {
-            Text("Separator")
+            Text("Flag Separator")
             Spacer()
             Text(mykeModeSeparator.description)
                 .foregroundColor(selectedView == .mykeModeSeparator ? .white : .secondary)
                 .opacity(selectedView == .mykeModeSeparator ? 0.8 : 1)
+        }
+    }
+    
+    var lineSeparatorPicker: LineSeparatorPicker {
+        LineSeparatorPicker(mykeModeLineSeparator: $mykeModeLineSeparator)
+    }
+    
+    var lineSeparatorPickerLink: some View {
+        HStack {
+            Text("Item Separator")
+            Spacer()
+            Text(mykeModeLineSeparator.description)
+                .foregroundColor(selectedView == .mykeModeLineSeparator ? .white : .secondary)
+                .opacity(selectedView == .mykeModeLineSeparator ? 0.8 : 1)
         }
     }
     
@@ -66,19 +84,37 @@ struct TimeListSettings: View, OrientationObserving {
                         defaultTimeFormatPickerLink
                     }.listRowBackground(selectedView == .mykeModeDefaultTimeFormat ? Color.accentColor : Color(UIColor.systemBackground))
                         .foregroundColor(selectedView == .mykeModeDefaultTimeFormat ? .white : .primary)
-                    Button(action: { selectedView = .mykeModeSeparator }) {
-                        separatorPickerLink
-                    }.listRowBackground(selectedView == .mykeModeSeparator ? Color.accentColor : Color(UIColor.systemBackground))
-                        .foregroundColor(selectedView == .mykeModeSeparator ? .white : .primary)
                 } else {
                     NavigationLink(destination: defaultTimeFormatPicker, tag: SettingsViews.mykeModeDefaultTimeFormat, selection: $selectedView) {
                         defaultTimeFormatPickerLink
                     }
+                }
+                Toggle("Include City Names", isOn: $showCities)
+                Toggle("Hide Country Flags", isOn: $hideFlags)
+                if isPadAndNotCompact {
+                    Button(action: { selectedView = .mykeModeSeparator }) {
+                        separatorPickerLink
+                    }.listRowBackground(selectedView == .mykeModeSeparator ? Color.accentColor : Color(UIColor.systemBackground))
+                        .foregroundColor(selectedView == .mykeModeSeparator ? .white : .primary)
+                        .disabled(hideFlags)
+                } else {
                     NavigationLink(destination: separatorPicker, tag: SettingsViews.mykeModeSeparator, selection: $selectedView) {
                         separatorPickerLink
                     }
+                    .disabled(hideFlags)
                 }
-                Toggle("Include City Names", isOn: $showCities)
+                Toggle("Force Lowercase AM/PM", isOn: $lowercaseAMPM)
+                Toggle("Use Short Time Zone Names", isOn: $useShortNames)
+                if isPadAndNotCompact {
+                    Button(action: { selectedView = .mykeModeLineSeparator }) {
+                        lineSeparatorPickerLink
+                    }.listRowBackground(selectedView == .mykeModeLineSeparator ? Color.accentColor : Color(UIColor.systemBackground))
+                        .foregroundColor(selectedView == .mykeModeLineSeparator ? .white : .primary)
+                } else {
+                    NavigationLink(destination: lineSeparatorPicker, tag: SettingsViews.mykeModeLineSeparator, selection: $selectedView) {
+                        lineSeparatorPickerLink
+                    }
+                }
             }
             
             if EWPasteboard.hasStrings() {
@@ -121,7 +157,7 @@ struct TimeListSettings_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             Form {
-                TimeListSettings(defaultTimeFormat: .constant(.systemLocale), mykeModeSeparator: .constant(.hyphen), showCities: .constant(true), selectedView: .constant(nil))
+                TimeListSettings(defaultTimeFormat: .constant(.systemLocale), mykeModeSeparator: .constant(.hyphen), mykeModeLineSeparator: .constant(.newLine), showCities: .constant(true), hideFlags: .constant(false), lowercaseAMPM: .constant(true), useShortNames: .constant(true), selectedView: .constant(nil))
             }
         }.environmentObject(OrientationObserver())
     }

@@ -23,8 +23,26 @@ enum MykeModeSeparator: String, CaseIterable, Identifiable {
         }
     }
     
-    var id: String {
-        self.rawValue
+    var id: String { self.rawValue }
+    
+}
+
+enum MykeModeLineSeparator: String, CaseIterable, Identifiable {
+    case newLine = "\n"
+    case comma = ", "
+    case slash = " / "
+    
+    var description: String {
+        switch self {
+        case .newLine:
+            return "New Line"
+        case .comma:
+            return "Comma"
+        case .slash:
+            return "Slash"
+        }
     }
+    
+    var id: String { self.rawValue}
     
 }

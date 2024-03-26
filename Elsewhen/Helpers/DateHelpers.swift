@@ -108,7 +108,7 @@ func discordFormat(for date: Date, in timezone: TimeZone, with formatCode: Forma
     return formattedString
 }
 
-func stringFor(time date: Date, in zone: TimeZone, sourceZone: TimeZone, ignoringTimeFormatOverride: Bool = false) -> String {
+func stringFor(time date: Date, in zone: TimeZone, sourceZone: TimeZone, lowercaseAMPM: Bool = false, ignoringTimeFormatOverride: Bool = false) -> String {
     let df = DateFormatter()
     df.timeZone = zone
     df.locale = Locale.current
@@ -129,24 +129,32 @@ func stringFor(time date: Date, in zone: TimeZone, sourceZone: TimeZone, ignorin
     if timeFormat == .twelve {
         result = result.lowercased().replacingOccurrences(of: "pm", with: pmSymbol).replacingOccurrences(of: "am", with: amSymbol)
     }
+    if lowercaseAMPM {
+        result = result.lowercased()
+    }
     return result
 }
 
-func stringForTimeAndFlag(in tz: TimeZone, date: Date, sourceZone: TimeZone, separator: MykeModeSeparator, timeZonesUsingEUFlag: Set<TimeZone>, timeZonesUsingNoFlag: Set<TimeZone>, showCities: Bool, ignoringTimeFormatOverride: Bool = false) -> String {
+func stringForTimeAndFlag(in tz: TimeZone, date: Date, sourceZone: TimeZone, separator: MykeModeSeparator, timeZonesUsingEUFlag: Set<TimeZone>, timeZonesUsingNoFlag: Set<TimeZone>, showCities: Bool, hideFlags: Bool = false, lowercaseAMPM: Bool = false, useShortNames: Bool = false, ignoringTimeFormatOverride: Bool = false) -> String {
     var text = ""
-    let abbr = tz.fudgedAbbreviation(for: date) ?? ""
-    let flag: String
-    if timeZonesUsingNoFlag.contains(tz) {
-        flag = NoFlagTimeZoneEmoji
+    let abbr = tz.fudgedAbbreviation(for: date, usingShort: useShortNames) ?? ""
+    var flag: String
+    if hideFlags {
+        flag = ""
     } else {
-        if timeZonesUsingEUFlag.contains(tz) {
-            flag = "🇪🇺"
+        if timeZonesUsingNoFlag.contains(tz) {
+            flag = NoFlagTimeZoneEmoji
         } else {
-            flag = flagForTimeZone(tz)
+            if timeZonesUsingEUFlag.contains(tz) {
+                flag = "🇪🇺"
+            } else {
+                flag = flagForTimeZone(tz)
+            }
         }
+        flag = "\(flag)\(separator.rawValue)"
     }
-    text += "\(flag)\(separator.rawValue)\(stringFor(time: date, in: tz, sourceZone: sourceZone, ignoringTimeFormatOverride: ignoringTimeFormatOverride))"
-    if showCities {
+    text += "\(flag)\(stringFor(time: date, in: tz, sourceZone: sourceZone, lowercaseAMPM: lowercaseAMPM, ignoringTimeFormatOverride: ignoringTimeFormatOverride))"
+    if showCities && tz.city != abbr {
         text += " \(tz.city) (\(abbr))"
     } else {
         text += " \(abbr)"
@@ -154,12 +162,12 @@ func stringForTimeAndFlag(in tz: TimeZone, date: Date, sourceZone: TimeZone, sep
     return text
 }
 
-func stringForTimesAndFlags<TZSequence>(of date: Date, in sourceZone: TimeZone, for timezones: TZSequence, separator: MykeModeSeparator, timeZonesUsingEUFlag: Set<TimeZone>, timeZonesUsingNoFlag: Set<TimeZone>, showCities: Bool) -> String where TZSequence: Collection, TZSequence.Element == TimeZone {
+func stringForTimesAndFlags<TZSequence>(of date: Date, in sourceZone: TimeZone, for timezones: TZSequence, separator: MykeModeSeparator, lineSeparator: MykeModeLineSeparator, timeZonesUsingEUFlag: Set<TimeZone>, timeZonesUsingNoFlag: Set<TimeZone>, showCities: Bool, hideFlags: Bool = false, lowercaseAMPM: Bool = false, useShortNames: Bool = false, ignoringTimeFormatOverride: Bool = false) -> String where TZSequence: Collection, TZSequence.Element == TimeZone {
     var text = "\n"
     for tz in timezones {
-        text = "\(text)\(stringForTimeAndFlag(in: tz, date: date, sourceZone: sourceZone, separator: separator, timeZonesUsingEUFlag: timeZonesUsingEUFlag, timeZonesUsingNoFlag: timeZonesUsingNoFlag, showCities: showCities))\n"
+        text = "\(text)\(stringForTimeAndFlag(in: tz, date: date, sourceZone: sourceZone, separator: separator, timeZonesUsingEUFlag: timeZonesUsingEUFlag, timeZonesUsingNoFlag: timeZonesUsingNoFlag, showCities: showCities, hideFlags: hideFlags, lowercaseAMPM: lowercaseAMPM, useShortNames: useShortNames, ignoringTimeFormatOverride: ignoringTimeFormatOverride))\(lineSeparator.rawValue)"
     }
-    return text
+    return String(text.dropLast(lineSeparator.rawValue.count))
 }
 
 func filter<TZSequence>(timezones: TZSequence, by searchTerm: String, onDate: Date = Date()) -> [TimeZone] where TZSequence: Collection, TZSequence.Element == TimeZone {

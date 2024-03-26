@@ -21,9 +21,13 @@ extension UserDefaults {
     static let resetButtonTimeZoneIdentifierKey = "resetButtonTimeZoneIdentifier"
     static let mykeModeDefaultTimeFormatKey = "mykeModeDefaultTimeFormat"
     static let mykeModeSeparatorKey = "mykeModeSeparator"
+    static let mykeModeLineSeparatorKey = "mykeModeLineSeparator"
     static let mykeModeShowCitiesKey = "mykeModeShowCities"
     static let defaultTabKey = "defaultTab"
     static let useMapKitSearchKey = "useMapKitSearch"
+    static let mykeModeHideFlagsKey = "mykeModeHideFlags"
+    static let mykeModeLowercaseAMPMKey = "mykeModeLowercaseAMPM"
+    static let mykeModeUseShortNamesKey = "mykeModeUseShortNames"
     
     static let defaultMykeModeTimeZoneIdentifiers: [String] = [
         "America/Los_Angeles",
@@ -46,6 +50,7 @@ extension UserDefaults {
         mykeModeDefaultTimeFormat = .systemLocale
         mykeModeSeparator = .hyphen
         mykeModeShowCities = false
+        mykeModeHideFlags = false
         defaultTab = Tab.timeCodes.rawValue
     }
     
@@ -156,10 +161,37 @@ extension UserDefaults {
         }
     }
     
+    var mykeModeLineSeparator: MykeModeLineSeparator {
+        get {
+            MykeModeLineSeparator(rawValue: string(forKey: Self.mykeModeLineSeparatorKey) ?? MykeModeLineSeparator.newLine.rawValue) ?? .newLine
+        }
+        set {
+            set(newValue.rawValue, forKey: Self.mykeModeLineSeparatorKey)
+        }
+    }
+    
     @objc
     var mykeModeShowCities: Bool {
         get { bool(forKey: Self.mykeModeShowCitiesKey) }
         set { set(newValue, forKey: Self.mykeModeShowCitiesKey) }
+    }
+    
+    @objc
+    var mykeModeHideFlags: Bool {
+        get { bool(forKey: Self.mykeModeHideFlagsKey) }
+        set { set(newValue, forKey: Self.mykeModeHideFlagsKey) }
+    }
+    
+    @objc
+    var mykeModeLowercaseAMPM: Bool {
+        get { bool(forKey: Self.mykeModeLowercaseAMPMKey) }
+        set { set(newValue, forKey: Self.mykeModeLowercaseAMPMKey) }
+    }
+    
+    @objc
+    var mykeModeUseShortNames: Bool {
+        get { bool(forKey: Self.mykeModeUseShortNamesKey) }
+        set { set(newValue, forKey: Self.mykeModeUseShortNamesKey) }
     }
     
     @objc
